@@ -1,9 +1,8 @@
 /**
- * Blue Star Admin — admin.js v1.2
- * localStorage + GitHub image upload with token fallback
+ * Blue Star Admin — admin.js v1.3
+ * localStorage-first token + GitHub image upload
  */
 
-// ── CONFIG ────────────────────────────────────────────────────────────────
 const GITHUB = {
   owner:  'DAVID-DADO',
   repo:   'bluestar-library',
@@ -11,55 +10,56 @@ const GITHUB = {
   token:  null
 };
 
-let currentData  = {};
-let pendingUpload = null; // { slotKey, productId }
+let currentData   = {};
+let pendingUpload = null;
 
 // ── TOKEN ─────────────────────────────────────────────────────────────────
+// Priority: memory → localStorage → /api/token → prompt
 
 async function getGitHubToken() {
   if (GITHUB.token) return GITHUB.token;
 
-  // Try /api/token endpoint (works on Vercel)
+  // 1. localStorage (fastest — survives page refresh)
+  const stored = localStorage.getItem('bluestar_gh_token');
+  if (stored) { GITHUB.token = stored; return GITHUB.token; }
+
+  // 2. /api/token (works if Vercel project auth is off)
   try {
     const r = await fetch('/api/token');
     if (r.ok) {
       const d = await r.json();
-      GITHUB.token = d.token || d.GITHUB_TOKEN || null;
+      if (d.token || d.GITHUB_TOKEN) {
+        GITHUB.token = d.token || d.GITHUB_TOKEN;
+        localStorage.setItem('bluestar_gh_token', GITHUB.token);
+        return GITHUB.token;
+      }
     }
-  } catch(e) {
-    console.warn('Could not fetch token from /api/token');
-  }
+  } catch(e) {}
 
-  // Try /api/token endpoint (works on Vercel)
-  try {
-    const r = await fetch('/api/token');
-    if (r.ok) {
-      const d = await r.json();
-      GITHUB.token = d.token || d.GITHUB_TOKEN || null;
-    }
-  } catch(e) { console.warn('Server token not found.'); }
-
-  // Try localStorage (saved from previous session)
-  if (!GITHUB.token) {
-    GITHUB.token = localStorage.getItem('bluestar_gh_token') || null;
-  }
-
-  // Fallback: ask user once, save for future sessions
-  if (!GITHUB.token) {
-    const manual = prompt('GitHub Token לא נמצא.\nהכנס Personal Access Token (הרשאת repo):');
-    if (manual && manual.trim()) {
-      GITHUB.token = manual.trim();
-      localStorage.setItem('bluestar_gh_token', GITHUB.token);
-    }
+  // 3. Prompt once — save to localStorage for all future sessions
+  const manual = prompt(
+    'GitHub Personal Access Token לא נמצא.\n' +
+    'הכנס token עם הרשאת repo — ישמר בדפדפן:'
+  );
+  if (manual && manual.trim()) {
+    GITHUB.token = manual.trim();
+    localStorage.setItem('bluestar_gh_token', GITHUB.token);
   }
 
   return GITHUB.token;
 }
 
+// Clear token (if need to reset)
+function resetToken() {
+  localStorage.removeItem('bluestar_gh_token');
+  GITHUB.token = null;
+  toast('Token נמחק — רענן דף');
+}
+
 // ── INIT ──────────────────────────────────────────────────────────────────
 
 window.onload = async () => {
-  await getGitHubToken(); // load token early
+  await getGitHubToken();
   document.getElementById('global-file-input').addEventListener('change', handleFileSelected);
   loadProduct('pistachio', document.querySelector('.nav-btn.active'));
 };
@@ -77,9 +77,7 @@ async function loadProduct(productId, btn) {
     try {
       const res = await fetch(`${productId}-sample.json`);
       currentData = res.ok ? await res.json() : emptySkeleton(productId);
-    } catch(e) {
-      currentData = emptySkeleton(productId);
-    }
+    } catch(e) { currentData = emptySkeleton(productId); }
   }
 
   document.getElementById('current-product-name').textContent =
@@ -130,7 +128,7 @@ function renderNews() {
         <label>תוכן</label>
         <textarea onchange="currentData.news[${i}].body=this.value">${esc(item.body||'')}</textarea>
         <div class="input-row">
-          <input type="text" value="${esc(item.tag||'')}"  placeholder="תגית"
+          <input type="text" value="${esc(item.tag||'')}" placeholder="תגית"
             onchange="currentData.news[${i}].tag=this.value">
           <input type="text" value="${esc(item.meta||'')}" placeholder="מקור / תאריך"
             onchange="currentData.news[${i}].meta=this.value">
@@ -197,16 +195,14 @@ function deleteChapter(i) {
 
 function renderMedia() {
   const media = currentData.media || {};
-  const slots  = Object.entries(media);
+  const slots = Object.entries(media);
 
   document.getElementById('media-editor').innerHTML = `
     <div class="media-grid">
       ${slots.map(([key, url]) => `
         <div class="media-slot" id="slot-${key}">
           <div class="media-preview" id="prev-${key}">
-            ${url
-              ? `<img src="${esc(url)}" onerror="this.parentElement.innerHTML='🖼'">`
-              : '<span>🖼</span>'}
+            ${url ? `<img src="${esc(url)}" onerror="this.parentElement.innerHTML='🖼'">` : '<span>🖼</span>'}
           </div>
           <div class="media-slot-body">
             <div class="media-slot-label">${key}</div>
@@ -214,9 +210,7 @@ function renderMedia() {
               assets/images/${currentData.id}-${key}.jpg
             </div>
             <button class="btn btn-save" style="width:100%;margin-bottom:8px;justify-content:center"
-              onclick="triggerUpload('${key}')">
-              📤 העלה תמונה
-            </button>
+              onclick="triggerUpload('${key}')">📤 העלה תמונה</button>
             <div class="media-url-row">
               <input type="text" id="url-${key}" value="${esc(url||'')}" placeholder="או הכנס URL...">
               <button onclick="updateMediaUrl('${key}')">✓</button>
@@ -227,6 +221,10 @@ function renderMedia() {
       `).join('')}
     </div>
     ${slots.length === 0 ? '<p style="color:var(--muted);padding:20px 0">אין slots מוגדרים.</p>' : ''}
+    <div style="margin-top:16px">
+      <button class="btn" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:11px"
+        onclick="resetToken()">🔑 אפס Token</button>
+    </div>
   `;
 }
 
@@ -243,13 +241,12 @@ async function handleFileSelected(e) {
   const { slotKey, productId } = pendingUpload;
   const statusEl = document.getElementById(`status-${slotKey}`);
   const prevEl   = document.getElementById(`prev-${slotKey}`);
-
-  const ext    = file.name.split('.').pop().toLowerCase() || 'jpg';
-  const ghPath = `assets/images/${productId}-${slotKey}.${ext}`;
+  const ext      = file.name.split('.').pop().toLowerCase() || 'jpg';
+  const ghPath   = `assets/images/${productId}-${slotKey}.${ext}`;
   const localUrl = `../${ghPath}`;
 
-  statusEl.style.color   = 'var(--muted)';
-  statusEl.textContent   = 'מעלה...';
+  statusEl.style.color = 'var(--muted)';
+  statusEl.textContent = 'מעלה...';
 
   try {
     const base64 = await fileToBase64(file);
@@ -258,8 +255,7 @@ async function handleFileSelected(e) {
     if (result.ok) {
       currentData.media[slotKey] = localUrl;
       document.getElementById(`url-${slotKey}`).value = localUrl;
-      prevEl.innerHTML = `<img src="${localUrl}?t=${Date.now()}"
-        onerror="this.parentElement.innerHTML='✓ הועלה'">`;
+      prevEl.innerHTML = `<img src="${localUrl}?t=${Date.now()}" onerror="this.parentElement.innerHTML='✓'">`;
       statusEl.style.color = 'var(--accent-h)';
       statusEl.textContent = `✓ ${ghPath}`;
       saveToLocal();
@@ -270,8 +266,8 @@ async function handleFileSelected(e) {
   } catch(err) {
     statusEl.style.color = 'var(--red)';
     statusEl.textContent = `שגיאה: ${err.message}`;
-    console.error('Upload error:', err);
-    toast('שגיאה בהעלאה — ראה Console');
+    console.error('[Admin Upload]', err);
+    toast('שגיאה — ראה Console (F12)');
   }
 
   pendingUpload = null;
@@ -281,7 +277,7 @@ async function handleFileSelected(e) {
 
 async function uploadToGitHub(path, base64data) {
   const token = await getGitHubToken();
-  if (!token) return { ok: false, error: 'חסר GitHub Token' };
+  if (!token) return { ok: false, error: 'חסר Token' };
 
   const url = `https://api.github.com/repos/${GITHUB.owner}/${GITHUB.repo}/contents/${path}`;
   const headers = {
@@ -290,45 +286,35 @@ async function uploadToGitHub(path, base64data) {
     'Accept':        'application/vnd.github.v3+json'
   };
 
-  // Get SHA if file already exists (required for update)
+  // SHA required if file exists
   let sha = null;
   try {
     const check = await fetch(url, { headers });
-    if (check.ok) {
-      const data = await check.json();
-      sha = data.sha;
-    }
-  } catch(e) { /* new file */ }
+    if (check.ok) { sha = (await check.json()).sha; }
+  } catch(e) {}
 
-  const body = {
-    message: `Admin upload: ${path} [skip ci]`,
-    content: base64data,
-    branch:  GITHUB.branch
-  };
+  const body = { message: `upload: ${path} [skip ci]`, content: base64data, branch: GITHUB.branch };
   if (sha) body.sha = sha;
 
-  const res = await fetch(url, {
-    method:  'PUT',
-    headers,
-    body:    JSON.stringify(body)
-  });
-
+  const res = await fetch(url, { method: 'PUT', headers, body: JSON.stringify(body) });
   if (!res.ok) {
-    let errMsg = `HTTP ${res.status}`;
-    try { const e = await res.json(); errMsg = e.message || errMsg; } catch(e) {}
-    return { ok: false, error: errMsg };
+    let msg = `HTTP ${res.status}`;
+    try { msg = (await res.json()).message || msg; } catch(e) {}
+    // Token error — clear it so next attempt prompts again
+    if (res.status === 401) {
+      localStorage.removeItem('bluestar_gh_token');
+      GITHUB.token = null;
+      msg = 'Token לא תקין — רענן ונסה שנית';
+    }
+    return { ok: false, error: msg };
   }
-
   return { ok: true };
 }
-
-// ── MANUAL URL UPDATE ─────────────────────────────────────────────────────
 
 function updateMediaUrl(key) {
   const url = document.getElementById(`url-${key}`).value.trim();
   currentData.media[key] = url;
-  const prev = document.getElementById(`prev-${key}`);
-  prev.innerHTML = url
+  document.getElementById(`prev-${key}`).innerHTML = url
     ? `<img src="${esc(url)}" onerror="this.parentElement.innerHTML='🖼'">`
     : '<span>🖼</span>';
   saveToLocal();
@@ -347,18 +333,16 @@ function openTab(evt, name) {
 // ── UTILS ─────────────────────────────────────────────────────────────────
 
 function fileToBase64(file) {
-  return new Promise((resolve, reject) => {
+  return new Promise((res, rej) => {
     const r = new FileReader();
-    r.onload  = () => resolve(r.result.split(',')[1]);
-    r.onerror = reject;
+    r.onload  = () => res(r.result.split(',')[1]);
+    r.onerror = rej;
     r.readAsDataURL(file);
   });
 }
 
 function esc(s) {
-  return String(s||'')
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 function toast(msg) {
