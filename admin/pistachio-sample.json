@@ -1,0 +1,42 @@
+{
+  "id": "pistachio",
+  "name": "פיסטוק",
+  "hero": {
+    "title": "פיסטוק",
+    "deck": "האגוז הפרסי שכבש את העולם. אחד משני האגוזים שמוזכרים בתנ\"ך. הקליפה שנפתחת לבד כשהאגוז מוכן — סימן שהטבע בנה לו מנגנון שיווק מובנה.",
+    "image": "../assets/images/pistachio-hero.jpg"
+  },
+  "story": [
+    {
+      "chapter": "ראשון",
+      "title": "תשעת אלפים שנה של ירוק",
+      "content": "המילה \"פיסטוק\" מגיעה מהפרסית העתיקה — \"pistag\". אגוז אחד, מילה אחת, תשעת אלפים שנה."
+    },
+    {
+      "chapter": "שני",
+      "title": "הגאוגרפיה — קליפורניה, איראן והסירוגיות",
+      "content": "שוק הפיסטוק עבר מהפך דרמטי. בעוד איראן הובילה היסטורית, קליפורניה הפכה למעצמה העולמית. תופעת ה-Alternate Bearing (סירוגיות) היא קריטית לניהול הרכש."
+    }
+  ],
+  "news": [
+    {
+      "tag": "תעשייה",
+      "title": "מגמות עיבוד ואריזה, 2024-2025",
+      "body": "שינויים ברגולציה של ייבוא פיסטוק ב-2024 השפיעו על לוחות הזמנים.",
+      "meta": "מקור: INC 2024",
+      "isInsight": false
+    },
+    {
+      "tag": "Blue Star Insight",
+      "title": "פעילות Blue Star International",
+      "body": "ניסיון של מעל 20 שנה מול הספקים המובילים בעולם.",
+      "meta": "Blue Star International",
+      "isInsight": true
+    }
+  ],
+  "media": {
+    "hero": "../assets/images/pistachio-hero.jpg",
+    "harvest": "../assets/images/pistachio-img3.jpg",
+    "grades": ""
+  }
+}
