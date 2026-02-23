@@ -30,10 +30,18 @@ async function getGitHubToken() {
     console.warn('Could not fetch token from /api/token');
   }
 
-  // Fallback: ask user once per session
+  // Try localStorage (saved from previous session)
+  if (!GITHUB.token) {
+    GITHUB.token = localStorage.getItem('bluestar_gh_token') || null;
+  }
+
+  // Fallback: ask user once, save for future sessions
   if (!GITHUB.token) {
     const manual = prompt('GitHub Token לא נמצא.\nהכנס Personal Access Token (הרשאת repo):');
-    if (manual && manual.trim()) GITHUB.token = manual.trim();
+    if (manual && manual.trim()) {
+      GITHUB.token = manual.trim();
+      localStorage.setItem('bluestar_gh_token', GITHUB.token);
+    }
   }
 
   return GITHUB.token;
@@ -268,7 +276,7 @@ async function uploadToGitHub(path, base64data) {
 
   const url = `https://api.github.com/repos/${GITHUB.owner}/${GITHUB.repo}/contents/${path}`;
   const headers = {
-    'Authorization': `token ${token}`,
+    'Authorization': `Bearer ${token}`,
     'Content-Type':  'application/json',
     'Accept':        'application/vnd.github.v3+json'
   };
