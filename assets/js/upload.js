@@ -1,122 +1,213 @@
 /* ================================================================
-   upload.js — Blue Star Library v2  |  גרסה יציבה סופית
+   upload.js — Blue Star Library v2  |  GitHub-backed storage
    ================================================================
-   כולל:
-   - Optional chaining  (ph?.querySelector)
-   - Safe DOM access    (if (!ph) return)
-   - Flexible selector  (.hi-title, .pt, .img-ph-title)
-   - State management   (reload רק אחרי ok מהשרת)
-   - alias אחורה       (uploadHeroImage → uploadImage)
+   תמונות נשמרות ב-GitHub repo ו-Vercel עושה redeploy אוטומטי.
+   כולם רואים את אותן תמונות.
    ================================================================ */
 
-const SERVER = 'http://localhost:7771';
+let GH_TOKEN = '';
+async function getToken() {
+  if (GH_TOKEN) return GH_TOKEN;
+  try {
+    const r = await fetch('/api/token');
+    const d = await r.json();
+    GH_TOKEN = d.token || '';
+  } catch(e) { GH_TOKEN = ''; }
+  return GH_TOKEN;
+}
+const GH_OWNER = 'DAVID-DADO';
+const GH_REPO  = 'bluestar-library';
+const GH_BRANCH = 'main';
 
-/* ── triggerUpload ──────────────────────────────────────────────
-   קורא מ-onclick של כל כפתור upload.
-   מחפש input[type=file] סמוך ופותח אותו.
-   אם לא נמצא — לא קורס, רק יוצא.
-*/
+/* ── עזר: המרת קובץ ל-base64 ── */
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload  = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+/* ── עזר: קבלת SHA של קובץ קיים ב-GitHub ── */
+async function getFileSha(repoPath) {
+  const token = await getToken();
+  const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${repoPath}?ref=${GH_BRANCH}`;
+  const r = await fetch(url, {
+    headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' }
+  });
+  if (!r.ok) return null;
+  const data = await r.json();
+  return data.sha || null;
+}
+
+/* ── עזר: כתיבת קובץ ל-GitHub ── */
+async function writeToGitHub(repoPath, base64Content, commitMsg) {
+  const token = await getToken();
+  const sha = await getFileSha(repoPath);
+  const body = { message: commitMsg, content: base64Content, branch: GH_BRANCH };
+  if (sha) body.sha = sha;
+
+  const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${repoPath}`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `token ${token}`,
+      Accept: 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  });
+  if (!r.ok) throw new Error('GitHub write failed: ' + r.status);
+  return await r.json();
+}
+
+/* ── עזר: קריאת HTML קובץ מ-GitHub ── */
+async function readHtmlFromGitHub(repoPath) {
+  const token = await getToken();
+  const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${repoPath}?ref=${GH_BRANCH}`;
+  const r = await fetch(url, {
+    headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' }
+  });
+  if (!r.ok) throw new Error('GitHub read failed: ' + r.status);
+  const data = await r.json();
+  return { content: atob(data.content.replace(/\n/g, '')), sha: data.sha };
+}
+
+/* ── עזר: החלפת placeholder ב-HTML string ── */
+function replacePlaceholderInHtml(html, slotId, imgRepoPath, captionTitle, isHero) {
+  if (isHero) {
+    /* hero: מחפש div.hero-img-ph עם data-slot תואם */
+    const re = new RegExp(
+      `<div[^>]*class="hero-img-ph"[^>]*data-slot="${slotId}"[^>]*>[\\s\\S]*?</div>\\s*</div>`,
+      'g'
+    );
+    const replacement =
+      `<div class="hero-img-wrap" data-slot="${slotId}">` +
+      `<img src="../../assets/images/${imgRepoPath.split('/').pop()}" alt="${captionTitle}" style="width:100%;height:440px;object-fit:cover;">` +
+      `</div>`;
+    return html.replace(re, replacement);
+  } else {
+    /* פנימי: מחפש div.ph או div.img-ph עם data-slot תואם */
+    const re = new RegExp(
+      `<div[^>]*class="(?:ph|img-ph)"[^>]*data-slot="${slotId}"[^>]*>[\\s\\S]*?</div>`,
+      'g'
+    );
+    const replacement =
+      `<figure class="ph-done" data-slot="${slotId}">` +
+      `<img src="../../assets/images/${imgRepoPath.split('/').pop()}" alt="${captionTitle}" style="width:100%;border-radius:8px;display:block;">` +
+      `<figcaption class="ph-cap">${captionTitle}</figcaption>` +
+      `</figure>`;
+    return html.replace(re, replacement);
+  }
+}
+
+/* ── triggerUpload ── */
 function triggerUpload(btn) {
   if (!btn) return;
   const input = btn.nextElementSibling;
   if (input?.type === 'file') input.click();
 }
 
-/* ── uploadImage ────────────────────────────────────────────────
-   פונקציה יחידה לכל סוגי ה-placeholder:
-     hero-img-ph  →  תמונת banner (מחלקה .hi-title)
-     ph           →  תמונת פרק פנימי (מחלקה .pt)
-     img-ph       →  תמונת specs/news פנימית (מחלקה .img-ph-title)
-
-   Safe DOM access בכל שלב — אין קריסה אם אלמנט חסר.
-*/
-function uploadImage(input) {
+/* ── uploadImage — פונקציה ראשית ── */
+async function uploadImage(input) {
   if (!input) return;
 
-  /* מציאת ה-placeholder הכי קרוב */
   const ph = input.closest('.hero-img-ph, .ph, .img-ph');
   if (!ph) return;
 
   const file = input.files?.[0];
   if (!file) return;
 
-  /* זיהוי סוג */
-  const isHero    = ph.classList.contains('hero-img-ph');
-  const slotId    = ph.dataset?.slot   ?? '';
-  const htmlFile  = ph.dataset?.html   ?? '';
+  const isHero   = ph.classList.contains('hero-img-ph');
+  const slotId   = ph.dataset?.slot ?? '';
+  const htmlFile = ph.dataset?.html ?? '';
 
-  /* selector גמיש — תומך בכל סוגי ה-placeholder */
   const titleEl   = ph.querySelector('.hi-title, .pt, .img-ph-title');
   const titleText = titleEl
     ? titleEl.textContent.replace(/^📷\s*/, '').trim()
     : (slotId || 'Image');
 
-  /* כפתור — מחפש לפי סוג */
   const btn = isHero
     ? ph.querySelector('.hero-img-btn')
     : ph.querySelector('.ph-upload-btn, .img-ph-btn');
 
-  /* state: נועל כפתור למניעת כפל העלאות */
-  if (btn) {
-    btn.textContent = 'שומר...';
-    btn.disabled    = true;
-  }
+  if (btn) { btn.textContent = 'שומר ב-GitHub...'; btn.disabled = true; }
 
-  /* בנה FormData */
-  const fd = new FormData();
-  fd.append('file',          file);
-  fd.append('slot_id',       slotId);
-  fd.append('html_file',     htmlFile);
-  fd.append('caption_title', titleText);
+  try {
+    /* 1. המר תמונה ל-base64 */
+    const imgBase64 = await fileToBase64(file);
 
-  fetch(SERVER + '/upload', { method: 'POST', body: fd })
-    .then(r => {
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return r.json();
-    })
-    .then(data => {
-      if (!data.ok) throw new Error(data.error || 'server error');
+    /* 2. קבע שם קובץ ונתיב ב-repo */
+    const ext       = file.name.split('.').pop().toLowerCase();
+    const imgName   = `${slotId}.${ext}`;
+    const imgPath   = `assets/images/${imgName}`;
 
-      /* ── הצלחה: מחליף placeholder בתמונה ── */
-      if (isHero) {
-        /* hero banner — div עם img full-width */
-        const wrap = document.createElement('div');
-        wrap.className    = 'hero-img-wrap';
-        wrap.dataset.slot = slotId;
-        const img = document.createElement('img');
-        img.src   = '../../site/assets/images/' + data.saved;
-        img.alt   = titleText;
-        wrap.appendChild(img);
-        ph.replaceWith(wrap);
-      } else {
-        /* פנימי — figure עם caption */
-        const fig = document.createElement('figure');
-        fig.className    = 'ph-done';
-        fig.dataset.slot = slotId;
-        const img = document.createElement('img');
-        img.src           = '../../site/assets/images/' + data.saved;
-        img.alt           = titleText;
-        img.style.cssText = 'width:100%;border-radius:8px;display:block;';
-        const cap = document.createElement('figcaption');
-        cap.className   = 'ph-cap';
-        cap.textContent = titleText;
-        fig.appendChild(img);
-        fig.appendChild(cap);
-        ph.replaceWith(fig);
-      }
+    /* 3. העלה תמונה ל-GitHub */
+    if (btn) btn.textContent = 'מעלה תמונה...';
+    await writeToGitHub(imgPath, imgBase64, `image: ${slotId}`);
 
-      /* reload רק אחרי ok מהשרת — מניעת לולאות */
-      /* location.reload(); — מושבת, מיותר, DOM כבר עודכן */
-    })
-    .catch(err => {
-      console.error('[upload.js]', err);
-      /* שחרר כפתור לניסיון חוזר */
-      if (btn) {
-        btn.textContent = 'שגיאה — נסה שוב';
-        btn.disabled    = false;
-      }
+    /* 4. קרא את ה-HTML הנוכחי מ-GitHub ועדכן */
+    if (btn) btn.textContent = 'מעדכן דף...';
+    const { content: htmlContent, sha: htmlSha } = await readHtmlFromGitHub(htmlFile);
+    const updatedHtml = replacePlaceholderInHtml(htmlContent, slotId, imgPath, titleText, isHero);
+
+    /* 5. כתוב HTML מעודכן ל-GitHub */
+    const token = await getToken();
+    const htmlBase64 = btoa(unescape(encodeURIComponent(updatedHtml)));
+    await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${htmlFile}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `token ${token}`,
+        Accept: 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: `embed image: ${slotId}`,
+        content: htmlBase64,
+        sha: htmlSha,
+        branch: GH_BRANCH
+      })
     });
+
+    /* 6. עדכן DOM מיידית (לפני redeploy) */
+    if (isHero) {
+      const wrap = document.createElement('div');
+      wrap.className = 'hero-img-wrap';
+      wrap.dataset.slot = slotId;
+      const img = document.createElement('img');
+      img.src = `../../assets/images/${imgName}`;
+      img.alt = titleText;
+      img.style.cssText = 'width:100%;height:440px;object-fit:cover;';
+      wrap.appendChild(img);
+      ph.replaceWith(wrap);
+    } else {
+      const fig = document.createElement('figure');
+      fig.className = 'ph-done';
+      fig.dataset.slot = slotId;
+      const img = document.createElement('img');
+      img.src = `../../assets/images/${imgName}`;
+      img.alt = titleText;
+      img.style.cssText = 'width:100%;border-radius:8px;display:block;';
+      const cap = document.createElement('figcaption');
+      cap.className = 'ph-cap';
+      cap.textContent = titleText;
+      fig.appendChild(img);
+      fig.appendChild(cap);
+      ph.replaceWith(fig);
+    }
+
+    /* הודעת הצלחה */
+    const notice = document.createElement('div');
+    notice.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#2D5A1A;color:#fff;padding:12px 24px;border-radius:8px;font-size:14px;z-index:9999;';
+    notice.textContent = 'התמונה נשמרה. הדף יתעדכן לכולם תוך ~30 שניות.';
+    document.body.appendChild(notice);
+    setTimeout(() => notice.remove(), 5000);
+
+  } catch (err) {
+    console.error('[upload.js]', err);
+    if (btn) { btn.textContent = 'שגיאה, נסה שוב'; btn.disabled = false; }
+  }
 }
 
-/* ── alias לתאימות אחורה ────────────────────────────────────── */
+/* alias */
 function uploadHeroImage(input) { uploadImage(input); }
