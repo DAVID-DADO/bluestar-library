@@ -1,0 +1,18 @@
+{
+  "id": "macadamia",
+  "name": "מקדמיה",
+  "hero": {
+    "title": "מקדמיה",
+    "deck": "האגוז היקר בעולם. קליפה קשה מכל אגוז אחר — 300 ניוטון לפיצוח. אוסטרליה, הוואי והמפרץ הקניאני. שומן של 76%, הגבוה מכולם.",
+    "image": "../assets/images/macadamia-hero.jpg"
+  },
+  "story": [
+    { "chapter": "ראשון", "title": "מוצא — יער הגשם האוסטרלי", "content": "Macadamia integrifolia ו-M. tetraphylla — שני זנים מסחריים, שניהם מקווינסלנד. הזן הגידולי המסחרי אינו זהה לעץ הבר המוגן." },
+    { "chapter": "שני", "title": "דרום אפריקה עוברת את הוואי", "content": "דרום אפריקה הפכה ליצרנית מספר 1 עם 70,000 טון. הוואי, ארץ המוצא המסחרי, ירדה למקום 4 בשל עלויות." }
+  ],
+  "news": [
+    { "tag": "תעשייה", "title": "ייצור דרום אפריקה — שיא 2024", "body": "דרום אפריקה מובילה עם 70,000 טון. מחירי גרעין Style 0 בין 12-15 דולר לק\"ג.", "meta": "INC, 2024", "isInsight": false },
+    { "tag": "Blue Star Insight", "title": "מקדמיה — מוצר פרימיום לשוק הישראלי", "body": "ביקוש גובר בקטגוריית הגורמה. Style 1 ו-Style 2 מתאימים לקמעונאי.", "meta": "Blue Star International", "isInsight": true }
+  ],
+  "media": { "hero": "../assets/images/macadamia-hero.jpg", "orchard": "", "grades": "" }
+}
