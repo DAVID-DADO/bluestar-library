@@ -1,24 +1,43 @@
 /**
- * Blue Star Admin — admin.js
- * localStorage-based content manager.
- *
- * [PERSISTENCE] comments = replace with GitHub API / Vercel KV when ready.
+ * Blue Star Admin — admin.js v1.1
+ * localStorage + GitHub image upload
  */
 
+// ── CONFIG ────────────────────────────────────────────────────────────────
+const GITHUB = {
+  owner:  'DAVID-DADO',
+  repo:   'bluestar-library',
+  branch: 'main',
+  // Token loaded from /api/token endpoint (same as upload.js)
+  // Falls back to prompt if needed
+  token:  null
+};
+
 let currentData = {};
+let pendingUpload = null; // { slotKey, productId }
 
 // ── INIT ──────────────────────────────────────────────────────────────────
 
-window.onload = () => loadProduct('pistachio');
+window.onload = async () => {
+  // Load GitHub token from existing endpoint
+  try {
+    const r = await fetch('/api/token');
+    const d = await r.json();
+    GITHUB.token = d.token || d.GITHUB_TOKEN || null;
+  } catch(e) {}
+
+  // File input handler (shared, single input)
+  document.getElementById('global-file-input').addEventListener('change', handleFileSelected);
+
+  loadProduct('pistachio', document.querySelector('.nav-btn.active'));
+};
 
 // ── LOAD / SAVE ───────────────────────────────────────────────────────────
 
-async function loadProduct(productId) {
-  // Update sidebar active state
+async function loadProduct(productId, btn) {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  event?.currentTarget?.classList?.add('active');
+  if (btn) btn.classList.add('active');
 
-  // [PERSISTENCE] Replace fetch with: GET /repos/.../contents/data/{productId}.json
   const saved = localStorage.getItem(`bluestar_${productId}`);
   if (saved) {
     currentData = JSON.parse(saved);
@@ -26,26 +45,25 @@ async function loadProduct(productId) {
     try {
       const res = await fetch(`${productId}-sample.json`);
       currentData = res.ok ? await res.json()
-        : { id: productId, name: productId, hero: {title:'',deck:''}, news: [], story: [], media: {} };
+        : emptySkeleton(productId);
     } catch(e) {
-      currentData = { id: productId, name: productId, hero: {title:'',deck:''}, news: [], story: [], media: {} };
+      currentData = emptySkeleton(productId);
     }
   }
 
   document.getElementById('current-product-name').textContent =
     (currentData.name || productId) + ' Dashboard';
 
+  // Reset to news tab
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-link').forEach(el => el.classList.remove('active'));
+  document.getElementById('news').classList.add('active');
+  document.querySelector('.tab-link').classList.add('active');
+
   renderAll();
 }
 
 function saveToLocal() {
-  // [PERSISTENCE] Replace with:
-  // const base64 = btoa(unescape(encodeURIComponent(JSON.stringify(currentData,null,2))));
-  // const sha = await getFileSha(`data/${currentData.id}.json`);
-  // await fetch(`https://api.github.com/repos/OWNER/REPO/contents/data/${currentData.id}.json`, {
-  //   method: 'PUT', headers: { Authorization: `token TOKEN`, 'Content-Type': 'application/json' },
-  //   body: JSON.stringify({ message: `update ${currentData.id}`, content: base64, sha, branch: 'main' })
-  // });
   localStorage.setItem(`bluestar_${currentData.id}`, JSON.stringify(currentData));
   toast('נשמר ✓');
 }
@@ -62,6 +80,11 @@ function exportJSON() {
   toast(`הורד ${currentData.id}.json`);
 }
 
+function emptySkeleton(id) {
+  return { id, name: id, hero: { title: id, deck: '', image: '' },
+           story: [], news: [], media: {} };
+}
+
 // ── RENDER ALL ────────────────────────────────────────────────────────────
 
 function renderAll() {
@@ -73,33 +96,31 @@ function renderAll() {
 // ── NEWS ──────────────────────────────────────────────────────────────────
 
 function renderNews() {
-  const list = document.getElementById('news-editor-list');
   const articles = currentData.news || [];
-
-  list.innerHTML = articles.map((item, i) => `
-    <div class="edit-card">
-      <div class="card-tag">${esc(item.tag || 'כתבה')}</div>
-      <label>כותרת</label>
-      <input type="text" value="${esc(item.title)}"
-        onchange="currentData.news[${i}].title = this.value">
-      <label>תוכן</label>
-      <textarea onchange="currentData.news[${i}].body = this.value">${esc(item.body||'')}</textarea>
-      <div class="input-row">
-        <input type="text" value="${esc(item.tag||'')}" placeholder="תגית"
-          onchange="currentData.news[${i}].tag = this.value">
-        <input type="text" value="${esc(item.meta||'')}" placeholder="מקור / תאריך"
-          onchange="currentData.news[${i}].meta = this.value">
+  document.getElementById('news-editor-list').innerHTML =
+    articles.map((item, i) => `
+      <div class="edit-card">
+        <div class="card-tag">${esc(item.tag || 'כתבה')}</div>
+        <label>כותרת</label>
+        <input type="text" value="${esc(item.title)}" onchange="currentData.news[${i}].title=this.value">
+        <label>תוכן</label>
+        <textarea onchange="currentData.news[${i}].body=this.value">${esc(item.body||'')}</textarea>
+        <div class="input-row">
+          <input type="text" value="${esc(item.tag||'')}" placeholder="תגית"
+            onchange="currentData.news[${i}].tag=this.value">
+          <input type="text" value="${esc(item.meta||'')}" placeholder="מקור / תאריך"
+            onchange="currentData.news[${i}].meta=this.value">
+        </div>
+        <div style="margin-top:12px;display:flex;justify-content:flex-end">
+          <button class="btn-delete" onclick="deleteNews(${i})">🗑 מחק</button>
+        </div>
       </div>
-      <div style="margin-top:12px;display:flex;justify-content:flex-end">
-        <button class="btn-delete" onclick="deleteNews(${i})">🗑 מחק</button>
-      </div>
-    </div>
-  `).join('') || '<p style="color:var(--muted);padding:20px 0">אין ידיעות עדיין.</p>';
+    `).join('') || '<p style="color:var(--muted);padding:20px 0">אין ידיעות.</p>';
 }
 
 function addNewArticle() {
   if (!currentData.news) currentData.news = [];
-  currentData.news.unshift({ title: '', body: '', tag: 'תעשייה', meta: '', isInsight: false });
+  currentData.news.unshift({ title:'', body:'', tag:'תעשייה', meta:'', isInsight:false });
   renderNews();
 }
 
@@ -112,33 +133,31 @@ function deleteNews(i) {
 // ── STORY ─────────────────────────────────────────────────────────────────
 
 function renderStory() {
-  // Hero fields
   const hero = currentData.hero || {};
   const t = document.getElementById('hero-title');
   const d = document.getElementById('hero-deck');
   if (t) t.value = hero.title || '';
   if (d) d.textContent = hero.deck || '';
 
-  // Chapters
   const chapters = currentData.story || [];
-  document.getElementById('story-editor').innerHTML = chapters.map((ch, i) => `
-    <div class="edit-card">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-        <span style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase">פרק ${esc(ch.chapter||String(i+1))}</span>
-        <button class="btn-delete" onclick="deleteChapter(${i})">🗑</button>
+  document.getElementById('story-editor').innerHTML =
+    chapters.map((ch, i) => `
+      <div class="edit-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <span style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase">פרק ${esc(ch.chapter||String(i+1))}</span>
+          <button class="btn-delete" onclick="deleteChapter(${i})">🗑</button>
+        </div>
+        <label>כותרת פרק</label>
+        <input type="text" value="${esc(ch.title||'')}" onchange="currentData.story[${i}].title=this.value">
+        <label>תוכן</label>
+        <textarea onchange="currentData.story[${i}].content=this.value">${esc(ch.content||'')}</textarea>
       </div>
-      <label>כותרת פרק</label>
-      <input type="text" value="${esc(ch.title||'')}"
-        onchange="currentData.story[${i}].title = this.value">
-      <label>תוכן</label>
-      <textarea onchange="currentData.story[${i}].content = this.value">${esc(ch.content||'')}</textarea>
-    </div>
-  `).join('') || '<p style="color:var(--muted);padding:20px 0">אין פרקים.</p>';
+    `).join('') || '<p style="color:var(--muted);padding:20px 0">אין פרקים.</p>';
 }
 
 function addChapter() {
   if (!currentData.story) currentData.story = [];
-  currentData.story.push({ chapter: String(currentData.story.length + 1), title: '', content: '' });
+  currentData.story.push({ chapter: String(currentData.story.length + 1), title:'', content:'' });
   renderStory();
 }
 
@@ -157,16 +176,32 @@ function renderMedia() {
   document.getElementById('media-editor').innerHTML = `
     <div class="media-grid">
       ${slots.map(([key, url]) => `
-        <div class="media-slot">
+        <div class="media-slot" id="slot-${key}">
           <div class="media-preview" id="prev-${key}">
-            ${url ? `<img src="${esc(url)}" onerror="this.parentElement.innerHTML='🖼'">` : '🖼'}
+            ${url
+              ? `<img src="${esc(url)}" onerror="this.parentElement.innerHTML='🖼'">`
+              : '<span>🖼</span>'}
           </div>
           <div class="media-slot-body">
             <div class="media-slot-label">${key}</div>
-            <div class="media-url-row">
-              <input type="text" id="url-${key}" value="${esc(url||'')}" placeholder="נתיב / URL">
-              <button onclick="updateMedia('${key}')">✓</button>
+            <div style="font-size:10px;color:var(--muted);margin-bottom:8px;font-family:monospace">
+              assets/images/${currentData.id}-${key}.jpg
             </div>
+
+            <!-- Upload button -->
+            <button class="btn btn-save" style="width:100%;margin-bottom:8px;justify-content:center"
+              onclick="triggerUpload('${key}')">
+              📤 העלה תמונה
+            </button>
+
+            <!-- OR manual URL -->
+            <div class="media-url-row">
+              <input type="text" id="url-${key}" value="${esc(url||'')}" placeholder="או הכנס URL...">
+              <button onclick="updateMediaUrl('${key}')">✓</button>
+            </div>
+
+            <!-- Upload status -->
+            <div id="status-${key}" style="font-size:11px;color:var(--muted);margin-top:6px;min-height:16px"></div>
           </div>
         </div>
       `).join('')}
@@ -175,12 +210,106 @@ function renderMedia() {
   `;
 }
 
-function updateMedia(key) {
+// Trigger file picker for a specific slot
+function triggerUpload(slotKey) {
+  pendingUpload = { slotKey, productId: currentData.id };
+  document.getElementById('global-file-input').value = '';
+  document.getElementById('global-file-input').click();
+}
+
+// Handle file selected
+async function handleFileSelected(e) {
+  const file = e.target.files[0];
+  if (!file || !pendingUpload) return;
+
+  const { slotKey, productId } = pendingUpload;
+  const statusEl = document.getElementById(`status-${slotKey}`);
+  const prevEl   = document.getElementById(`prev-${slotKey}`);
+
+  // Filename: e.g. assets/images/pistachio-hero.jpg
+  const ext      = file.name.split('.').pop().toLowerCase() || 'jpg';
+  const ghPath   = `assets/images/${productId}-${slotKey}.${ext}`;
+  const localUrl = `../${ghPath}`;
+
+  statusEl.textContent = 'מעלה...';
+
+  try {
+    const base64 = await fileToBase64(file);
+    const result = await uploadToGitHub(ghPath, base64, file.type);
+
+    if (result.ok) {
+      // Update data + preview
+      currentData.media[slotKey] = localUrl;
+      document.getElementById(`url-${slotKey}`).value = localUrl;
+      prevEl.innerHTML = `<img src="${localUrl}?t=${Date.now()}" onerror="this.parentElement.innerHTML='✓ הועלה'">`;
+      statusEl.style.color = 'var(--accent-h)';
+      statusEl.textContent = `✓ הועלה: ${ghPath}`;
+      saveToLocal();
+      toast(`הועלה — ${ghPath}`);
+    } else {
+      throw new Error(result.error);
+    }
+  } catch(err) {
+    statusEl.style.color = 'var(--red)';
+    statusEl.textContent = `שגיאה: ${err.message}`;
+    toast('שגיאה בהעלאה');
+  }
+
+  pendingUpload = null;
+}
+
+// Upload file to GitHub via API
+async function uploadToGitHub(path, base64data, mimeType) {
+  if (!GITHUB.token) {
+    // Fallback: try /api/token again
+    try {
+      const r = await fetch('/api/token');
+      const d = await r.json();
+      GITHUB.token = d.token || d.GITHUB_TOKEN;
+    } catch(e) {}
+  }
+  if (!GITHUB.token) return { ok: false, error: 'אין טוקן GitHub' };
+
+  const url = `https://api.github.com/repos/${GITHUB.owner}/${GITHUB.repo}/contents/${path}`;
+  const headers = {
+    Authorization: `token ${GITHUB.token}`,
+    Accept: 'application/vnd.github.v3+json',
+    'Content-Type': 'application/json'
+  };
+
+  // Get existing sha if file exists
+  let sha = null;
+  try {
+    const r = await fetch(url, { headers });
+    if (r.ok) { const d = await r.json(); sha = d.sha; }
+  } catch(e) {}
+
+  const body = {
+    message: `upload: ${path}`,
+    content: base64data,
+    branch:  GITHUB.branch
+  };
+  if (sha) body.sha = sha;
+
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify(body)
+  });
+
+  return res.ok ? { ok: true } : { ok: false, error: `HTTP ${res.status}` };
+}
+
+// Update slot from manual URL input
+function updateMediaUrl(key) {
   const url = document.getElementById(`url-${key}`).value.trim();
   currentData.media[key] = url;
   const prev = document.getElementById(`prev-${key}`);
-  prev.innerHTML = url ? `<img src="${esc(url)}" onerror="this.parentElement.innerHTML='🖼'">` : '🖼';
+  prev.innerHTML = url
+    ? `<img src="${esc(url)}" onerror="this.parentElement.innerHTML='🖼'">`
+    : '<span>🖼</span>';
   saveToLocal();
+  toast('עודכן ✓');
 }
 
 // ── TABS ──────────────────────────────────────────────────────────────────
@@ -194,8 +323,19 @@ function openTab(evt, name) {
 
 // ── UTILS ─────────────────────────────────────────────────────────────────
 
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload  = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
 function esc(s) {
-  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(s||'')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 function toast(msg) {
