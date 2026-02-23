@@ -112,15 +112,32 @@ function triggerUpload(btn) {
 async function uploadImage(input) {
   if (!input) return;
 
-  const ph = input.closest('.hero-img-ph, .ph, .img-ph');
-  if (!ph) return;
-
   const file = input.files?.[0];
   if (!file) return;
 
-  const isHero   = ph.classList.contains('hero-img-ph');
-  const slotId   = ph.dataset?.slot ?? '';
-  const htmlFile = ph.dataset?.html ?? '';
+  // נסה לקרוא slot מה-parent הישיר (כפתור + input בתוך container)
+  const ph = input.closest('.hero-img-ph, .ph, .img-ph');
+  const btn = input.previousElementSibling;
+
+  // קרא slot מה-data-slot של הכפתור, ה-ph, או כל אב עם data-slot
+  const slotEl = ph || input.closest('[data-slot]') || btn?.closest('[data-slot]');
+  const slotId = slotEl?.dataset?.slot
+    || btn?.dataset?.slot
+    || input.dataset?.slot
+    || '';
+
+  // קרא html path — מה-ph או מה-data-html של הכפתור
+  const htmlFile = ph?.dataset?.html
+    || btn?.dataset?.html
+    || input.dataset?.html
+    || '';
+
+  if (!slotId || !htmlFile) {
+    console.error('[upload] missing slot or htmlFile', {slotId, htmlFile});
+    return;
+  }
+
+  const isHero = ph ? ph.classList.contains('hero-img-ph') : slotId.includes('hero');
 
   const titleEl   = ph.querySelector('.hi-title, .pt, .img-ph-title');
   const titleText = titleEl
