@@ -289,3 +289,79 @@ body{
   .ng{grid-template-columns:repeat(2,1fr)}
   .vc .vs{flex-direction:column;gap:6px}
 }
+
+
+/* ============================================================
+   BLUE STAR LIBRARY - MASTER LAYOUT STANDARD v2.0
+   ============================================================ */
+:root {
+  --max-w: 1000px;
+  --container-pad: 24px;
+  --hero-pt: 100px;
+  --hero-pb: 60px;
+  --border-radius: 16px;
+}
+
+.hero-inner,
+.con,
+.hero-img-wrap,
+.footer-inner {
+  max-width: var(--max-w);
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: var(--container-pad);
+  padding-right: var(--container-pad);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.hero {
+  width: 100%;
+  padding: var(--hero-pt) 0 var(--hero-pb);
+  display: flex;
+  flex-direction: column;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  margin: 12px 0;
+  line-height: 1.1;
+}
+
+.hero-img-wrap {
+  margin-bottom: 50px;
+}
+
+.hero-img-wrap img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 24px 0;
+  border: 1px solid var(--bdr);
+  border-radius: 8px;
+}
+
+table.gt {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --hero-pt: 80px;
+    --hero-pb: 40px;
+  }
+  .hero-img-wrap img {
+    height: 300px;
+    border-radius: 12px;
+  }
+}
