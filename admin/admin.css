@@ -1,0 +1,266 @@
+/* Blue Star Admin — admin.css */
+@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;700&family=Noto+Sans+Hebrew:wght@300;400;500;600&display=swap');
+
+:root {
+  --accent:  #4A8A3A;
+  --accent-h:#5BA848;
+  --bg:      #0F110E;
+  --surface: #161A15;
+  --surface2:#1C221B;
+  --border:  #2A3029;
+  --text:    #E0E0D8;
+  --muted:   #7A9080;
+  --gold:    #C9A96E;
+  --red:     #C04A3A;
+  --radius:  8px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+.admin-body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans Hebrew', system-ui, sans-serif;
+  font-size: 14px;
+  direction: rtl;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.admin-wrapper { display: flex; min-height: 100vh; }
+
+/* ── SIDEBAR ── */
+.admin-sidebar {
+  width: 240px;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.admin-logo {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--accent-h);
+  margin-bottom: 32px;
+  padding: 0 8px;
+}
+
+.product-nav { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+
+.nav-btn {
+  width: 100%;
+  text-align: right;
+  padding: 10px 12px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 14px;
+  transition: background .15s, color .15s;
+}
+.nav-btn:hover { background: var(--surface2); color: var(--text); }
+.nav-btn.active { background: rgba(74,138,58,.2); color: var(--accent-h); font-weight: 600; }
+
+.sidebar-footer {
+  font-size: 11px;
+  color: var(--muted);
+  padding: 8px;
+  margin-top: 16px;
+}
+
+/* ── MAIN ── */
+.admin-main { flex: 1; padding: 32px 40px; overflow-y: auto; }
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.admin-header h1 {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.header-actions { display: flex; gap: 10px; }
+
+/* ── TABS ── */
+.tab-nav {
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+  display: flex;
+  gap: 0;
+}
+
+.tab-link {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: -1px;
+  transition: color .15s, border-color .15s;
+}
+.tab-link:hover { color: var(--text); }
+.tab-link.active { color: var(--accent-h); border-bottom-color: var(--accent); font-weight: 600; }
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ── CARDS ── */
+.edit-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 14px;
+}
+
+.edit-card label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  margin: 10px 0 4px;
+}
+.edit-card label:first-child { margin-top: 0; }
+
+.card-tag {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent-h);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: 8px;
+}
+
+/* ── INPUTS ── */
+input[type="text"],
+input[type="date"],
+textarea {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  padding: 8px 12px;
+  outline: none;
+  transition: border-color .15s;
+}
+input:focus, textarea:focus { border-color: var(--accent); }
+textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+
+.input-row { display: flex; gap: 10px; margin-top: 10px; }
+.input-row input { margin: 0; }
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all .15s;
+}
+.btn-save    { background: var(--accent);  color: #fff; }
+.btn-save:hover { background: var(--accent-h); }
+.btn-publish { background: var(--gold); color: #1a1a1a; }
+.btn-publish:hover { opacity: .9; }
+.btn-add {
+  background: none;
+  border: 1px dashed var(--accent);
+  color: var(--accent);
+  width: 100%;
+  margin-top: 10px;
+  justify-content: center;
+}
+.btn-add:hover { background: rgba(74,138,58,.08); }
+.btn-delete {
+  background: none;
+  border: none;
+  color: var(--red);
+  cursor: pointer;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: inherit;
+}
+.btn-delete:hover { background: rgba(192,74,58,.1); }
+
+/* ── MEDIA GRID ── */
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.media-slot {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.media-preview {
+  width: 100%; height: 120px;
+  background: var(--surface2);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); font-size: 28px;
+  overflow: hidden;
+}
+.media-preview img { width: 100%; height: 100%; object-fit: cover; }
+
+.media-slot-body { padding: 12px; }
+.media-slot-label { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+
+.media-url-row { display: flex; gap: 6px; }
+.media-url-row input { margin: 0; font-size: 11px; padding: 6px 8px; flex: 1; }
+.media-url-row button {
+  padding: 6px 10px; font-size: 11px;
+  background: var(--accent); color: #fff;
+  border: none; border-radius: 5px; cursor: pointer; white-space: nowrap;
+}
+
+/* ── TOAST ── */
+#toast {
+  position: fixed;
+  bottom: 24px; left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  color: var(--accent-h);
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-size: 13px; font-weight: 600;
+  z-index: 9999;
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+  pointer-events: none;
+}
+#toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
