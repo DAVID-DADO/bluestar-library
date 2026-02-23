@@ -1,0 +1,42 @@
+{
+  "id": "almond",
+  "name": "שקד",
+  "hero": {
+    "title": "שקד",
+    "deck": "האגוז הכי נפוץ בעולם. מקליפורניה ועד ספרד, שקד הוא הבסיס של תעשיית האגוזים העולמית. מדריך מקיף.",
+    "image": "../assets/images/almond-hero.jpg"
+  },
+  "story": [
+    {
+      "chapter": "ראשון",
+      "title": "מוצא וגאוגרפיה",
+      "content": "השקד (Prunus dulcis) מוצאו מאזור המזרח התיכון ומרכז אסיה. קליפורניה מייצרת כיום מעל 80% מהייצור העולמי."
+    },
+    {
+      "chapter": "שני",
+      "title": "זנים עיקריים",
+      "content": "Nonpareil — הזן המוביל, 40% מהייצור. Carmel, Butte, Padre — זנים משלימים. Mission — לעיבוד תעשייתי."
+    }
+  ],
+  "news": [
+    {
+      "tag": "תעשייה",
+      "title": "יבול קליפורניה 2024 — 1.4 מיליארד פאונד",
+      "body": "Almond Board of California מדווח על עונה יציבה. מחירי Nonpareil בין 1.80-2.10 דולר לפאונד.",
+      "meta": "Almond Board of California, 2024",
+      "isInsight": false
+    },
+    {
+      "tag": "Blue Star Insight",
+      "title": "שקד ישראלי — ביקוש גובר לקונדיטוריה",
+      "body": "הביקוש המקומי לשקד Nonpareil גדל עם צמיחת ענף הקונדיטוריה הפרימיום.",
+      "meta": "Blue Star International",
+      "isInsight": true
+    }
+  ],
+  "media": {
+    "hero": "../assets/images/almond-hero.jpg",
+    "orchard": "",
+    "grades": ""
+  }
+}
