@@ -8,47 +8,17 @@
 <link rel="stylesheet" href="../assets/css/style.css">
 <link rel="stylesheet" href="../assets/css/animation.css">
 <style>
-:root {
-  --bg: #F5F7F2; --text: #1E1E1E; --body: #2D2A24; --light: #6B6458;
-  --accent: #4A8A3A; --dark: #2A5A1A; --warm: #7DB868; --bdr: #C8D8C2;
-  --max-w: 1000px;
-}
+:root{--bg:#F5F7F2;--text:#1E1E1E;--body:#2D2A24;--light:#6B6458;--accent:#4A8A3A;--dark:#2A5A1A;--warm:#7DB868;--wl:#F0F7EC;--gl:#E5EFE0;--bdr:#C8D8C2;--card:#FFF}
 
-.hero {
-  background: linear-gradient(160deg, #1A2A10, #2A5A1A 55%, #4A7A3A);
-  padding: 100px 24px 40px;
+.full-bleed {
+  width: calc(100% + 48px);
+  margin-right: -24px;
+  margin-left: -24px;
+  margin-top: 32px;
+  margin-bottom: 8px;
 }
-.hero-inner {
-  max-width: var(--max-w);
-  margin: 0 auto;
-}
-.hero-img-wrap {
-  max-width: var(--max-w);
-  margin: 40px auto;
-  padding: 0 24px;
-  box-sizing: border-box;
-}
-.hero-img-wrap img {
+.full-bleed img {
   width: 100%;
-  height: 440px;
-  object-fit: cover;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  display: block;
-}
-.img-ph {
-  background: var(--gl);
-  border: 2px dashed var(--bdr);
-  border-radius: 12px;
-  padding: 30px;
-  text-align: center;
-  margin: 30px 0;
-}
-.table-wrapper {
-  overflow-x: auto;
-  margin: 20px 0;
-  border-radius: 8px;
-  border: 1px solid var(--bdr);
 }
 .ph-cap {
   text-align: center;
@@ -56,6 +26,18 @@
   font-size: 13px;
   color: var(--light);
 }
+.hero{background:linear-gradient(160deg,#1A2A10,#2A5A1A 55%,#4A7A3A);padding:100px 24px 0}
+
+/* master layout v2.0 */
+:root{--max-w:1000px;--container-pad:24px;--border-radius:16px}
+.hero-inner,.con,.hero-img-wrap{max-width:var(--max-w);margin-left:auto !important;margin-right:auto !important;padding-left:var(--container-pad);padding-right:var(--container-pad);box-sizing:border-box;width:100%}
+.hero{width:100%;padding:100px 0 60px;display:flex;flex-direction:column}
+.hero h1{font-size:clamp(2.5rem,8vw,4rem);margin:12px 0;line-height:1.1}
+.hero-img-wrap{margin-bottom:50px}
+.hero-img-wrap img{width:100%;height:480px;object-fit:cover;border-radius:var(--border-radius);box-shadow:0 20px 40px rgba(0,0,0,.08)}
+.table-wrapper{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:24px 0;border:1px solid var(--bdr);border-radius:8px}
+table.gt{width:100%;min-width:600px;border-collapse:collapse}
+@media(max-width:768px){.hero-img-wrap img{height:300px;border-radius:12px}}
 </style>
 <style id="pb-css">
 .pb-chart{margin:16px 0 8px;display:flex;flex-direction:column;gap:10px}
@@ -70,108 +52,202 @@
 </style>
 </head>
 <body>
-
 <div class="hero">
-  <div class="hero-inner">
-    <div class="hero-k">ערך ידע · Blue Star International</div>
-    <h1>פיסטוק</h1>
-    <div class="deck">האגוז הפרסי שכבש את העולם. מדריך מקיף על היסטוריה, גיאופוליטיקה, סירוגיות וערכים תזונתיים.</div>
-    <div class="tabs">
-      <a href="story.html" class="tab active">סיפור</a>
-      <a href="specs.html" class="tab">נתונים</a>
-      <a href="news.html" class="tab">חדשות</a>
-    </div>
+<div class="hero-k">ערך ידע · Blue Star International</div>
+<h1>פיסטוק</h1>
+<div class="deck">האגוז הפרסי שכבש את העולם. אחד משני האגוזים שמוזכרים בתנ"ך. הקליפה שנפתחת לבד כשהאגוז מוכן — סימן שהטבע בנה לו מנגנון שיווק מובנה. מ-7,000 שנה לפני הספירה בהרי פרס ועד שליש מיליארד קילו בקליפורניה. מדריך מקיף.</div>
+
+  <div class="tabs">
+    <a href="story.html" class="tab active">סיפור</a>
+    <a href="specs.html" class="tab">נתונים</a>
+    <a href="news.html" class="tab">חדשות</a>
   </div>
 </div>
 
-<div class="hero-img-wrap" data-slot="pistachio-hero">
-  <img src="../assets/images/pistachio-hero.jpg" alt="Pistachio Hero">
+<div class="hero-img-wrap" data-slot="pistachio-hero"><img src="../assets/images/pistachio-hero.jpg" alt="תמונת פיסטוק" style="width:100%;height:440px;object-fit:cover;object-position:center;display:block;"></div>
+<div class="con">
+<!-- ═══ CH 1 ═══ -->
+<div class="ch">
+<div class="cl">פרק ראשון</div>
+<h2>תשעת אלפים שנה של ירוק — מפרס הקדומה ועד דרך המשי</h2>
+
+<p class="dc">המילה "פיסטוק" מגיעה מהפרסית העתיקה — "pistag" (פיסטַג) בשפה האווסטית, שפת הזורואסטרים. מכל השפות שאימצו את המילה — יוונית (πιστάκιον), לטינית (pistacia), ערבית (فستق, fustuq), טורקית (fıstık), עברית (פיסטוק) — כולן חוזרות לשורש הפרסי הזה. אגוז אחד, מילה אחת, תשעת אלפים שנה.</p>
+
+<p>ממצאים ארכיאולוגיים מעידים על צריכת פיסטוקים כבר ב-6,750 לפני הספירה באזור ג'רמו שבעירק הצפון-מזרחי. עדויות מאוזבקיסטן (ג'רקוטן) מתקופת הברונזה מאשרות צריכה נרחבת באסיה המרכזית. עצי פיסטוק בר (Pistacia vera) גדלו במדבריות ובהרים של מה שהיום איראן, אפגניסטן, טורקמניסטן וטורקיה — אזורים חמים ויבשים, עם אדמה מנוקזת ומעט מאוד מים.</p>
+
+<p>בפרס העתיקה, הפיסטוק היה מזון של מלכים — לא בהגזמה. אגדה פרסית מספרת שמלכת שבא הכריזה על כל הפיסטוקים כרכוש מלכותי ואסרה על הדיוטות לאכול אותם. הגנים התלויים של בבל — בתקופת מרדוך-אפלא-אידין השני, כ-700 לפני הספירה — כללו לפי המסורת עצי פיסטוק. ובחצר של דריוש הגדול (522–486 לפה"ס), פיסטוקים הוגשו בסעודות מלכותיות כסמל של עושר ומעמד.</p>
+
+<div class="pull"><p>אלכסנדר הגדול הביא את הפיסטוק ממסעו בפרס למקדוניה. הרומאים הביאו אותו מסוריה לאיטליה במאה הראשונה לספירה. הסוחרים הערביים הביאו אותו לספרד וסיציליה בימי הביניים. בכל תחנה — הוא הפך למותרות.</p></div>
+
+<p>תאופרסטוס, תלמידו של אריסטו, תיאר את הפיסטוק כ"עץ דמוי אלה עם אגוזים דמויי שקד, מבקטריה". פליניוס הזקן כתב שהפרוקונסול הרומי בסוריה, לוציוס ויטליוס, הביא את הפיסטוק לרומא ב-35 לספירה. דרך המשי נשאה את הפיסטוק מפרס לסין והודו — ובכל מקום שהגיע, הוא הפך למוצר יוקרה.</p>
+
+<div class="ab ab-w"><div class="tg">הפיסטוק והתנ"ך</div><p>הפיסטוק הוא אחד משני האגוזים שמוזכרים בתנ"ך (השני — השקד). בבראשית מג:יא, יעקב שולח את בניו למצרים עם "מעט צרי ומעט דבש, נכאת ולוט, <strong>בטנים</strong> ושקדים". "בוטנים" בעברית מקראית מזוהים על ידי חוקרים רבים כפיסטוקים, לא כבוטנים (שלא היו ידועים במזרח הקרוב). מילים קרובות בערבית (بطم), אכדית ואוגריתית מתייחסות לאלה (Pistacia) — אותו סוג בוטני. המילה נשארה בשמות מקומות: "בטונים" — ישוב בשומרון שמתאים לגידול פיסטוק.</p></div>
 </div>
+
+<!-- ═══ CH 2 ═══ -->
+<div class="ch">
+<div class="cl">פרק שני</div>
+<h2>הגאוגרפיה — ארה"ב שוברת שיאים, איראן בורחת</h2>
+
+<p class="dc">שוק הפיסטוק עבר מהפך דרמטי בעשרים השנה האחרונות. עד 2016, איראן הייתה המובילה הבלתי מעורערת — עם כ-340 אלף טון (2018) ומסורת של אלפי שנים. אבל מאז, קליפורניה עקפה הכל. ב-2023/24, ארה"ב ייצרה כ-678 אלף טון (1.5 מיליארד ליברות) — שיא כל הזמנים, 63% מהייצור העולמי. הצמיחה: 10% בשנה בעשור האחרון, כפול מהממוצע העולמי.</p>
+
+<div class="cb" id="pb-pistachio"><div class="ct">חלוקת הייצור העולמי של פיסטוק (גרעין)</div>
+<div class="pb-chart">
+<div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇺🇸</span><span class="pb-name">ארה"ב (קליפורניה)</span></div><div class="pb-track"><div class="pb-fill" data-w="55" style="background:#2A5A1A"></div></div><span class="pb-pct">55%</span></div>
+<div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇮🇷</span><span class="pb-name">איראן</span></div><div class="pb-track"><div class="pb-fill" data-w="30" style="background:#4A8A3A"></div></div><span class="pb-pct">30%</span></div>
+<div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇹🇷</span><span class="pb-name">טורקיה</span></div><div class="pb-track"><div class="pb-fill" data-w="8" style="background:#7ABB5A"></div></div><span class="pb-pct">8%</span></div>
+<div class="pb-row"><div class="pb-meta"><span class="pb-flag">🌍</span><span class="pb-name">אחרים</span></div><div class="pb-track"><div class="pb-fill" data-w="7" style="background:#DDD6CA"></div></div><span class="pb-pct">7%</span></div>
+</div>
+<div class="pb-note">~1 מיליון טון גרעין · INC / FAO 2024</div></div></div>
+
+<div class="vc"><div class="vn">Antep (Uzun/Kırmızı)</div><div class="vt">הטורקי — קטן ועז</div><p>הפיסטוק של גאזיאנטפ. קטן יותר מ-Kerman, אבל בעל טעם עז ומרוכז — מה שהופך אותו לפיסטוק המועדף לקונדיטוריה (בקלאווה, כונאפה, דונדורמה). צבע ירוק עמוק. טורקיה צורכת את רובו באופן מקומי — הביקוש הפנימי עצום.</p><div class="vs"><div class="vsi">גודל: <strong>קטן-בינוני</strong></div><div class="vsi">טעם: <strong>עז, מרוכז</strong></div><div class="vsi"><strong>קונדיטוריה, צריכה מקומית</strong></div></div></div>
+
+<div class="vc"><div class="vn">זנים איראניים</div><div class="vt">פנדוקי, אכברי, קלה-גוצ'י, אחמד-אגאיי</div><p><strong>פנדוקי</strong> — עגול וקטן, דומה לאגוז לוז (fandoq בפרסית), הנפוץ ביותר. <strong>אכברי</strong> — ארוך וגדול, טעם חמאתי-מתוק, פרימיום. <strong>קלה-גוצ'י</strong> — גדול ועגול, קליפה עבה, טעם עשיר. <strong>אחמד-אגאיי</strong> — בינוני, קליפה ורודה, גרעין ירוק — פופולרי לייצוא. כל אחד מתאים לשימוש אחר.</p><div class="vs"><div class="vsi">מגוון: <strong>4+ זנים מסחריים</strong></div><div class="vsi"><strong>ייצוא, גרעינים ירוקים, קונדיטוריה</strong></div></div></div>
+
+<h3>סיווג מסחרי — גודל ופתיחה</h3>
+<div style="overflow-x:auto"><table class="gt"><tr><th>קטגוריה</th><th>תיאור</th><th>הערות</th></tr>
+<tr><td><strong>Naturally Open</strong></td><td>קליפה נפתחה מעצמה, גרעין נראה</td><td>פרימיום</td></tr>
+<tr><td><strong>Mechanically Open</strong></td><td>קליפה נפתחה מכנית</td><td>בינוני</td></tr>
+<tr><td><strong>Closed Shell</strong></td><td>קליפה סגורה</td><td>נמוך — לתעשייה, לגרעינים</td></tr>
+<tr><td><strong>Kernels (GPPK)</strong></td><td>גרעינים ירוקים קלופים</td><td>פרימיום גבוה — קונדיטוריה</td></tr>
+</table></div>
+<p>פיסטוקים מסווגים גם לפי גודל: 18/20 (גדולים), 20/22 (בינוניים), 26/28 (קטנים) — המספרים מציינים כמות אגוזים לאונקייה. קטן יותר = מספר גבוה יותר = מחיר נמוך יותר (בדרך כלל).</p>
+
+
+<div class="pt">מטע פיסטוק — קליפורניה הרשעה</div><div class="pd">שיחי פיסטוק נמוכים עם אשכולות אדומים-ורודים</div><button class="ph-upload-btn" data-slot="pistachio-img2" data-html="pistachio/story.html" onclick="triggerUpload(this)">העלאת תמונה</button><input type="file" accept="image/*" style="display:none" onchange="uploadImage(this)"></div>
+</div><!-- /con -->
+
+<figure class="ph-done full-bleed" data-slot="pistachio-img2"><img src="../assets/images/pistachio-img2.jpg" alt="מטע פיסטוק" style="width:100%;height:400px;object-fit:cover;display:block;"><figcaption class="ph-cap">מטע פיסטוק — קליפורניה</figcaption></figure>
 
 <div class="con">
-  <div class="ch">
-    <div class="cl">פרק ראשון</div>
-    <h2>תשעת אלפים שנה של ירוק — מפרס ועד דרך המשי</h2>
-    <p class="dc">המילה "פיסטוק" מגיעה מהפרסית העתיקה — "pistag". אגוז אחד, מילה אחת, תשעת אלפים שנה.</p>
-    <p>ממצאים ארכיאולוגיים מעידים על צריכת פיסטוקים כבר ב-6,750 לפני הספירה. בפרס העתיקה, הפיסטוק היה מזון של מלכים — אגדה מספרת שמלכת שבא הכריזה עליו כרכוש מלכותי בלבד.</p>
-    <div class="ab ab-w">
-      <div class="tg">הפיסטוק והתנ"ך</div>
-      <p>הפיסטוק הוא אחד משני האגוזים שמוזכרים בתנ"ך (בראשית מג:יא — "בטנים ושקדים"). "בטנים" מזוהים בבוטניקה המקראית כפיסטוקים (Pistacia vera).</p>
-    </div>
-  </div>
 
-  <div class="ch">
-    <div class="cl">פרק שני</div>
-    <h2>הגאוגרפיה — קליפורניה, איראן והסירוגיות</h2>
-    <p class="dc">שוק הפיסטוק עבר מהפך דרמטי. בעוד איראן הובילה היסטורית, קליפורניה הפכה למעצמה העולמית עם 63% מהייצור ב-2023.</p>
-    <p>אחד האתגרים הגדולים בניהול מלאי פיסטוק הוא תופעת ה-<strong>Alternate Bearing (סירוגיות)</strong> — נטייה טבעית של העץ להניב יבול כבד בשנה אחת ויבול דל בשנה שאחריה. ב-Blue Star International אנו מנתחים מחזורים אלו כדי להבטיח רציפות אספקה.</p>
-    <div class="cb" id="pb-pistachio">
-      <div class="ct">חלוקת הייצור העולמי (גרעין)</div>
-      <div class="pb-chart">
-        <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇺🇸</span><span class="pb-name">ארה"ב</span></div><div class="pb-track"><div class="pb-fill" data-w="55" style="background:#2A5A1A"></div></div><span class="pb-pct">55%</span></div>
-        <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇮🇷</span><span class="pb-name">איראן</span></div><div class="pb-track"><div class="pb-fill" data-w="30" style="background:#4A8A3A"></div></div><span class="pb-pct">30%</span></div>
-        <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇹🇷</span><span class="pb-name">טורקיה</span></div><div class="pb-track"><div class="pb-fill" data-w="8" style="background:#7ABB5A"></div></div><span class="pb-pct">8%</span></div>
-      </div>
-      <div class="pb-note">נתוני INC / USDA 2024</div>
-    </div>
-  </div>
+<!-- ═══ CH 5 ═══ -->
+<div class="ch">
+<div class="cl">פרק שלישי</div>
+<h2>מה בפנים — הפרופיל התזונתי</h2>
 
-  <div class="ch">
-    <div class="cl">פרק שלישי</div>
-    <h2>סיווג מסחרי — איכות ופתיחה</h2>
-    <div class="table-wrapper">
-      <table class="gt">
-        <tr><th>קטגוריה</th><th>תיאור</th><th>הערות</th></tr>
-        <tr><td><strong>Naturally Open</strong></td><td>פתיחה טבעית על העץ</td><td>האיכות הגבוהה ביותר</td></tr>
-        <tr><td><strong>Mechanically Open</strong></td><td>פתיחה מלאכותית במפעל</td><td>דרגה מסחרית</td></tr>
-        <tr><td><strong>Closed Shell</strong></td><td>קליפה סגורה</td><td>לתעשיית הגרעינים</td></tr>
-      </table>
-    </div>
-    <div class="img-ph" data-slot="pistachio-img2" data-html="pistachio/story.html">
-      <div class="img-ph-title">📷 תמונת מטע ועיבוד</div>
-      <div class="img-ph-desc">מטע פיסטוק בקליפורניה לעומת איראן</div>
-      <button class="img-ph-btn" onclick="triggerUpload(this)">העלאת תמונה</button>
-      <input type="file" accept="image/*" style="display:none" onchange="uploadImage(this)">
-    </div>
-  </div>
+<p class="dc">פיסטוק הוא האגוז עם פחות הקלוריות ופחות השומן מכל אגוזי העץ הנפוצים — ועם הכי הרבה חלבון אחרי השקד. השילוב הזה הפך אותו לאגוז הדיאטה הפופולרי ביותר. 49 פיסטוקים = מנה של 28 גרם = 159 קלוריות בלבד. במונחי "אגוזים למנה" — הוא מנצח.</p>
 
-  <div class="ch">
-    <div class="cl">פרק רביעי</div>
-    <h2>מה בפנים — "אגוז הדיאטה"</h2>
-    <p>הפיסטוק הוא האגוז עם פחות קלוריות ופחות שומן מכל אגוזי העץ הנפוצים. הוא מכיל את הכמות הגבוהה ביותר של <strong>לוטאין וזאקסנתין</strong> לבריאות העיניים.</p>
-    <div class="ng">
-      <div class="ni"><div class="nv">557</div><div class="nu">קלוריות</div><div class="nl">ל-100 גרם</div></div>
-      <div class="ni"><div class="nv">20.3g</div><div class="nu">חלבון</div><div class="nl">שני אחרי שקד</div></div>
-      <div class="ni"><div class="nv">85%</div><div class="nu">B6</div><div class="nl">מהצריכה היומית</div></div>
-    </div>
-    <div class="img-ph" data-slot="pistachio-img3" data-html="pistachio/story.html">
-      <div class="img-ph-title">📷 קציר פיסטוק</div>
-      <div class="img-ph-desc">פיסטוקים פתוחים ומסוגרים על רשתות ייבוש</div>
-      <button class="img-ph-btn" onclick="triggerUpload(this)">העלאת תמונה</button>
-      <input type="file" accept="image/*" style="display:none" onchange="uploadImage(this)">
-    </div>
-  </div>
-
-  <div class="ch">
-    <div class="cl">פרק חמישי</div>
-    <h2>סיכום — "הזהב הירוק"</h2>
-    <p class="dc">פיסטוק הוא האגוז היחיד שהטבע עיצב לו אריזה עם פתיחה קלה. הוא משלב מסורת פרסית עם טכנולוגיה אמריקאית.</p>
-    <div class="pull">
-      <p>האגוז שנקרא "צוחק" בפרסית ו"שמח" בסינית. תשעת אלפים שנה — ועדיין הירוק הכי מבוקש בעולם.</p>
-    </div>
-  </div>
-
-  <div class="ft">
-    Blue Star International · 2026 · ערך ידע צרכני<br>
-    <span style="font-size:11px;color:#AAA59A;">מבוסס על נתוני INC, USDA FAS ומקורות תעשייתיים.</span>
-  </div>
+<div class="ng">
+<div class="ni"><div class="nv">557</div><div class="nu">קלוריות</div><div class="nl">ל-100 גרם</div></div>
+<div class="ni"><div class="nv">44.4g</div><div class="nu">שומן</div><div class="nl">55% חד בלתי רווי</div></div>
+<div class="ni"><div class="nv">20.3g</div><div class="nu">חלבון</div><div class="nl">שני אחרי שקד</div></div>
+<div class="ni"><div class="nv">10.6g</div><div class="nu">סיבים</div><div class="nl">42% מהיומי</div></div>
+<div class="ni"><div class="nv">49</div><div class="nu">אגוזים/מנה</div><div class="nl">הכי הרבה מכל אגוז</div></div>
+<div class="ni"><div class="nv">0</div><div class="nu">כולסטרול</div><div class="nl">אפס</div></div>
 </div>
 
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>ערך תזונתי</th><th>ל-100 גרם</th><th>% מהצריכה היומית</th><th>מה שזה אומר</th></tr>
+<tr><td>קלוריות</td><td>557</td><td>—</td><td>הנמוך ביותר מכל אגוזי עץ</td></tr>
+<tr><td>שומן כללי</td><td>44.4g</td><td>57%</td><td>55% חד בלתי רווי, 32% רב בלתי רווי</td></tr>
+<tr><td>חלבון</td><td>20.3g</td><td>41%</td><td>שני אחרי שקד בין אגוזי עץ</td></tr>
+<tr><td>סיבים תזונתיים</td><td>10.6g</td><td>42%</td><td>גבוה — תורם לשובע</td></tr>
+<tr><td>ויטמין B6</td><td>1.7mg</td><td>85%</td><td>הגבוה ביותר מכל אגוז</td></tr>
+<tr><td>תיאמין (B1)</td><td>0.87mg</td><td>58%</td><td>מטבוליזם אנרגיה</td></tr>
+<tr><td>נחושת</td><td>1.3mg</td><td>72%</td><td>עצמות ומערכת חיסון</td></tr>
+<tr><td>מנגן</td><td>1.2mg</td><td>52%</td><td>נוגד חמצון</td></tr>
+<tr><td>זרחן</td><td>490mg</td><td>49%</td><td>עצמות ואנרגיה</td></tr>
+<tr><td>לוטאין+זאקסנתין</td><td>1.4mg</td><td>—</td><td>הגבוה ביותר מכל אגוז — בריאות עיניים</td></tr>
+</table></div>
+
+<p>557 קלוריות למאה גרם — הנמוך ביותר מכל אגוזי העץ (לעומת 718 במקדמיה, 690 בפקאן). 44.4 גרם שומן (לעומת 75.8 במקדמיה). 20.3 גרם חלבון — כמעט כמו שקד. 10.6 גרם סיבים — גבוה מאוד. 28 גרם פחמימות (כ-8g נטו). מינרלים: נחושת (72%), ויטמין B6 (85%), תיאמין (58%), זרחן (49%), מנגן (52%).</p>
+
+<p>מה שמייחד: <strong>לוטאין וזאקסנתין</strong> — פיסטוק מכיל את הכמות הגבוהה ביותר של קרוטנואידים אלה מכל אגוז, שתורמים לבריאות העיניים ונותנים לגרעין את הצבע הירוק. בנוסף, <strong>ויטמין B6</strong> — 85% מהיומי ב-100 גרם — הגבוה ביותר מכל אגוז. ו<strong>"אפקט הקליפה"</strong>: מחקרים מצביעים על כך שאכילת פיסטוקים בקליפה גורמת לאנשים לאכול 41% פחות קלוריות מאשר אכילת גרעינים מוכנים — כי הקליפות מצטברות ומשמשות כרמז ויזואלי לכמות שנאכלה.</p>
+
+<div class="ab ab-w"><div class="tg">הצבע הירוק — לא צבע מאכל</div><p>הירוק של גרעין פיסטוק הוא טבעי — כלורופיל. ככל שהגרעין ירוק יותר, כך הוא בשל יותר ואיכותי יותר. פיסטוק איראני ידוע בירוק העמוק שלו — מה שהופך אותו למועדף בקונדיטוריה (בקלאווה, מלבי, גלידה) שבה הצבע חשוב. פיסטוק קליפורני נוטה לירוק בהיר יותר. הצבע מושפע מזן, אקלים, ותזמון קטיף.</p></div>
+</div>
+
+<!-- ═══ CH 6 ═══ -->
+<div class="ch">
+<div class="cl">פרק רביעי</div>
+<h2>מה עושים איתו</h2>
+
+<p class="dc">פיסטוק הוא כנראה האגוז הוורסטילי ביותר. הוא נאכל בקליפה כחטיף (קלוי ומלוח), משמש כגרעין קלוף בקונדיטוריה, נטחן לפסטה, מוכן כחמאה, מופיע בגלידה, בנקניק, בסלטים, ובמאות מנות מסורתיות מאיראן עד סיציליה. הצבע הירוק שלו הופך אותו למרכיב ויזואלי — לא רק טעמי.</p>
+
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>שימוש</th><th>צורה</th><th>שווקים מרכזיים</th></tr>
+<tr><td><strong>חטיף בקליפה</strong></td><td>קלוי ומלוח, בקליפה</td><td>ארה"ב, אירופה, ישראל</td></tr>
+<tr><td><strong>גרעינים קלויים</strong></td><td>קלוי ללא קליפה</td><td>הודו, סין, מזרח תיכון</td></tr>
+<tr><td><strong>בקלאווה וקונדיטוריה</strong></td><td>גרעין טרי / GPPK</td><td>טורקיה, לבנון, סוריה</td></tr>
+<tr><td><strong>גלידה וג'לאטו</strong></td><td>גרעינים + פסטה</td><td>איטליה (ברונטה), איראן, ישראל</td></tr>
+<tr><td><strong>פסטו ורטבים</strong></td><td>טחון גס</td><td>סיציליה, מסעדות פרימיום</td></tr>
+<tr><td><strong>חמאת פיסטוק</strong></td><td>טחון חלק</td><td>שוק בריאות, ארה"ב, אירופה</td></tr>
+<tr><td><strong>קרום לדגים ובשר</strong></td><td>טחון גס, שלם</td><td>מסעדות fine dining</td></tr>
+<tr><td><strong>GPPK — גרעין ירוק</strong></td><td>קלוף, ירוק</td><td>איראן (ייצוא), קונדיטוריה מזרח תיכון</td></tr>
+</table></div>
+
+<p><strong>כחטיף</strong> — קלוי ומלוח בקליפה, הצורה הפופולרית ביותר. Wonderful Pistachios בנו מותג גלובלי סביב זה. <strong>בקונדיטוריה</strong> — בקלאווה (טורקיה, לבנון, סוריה), כונאפה, לוקום, חלווה, נוגט. <strong>בגלידה</strong> — "בסתאני סונאתי" — גלידה פרסית עם מי ורדים, זעפרן ופיסטוק — אחת הגלידות העתיקות בעולם. דונדורמה טורקית (עם סאלפ) עם פיסטוק. ג'לאטו פיסטוק סיציליאני מברונטה. <strong>במנות מלוחות</strong> — מורטדלה (נקניק בולוני עם פיסטוקים), פסטו פיסטוק, קרום לדגים.</p>
+
+<h3>פיסטוק בתרבויות העולם</h3>
+<p>ב<strong>איראן</strong> — "אַג'יל" (تخمه و آجیل), תערובת אגוזים וזרעים שנאכלת עם תה, היא חלק מכל אירוח. פיסטוק הוא המרכיב הראשי. בנורוז (ראש השנה הפרסי) — פיסטוק מוזהב סמל לשפע. <strong>בטורקיה</strong> — בקלאווה מגאזיאנטפ עם פיסטוק (לא אגוז מלך!) היא סטנדרט הזהב. כונאפה עם פיסטוק — קלאסיקה. <strong>בסיציליה</strong> — פיסטוק ברונטה ("הזהב הירוק של אטנה") הוא PDO — מוצר מוגן מקור, מחיר פרימיום קיצוני. פסטו פיסטוק, ג'לאטו, מורטדלה. <strong>בהודו</strong> — בריאני עם פיסטוק, קולפי, מתוקים.</p>
+
+<p>ו<strong>בישראל</strong> — פיסטוק הוא חלק מהנוף הקולינרי ממזרח ותיכון: בבקלאווה, בחלווה, בגלידה, ובתערובות אגוזים. נמכר בקליפה (קלוי/מלוח) ובגרעינים. ישראל מייבאת פיסטוקים בעיקר מארה"ב ומטורקיה. שימוש הולך וגדל בקונדיטוריה ישראלית מודרנית — טארטים, מוסים, וקישוטי מנות.</p>
+</div>
+<div class="pt">פיסטוקים — ייבוש ומיון</div><div class="pd">פיסטוקים פתוחים ומסוגרים על רשתות ייבוש</div><button class="ph-upload-btn" data-slot="pistachio-img3" data-html="pistachio/story.html" onclick="triggerUpload(this)">העלאת תמונה</button><input type="file" accept="image/*" style="display:none" onchange="uploadImage(this)"></div>
+</div><!-- /con -->
+
+<figure class="ph-done full-bleed" data-slot="pistachio-img3"><img src="../assets/images/pistachio-img3.jpg" alt="קציר פיסטוק" style="width:100%;height:400px;object-fit:cover;display:block;"><figcaption class="ph-cap">קציר פיסטוק</figcaption></figure>
+
+<div class="con">
+
+
+<!-- ═══ CH 7 ═══ -->
+<div class="ch">
+<div class="cl">פרק חמישי</div>
+<h2>איכות, טריות ואחסון</h2>
+
+<p class="dc">פיסטוק מחזיק טוב יחסית — בזכות תכולת שומן בינונית (44%, לעומת 65+ באגוז מלך ומקדמיה) ואחוז גבוה של שומן חד בלתי רווי (55% מהשומן). אבל — הסיכון האמיתי בפיסטוק אינו חמצון אלא <strong>אפלטוקסינים</strong>. כמו באגוז ברזיל, לחות ואחסון לקוי מביאים לעובש מסוג Aspergillus. האיחוד האירופי מפקח בקפדנות על משלוחי פיסטוק מאיראן וטורקיה.</p>
+
+<p>איך מזהים פיסטוק טוב? <strong>קליפה</strong> — פתוחה טבעית, בז' נקי ללא כתמים כהים. <strong>גרעין</strong> — ירוק בהיר-עמוק (לא צהוב). <strong>ריח</strong> — אגוזי עדין. ריח חמוץ או עובשי = בעיה. <strong>טעם</strong> — מתקתק-חמאתי עם גוון ירוק. מרירות = גרעין ישן.</p>
+
+<div class="ab ab-g"><div class="tg">כללי אחסון</div><p>בקליפה — במיכל אטום במקום קריר ויבש, עד שלושה חודשים. <strong>מקרר — עד שישה חודשים</strong>. מקפיא — עד שנה. גרעינים קלופים — רגישים יותר, מקרר חובה. פיסטוקים סופגים ריח ולחות — תמיד במיכל אטום. היתרון על פני אגוז מלך: שומן בינוני + לחות נמוכה (5–7%) = חיי מדף טובים יחסית.</p></div>
+</div>
+
+<!-- ═══ CH 8 ═══ -->
+<div class="ch">
+<div class="cl">פרק שישי</div>
+<h2>רגישויות ודגשים בטיחותיים</h2>
+
+<p>פיסטוק שייך למשפחת ה-Anacardiaceae — משפחת הקשיו והמנגו. מבחינה אלרגנית, הוא מסווג כ<strong>אגוז עץ</strong> ומחייב סימון. רגישות צולבת קיימת בעיקר עם <strong>קשיו</strong> — שניהם מאותה משפחה. מי שאלרגי לקשיו צריך להיזהר במיוחד עם פיסטוק.</p>
+
+<div class="ab ab-r"><div class="tg">שלושה דגשים בטיחותיים</div><p><strong>1. אפלטוקסינים:</strong> פיסטוקים רגישים לעובש Aspergillus — בעיקר באחסון לקוי. האיחוד האירופי דחה משלוחים שלמים מאיראן וטורקיה. קנו ממקורות מפוקחים. <strong>2. מלח:</strong> פיסטוק קלוי ומלוח הוא מלכודת נתרן — קל לאכול 50–100 גרם בישיבה אחת ולצרוך מעל הגבול היומי של נתרן. מנה סבירה: 28 גרם (49 אגוזים). <strong>3. חנק:</strong> פיסטוקים בקליפה — שברי קליפה קשים — עלולים להוות סכנה לילדים. מומלץ לתת לילדים קטנים גרעינים קלופים בלבד.</p></div>
+
+<p>מעבר לאלרגיה: פיסטוק מכיל פרוקטנים (FODMAP) שעלולים לגרום לאי-נוחות במערכת העיכול אצל רגישים. מנה של 28 גרם נחשבת בטוחה ברוב דיאטות Low-FODMAP.</p>
+</div>
+
+<!-- ═══ CH 9 ═══ -->
+<!-- ═══ CH 10 ═══ -->
+<div class="ch">
+<div class="cl">פרק שביעי</div>
+<h2>סיכום — מה שנשאר</h2>
+
+<p class="dc">פיסטוק הוא אגוז שנבנה לאנשים. הקליפה נפתחת לבד כשהאגוז מוכן — כאילו הטבע עיצב לו אריזה עם פתיחה קלה. הצבע הירוק הטבעי הופך אותו למרכיב ויזואלי בכל מנה. הפרופיל התזונתי — פחות קלוריות, הכי הרבה אגוזים למנה, הכי הרבה חלבון אחרי שקד — הופך אותו לדיאטתי בלי להרגיש כמו פשרה. ו"אפקט הקליפה" — שגורם לאנשים לאכול פחות — מוסיף שכבה פסיכולוגית שאף משווק לא היה יכול להמציא.</p>
+
+<p>מ-"pistag" בפרסית העתיקה ועד "开心果" (פרי שמח) בסינית — הפיסטוק עבר דרך חצרות מלכים, דרך המשי, מטעי קליפורניה, מפעלי Wonderful, ובקלאוואות גאזיאנטפ — ושמר על הזהות שלו: ירוק, פתוח, ייחודי. אין אגוז שנראה כמו פיסטוק, אין אגוז שנפתח כמו פיסטוק, ואין אגוז שמגיע עם אותו שילוב של מסורת ומודרניות.</p>
+
+<div class="pull"><p>האגוז היחיד שמוזכר בתנ"ך ליד השקד. האגוז היחיד שהקליפה שלו נפתחת מעצמה. האגוז שנקרא "צוחק" בפרסית ו"שמח" בסינית. תשעת אלפים שנה — ועדיין הירוק הכי מבוקש בעולם.</p></div>
+
+<p><strong>לקנייה:</strong> קליפה פתוחה טבעית, בז' נקי, גרעין ירוק (לא צהוב). פיסטוק איראני — ירוק עמוק, טעם עז, מעולה לקונדיטוריה. קליפורני — גדול, אחיד, מעולה כחטיף. טורקי — קטן ומרוכז, הכי טוב לבקלאווה. בדקו שאין ריח עובשי. העדיפו אריזות ואקום.</p>
+
+<p><strong>בבית:</strong> מיכל אטום, מקרר. בקליפה — חצי שנה. קלופים — חודשיים. מקפיא — שנה. ואם אתם אוכלים מהשקית ישר — שימו לב לקליפות שמצטברות. זה לא באג, זה פיצ'ר. הקליפות הן הבקרת מנות הטובה ביותר שטבע המציא.</p>
+</div>
+
+
+<div class="ft">
+ערך ידע צרכני · Blue Star International · 2026<br>
+מבוסס על נתוני INC, USDA FAS, American Pistachio Growers, Iran Pistachio Association, ומקורות פתוחים<br>
+<span style="font-size:11px;color:#AAA59A;">מידע תזונתי: USDA FoodData Central · נתוני ייצור: INC / USDA 2023/24–2024/25 · ארכיאולוגיה: Spengler et al. 2022 (MDPI Agronomy) · היסטוריה: Wikipedia, American Pistachio Growers</span>
+</div>
+ 
+ 
+ 
+ 
+</div><!-- /con -->
 <a href="../index.html" class="home-btn" style="position:fixed;top:18px;right:18px;z-index:9999;display:flex;align-items:center;gap:7px;padding:8px 16px;background:rgba(30,28,24,.92);border:1px solid rgba(201,169,110,.25);border-radius:8px;text-decoration:none;backdrop-filter:blur(10px)">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
 <span style="font-family:sans-serif;font-size:13px;font-weight:600;color:#C9A96E">ספרייה</span>
 </a>
-
 <script src="../assets/js/scroll_reveal.js"></script>
 <script src="../assets/js/upload.js"></script>
 <script id="pb-js">
