@@ -11,17 +11,21 @@
     <aside class="admin-sidebar">
       <div class="admin-logo">Blue Star Admin</div>
       <nav class="product-nav">
-        <button class="nav-btn active" onclick="loadProduct('pistachio')">🟢 פיסטוק</button>
-        <button class="nav-btn" onclick="loadProduct('almond')">🟤 שקד</button>
-        <button class="nav-btn" onclick="loadProduct('cashew')">🟡 קשיו</button>
-        <button class="nav-btn" onclick="loadProduct('walnut')">🟫 אגוז מלך</button>
+        <button class="nav-btn active" data-id="pistachio"  onclick="loadProduct('pistachio',this)">🟢 פיסטוק</button>
+        <button class="nav-btn"        data-id="almond"     onclick="loadProduct('almond',this)">🟤 שקד</button>
+        <button class="nav-btn"        data-id="cashew"     onclick="loadProduct('cashew',this)">🟡 קשיו</button>
+        <button class="nav-btn"        data-id="walnut"     onclick="loadProduct('walnut',this)">🟫 אגוז מלך</button>
+        <button class="nav-btn"        data-id="brazil"     onclick="loadProduct('brazil',this)">🌰 אגוז ברזיל</button>
+        <button class="nav-btn"        data-id="macadamia"  onclick="loadProduct('macadamia',this)">⚪ מקדמיה</button>
+        <button class="nav-btn"        data-id="pecan"      onclick="loadProduct('pecan',this)">🟧 פקאן</button>
+        <button class="nav-btn"        data-id="hazelnut"   onclick="loadProduct('hazelnut',this)">🟥 לוז</button>
       </nav>
-      <div class="sidebar-footer">v1.0 · Blue Star Library</div>
+      <div class="sidebar-footer">v1.1 · Blue Star Library</div>
     </aside>
 
     <main class="admin-main">
       <header class="admin-header">
-        <h1 id="current-product-name">Pistachio Dashboard</h1>
+        <h1 id="current-product-name">Dashboard</h1>
         <div class="header-actions">
           <button class="btn btn-save" onclick="saveToLocal()">💾 שמור</button>
           <button class="btn btn-publish" onclick="exportJSON()">⬇ ייצוא JSON</button>
@@ -54,6 +58,9 @@
 
       <!-- MEDIA -->
       <div id="media" class="tab-content">
+        <p style="color:var(--muted);font-size:12px;margin-bottom:16px">
+          העלאה ישירה ל-GitHub. התמונה תופיע מיד באתר לאחר deploy.
+        </p>
         <div id="media-editor"></div>
       </div>
     </main>
@@ -61,6 +68,8 @@
   </div>
 
   <div id="toast"></div>
+  <!-- hidden file input for image upload -->
+  <input type="file" id="global-file-input" accept="image/*" style="display:none">
   <script src="admin.js"></script>
 </body>
 </html>
