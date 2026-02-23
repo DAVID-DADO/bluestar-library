@@ -1,0 +1,18 @@
+{
+  "id": "hazelnut",
+  "name": "לוז",
+  "hero": {
+    "title": "לוז",
+    "deck": "האגוז של שוקולד Nutella. טורקיה שולטת ב-70% מהייצור העולמי. הצ'ג'ינות של הדרומים העות'מאני ועד ריבוע שוקולד של לינדט.",
+    "image": "../assets/images/hazelnut-hero.jpg"
+  },
+  "story": [
+    { "chapter": "ראשון", "title": "טורקיה — מעצמת הלוז העולמית", "content": "חוף הים השחור הטורקי, אזור גירסון וטרבזון, מייצר 70% מהלוז בעולם. 400,000 טון בשנה. כ-3 מיליון איכרים קטנים תלויים בגידול." },
+    { "chapter": "שני", "title": "פרמיום מול תעשייה", "content": "Giresun (BGF — Bagged, Grade, Fair) הוא סטנדרט הייצוא. Levante — לוז מאזור לבנט, רמה נמוכה יותר. Round Grade A לשוק הקמעונאי." }
+  ],
+  "news": [
+    { "tag": "תעשייה", "title": "יבול טורקיה 2024 — מתחת לצפי", "body": "גשמים כבדים פגעו בעונה. מחירי GTB (In-Shell) עלו 20%. Ferrero מגדילה רכש מאיטליה.", "meta": "INC, 2024", "isInsight": false },
+    { "tag": "Blue Star Insight", "title": "לוז טורקי — ביקוש יציב מהתעשייה", "body": "מפעלי שוקולד וחטיפים בישראל רוכשים לוז קבוע. Blue Star מספקת Giresun Grade A.", "meta": "Blue Star International", "isInsight": true }
+  ],
+  "media": { "hero": "../assets/images/hazelnut-hero.jpg", "orchard": "", "grades": "" }
+}
