@@ -1,0 +1,291 @@
+/* Blue Star International — Master Stylesheet v2
+   library-v2/assets/css/style.css
+   
+   מה נמצא כאן: כל CSS משותף ל-24 הקבצים
+   מה אינו כאן: :root (צבעים ייחודיים לכל מוצר) + .hero background (ייחודי לכל מוצר)
+   
+   cascade order:
+   1. <link rel="stylesheet" href="../assets/css/style.css"> — נטען ראשון
+   2. <style> ב-<head> — נטען שני, מנצח על כל conflict
+*/
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--bg);
+  color:var(--body);
+  font-family:'Noto Sans Hebrew',sans-serif;
+  font-size:18px;
+  line-height:1.9;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden
+}
+
+/* ============================================================
+   HERO — מבנה כללי בלבד
+   background + padding ייחודיים מוגדרים inline בכל קובץ
+   ============================================================ */
+.hero{text-align:center;position:relative}
+.hero-k{
+  font-size:12px;font-weight:600;letter-spacing:5px;
+  text-transform:uppercase;color:var(--warm);margin-bottom:16px
+}
+.hero h1{
+  font-family:'Frank Ruhl Libre',serif;font-size:68px;
+  font-weight:900;color:#FAF7F0;line-height:1.1;margin-bottom:12px
+}
+.hero .deck{
+  font-size:21px;color:#C8C0B4;font-weight:300;
+  max-width:780px;margin:0 auto;line-height:1.6
+}
+
+/* ============================================================
+   NAVIGATION TABS
+   ============================================================ */
+.tabs{
+  display:flex;justify-content:center;gap:0;
+  border-top:1px solid rgba(255,255,255,0.1)
+}
+.tab{
+  padding:14px 36px;font-size:11px;font-weight:700;
+  letter-spacing:4px;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);text-decoration:none;
+  border-bottom:2px solid transparent;
+  transition:color .15s,border-color .15s
+}
+.tab:hover{color:rgba(255,255,255,0.7)}
+.tab.active{color:var(--warm);border-bottom-color:var(--warm)}
+
+/* ============================================================
+   HERO IMAGE (story.html)
+   ============================================================ */
+.hero-img-wrap{
+  position:relative;width:100%;max-height:520px;
+  overflow:hidden;background:#1A1208
+}
+.hero-img-wrap img{
+  width:100%;max-height:520px;object-fit:cover;
+  object-position:center;display:block;opacity:.92
+}
+.hero-img-ph{
+  background:#1A1208;min-height:280px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:10px;padding:48px 24px;text-align:center;
+  border-bottom:1px solid rgba(255,255,255,.07)
+}
+.hero-img-ph .hi-desc{
+  font-size:12px;color:rgba(255,255,255,.3);
+  max-width:480px;line-height:1.6
+}
+.hero-img-btn{
+  margin-top:8px;padding:9px 22px;
+  background:rgba(201,169,110,.18);color:#C9A96E;
+  border:1px solid rgba(201,169,110,.35);border-radius:6px;
+  font-family:'Noto Sans Hebrew',sans-serif;
+  font-size:13px;font-weight:600;cursor:pointer
+}
+.hero-img-btn:hover{background:rgba(201,169,110,.3)}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.con{max-width:780px;margin:0 auto;padding:0 24px;word-wrap:break-word;overflow-wrap:break-word;overflow:hidden}
+
+/* specs / news sections */
+.sec{padding:52px 0 28px}
+.sec+.sec{border-top:1px solid var(--bdr)}
+.cl{
+  font-size:11px;font-weight:700;letter-spacing:5px;
+  text-transform:uppercase;color:var(--accent);margin-bottom:8px
+}
+.sec h2{
+  font-family:'Frank Ruhl Libre',serif;font-size:36px;
+  font-weight:900;color:var(--text);line-height:1.2;margin-bottom:24px
+}
+.sec h3{
+  font-size:20px;font-weight:700;color:var(--dark);
+  margin:32px 0 12px;
+  border-right:3px solid var(--warm);padding-right:12px
+}
+.sec p{margin-bottom:16px}
+
+/* story chapters */
+.ch{padding:52px 0 28px}
+.ch+.ch{border-top:1px solid var(--bdr)}
+.ch h2{
+  font-family:'David Libre',serif;font-size:32px;
+  font-weight:700;color:var(--text);line-height:1.35;margin-bottom:24px
+}
+.ch h3{
+  font-family:'David Libre',serif;font-size:22px;
+  font-weight:700;color:var(--dark);
+  margin:36px 0 14px;
+  padding-right:14px;border-right:3px solid var(--warm)
+}
+.ch p{margin-bottom:18px}
+.dc::first-letter{
+  font-family:'Frank Ruhl Libre',serif;font-size:2.8em;
+  font-weight:900;color:var(--dark);line-height:1
+}
+
+/* ============================================================
+   TEXT COMPONENTS
+   ============================================================ */
+.pull{
+  margin:40px 0;padding:28px 32px;
+  border-top:2px solid var(--warm);border-bottom:2px solid var(--warm);
+  text-align:center
+}
+.pull p{
+  font-family:'Frank Ruhl Libre',serif;font-size:22px;
+  font-weight:500;color:var(--dark);line-height:1.55;
+  margin:0;font-style:italic
+}
+.ab{padding:20px 24px;margin:28px 0;border-radius:0 8px 8px 0}
+.ab .tg{
+  font-size:10px;font-weight:700;letter-spacing:4px;
+  text-transform:uppercase;margin-bottom:6px
+}
+.ab p{margin:0;font-size:16px;line-height:1.75}
+.ab-w{background:var(--wl);border-right:4px solid var(--warm)}
+.ab-w .tg{color:var(--warm)}
+.ab-w p{color:#2A4A22}
+.ab-g{background:var(--gl);border-right:4px solid var(--accent)}
+.ab-g .tg{color:var(--dark)}
+.ab-g p{color:#1A3A10}
+.ab-r{background:#FFF5F5;border-right:4px solid #B83030}
+.ab-r .tg{color:#B83030}
+.ab-r p{color:#5A1818}
+
+/* ============================================================
+   VARIETY CARD (story)
+   ============================================================ */
+.vc{background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:22px;margin:18px 0;overflow:hidden}
+.vc .vn{font-family:'Frank Ruhl Libre',serif;font-size:21px;font-weight:700;color:var(--dark)}
+.vc .vt{font-size:12px;color:var(--warm);font-weight:600;margin-bottom:10px;overflow-wrap:break-word;word-break:break-word}
+.vc p{font-size:16px;line-height:1.75;margin-bottom:0}
+.vc .vs{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+.vc .vsi{background:var(--bg);padding:6px 12px;border-radius:5px;font-size:12px;color:var(--light)}
+.vc .vsi strong{color:var(--text)}
+
+/* ============================================================
+   CHART BOX (story)
+   ============================================================ */
+.cb{background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:24px;margin:28px 0;text-align:center}
+.cb .ct{font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:700;margin-bottom:14px}
+
+/* ============================================================
+   DATA GRID
+   ============================================================ */
+.ng{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0;width:100%;box-sizing:border-box}
+.ni{background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:14px;text-align:center}
+.ni .nv{font-family:'Frank Ruhl Libre',serif;font-size:26px;font-weight:700;color:var(--dark)}
+.ni .nu{font-size:13px;color:var(--light);margin-top:2px}
+.ni .nl{font-size:11px;color:var(--warm);margin-top:3px;font-weight:600}
+
+/* ============================================================
+   TABLE
+   ============================================================ */
+.gt{width:100%;border-collapse:collapse;margin:24px 0;font-size:15px;table-layout:fixed}
+.gt th{background:var(--dark);color:#fff;padding:11px 14px;text-align:right;font-weight:600;font-size:12px;letter-spacing:1px;word-break:break-word}
+.gt td{padding:10px 14px;border-bottom:1px solid var(--bdr);word-break:break-word}
+.gt tr:nth-child(even) td{background:#F5F3EE}
+.gt tr:hover td{background:#F0EDE6}
+
+/* ============================================================
+   CHAPTER PLACEHOLDERS (story — img בתוך טקסט)
+   ============================================================ */
+.ph{
+  margin:32px 0;background:#E0E8DD;
+  border:2px dashed var(--bdr);border-radius:10px;
+  min-height:280px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:32px 24px;box-sizing:border-box
+}
+.ph .pi{font-size:40px;color:#A0B09A;margin-bottom:10px}
+.ph .pt{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:6px}
+.ph .pd{font-size:12px;color:var(--light);margin-top:4px;max-width:480px;line-height:1.6}
+.ph-upload-btn{
+  margin-top:18px;padding:9px 22px;
+  background:var(--dark);color:#fff;border:none;border-radius:6px;
+  font-family:'Noto Sans Hebrew',sans-serif;
+  font-size:13px;font-weight:600;cursor:pointer;letter-spacing:.5px
+}
+.ph-upload-btn:hover{background:var(--accent)}
+.ph-done{margin:32px 0}
+.ph-done img{width:100%;display:block;border-radius:10px}
+.ph-cap{font-size:13px;color:var(--light);padding:8px 0 0;text-align:center;display:block}
+
+/* ============================================================
+   SPECS / NEWS PLACEHOLDERS
+   ============================================================ */
+.img-ph{
+  background:#E0E8DD;border:2px dashed var(--bdr);
+  border-radius:10px;padding:32px 24px;margin:32px 0;text-align:center
+}
+.img-ph-title{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:6px}
+.img-ph-desc{
+  font-size:12px;color:var(--light);margin-bottom:18px;
+  max-width:560px;margin-inline:auto;line-height:1.6
+}
+.img-ph-btn{
+  padding:9px 22px;background:var(--dark);color:#fff;
+  border:none;border-radius:6px;
+  font-family:'Noto Sans Hebrew',sans-serif;
+  font-size:13px;font-weight:600;cursor:pointer
+}
+.img-ph-btn:hover{background:var(--accent)}
+
+/* ============================================================
+   NEWS CARDS
+   ============================================================ */
+.news-card{
+  background:var(--card);border:1px solid var(--bdr);
+  border-radius:10px;padding:24px;margin:16px 0;
+  transition:box-shadow .2s
+}
+.news-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.news-tag{
+  font-size:10px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:var(--warm);margin-bottom:8px
+}
+.news-title{
+  font-family:'Frank Ruhl Libre',serif;font-size:22px;
+  font-weight:700;color:var(--text);margin-bottom:10px;line-height:1.35
+}
+.news-body{font-size:15px;color:var(--light);line-height:1.75}
+.news-meta{font-size:11px;color:var(--light);margin-top:12px;opacity:.7}
+
+/* ============================================================
+   PRICE BAND (news)
+   ============================================================ */
+.price-band{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0}
+.pb-item{background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:16px;text-align:center}
+.pb-label{font-size:11px;color:var(--light);margin-bottom:6px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.pb-val{font-family:'Frank Ruhl Libre',serif;font-size:28px;font-weight:700;color:var(--dark)}
+.pb-unit{font-size:12px;color:var(--warm);margin-top:2px}
+.trend-up{color:#2E7D32;font-weight:700}
+.trend-dn{color:#C62828;font-weight:700}
+.trend-fl{color:var(--light);font-weight:700}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.ft{
+  text-align:center;padding:44px 24px;
+  font-size:13px;color:var(--light);
+  border-top:1px solid var(--bdr);margin-top:36px
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:600px){
+  .hero h1{font-size:42px}
+  .ch h2{font-size:26px}
+  .ng{grid-template-columns:repeat(2,1fr)}
+  .vc .vs{flex-direction:column;gap:6px}
+}
