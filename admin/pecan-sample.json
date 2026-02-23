@@ -1,0 +1,18 @@
+{
+  "id": "pecan",
+  "name": "פקאן",
+  "hero": {
+    "title": "פקאן",
+    "deck": "האגוז האמריקאי הילידי. ארה\"ב מייצרת 80% מהייצור העולמי. דרום אפריקה עולה בחדות. פקאן Pie, חמאה וקונדיטוריה — שוק של 2 מיליארד דולר.",
+    "image": "../assets/images/pecan-hero.jpg"
+  },
+  "story": [
+    { "chapter": "ראשון", "title": "האגוז הילידי של צפון אמריקה", "content": "Carya illinoinensis — האגוז היחיד באגוזי העץ שמוצאו הוא צפון אמריקה. שבטי אינדיאנים השתמשו בו אלפי שנים לפני האירופאים." },
+    { "chapter": "שני", "title": "ג'ורג'יה, טקסס ודרום אפריקה", "content": "ג'ורג'יה וטקסס מובילות את הייצור האמריקאי. דרום אפריקה הפכה לשחקן מרכזי עם פקאן Wichita ו-Western Schley." }
+  ],
+  "news": [
+    { "tag": "תעשייה", "title": "עונת פקאן 2024 — תשואה ממוצעת", "body": "אמריקן פקאן בין 4.50-6.00 דולר לפאונד לפי זן ואיכות. ביקוש סיני יציב.", "meta": "American Pecan Council, 2024", "isInsight": false },
+    { "tag": "Blue Star Insight", "title": "פקאן — כניסה לשוק הישראלי", "body": "פקאן Mammoth Half מתאים לקמעונאי פרימיום. Blue Star בוחנת ייבוא מדרום אפריקה.", "meta": "Blue Star International", "isInsight": true }
+  ],
+  "media": { "hero": "../assets/images/pecan-hero.jpg", "orchard": "", "halves": "" }
+}
