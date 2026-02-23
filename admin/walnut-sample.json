@@ -1,0 +1,42 @@
+{
+  "id": "walnut",
+  "name": "אגוז מלך",
+  "hero": {
+    "title": "אגוז מלך",
+    "deck": "האגוז עם הפרופיל התזונתי הכי עשיר. קליפורניה ואיראן שולטות. אומגה-3, פוליפנולים ושוק עולמי של 8 מיליארד דולר.",
+    "image": "../assets/images/walnut-hero.jpg"
+  },
+  "story": [
+    {
+      "chapter": "ראשון",
+      "title": "עץ האלים — מהפרס הקדומה",
+      "content": "Juglans regia, האגוז הפרסי, גדל בצמרת עצים גבוהים. מוצאו מהאזור שבין קווקז לגאנשאן."
+    },
+    {
+      "chapter": "שני",
+      "title": "קליפורניה — מעל 50% מהייצור",
+      "content": "קליפורניה מייצרת כ-700,000 טון בשנה. Chandler הוא הזן המסחרי הדומיננטי — קליפה בהירה, ליבה שלמה, 60% מהייצור."
+    }
+  ],
+  "news": [
+    {
+      "tag": "תעשייה",
+      "title": "ייצוא קליפורניה 2024 — ירידה בשוק הסיני",
+      "body": "תעריפי מכס סיניים פגעו בייצוא. השוק האירופי מגדיל רכש. מחירי Chandler יציבים.",
+      "meta": "California Walnut Commission, 2024",
+      "isInsight": false
+    },
+    {
+      "tag": "Blue Star Insight",
+      "title": "אגוז מלך ישראלי — הזדמנות בפרימיום",
+      "body": "הביקוש לאגוז מלך Chandler Light Half גדל. Blue Star בוחנת אפשרויות ייבוא ישיר.",
+      "meta": "Blue Star International",
+      "isInsight": true
+    }
+  ],
+  "media": {
+    "hero": "../assets/images/walnut-hero.jpg",
+    "harvest": "",
+    "grades": ""
+  }
+}
