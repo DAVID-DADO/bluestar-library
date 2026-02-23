@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>Blue Star Admin — Library Control</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+  <div class="admin-wrapper">
+
+    <aside class="admin-sidebar">
+      <div class="admin-logo">Blue Star Admin</div>
+      <nav class="product-nav">
+        <button class="nav-btn active" onclick="loadProduct('pistachio')">🟢 פיסטוק</button>
+        <button class="nav-btn" onclick="loadProduct('almond')">🟤 שקד</button>
+        <button class="nav-btn" onclick="loadProduct('cashew')">🟡 קשיו</button>
+        <button class="nav-btn" onclick="loadProduct('walnut')">🟫 אגוז מלך</button>
+      </nav>
+      <div class="sidebar-footer">v1.0 · Blue Star Library</div>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-header">
+        <h1 id="current-product-name">Pistachio Dashboard</h1>
+        <div class="header-actions">
+          <button class="btn btn-save" onclick="saveToLocal()">💾 שמור</button>
+          <button class="btn btn-publish" onclick="exportJSON()">⬇ ייצוא JSON</button>
+        </div>
+      </header>
+
+      <nav class="tab-nav">
+        <button class="tab-link active" onclick="openTab(event,'news')">חדשות</button>
+        <button class="tab-link" onclick="openTab(event,'story')">סיפור</button>
+        <button class="tab-link" onclick="openTab(event,'media')">מדיה</button>
+      </nav>
+
+      <!-- NEWS -->
+      <div id="news" class="tab-content active">
+        <div id="news-editor-list"></div>
+        <button class="btn btn-add" onclick="addNewArticle()">+ הוסף ידיעה</button>
+      </div>
+
+      <!-- STORY -->
+      <div id="story" class="tab-content">
+        <div class="edit-card" style="margin-bottom:20px">
+          <label>כותרת ראשית (Hero)</label>
+          <input type="text" id="hero-title" onchange="currentData.hero.title=this.value" placeholder="כותרת...">
+          <label>תקציר (Deck)</label>
+          <textarea id="hero-deck" onchange="currentData.hero.deck=this.value"></textarea>
+        </div>
+        <div id="story-editor"></div>
+        <button class="btn btn-add" onclick="addChapter()">+ הוסף פרק</button>
+      </div>
+
+      <!-- MEDIA -->
+      <div id="media" class="tab-content">
+        <div id="media-editor"></div>
+      </div>
+    </main>
+
+  </div>
+
+  <div id="toast"></div>
+  <script src="admin.js"></script>
+</body>
+</html>
