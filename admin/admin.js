@@ -193,6 +193,15 @@ function deleteChapter(i) {
 
 // ── MEDIA ─────────────────────────────────────────────────────────────────
 
+function toPreviewUrl(url) {
+  // Convert ../assets/images/x.jpg → raw GitHub URL for preview in admin
+  if (url && url.startsWith('../assets/')) {
+    const path = url.replace('../', '');
+    return `https://raw.githubusercontent.com/${GITHUB.owner}/${GITHUB.repo}/${GITHUB.branch}/${path}`;
+  }
+  return url;
+}
+
 function renderMedia() {
   const media = currentData.media || {};
   const slots = Object.entries(media);
@@ -202,7 +211,7 @@ function renderMedia() {
       ${slots.map(([key, url]) => `
         <div class="media-slot" id="slot-${key}">
           <div class="media-preview" id="prev-${key}">
-            ${url ? `<img src="${esc(url)}" onerror="this.parentElement.innerHTML='🖼'">` : '<span>🖼</span>'}
+            ${url ? `<img src="${toPreviewUrl(url)}" onerror="this.parentElement.innerHTML='🖼'">` : '<span>🖼</span>'}
           </div>
           <div class="media-slot-body">
             <div class="media-slot-label">${key}</div>
@@ -244,6 +253,8 @@ async function handleFileSelected(e) {
   const ext      = file.name.split('.').pop().toLowerCase() || 'jpg';
   const ghPath   = `assets/images/${productId}-${slotKey}.${ext}`;
   const localUrl = `../${ghPath}`;
+  // Raw GitHub URL for preview (works from any path)
+  const rawUrl   = `https://raw.githubusercontent.com/${GITHUB.owner}/${GITHUB.repo}/${GITHUB.branch}/${ghPath}`;
 
   statusEl.style.color = 'var(--muted)';
   statusEl.textContent = 'מעלה...';
@@ -255,7 +266,8 @@ async function handleFileSelected(e) {
     if (result.ok) {
       currentData.media[slotKey] = localUrl;
       document.getElementById(`url-${slotKey}`).value = localUrl;
-      prevEl.innerHTML = `<img src="${localUrl}?t=${Date.now()}" onerror="this.parentElement.innerHTML='✓'">`;
+      // Preview via raw GitHub (cache-busted) — no path issues
+      prevEl.innerHTML = `<img src="${rawUrl}?t=${Date.now()}" onerror="this.src='${rawUrl}'">`;
       statusEl.style.color = 'var(--accent-h)';
       statusEl.textContent = `✓ ${ghPath}`;
       saveToLocal();
