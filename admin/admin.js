@@ -30,6 +30,15 @@ async function getGitHubToken() {
     console.warn('Could not fetch token from /api/token');
   }
 
+  // Try /api/token endpoint (works on Vercel)
+  try {
+    const r = await fetch('/api/token');
+    if (r.ok) {
+      const d = await r.json();
+      GITHUB.token = d.token || d.GITHUB_TOKEN || null;
+    }
+  } catch(e) { console.warn('Server token not found.'); }
+
   // Try localStorage (saved from previous session)
   if (!GITHUB.token) {
     GITHUB.token = localStorage.getItem('bluestar_gh_token') || null;
@@ -292,7 +301,7 @@ async function uploadToGitHub(path, base64data) {
   } catch(e) { /* new file */ }
 
   const body = {
-    message: `Admin upload: ${path}`,
+    message: `Admin upload: ${path} [skip ci]`,
     content: base64data,
     branch:  GITHUB.branch
   };
