@@ -1,0 +1,63 @@
+
+/* ============================================================
+   ANIMATION LAYER — Blue Star v2
+   scroll reveal · card hover · tab active indicator
+   ============================================================ */
+
+/* --- Scroll Reveal: מצב התחלתי ל-.ch ו-.sec --- */
+.ch, .sec {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1),
+              transform 0.8s cubic-bezier(0.22,1,0.36,1);
+}
+.ch.visible, .sec.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* stagger: כל אלמנט מתחיל קצת אחרי הקודם */
+.ch:nth-child(2).visible, .sec:nth-child(2).visible { transition-delay: 0.05s }
+.ch:nth-child(3).visible, .sec:nth-child(3).visible { transition-delay: 0.10s }
+.ch:nth-child(4).visible, .sec:nth-child(4).visible { transition-delay: 0.15s }
+.ch:nth-child(5).visible, .sec:nth-child(5).visible { transition-delay: 0.20s }
+
+/* --- Card Hover: .wc-card (index.html) --- */
+/* הכרטיס עולה 8px, הצל מעמיק, ה-.strip מתרחב ב-4px */
+.wc-card {
+  transition: transform 0.28s cubic-bezier(0.22,1,0.36,1),
+              box-shadow 0.28s cubic-bezier(0.22,1,0.36,1),
+              border-color 0.28s ease;
+}
+.wc-card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 20px 56px rgba(0,0,0,.52) !important;
+}
+.wc-card .strip {
+  transition: height 0.28s cubic-bezier(0.22,1,0.36,1);
+}
+.wc-card:hover .strip {
+  height: 8px;
+}
+
+/* --- Tabs Active: פס זהב צומח מהמרכז --- */
+/* מחליף את border-bottom הסטטי בפסאודו-אלמנט מונפש */
+.tab {
+  position: relative;
+  border-bottom: none !important; /* ביטול הגדרה ישנה */
+}
+.tab::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  right: 50%;
+  height: 2px;
+  background: var(--warm);
+  transition: left 0.25s cubic-bezier(0.22,1,0.36,1),
+              right 0.25s cubic-bezier(0.22,1,0.36,1);
+}
+.tab.active::after {
+  left: 0;
+  right: 0;
+}
