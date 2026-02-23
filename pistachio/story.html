@@ -28,18 +28,23 @@
 }
 .hero{background:linear-gradient(160deg,#1A2A10,#2A5A1A 55%,#4A7A3A);padding:100px 24px 0}
 
-/* תמונות — רוחב טקסט + מסגרת ירוקה עדינה */
-.hero-img-wrap img,
-figure.ph-done img,
-.full-bleed img {
+/* תמונות — מסגרת חיצונית ירוקה */
+.hero-img-wrap,
+figure.ph-done {
   border: 1.5px solid #4A8A3A;
   border-radius: 10px;
-}
-.hero-img-wrap {
+  overflow: hidden;
   max-width: var(--max-w, 1000px);
   margin: 32px auto 40px;
-  padding: 0 24px;
+  padding: 0;
   box-sizing: border-box;
+}
+.hero-img-wrap img,
+figure.ph-done img {
+  border: none;
+  border-radius: 0;
+  display: block;
+  width: 100%;
 }
 
 /* master layout v2.0 */
