@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>אגוז לוז · Blue Star International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── BLUE STAR OS · PREMIUM DARK THEME v4.0 ── */
+
+/* 1. MASTER VARIABLES (DARK MODE) */
+:root {
+    --bg: #0A0A0B; 
+    --text: #FAF7F0; 
+    --body: #D1CEC5; 
+    --accent: #8B6340; 
+    --warm: #B8894A;
+    --card: rgba(20, 20, 22, 0.4); 
+    --radius: 20px; 
+    --shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+/* 2. CORE TYPOGRAPHY & GRID BACKGROUND */
+body { 
+    background-color: var(--bg); 
+    color: var(--body); 
+    font-family: 'Noto Sans Hebrew', sans-serif; 
+    font-size: 18px; 
+    line-height: 1.9; 
+    overflow-x: hidden; 
+    position: relative;
+    background-image: 
+        linear-gradient(rgba(184, 137, 74, 0.03) 1px, transparent 1px), 
+        linear-gradient(90deg, rgba(184, 137, 74, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+
+/* 3. AMBIENT GLOW ORBS (3D DEPTH) */
+body::before, body::after {
+    content: ''; position: fixed; width: 600px; height: 600px; border-radius: 50%;
+    filter: blur(120px); z-index: -2; opacity: 0.15; pointer-events: none;
+}
+body::before { background: var(--warm); top: -100px; left: -100px; }
+body::after { background: #5A3E28; bottom: 20%; right: -150px; }
+
+/* 4. UTILITY BARS & BUTTONS */
+#progress-bar { position:fixed; top:0; left:0; height:3px; background:var(--warm); width:0; z-index:1000; }
+
+.back-btn {
+    position: absolute; top: 40px; left: 40px; z-index: 10; display: flex; align-items: center; gap: 8px;
+    color: var(--text); text-decoration: none; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px;
+    opacity: 0.5; transition: 0.3s;
+}
+.back-btn:hover { opacity: 1; color: var(--warm); }
+
+#backToTop { 
+    position: fixed; bottom: 30px; left: 30px; width: 40px; height: 40px; 
+    background: var(--warm); color: #000; border: none; border-radius: 50%; 
+    cursor: pointer; font-size: 18px; display: none; z-index: 1000; transition: 0.3s; 
+}
+#backToTop:hover { transform: scale(1.1); box-shadow: 0 0 20px rgba(184, 137, 74, 0.4); }
+
+/* 5. HERO SECTION */
+.hero { padding: 100px 40px 160px; text-align: center; color: var(--text); position: relative; }
+.hero-k { font-size: 11px; font-weight: 700; letter-spacing: 5px; color: var(--warm); margin-bottom: 20px; text-transform: uppercase; font-family: 'Space Mono', monospace; }
+.hero h1 { font-family:'Frank Ruhl Libre', serif; font-size: 90px; font-weight: 900; line-height: 0.8; margin-bottom: 25px; letter-spacing: -2px; }
+.hero .deck { font-size: 20px; opacity: 0.8; max-width: 650px; margin: 0 auto 40px; font-weight: 300; }
+
+.hero-img-wrap {
+    max-width: 900px; margin: 0 auto -220px; height: 500px; border-radius: var(--radius); overflow: hidden;
+    box-shadow: var(--shadow); background: #000; border: 1px solid rgba(255,255,255,0.05);
+}
+.hero-img-wrap video, .hero-img-wrap img { width:100%; height:100%; object-fit:cover; }
+.hero-img-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:12px; background:#0A0A0B; }
+.hero-img-placeholder span { color:rgba(255,255,255,0.15); font-size:12px; letter-spacing:3px; font-family:'Space Mono',monospace; }
+
+/* 6. SIDE NAVIGATION */
+.side-nav { position: fixed; top: 50%; right: 30px; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 12px; }
+.nav-dot { width: 10px; height: 10px; border: 1px solid var(--warm); border-radius: 50%; opacity: 0.3; cursor: pointer; transition: 0.3s; }
+.nav-dot.active { opacity: 1; transform: scale(1.4); background: var(--warm); }
+
+/* 7. CONTENT CARDS (GLASSMORPHISM) */
+.con { max-width: 800px; margin: 280px auto 100px; padding: 0 24px; position: relative; z-index: 5; }
+.ch { 
+    background: var(--card); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+    padding: 50px; border-radius: var(--radius); margin-bottom: 40px; 
+    border: 1px solid rgba(255,255,255,0.05); position: relative; overflow: hidden;
+    color: var(--body);
+}
+.ch::before, .ch::after { content: '+'; position: absolute; font-family: 'Space Mono', monospace; color: var(--warm); font-size: 14px; opacity: 0.4; }
+.ch::before { top: 15px; left: 15px; } 
+.ch::after { bottom: 15px; right: 15px; }
+
+.ch h2 { font-family:'Frank Ruhl Libre', serif; font-size: 38px; margin-bottom: 25px; color: var(--text); border-right: 5px solid var(--warm); padding-right: 20px; line-height: 1.1; }
+.ch h3 { font-family:'Frank Ruhl Libre', serif; font-size: 22px; font-weight: 700; color: var(--text); margin: 36px 0 14px; padding-right: 14px; border-right: 3px solid var(--warm); }
+.ch p { margin-bottom: 18px; color: var(--body); }
+.cl { font-size: 10px; font-weight: 700; color: var(--warm); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; display: block; font-family: 'Space Mono', monospace; }
+.dc::first-letter { font-family:'Frank Ruhl Libre', serif; font-size: 2.8em; font-weight: 900; color: var(--warm); line-height: 1; float: right; margin-left: 8px; }
+em { color: #C4A878; font-style: italic; }
+strong { color: var(--text); }
+
+/* 8. ASIDE BOXES */
+.ab { padding: 20px 24px; margin: 28px 0; border-radius: 0 8px 8px 0; }
+.ab .tg { font-size: 10px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 6px; }
+.ab p { margin: 0; font-size: 16px; line-height: 1.75; }
+.ab-w { background: rgba(184,137,74,0.08); border-right: 4px solid var(--warm); }
+.ab-w .tg { color: var(--warm); }
+.ab-g { background: rgba(90,62,40,0.2); border-right: 4px solid var(--accent); }
+.ab-g .tg { color: #C4A878; }
+.ab-r { background: rgba(184,50,50,0.1); border-right: 4px solid #B83030; }
+.ab-r .tg { color: #E06060; }
+.ab-r p { color: #DDB0B0; }
+
+/* 9. VARIETY CARDS */
+.vc { background: rgba(30,28,25,0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 22px; margin: 18px 0; }
+.vc .vn { font-family:'Frank Ruhl Libre', serif; font-size: 21px; font-weight: 700; color: var(--text); }
+.vc .vt { font-size: 12px; color: var(--warm); font-weight: 600; margin-bottom: 10px; }
+.vc p { font-size: 16px; line-height: 1.75; margin-bottom: 0; color: var(--body); }
+.vc .vs { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+.vc .vsi { background: rgba(255,255,255,0.04); padding: 6px 12px; border-radius: 5px; font-size: 12px; color: #A09080; }
+.vc .vsi strong { color: var(--text); }
+
+/* 10. NUTRITION GRID */
+.ng { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin: 24px 0; }
+.ni { background: rgba(30,28,25,0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 14px; text-align: center; }
+.ni .nv { font-family:'Frank Ruhl Libre', serif; font-size: 26px; font-weight: 700; color: var(--text); }
+.ni .nu { font-size: 13px; color: #A09080; margin-top: 2px; }
+.ni .nl { font-size: 11px; color: var(--warm); margin-top: 3px; font-weight: 600; }
+
+/* 11. CHART BLOCK */
+.cb { background: rgba(20,20,22,0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 24px; margin: 28px 0; }
+.cb .ct { font-family:'Frank Ruhl Libre', serif; font-size: 17px; font-weight: 700; margin-bottom: 14px; text-align: center; color: var(--text); }
+.pb-chart { margin: 16px 0 8px; display: flex; flex-direction: column; gap: 10px; }
+.pb-row { display: flex; align-items: center; gap: 10px; }
+.pb-meta { display: flex; align-items: center; gap: 6px; min-width: 120px; justify-content: flex-end; }
+.pb-flag { font-size: 18px; }
+.pb-name { font-size: 13px; color: #A09080; }
+.pb-track { flex: 1; background: rgba(255,255,255,0.08); height: 18px; border-radius: 9px; overflow: hidden; }
+.pb-fill { height: 100%; width: 0; border-radius: 9px; transition: width 1.2s cubic-bezier(0.22,1,0.36,1); }
+.pb-pct { font-family:'Frank Ruhl Libre', serif; font-size: 14px; font-weight: 700; color: var(--text); width: 36px; text-align: left; }
+.pb-note { font-size: 11px; color: #6B6058; opacity: .7; margin-top: 10px; text-align: center; }
+
+/* 12. TABLES */
+.gt { width: 100%; border-collapse: collapse; margin: 25px 0; font-size: 15px; border-top: 1px solid rgba(255,255,255,0.05); }
+.gt th { background: rgba(0,0,0,0.5); color: var(--text); padding: 14px; text-align: right; font-size: 12px; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.gt td { padding: 14px; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--body); }
+.gt tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+
+/* 13. PULL QUOTE */
+.pull { margin: 40px 0; padding: 45px; background: rgba(0,0,0,0.4); border-radius: var(--radius); text-align: center; border: 1px solid rgba(184,137,74,0.2); }
+.pull p { font-family:'Frank Ruhl Libre', serif; font-size: 22px; font-weight: 500; color: var(--body); line-height: 1.55; margin: 0; font-style: italic; }
+
+/* 14. SCROLL REVEAL */
+.reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.2, 1, 0.2, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+/* 15. MARQUEE */
+.marquee-container { position: fixed; bottom: -3vh; left: 0; width: 100vw; overflow: hidden; z-index: -1; pointer-events: none; }
+.marquee-text { font-family: 'Playfair Display', serif; font-size: 15vw; white-space: nowrap; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.03); animation: scrollText 40s linear infinite; }
+@keyframes scrollText { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* 16. FOOTER */
+.ft { text-align: center; padding: 44px 24px; font-size: 13px; color: #6B6058; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 36px; }
+.inner-ft { background: rgba(0,0,0,0.8); color: var(--text); padding: 60px 20px; text-align: center; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; opacity: 0.6; border-top: 1px solid rgba(255,255,255,0.05); }
+
+/* 17. MOBILE */
+@media (max-width: 900px) { 
+    .side-nav { display: none; } 
+    .back-btn { top: 20px; left: 20px; } 
+    .hero h1 { font-size: 55px; } 
+    .hero-img-wrap { height: 300px; margin-bottom: -100px; }
+    .con { margin-top: 150px; }
+    .ng { grid-template-columns: repeat(2,1fr); }
+}
+
+/* LIST STYLING FIX */
+.ch ol, .ch ul { padding-right: 24px; margin: 16px 0 18px; }
+.ch li { margin-bottom: 10px; color: var(--body); line-height: 1.8; }
+.ch ol li::marker { color: var(--warm); font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; }
+.ch ul li::marker { color: var(--warm); }
+
+/* PROCESS STEPS STYLING */
+.proc-steps { display: flex; flex-direction: column; gap: 20px; margin: 24px 0; }
+.proc-step { display: flex; gap: 20px; align-items: flex-start; }
+.proc-step-num {
+    min-width: 36px; height: 36px; border-radius: 50%;
+    background: var(--warm); color: #000;
+    font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.proc-step-title { font-family: 'Frank Ruhl Libre', serif; font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.proc-step-body { font-size: 16px; color: var(--body); line-height: 1.75; }
+
+/* Product Gallery - Stark OS */
+.product-gallery-wrapper { margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.06); }
+.product-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.gallery-item { aspect-ratio: 1; background: var(--card); border-radius: calc(var(--radius) / 2); overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.06); }
+.gallery-item-placeholder { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: rgba(255,255,255,0.12); text-align: center; }
+.gallery-item img, .gallery-item video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9); transition: filter 0.3s ease; }
+.gallery-item:hover img, .gallery-item:hover video { filter: brightness(1.1); }
+
+/* Inline Media Slots */
+.media-slot-inline {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--card);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 40px 0;
+    border: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.media-slot-inline img,
+.media-slot-inline video {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(0.92);
+    transition: filter 0.3s;
+}
+.media-slot-inline:hover img,
+.media-slot-inline:hover video { filter: brightness(1.05); }
+.media-slot-inline .slot-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.1);
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+</style>
+<script src="../auth.js"></script>
+</head>
+<body>
+<div class="marquee-container">
+    <div class="marquee-text">
+        BLUE STAR INTERNATIONAL · GLOBAL COMMODITY ARCHIVE · BLUE STAR INTERNATIONAL · GLOBAL COMMODITY ARCHIVE · 
+    </div>
+</div>
+<div id="progress-bar"></div>
+<nav class="side-nav">
+    <div class="nav-dot active" data-target="ch1"></div>
+    <div class="nav-dot" data-target="ch2"></div>
+    <div class="nav-dot" data-target="ch3"></div>
+    <div class="nav-dot" data-target="ch4"></div>
+    <div class="nav-dot" data-target="ch5"></div>
+    <div class="nav-dot" data-target="ch6"></div>
+    <div class="nav-dot" data-target="ch7"></div>
+    <div class="nav-dot" data-target="ch8"></div>
+    <div class="nav-dot" data-target="ch9"></div>
+    <div class="nav-dot" data-target="ch10"></div>
+</nav>
+<section class="hero">
+    <a href="index.html" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>חזרה למסוף</a>
+    <div class="hero-k">ערך ידע חקלאי · Blue Star International</div>
+    <h1 id="sync-title">אגוז לוז</h1>
+    <p class="deck" id="sync-desc">מטורקיה לנוטלה, מהיערות של ארה"ב לשוקולד האהוב בעולם. הסיפור של האגוז שעיצב תעשייה שלמה.</p>
+    <div class="hero-img-wrap" id="slot-product-hero">
+        <div class="hero-img-placeholder"><span>מדיה_לא_נטענה</span></div>
+    </div>
+</section>
+<main class="con">
+
+<!-- ═══ CH 1 ═══ -->
+<div class="ch" id="ch-1">
+<div class="cl">פרק ראשון</div>
+<h2>עשרת אלפים שנה, מהמזוליתי ועד הנוטלה</h2>
+
+<p class="dc">אגוז הלוז (Corylus avellana) הוא אחד המזונות העתיקים ביותר של האנושות. ממצאים ארכיאולוגיים מצביעים על צריכה כבר 10,000 לפני הספירה, תקופת המזוליתי, הרבה לפני חקלאות. באתרים בגרמניה הצפונית, סקוטלנד ודנמרק נמצאו כמויות עצומות של קליפות לוז חרוכות: ציידים-לקטים אספו אותם בכמויות, ייבשו, אחסנו וקלו אותם. הלוז היה העץ הראשון שחזר ליישב את אירופה אחרי עידן הקרח האחרון, עוד לפני האלון, הגרב והאשור.</p>
+
+<p>השם המדעי מספר את הסיפור: "Corylus", מהיוונית "korys" (קסדה), על שם הקליפה הירוקה שעוטפת את האגוז כמו קסדה. "avellana", מהעיר אבלה (Abella, כיום Avella) בקמפניה, איטליה, אזור שהיה מפורסם בגידול לוזים בתקופה הרומית. וירגיליוס, בשיר "גאורגיקה" שלו על חקלאות, הזכיר את המומחיות הנדרשת לגידול אגוז לוז. פליניוס הזקן כתב שאגוזי הלוז הגיעו מדמשק, ואכן, דמשק עם אקלים ימי תיכוני ואדמה בזלתית, מתאימה לגידול.</p>
+
+<div class="pull"><p>אגוז הלוז היה העץ הראשון שחזר ליישב את אירופה אחרי עידן הקרח. הוא ליווה את האנושות מתקופת הציידים-לקטים, דרך הברונזה והרומאים, ועד למטעים המודרניים של חוף הים השחור. שום אגוז אחר אינו עתיק כמוהו בהיסטוריה האירופית.</p></div>
+
+<p>בכתב היתדות מכולטפה (אנטוליה, כ-1,950–1,830 לפה"ס) נמצאו עדויות למסחר באגוזי לוז, מוצרי יוקרה שהובאו דרך הרשת המסחרית האשורית. מחקר גנטי מ-2009 הראה שאגוז הלוז בויית באופן עצמאי בשלושה אזורים: הים התיכון, טורקיה ואיראן, כלומר שלושה תהליכי ביות נפרדים, שלוש תרבויות גידול שהתפתחו במקביל.</p>
+
+<p>בתרבות הסלטית, עץ הלוז סימל חוכמה. במיתולוגיה האירית, תשעה עצי לוז גדלו סביב באר החוכמה, ואגוזיהם נפלו למים והאכילו את "סלמון הידע". בנורדית, שרביטי לוז שימשו לניחוש מים (dowsing). עץ הלוז היה "עץ הפיות", מקום מפגש בין עולמות. ובאנגליה, ענפי לוז (coppice) סיפקו חומר גלם לבניית גדרות, דפנות בתים (wattle-and-daub) ולחקלאות, במשך מאות שנים.</p>
+
+<div class="ab"><div class="tg">שמות ומילים</div><p>לאגוז הלוז יש שמות רבים: בפרסית, "fonduk" (פונדוק), שממנו הטורקית "fındık". בערבית, "bunduk" (בונדוק). באיטלקית, "nocciola". בצרפתית, "noisette". באנגלית, "hazelnut" או "filbert" (כנראה על שם הקדוש פיליברט, שיום חגו חל בעונת הקטיף). בעברית, "לוז", שורש קדום שמופיע גם בשם העיר "לוז" בתנ"ך, שם קדום לבית-אל.</p></div>
+
+<div class="img-ph" data-slot="hazelnut-history">
+  <div class="img-ph-title">📷 אתר ארכיאולוגי, קליפות לוז</div>
+  <div class="img-ph-desc">ממצאים מזוליתיים, ראיות לאיסוף אגוזי לוז לפני 10,000 שנה</div>
+</div>
+</div>
+
+<!-- ═══ CH 2 ═══ -->
+<div class="ch" id="ch-2">
+<div class="cl">פרק שני</div>
+
+
+<h2>הגאוגרפיה, טורקיה שולטת, פררו קונה</h2>
+
+<p class="dc">אגוז הלוז הוא האגוז עם הריכוז הגאוגרפי הקיצוני ביותר מכל אגוזי העץ המסחריים. כ-70% מהייצור העולמי מגיע ממדינה אחת, טורקיה, ובתוך טורקיה, מרצועה צרה לאורך חוף הים השחור: מדרונות תלולים, עננות, לחות, ו-400 אלף חקלאים קטנים שמגדלים עצי לוז על מדרונות הרים. הייצור הממוצע: 600–700 אלף טון בשנה, 80% מהייצוא העולמי.</p>
+
+<div class="pb-chart">
+  <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇹🇷</span><span class="pb-name">טורקיה</span></div><div class="pb-track"><div class="pb-fill" data-w="70" style="background:#4A2810"></div></div><span class="pb-pct">70%</span></div>
+  <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇮🇹</span><span class="pb-name">איטליה</span></div><div class="pb-track"><div class="pb-fill" data-w="8" style="background:#7A4B2A"></div></div><span class="pb-pct">8%</span></div>
+  <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇦🇿</span><span class="pb-name">אזרבייג'אן</span></div><div class="pb-track"><div class="pb-fill" data-w="7" style="background:#B07A4A"></div></div><span class="pb-pct">7%</span></div>
+  <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇺🇸</span><span class="pb-name">ארה"ב (אורגון)</span></div><div class="pb-track"><div class="pb-fill" data-w="4" style="background:#D4A870"></div></div><span class="pb-pct">4%</span></div>
+  <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🌍</span><span class="pb-name">אחרים</span></div><div class="pb-track"><div class="pb-fill" data-w="11" style="background:#DDD6CA"></div></div><span class="pb-pct">11%</span></div>
+  <div class="pb-note">~600 אלף טון גרעין · INC / FAO 2024</div>
+</div>
+
+<table class="gt">
+<tr><th>מדינה</th><th>ייצור (טון)</th><th>מאפיין עיקרי</th><th>מגמה</th></tr>
+<tr><td>טורקיה</td><td>600–700K</td><td>70% עולמי, 400K חקלאים, ים שחור</td><td>↓ סיכון כפורים 2025</td></tr>
+<tr><td>איטליה</td><td>80–100K</td><td>Tonda Gentile IGP, פיימונטה</td><td>→ יציב, פרימיום</td></tr>
+<tr><td>אזרבייג'אן</td><td>65–75K</td><td>ייצוא גדל, השקעות חדשות</td><td>↑ צמיחה</td></tr>
+<tr><td>ארה"ב (אורגון)</td><td>35–45K</td><td>זנים עמידי EFB, מכני</td><td>↑ התרחבות</td></tr>
+<tr><td>גאורגיה + סרביה</td><td>30–40K</td><td>מקורות פררו חלופיים</td><td>↑↑ הרחבה מהירה</td></tr>
+</table>
+
+<h3>פררו, הקונה הדומיננטי</h3>
+<p>פררו רוכשת כ-25% מכלל אגוזי הלוז בעולם, כ-150,000 טון בשנה. זה לא קנייה. זה שליטה. כשפררו מחליטה על מחיר, כשפררו מפנה גיוון לאוסטרליה וארגנטינה, כשפררו מטילה תנאי איכות על ספקי טורקיה, כל שרשרת האספקה זה. יש מעט מאוד סחורות עולמיות שבהן קונה אחד מחזיק ברבע מהשוק.</p>
+
+<div class="ab"><div class="tg">נקודה מסחרית, ריכוז סיכון</div><p>70% ממדינה אחת + 25% מקונה אחד = שוק שביר להחריד. כפור טורקי אחד, שנה כמו 2025, יכול להכפיל מחיר בחודשים. כל קונה שמשתמש בלוז כחומר גלם, בין אם יצרן שוקולד ובין אם ממרח, חייב להחזיק מלאי אסטרטגי ועתודת תקציב.</p></div>
+
+<div class="img-ph" data-slot="hazelnut-map">
+  <div class="img-ph-title">📷 מפת גידול אגוז לוז</div>
+  <div class="img-ph-desc">ריכוז ים שחור, טורקיה לעומת שאר העולם</div>
+</div>
+</div>
+<div id="slot-inline-2" class="media-slot-inline"><div class="media-slot-placeholder">MEDIA_02</div></div>
+
+
+<!-- ═══ CH 3 ═══ -->
+<div class="ch" id="ch-3">
+<div class="cl">פרק שלישי</div>
+<h2>מהעץ ועד המפעל, הקסדה הירוקה</h2>
+
+<p class="dc">עץ הלוז הוא בעצם שיח, 3 עד 8 מטר, לפעמים עד 15. הוא חלק ממשפחת הליבנה (Betulaceae), לא ממשפחת השקד והפקאן. זהו עץ נשיר, מפיל עלים בחורף. הוא מתאביק ברוח: הפרחים הזכריים (catkins, זנבות חתול) מייצרים אבקה שנישאת ברוח אל הפרחים הנקביים הזעירים, כמעט בלתי נראים. אין צורך בדבורים, אגוז הלוז הוא wind-pollinated.</p>
+
+<p>הפרי מתפתח בתוך כיסוי ירוק (involucre), ה"קסדה" שממנה בא השם Corylus. כשהאגוז בשל, הוא חום, עגול, ונושר מהעץ בקליפה הירוקה. הקטיף: באירופה, בעיקר אוגוסט–ספטמבר. בטורקיה, עדיין ידני ברובו על המדרחות. באורגון ובאיטליה, מכני: מכונות ניעור ואיסוף מהקרקע. אחרי הקטיף: הסרת הקליפה הירוקה, ייבוש עד 5–6% לחות, סיווג.</p>
+
+<div class="proc-steps">
+  <div class="proc-step">
+    <div class="proc-step-num">1</div>
+    <div><div class="proc-step-title">קטיף</div><div class="proc-step-body">אוגוסט–ספטמבר בחוף הים השחור. ידני על מדרונות תלולים. האוספים משתמשים בגרדנים ומברשות לאיסוף מהקרקע. בעונה טובה, חקלאי ממוצע מניב 1–2 טון.</div></div>
+  </div>
+  <div class="proc-step">
+    <div class="proc-step-num">2</div>
+    <div><div class="proc-step-title">הסרת הקסדה הירוקה</div><div class="proc-step-body">הסרת ה-involucre, הכיסוי הירוק. נעשה ביד או במכונה. האגוז חשוף עכשיו בקליפה הקשה החומה.</div></div>
+  </div>
+  <div class="proc-step">
+    <div class="proc-step-num">3</div>
+    <div><div class="proc-step-title">ייבוש</div><div class="proc-step-body">הורדה מ-15–20% לחות ל-5–6%. שמש טבעית עד שבועיים, או מייבש תעשייתי. שלב קריטי, לחות גבוהה מוביל לעובש ואפלטוקסינים.</div></div>
+  </div>
+  <div class="proc-step">
+    <div class="proc-step-num">4</div>
+    <div><div class="proc-step-title">סיווג בקליפה</div><div class="proc-step-body">מיון לפי גודל (קוטר מ"מ), מסה, מראה. ייצוא בקליפה מבוצע כאן. פגומים, שבורים וחסרים מוסרים.</div></div>
+  </div>
+  <div class="proc-step">
+    <div class="proc-step-num">5</div>
+    <div><div class="proc-step-title">פיצוח וקילוף</div><div class="proc-step-body">פיצוח מכני לגרעינים. הגרעין מכוסה ב-pellicle, קליפה חומה דקה עשירה בפנולים. נשאיר (גרעין טבעי) או נסיר (blanching, ריכוך בקיטור + חיכוך).</div></div>
+  </div>
+  <div class="proc-step">
+    <div class="proc-step-num">6</div>
+    <div><div class="proc-step-title">קלייה</div><div class="proc-step-body">120–150 מעלות, 20–30 דקות. מפתחת טעם וארומה (תגובת מייאר). מסייעת לקילוף ה-pellicle. כאן נוצר הטעם של נוטלה.</div></div>
+  </div>
+</div>
+
+<p>אגוז הלוז רגיש ל-<strong>Eastern Filbert Blight</strong> (EFB), מחלת פטרייה (Anisogramma anomala) שהרסה מטעים שלמים בצפון אמריקה ובקנדה. באורגון, אוניברסיטת אורגון סטייט פיתחה זנים עמידים מבוססי גן Gasaway, מה שאפשר את שיקום התעשייה. בטורקיה, הבעיות שונות: חרקים (Curculio nucum, חידקון הלוז), עובש (Botrytis), וכפורים אביביים שמרסקים יבולים, כמו משבר 2025.</p>
+
+<div class="ab"><div class="tg">80% לשוקולד</div><p>80% מכל אגוזי הלוז בעולם הולכים לתעשיית השוקולד והקונדיטוריה. 15% לעוגות, עוגיות ומתוקים. 5% בלבד נמכרים כחטיף. זה הופך את אגוז הלוז ל<strong>אגוז תעשייתי</strong> בראש ובראשונה, לא אגוז של צרכן ישיר. הלקוחות העיקריים: פררו (Nutella, Ferrero Rocher, Kinder Bueno), Mondelez (Cadbury), ויצרני פרלינים ושוקולד פרימיום ברחבי אירופה.</p></div>
+
+<div class="img-ph" data-slot="hazelnut-orchard">
+  <div class="img-ph-title">📷 מטעי אגוז לוז, חוף הים השחור</div>
+  <div class="img-ph-desc">גבעות ירוקות מכוסות שיחי לוז באוגוסט, טורקיה</div>
+</div>
+</div>
+
+<!-- ═══ CH 4 ═══ -->
+<div class="ch" id="ch-4">
+<div class="cl">פרק רביעי</div>
+
+
+<h2>הזנים, טונדה ג'נטילה וחברים</h2>
+
+<p class="dc">יש מעל 400 זנים רשומים של Corylus avellana, אבל התעשייה מסתובבת סביב קומץ. הבחירה בזן קובעת הכל: צורת הגרעין (עגול או מוארך), קלות הקילוף, טעם, התאמה לתעשייה.</p>
+
+<div class="vc">
+  <div class="vn">Tonda Gentile delle Langhe</div>
+  <div class="vt">הזן האיטלקי, הפרימיום</div>
+  <p>מפיימונטה, צפון-מערב איטליה. מוגן כ-IGP (ציון גאוגרפי מוגן). גרעין עגול, קטן-בינוני, קליפה דקה שמתקלפת בקלות אחרי קלייה. טעם עדין, מתקתק, ארומטי. <strong>הזן של נוטלה</strong>, פררו נוסדה בפיימונטה, וה-Tonda Gentile הוא ה-DNA של המותג. מחיר פרימיום קיצוני.</p>
+  <div class="vs"><span class="vsi">מקור: פיימונטה (IGP)</span><span class="vsi">צורה: עגול, קטן</span><span class="vsi">שוקולד + פרלינים</span><span class="vsi">מחיר: פרימיום</span></div>
+</div>
+
+<div class="vc">
+  <div class="vn">Tombul (טומבול)</div>
+  <div class="vt">הטורקי, הנפח</div>
+  <p>הזן הנפוץ ביותר בטורקיה, מאזור גירסון. עגול, בשרני, תכולת שומן גבוהה (60%+). אחוז תפוקה (kernel ratio) גבוה, 50–52% משקל גרעין ביחס לאגוז השלם. הזן שמייצר את רוב אגוזי הלוז בעולם. נחשב איכותי לקלייה ולקונדיטוריה.</p>
+  <div class="vs"><span class="vsi">מקור: גירסון, טורקיה</span><span class="vsi">תפוקה: 50–52% kernel</span><span class="vsi">70% מהייצור העולמי</span></div>
+</div>
+
+<div class="vc">
+  <div class="vn">Barcelona</div>
+  <div class="vt">האמריקאי הישן, בדרך החוצה</div>
+  <p>הזן הדומיננטי באורגון עד שנות ה-2000. גדול, קליפה עבה. רגיש ל-EFB. מוחלף הדרגתית בזנים עמידים כמו Jefferson, Yamhill ו-Wepster, שפותחו באוניברסיטת אורגון סטייט ונושאים את גן העמידות Gasaway.</p>
+  <div class="vs"><span class="vsi">מקור: אורגון, ארה"ב</span><span class="vsi">רגיש: EFB</span><span class="vsi">מוחלף בזנים חדשים</span></div>
+</div>
+
+<div class="vc">
+  <div class="vn">Jefferson / Yamhill / Wepster</div>
+  <div class="vt">דור חדש, עמידי מחלות</div>
+  <p>זנים שפותחו באוניברסיטת אורגון סטייט עם גן Gasaway לעמידות מלאה ל-EFB. Jefferson מוביל: גרעין עגול, קליפה דקה, קל לקילוף, תפוקה טובה. אלה הזנים שמאפשרים לתעשיית אורגון לגדול בלי לחשוש ממגפת הפטרייה.</p>
+  <div class="vs"><span class="vsi">מקור: אורגון, OSU</span><span class="vsi">עמיד: EFB 100%</span><span class="vsi">↑ הרחבה מהירה</span></div>
+</div>
+
+<h3>סיווג מסחרי</h3>
+<table class="gt">
+<tr><th>קטגוריה</th><th>תיאור</th><th>שימוש</th></tr>
+<tr><td><strong>בקליפה (In-shell)</strong></td><td>שלם, לא קלוף</td><td>חטיף, חגים, קישוט</td></tr>
+<tr><td><strong>גרעינים טבעיים</strong></td><td>קלופים, עם pellicle חומה</td><td>אפייה, קונדיטוריה</td></tr>
+<tr><td><strong>גרעינים מולבנים (Blanched)</strong></td><td>ללא קליפה חומה</td><td>שוקולד, פרלינים, נוטלה</td></tr>
+<tr><td><strong>קלויים</strong></td><td>שלמים או חתוכים</td><td>חטיף פרימיום, טופינגים</td></tr>
+<tr><td><strong>פסטה / חמאה</strong></td><td>טחון לפסטה חלקה</td><td>ממרחים, ג'יאנדויה, גלידה</td></tr>
+<tr><td><strong>שמן</strong></td><td>כבוש קר</td><td>קוסמטיקה, בישול פרימיום</td></tr>
+</table>
+</div>
+
+<!-- ═══ CH 5 ═══ -->
+<div class="ch" id="ch-5">
+<div class="cl">פרק חמישי</div>
+<h2>מה בפנים, ה
+<div id="slot-inline-3" class="media-slot-inline"><div class="media-slot-placeholder">MEDIA_03</div></div>
+פרופיל התזונתי</h2>
+
+<p class="dc">אגוז לוז הוא אגוז מאוזן תזונתית, לא הכי קיצוני בשום פרמטר, אבל חזק בכל מקום. 628 קלוריות ל-100 גרם, 60.8 גרם שומן, 15 גרם חלבון. מה שמייחד אותו: ויטמין E. אגוז הלוז מכיל את הריכוז הגבוה ביותר מכל אגוזי העץ.</p>
+
+<div class="ng">
+  <div class="ni"><div class="nv">628</div><div class="nu">קלוריות</div><div class="nl">ל-100 גרם</div></div>
+  <div class="ni"><div class="nv">60.8g</div><div class="nu">שומן</div><div class="nl">78% חד בלתי רווי</div></div>
+  <div class="ni"><div class="nv">15g</div><div class="nu">חלבון</div><div class="nl">בינוני</div></div>
+  <div class="ni"><div class="nv">9.7g</div><div class="nu">סיבים</div><div class="nl">39% מהיומי</div></div>
+  <div class="ni"><div class="nv">15mg</div><div class="nu">ויטמין E</div><div class="nl">100% מהיומי!</div></div>
+  <div class="ni"><div class="nv">0</div><div class="nu">כולסטרול</div><div class="nl">אפס</div></div>
+</div>
+
+<table class="gt">
+<tr><th>ערך תזונתי</th><th>ל-100 גרם</th><th>% מהצריכה היומית</th><th>הערה</th></tr>
+<tr><td>קלוריות</td><td>628 קק"ל</td><td></td><td>גבוה, אגוז עשיר בשומן</td></tr>
+<tr><td>שומן כללי</td><td>60.8g</td><td>78%</td><td>78% חד בלתי רווי, פרופיל בריא</td></tr>
+<tr><td>שומן חד בלתי רווי</td><td>45.7g</td><td></td><td>חומצה אולאית</td></tr>
+<tr><td>שומן רב בלתי רווי</td><td>7.9g</td><td></td><td>אומגה 6</td></tr>
+<tr><td>שומן רווי</td><td>4.5g</td><td>23%</td><td>נמוך יחסית</td></tr>
+<tr><td>חלבון</td><td>15g</td><td>30%</td><td>בינוני, מאוזן</td></tr>
+<tr><td>פחמימות</td><td>16.7g</td><td>6%</td><td>כולל סיבים</td></tr>
+<tr><td>סיבים תזונתיים</td><td>9.7g</td><td>39%</td><td>גבוה, תורם לשובע</td></tr>
+<tr><td>ויטמין E</td><td>15mg</td><td>100%</td><td>הגבוה ביותר מכל אגוז!</td></tr>
+<tr><td>מנגן</td><td>6.2mg</td><td>313%</td><td>הגבוה ביותר מכל אגוז!</td></tr>
+<tr><td>נחושת</td><td>1.7mg</td><td>97%</td><td>עצמות ומערכת עצבים</td></tr>
+<tr><td>מגנזיום</td><td>163mg</td><td>41%</td><td>שרירים ולב</td></tr>
+<tr><td>זרחן</td><td>290mg</td><td>41%</td><td>עצמות ושיניים</td></tr>
+<tr><td>אשלגן</td><td>680mg</td><td>19%</td><td>לחץ דם</td></tr>
+<tr><td>ויטמין B1 (תיאמין)</td><td>0.64mg</td><td>53%</td><td>מטבוליזם פחמימות</td></tr>
+<tr><td>פולאט</td><td>113µg</td><td>28%</td><td>חשוב בהיריון</td></tr>
+</table>
+
+<div class="ab"><div class="tg">מנגן + ויטמין E, הצמד הייחודי</div><p>אגוז הלוז הוא המקור הטבעי הטוב ביותר לשני נוגדי חמצון יחד: מנגן (313% מהיומי) וויטמין E (100% מהיומי). מנגן נחוץ לאנזימי נוגדי חמצון בתאים, וויטמין E מגן על ממברנות התא. השילוב נמצא במחקרים כבעל השפעה מגנה על מערכת הלב וכלי הדם.</p></div>
+
+<p>מנה סטנדרטית: 28 גרם, כ-21 אגוזים, 178 קלוריות. פנולים: חומצה גאלית, קטכין, חומצות פרולית וקפאית, נוגדי חמצון חזקים שמצויים בעיקר בקליפה החומה הדקה.</p>
+
+<div class="ab"><div class="tg">הקליפה החומה, לזרוק או לשמור?</div><p>הקליפה החומה הדקה (pellicle) שעוטפת את גרעין הלוז מכילה את רוב נוגדי החמצון. בתעשיית השוקולד, מסירים אותה (blanching) כי היא מרה ומשפיעה על צבע ומרקם. אבל מבחינה תזונתית, גרעינים עם קליפה חומה מכילים יותר פנולים. אם אוכלים לוזים כחטיף, לא חייבים לקלף.</p></div>
+</div>
+
+<!-- ═══ CH 6 ═══ -->
+<div class="ch" id="ch-6">
+<div class="cl">פרק שישי</div>
+
+
+<h2>מה עושים איתו, מנוטלה ועד פרנג'ליקו</h2>
+
+<p class="dc">אגוז הלוז הוא האגוז של השוקולד. הקשר בין לוז לשוקולד הוא כנראה השידוך הקולינרי הגדול ביותר בעולם האגוזים: ג'יאנדויה, נוטלה, פררו רושה, פרלינים בלגיים, טראפלים. 80% מכל הלוזים בעולם מגיעים לתעשיית השוקולד. זו לא עוד שותפות, זו נישואין.</p>
+
+<h3>מותגי השוקולד</h3>
+<p><strong>נוטלה:</strong> 13% אגוזי לוז, סוכר ושמן דקלים מהווים מעל 50%. 365 אלף טון בשנה, 770 מיליון צנצנות. נמכרת ב-160 מדינות. נולדה ב-1964 בפיימונטה, כשפייטרו פררו שיכלל את ממרח ה"גיאנדויה" שהמציא אביו. <strong>פררו רושה:</strong> לוז שלם בתוך כדור שוקולד ופרלין, 3.6 מיליארד יחידות בשנה. <strong>Kinder Bueno:</strong> קרם לוז בגביע וופל. <strong>ג'יאנדויה:</strong> שוקולד + פסטת לוז, המצאה פיימונטזית מהמאה ה-19, כשמחסור בקקאו הוביל לערבוב עם לוזים. <strong>פרלינים:</strong> השוקולד הבלגי מבוסס על פסטת לוז.</p>
+
+<h3>מעבר לשוקולד</h3>
+<p><strong>שמן לוז:</strong> בעל טעם חזק, עשיר בשומן חד בלתי רווי, משמש בקוסמטיקה (קרמי לחות, שמני שיער) ובבישול פרימיום (סלטים, דגים). <strong>פרנג'ליקו:</strong> ליקר לוז איטלקי. <strong>חלב לוז:</strong> תחליף חלב צמחי, שוק צומח. <strong>קמח לוז:</strong> ללא גלוטן, לאפיית פסטה ומאפים. <strong>קלוי כחטיף:</strong> 5% בלבד מהייצור, אבל צומח. <strong>בקונדיטוריה מזרח-תיכונית:</strong> בקלאווה (בעיקר טורקיה וסוריה), חלווה, מתוקים.</p>
+
+<p><strong>בישראל:</strong> אגוז הלוז נוכח בעיקר דרך נוטלה (שנמכרת בכמויות עצומות), פררו רושה, ושוקולד פרימיום. שימוש גולמי פחות נפוץ מאשר שקד או אגוז מלך, אבל הולך וגדל בקונדיטוריות בוטיק ובאפייה מודרנית.</p>
+
+<div class="img-ph" data-slot="hazelnut-products">
+  <div class="img-ph-title">📷 מוצרי לוז</div>
+  <div class="img-ph-desc">שמן, ממרח, קלויים, גרעינים מולבנים</div>
+</div>
+</div>
+
+<!-- ═══ CH 7 ═══ -->
+<div class="ch" id="ch-7">
+<div class="cl">פרק שביעי</div>
+<h2>איכות, טריות ואחסון</h2>
+
+<p class="dc">אגוז לוז, עם 61% שומן ו-78% חד בלתי רווי, נהנה מיציבות חמצונית סבירה,
+<div id="slot-inline-4" class="media-slot-inline"><div class="media-slot-placeholder">MEDIA_04</div></div>
+ דומה לשקד, טוב יותר מאגוז מלך. ויטמין E הטבעי מגן מפני חמצון. אבל, כמו בכל אגוז, חום, אור ולחות הורסים.</p>
+
+<p>איך מזהים לוז טוב: <strong>בקליפה</strong>, חום אחיד, ללא סדקים, כבד ביד (קל מדי = יבש מדי). <strong>גרעין:</strong> קרם-לבן תחת הקליפה החומה, לא צהוב. <strong>ריח:</strong> אגוזי עדין, חמאתי. ריח שמן ישן שווה רנסידיות. <strong>מרקם:</strong> קריספי, לא גומי. <strong>קלייה:</strong> חום-זהוב אחיד, הקליפה החומה מתקלפת בקלות.</p>
+
+<table class="gt">
+<tr><th>מצב</th><th>אחסון</th><th>משך</th><th>הערות</th></tr>
+<tr><td>בקליפה</td><td>קריר ויבש, מקום אפל</td><td>עד 6 חודשים</td><td>הכי עמיד</td></tr>
+<tr><td>גרעינים קלופים</td><td>מיכל אטום, מקרר</td><td>עד 4 חודשים</td><td>סופג ריחות, הרחיקו</td></tr>
+<tr><td>מקפיא</td><td>שקית ואקום</td><td>עד שנה</td><td>הטוב ביותר לטווח ארוך</td></tr>
+<tr><td>קלויים</td><td>מיכל אטום, מקרר</td><td>עד חודש</td><td>מתחמצנים מהר!</td></tr>
+<tr><td>שמן לוז</td><td>צנצנת כהה, מקרר</td><td>2–3 חודשים</td><td>אחרי פתיחה</td></tr>
+</table>
+
+<div class="ab"><div class="tg">כללי אחסון</div><p>בקליפה, במקום קריר ויבש, עד שישה חודשים. גרעינים קלופים, <strong>מיכל אטום במקרר</strong>, עד ארבעה חודשים. מקפיא, עד שנה. לוזים סופגים ריחות, הרחיקו ממזונות ריחניים. לאחר קלייה, אחסנו במיכל אטום מיד, קלויים מתקלקלים מהר יותר.</p></div>
+</div>
+
+<!-- ═══ CH 8 ═══ -->
+<div class="ch" id="ch-8">
+<div class="cl">פרק שמיני</div>
+<h2>רגישויות ודגשים בטיחותיים</h2>
+
+<p class="dc">אגוז לוז מסווג כ<strong>אגוז עץ</strong>, אלרגן מחייב סימון. אלרגיה ללוז היא מהנפוצות ביותר באירופה, ויש לה קשר חזק לאלרגיה לאבקת ליבנה (Birch). שני הצמחים מאותה משפחה (Betulaceae), והחלבונים דומים: Cor a 1 (לוז) ו-Bet v 1 (ליבנה), רגישות צולבת שכיחה מאוד.</p>
+
+<div class="ab-r"><div class="tg">אלרגיית לוז, נפוצה מאוד</div><p>אלרגיה ללוז היא <strong>מהנפוצות ביותר באלרגיות לאגוזי עץ</strong>, במיוחד בצפון אירופה שבה ליבנה נפוצה. הסימפטומים: מגרד בפה ובגרון (Oral Allergy Syndrome, OAS, הנפוץ ביותר), ובמקרים חמורים, אנפילקסיס. חשוב: לוזים קלויים גורמים לפחות תגובות OAS מאשר גולמיים (החום משנה את מבנה החלבון). אבל אנפילקסיס יכולה לקרות גם מלוז מבושל.</p></div>
+
+<p>נקודות נוספות: אגוזי לוז עלולים להכיל אפלטוקסינים, במיוחד באחסון לקוי. רגישות צולבת עם אגוז מלך, פקאן וקשיו קיימת, אבל פחות חזקה מאשר עם שקד. ילדים קטנים, לוז שלם עלול להוות סכנת חנק. חתכו או טחנו.</p>
+</div>
+
+<!-- ═══ CH 9 ═══ -->
+<div class="ch" id="ch-9">
+<div class="cl">פרק תשיעי</div>
+<h2>השוק, השבריריות, והעתיד</h2>
+
+<p class="dc">שוק אגוז הלוז הוא אחד הדינמיים והשבירים ביחד. הביקוש גדל: שוק ממרחי שוקולד עולמי שהוערך ב-8–11.9 מיליארד דולר עם צמיחה של 6.5–8.7% בשנה, חלב לוז כתחליף חלב, שמן לוז בקוסמטיקה, ומגמת "צמחוני/טבעוני" שמעלה ביקוש לאגוזים באופן כללי. סין שוק צומח, יפן שוק פרימיום.</p>
+
+<p>אבל, והנה הנקודה, שום שוק אגוזים אחר בעולם אינו שביר כמו שוק הלוז. 70% ממדינה אחת, 25% מקונה אחד, רגישות קיצונית למזג אוויר. 2014: כפור מאוחר בטורקיה הפחית את היבול ב-50%, כותרות על "סוף הנוטלה". 2018: סערה שטפה עשרות אלפי טון לוזים לים השחור. 2025: כפור אביבי + מזיקים, תחזית ירידה ל-300 אלף טון (מ-600–700 רגיל), עימות פומבי בין פררו לסוחרים טורקים על מחיר.</p>
+
+<div class="ab"><div class="tg">אסטרטגיית פררו, גיוון גלובלי</div><p>פררו לא מחכה שטורקיה תפתור את הבעיה. <strong>אוסטרליה:</strong> 2,000 הקטר. <strong>ארגנטינה:</strong> 300 הקטר. <strong>דרום אפריקה:</strong> בתכנון. <strong>סרביה, גאורגיה:</strong> מקורות חלופיים. המטרה: קטיף בחצי הכדור הדרומי (פבר–מרץ) + צפוני (אוג–ספט) = אספקה רציפה כל השנה. פררו שואפת ל-100% מעקב (traceability) מחקלאי ועד מפעל.</p></div>
+
+<table class="gt">
+<tr><th>גורם</th><th>השפעה על מחיר</th><th>דוגמה</th></tr>
+<tr><td>כפור אביבי בטורקיה</td><td>↑↑↑ חריפה</td><td>2025: x2 בחודשים</td></tr>
+<tr><td>שינוי שע"ח לירה טורקית</td><td>↑↓ משפיע</td><td>2018–2022 תנודות גדולות</td></tr>
+<tr><td>ייבול אוגוסט טורקיה</td><td>הכי קריטי</td><td>תחזיות FAO + TMO</td></tr>
+<tr><td>גיוון ספקים פררו</td><td>↓ ייצוב ארוך טווח</td><td>אוסטרליה + ארגנטינה</td></tr>
+<tr><td>ביקוש שוק סין</td><td>↑ מגמה</td><td>+15% בשנה האחרונה</td></tr>
+</table>
+
+<div class="img-ph" data-slot="hazelnut-market">
+  <div class="img-ph-title">📷 שוק ותמחור לוז</div>
+  <div class="img-ph-desc">גרף מחיר היסטורי, השפעת כפורים טורקיים</div>
+</div>
+</div>
+
+<!-- ═══ CH 10 ═══ -->
+<div class="ch" id="ch-10">
+<div class="cl">פרק עשירי</div>
+<h2>סיכום, מה שנשאר</h2>
+
+<p class="dc">אגוז הלוז הוא אגוז של פרדוקסים. הוא הכי עתיק (10,000 שנה באירופה) אבל התעשייה שלו צעירה ותלויה ב-60 שנות נוטלה. הוא גדל על מדרחות חלומיות מעל הים השחור אבל 80% שלו מגיע לתוך מכונות תעשייתיות. הוא האגוז הכי קשור לשוקולד, אבל רוב האנשים לא מזהים אותו כאגוז בזכות עצמו.</p>
+
+<p>מה שמייחד: <strong>הוא האגוז שבנה אימפריה</strong>. פררו, 17 מיליארד אירו הכנסות, 23 מפעלים בעולם, בנויה סביב אגוז אחד. שום אגוז אחר לא יצר מותג בסדר גודל כזה. וכשמדינה אחת (טורקיה) מספקת 70%, וחברה אחת (פררו) קונה 25%, נוצרת מערכת שהיא גם יעילה להחריד וגם שבירה להחריד.</p>
+
+<div class="pull"><p>מקליפות חרוכות של ציידים-לקטים לפני 12,000 שנה, דרך עץ הפיות הסלטי ותשעת עצי החוכמה, דרך ג'יאנדויה פיימונטזית ונוטלה שנמכרת כל 2.5 שניות, ועד לכפור אביבי בחוף הים השחור שמכפיל מחירים ברגע. עץ שיח צנוע, קסדה ירוקה, וגרעין שמשגע את העולם.</p></div>
+
+<h3>מדריך רכישה</h3>
+<p><strong>לקנייה:</strong> גרעין קרם-לבן, קליפה חומה שלמה, ריח חמאתי-אגוזי. לשוקולד ואפייה, בחרו Blanched (מולבנים). לחטיף, קלויים עם קליפה. Tonda Gentile (איטלקי) = פרימיום. Tombul (טורקי) = נפח, איכות טובה. אורגון = עמידי מחלות, זמינים.</p>
+
+<h3>בבית</h3>
+<p><strong>אחסון:</strong> מקרר, מיכל אטום. גרעינים קלופים, ארבעה חודשים. בקליפה, שישה. מקפיא, שנה. קלויים, אכלו מהר, הם מתחמצנים מהר יותר מגולמיים. ואל תזרקו את הקליפה החומה, היא מלאה בנוגדי חמצון.</p>
+
+<table class="gt">
+<tr><th>קריטריון</th><th>טוב</th><th>גרוע</th></tr>
+<tr><td>צבע גרעין</td><td>קרם-לבן, בהיר</td><td>צהוב, כהה, כתמים</td></tr>
+<tr><td>ריח</td><td>חמאתי-אגוזי, נעים</td><td>שמן ישן, עפוץ, עובשי</td></tr>
+<tr><td>מרקם</td><td>קריספי, מוצק</td><td>גומי, ריסוק קל = ישן</td></tr>
+<tr><td>קליפה חומה</td><td>שלמה, עם ניחוח</td><td>מנוקדת, לחה</td></tr>
+<tr><td>אריזה</td><td>ואקום, תאריך עדכני</td><td>פתוח, ללא תאריך</td></tr>
+</table>
+</div>
+
+<div class="ft">
+ערך ידע צרכני · Blue Star International · 2026<br>
+מבוסס על נתוני INC, FAO, Ferrero Hazelnut Company, USDA FAS, ומקורות פתוחים<br>
+<span>מידע תזונתי: USDA FoodData Central · נתוני ייצור: INC / FAO 2024 · גנטיקה: Boccacci &amp; Botta 2009 · מסחר עתיק: Fairbairn et al. 2014 (Kültepe) · אלרגיה: Cor a 1 / Bet v 1 cross-reactivity</span>
+</div>
+
+</div><!-- /con -->
+
+
+</div>
+
+<script>
+window.onscroll = () => {
+    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('progress-bar').style.width = (window.scrollY / h * 100) + '%';
+    const sections = document.querySelectorAll('.ch');
+    const dots = document.querySelectorAll('.nav-dot');
+    let current = "";
+    sections.forEach(s => { if (pageYOffset >= s.offsetTop - 200) current = s.id; });
+    dots.forEach(d => { d.classList.remove('active'); if (d.dataset.target === current) d.classList.add('active'); });
+// Back to top
+const btt = document.getElementById('btt');
+window.addEventListener('scroll', () => {
+    btt.classList.toggle('visible', window.scrollY > 300);
+});
+btt.onclick = () => window.scrollTo({top:0, behavior:'smooth'});
+};
+document.querySelectorAll('.nav-dot').forEach(dot => {
+    dot.onclick = () => document.getElementById(dot.dataset.target).scrollIntoView({behavior:'smooth'});
+});
+if (window.IntersectionObserver) {
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            e.target.querySelectorAll('.pb-fill').forEach(b => { b.style.width = b.dataset.w + '%'; });
+            obs.unobserve(e.target);
+        });
+    }, {threshold: 0.3});
+    document.querySelectorAll('.pb-chart').forEach(el => obs.observe(el));
+}
+(function() {
+    const dbName = 'StarkOS_DB';
+    const productId = window.location.pathname.split('/').pop().replace('.html', '') || 'hazelnut';
+    function syncProductPage() {
+        const request = indexedDB.open(dbName, 1);
+        request.onsuccess = (e) => {
+            const db = e.target.result;
+            const store = db.transaction('archive', 'readonly').objectStore('archive');
+            const getRequest = store.get(productId);
+            getRequest.onsuccess = () => {
+                const data = getRequest.result;
+                if (!data) return;
+
+                function makeMedia(src) {
+                    const isVid = src.startsWith('data:video');
+                    const el = document.createElement(isVid ? 'video' : 'img');
+                    el.src = src;
+                    el.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+                    if (isVid) { el.autoplay = el.muted = el.loop = true; el.setAttribute('playsinline',''); }
+                    return el;
+                }
+
+                const heroH1 = document.getElementById('sync-title');
+                if (heroH1 && data.name) heroH1.innerText = data.name;
+                const heroDeck = document.getElementById('sync-desc');
+                if (heroDeck && data.desc) heroDeck.innerText = data.desc;
+
+                const heroSrc = data.media1 || data.media;
+                const heroSlot = document.getElementById('slot-product-hero');
+                if (heroSlot && heroSrc) {
+                    heroSlot.innerHTML = '';
+                    heroSlot.appendChild(makeMedia(heroSrc));
+                }
+
+                [['slot-inline-2', data.media2], ['slot-inline-3', data.media3], ['slot-inline-4', data.media4]].forEach(function([id, src]) {
+                    if (!src) return;
+                    const slot = document.getElementById(id);
+                    if (!slot) return;
+                    slot.innerHTML = '';
+                    slot.appendChild(makeMedia(src));
+                    slot.classList.add('has-media');
+                    slot.classList.remove('media-slot-placeholder');
+                });
+            };
+        };
+    }
+    // Scroll Reveal Engine
+    function initScrollReveal() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.ch').forEach(card => {
+            card.classList.add('reveal');
+            observer.observe(card);
+        });
+    }
+    
+    initScrollReveal();
+
+    window.addEventListener('load', syncProductPage);
+})();
+</script>
+
+<button class="back-to-top" id="btt" aria-label="Back to top">&#8593;</button>
+</body>
+</html>

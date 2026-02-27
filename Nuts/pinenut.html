@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>צנובר · Blue Star International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg: #0A0A0B;
+    --text: #FAF7F0;
+    --body: #D1CEC5;
+    --accent: #4A6020;
+    --warm: #A8C060;
+    --card: rgba(20, 20, 22, 0.4);
+    --radius: 20px;
+    --shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    background-color: var(--bg);
+    color: var(--body);
+    font-family: 'Noto Sans Hebrew', sans-serif;
+    font-size: 18px;
+    line-height: 1.9;
+    overflow-x: hidden;
+    position: relative;
+    background-image:
+        linear-gradient(rgba(168, 192, 96, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(168, 192, 96, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+
+body::before, body::after {
+    content: ''; position: fixed; width: 600px; height: 600px; border-radius: 50%;
+    filter: blur(120px); z-index: -2; opacity: 0.15; pointer-events: none;
+}
+body::before { background: #6A8A30; top: -100px; left: -100px; }
+body::after { background: #2A4010; bottom: 20%; right: -150px; }
+
+#progress-bar { position:fixed; top:0; left:0; height:3px; background:var(--warm); width:0; z-index:1000; }
+
+.back-btn {
+    position: absolute; top: 40px; left: 40px; z-index: 10; display: flex; align-items: center; gap: 8px;
+    color: var(--text); text-decoration: none; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px;
+    opacity: 0.5; transition: 0.3s;
+}
+.back-btn:hover { opacity: 1; color: var(--warm); }
+
+#btt {
+    position: fixed; bottom: 30px; left: 30px; width: 40px; height: 40px;
+    background: var(--warm); color: #000; border: none; border-radius: 50%;
+    cursor: pointer; font-size: 18px; display: none; z-index: 1000; transition: 0.3s;
+}
+#btt.visible { display: flex; align-items: center; justify-content: center; }
+#btt:hover { transform: scale(1.1); box-shadow: 0 0 20px rgba(168, 192, 96, 0.4); }
+
+.hero { padding: 100px 40px 160px; text-align: center; color: var(--text); position: relative; }
+.hero-k { font-size: 11px; font-weight: 700; letter-spacing: 5px; color: var(--warm); margin-bottom: 20px; text-transform: uppercase; font-family: 'Space Mono', monospace; }
+.hero h1 { font-family:'Frank Ruhl Libre', serif; font-size: 90px; font-weight: 900; line-height: 0.8; margin-bottom: 25px; letter-spacing: -2px; }
+.hero .deck { font-size: 20px; opacity: 0.8; max-width: 650px; margin: 0 auto 40px; font-weight: 300; }
+
+.hero-img-wrap {
+    max-width: 900px; margin: 0 auto -220px; height: 500px; border-radius: var(--radius); overflow: hidden;
+    box-shadow: var(--shadow); background: #000; border: 1px solid rgba(255,255,255,0.05);
+}
+.hero-img-wrap img { width:100%; height:100%; object-fit:cover; }
+.hero-img-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:12px; background:#0A0A0B; }
+.hero-img-placeholder span { color:rgba(255,255,255,0.15); font-size:12px; letter-spacing:3px; font-family:'Space Mono',monospace; }
+
+.side-nav { position: fixed; top: 50%; right: 30px; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 12px; }
+.nav-dot { width: 10px; height: 10px; border: 1px solid var(--warm); border-radius: 50%; opacity: 0.3; cursor: pointer; transition: 0.3s; }
+.nav-dot.active { opacity: 1; transform: scale(1.4); background: var(--warm); }
+
+.con { max-width: 800px; margin: 280px auto 100px; padding: 0 24px; position: relative; z-index: 5; }
+.ch {
+    background: var(--card); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+    padding: 50px; border-radius: var(--radius); margin-bottom: 40px;
+    border: 1px solid rgba(255,255,255,0.05); position: relative; overflow: hidden;
+    color: var(--body);
+}
+.ch::before, .ch::after { content: '+'; position: absolute; font-family: 'Space Mono', monospace; color: var(--warm); font-size: 14px; opacity: 0.4; }
+.ch::before { top: 15px; left: 15px; }
+.ch::after { bottom: 15px; right: 15px; }
+
+.ch h2 { font-family:'Frank Ruhl Libre', serif; font-size: 38px; margin-bottom: 25px; color: var(--text); border-right: 5px solid var(--warm); padding-right: 20px; line-height: 1.1; }
+.ch h3 { font-family:'Frank Ruhl Libre', serif; font-size: 22px; font-weight: 700; color: var(--text); margin: 36px 0 14px; padding-right: 14px; border-right: 3px solid var(--warm); }
+.ch p { margin-bottom: 18px; color: var(--body); }
+.cl { font-size: 10px; font-weight: 700; color: var(--warm); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; display: block; font-family: 'Space Mono', monospace; }
+.dc::first-letter { font-family:'Frank Ruhl Libre', serif; font-size: 2.8em; font-weight: 900; color: var(--warm); line-height: 1; float: right; margin-left: 8px; }
+em { color: #C0D890; font-style: italic; }
+strong { color: var(--text); }
+
+.ab { padding: 20px 24px; margin: 28px 0; border-radius: 0 8px 8px 0; }
+.ab .tg { font-size: 10px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 6px; }
+.ab p { margin: 0; font-size: 16px; line-height: 1.75; }
+.ab-w { background: rgba(168,192,96,0.08); border-right: 4px solid var(--warm); }
+.ab-w .tg { color: var(--warm); }
+.ab-g { background: rgba(50,80,20,0.25); border-right: 4px solid var(--accent); }
+.ab-g .tg { color: #90B050; }
+.ab-r { background: rgba(184,50,50,0.1); border-right: 4px solid #B83030; }
+.ab-r .tg { color: #E06060; }
+.ab-r p { color: #DDB0B0; }
+
+.vc { background: rgba(30,28,25,0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 22px; margin: 18px 0; }
+.vc .vn { font-family:'Frank Ruhl Libre', serif; font-size: 21px; font-weight: 700; color: var(--text); }
+.vc .vt { font-size: 12px; color: var(--warm); font-weight: 600; margin-bottom: 10px; }
+.vc p { font-size: 16px; line-height: 1.75; margin-bottom: 0; color: var(--body); }
+.vc .vs { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+.vc .vsi { background: rgba(255,255,255,0.04); padding: 6px 12px; border-radius: 5px; font-size: 12px; color: #A09080; }
+.vc .vsi strong { color: var(--text); }
+
+.ng { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin: 24px 0; }
+.ni { background: rgba(30,28,25,0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 14px; text-align: center; }
+.ni .nv { font-family:'Frank Ruhl Libre', serif; font-size: 26px; font-weight: 700; color: var(--text); }
+.ni .nu { font-size: 13px; color: #A09080; margin-top: 2px; }
+.ni .nl { font-size: 11px; color: var(--warm); margin-top: 3px; font-weight: 600; }
+
+.pb-chart { margin: 16px 0 8px; display: flex; flex-direction: column; gap: 10px; }
+.pb-row { display: flex; align-items: center; gap: 10px; }
+.pb-meta { display: flex; align-items: center; gap: 6px; min-width: 120px; justify-content: flex-end; }
+.pb-flag { font-size: 18px; }
+.pb-name { font-size: 13px; color: #A09080; }
+.pb-track { flex: 1; background: rgba(255,255,255,0.08); height: 18px; border-radius: 9px; overflow: hidden; }
+.pb-fill { height: 100%; width: 0; border-radius: 9px; transition: width 1.2s cubic-bezier(0.22,1,0.36,1); }
+.pb-pct { font-family:'Frank Ruhl Libre', serif; font-size: 14px; font-weight: 700; color: var(--text); width: 36px; text-align: left; }
+.pb-note { font-size: 11px; color: #6B6058; opacity: .7; margin-top: 10px; text-align: center; }
+
+.gt { width: 100%; border-collapse: collapse; margin: 25px 0; font-size: 15px; border-top: 1px solid rgba(255,255,255,0.05); }
+.gt th { background: rgba(0,0,0,0.5); color: var(--text); padding: 14px; text-align: right; font-size: 12px; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.gt td { padding: 14px; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--body); }
+.gt tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+
+.pull { margin: 40px 0; padding: 45px; background: rgba(0,0,0,0.4); border-radius: var(--radius); text-align: center; border: 1px solid rgba(168,192,96,0.2); }
+.pull p { font-family:'Frank Ruhl Libre', serif; font-size: 22px; font-weight: 500; color: var(--body); line-height: 1.55; margin: 0; font-style: italic; }
+
+.reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.2, 1, 0.2, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+.marquee-container { position: fixed; bottom: -3vh; left: 0; width: 100vw; overflow: hidden; z-index: -1; pointer-events: none; }
+.marquee-text { font-family: 'Playfair Display', serif; font-size: 15vw; white-space: nowrap; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.03); animation: scrollText 40s linear infinite; }
+@keyframes scrollText { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+.ft { text-align: center; padding: 44px 24px; font-size: 13px; color: #6B6058; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 36px; }
+
+.proc-steps { display: flex; flex-direction: column; gap: 20px; margin: 24px 0; }
+.proc-step { display: flex; gap: 20px; align-items: flex-start; }
+.proc-step-num {
+    min-width: 36px; height: 36px; border-radius: 50%;
+    background: var(--warm); color: #000;
+    font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.proc-step-title { font-family: 'Frank Ruhl Libre', serif; font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.proc-step-body { font-size: 16px; color: var(--body); line-height: 1.75; }
+
+.ch ol, .ch ul { padding-right: 24px; margin: 16px 0 18px; }
+.ch li { margin-bottom: 10px; color: var(--body); line-height: 1.8; }
+.ch ol li::marker { color: var(--warm); font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; }
+.ch ul li::marker { color: var(--warm); }
+
+@media (max-width: 900px) {
+    .side-nav { display: none; }
+    .back-btn { top: 20px; left: 20px; }
+    .hero h1 { font-size: 55px; }
+    .hero-img-wrap { height: 300px; margin-bottom: -100px; }
+    .con { margin-top: 150px; }
+    .ng { grid-template-columns: repeat(2,1fr); }
+}
+</style>
+<script src="../auth.js"></script>
+</head>
+<body>
+<div class="marquee-container">
+    <div class="marquee-text">
+        BLUE STAR INTERNATIONAL · GLOBAL COMMODITY ARCHIVE · BLUE STAR INTERNATIONAL · GLOBAL COMMODITY ARCHIVE ·
+    </div>
+</div>
+<div id="progress-bar"></div>
+<nav class="side-nav">
+    <div class="nav-dot active" data-target="ch-1"></div>
+    <div class="nav-dot" data-target="ch-2"></div>
+    <div class="nav-dot" data-target="ch-3"></div>
+    <div class="nav-dot" data-target="ch-4"></div>
+    <div class="nav-dot" data-target="ch-5"></div>
+    <div class="nav-dot" data-target="ch-6"></div>
+    <div class="nav-dot" data-target="ch-7"></div>
+    <div class="nav-dot" data-target="ch-8"></div>
+    <div class="nav-dot" data-target="ch-9"></div>
+    <div class="nav-dot" data-target="ch-10"></div>
+</nav>
+<section class="hero">
+    <a href="index.html" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>חזרה למסוף</a>
+    <div class="hero-k">ערך ידע חקלאי · Blue Star International</div>
+    <h1 id="sync-title">צנובר</h1>
+    <p class="deck" id="sync-desc">האגוז היקר בעולם. עץ שצריך 15-25 שנה לפני שמניב, קונוס שלוקח שנתיים להבשיל, וגרעין שחופים בידיים. המחיר לא מקרי.</p>
+    <div class="hero-img-wrap" id="slot-product-hero">
+        <div class="hero-img-placeholder"><span>מדיה_לא_נטענה</span></div>
+    </div>
+</section>
+<main class="con">
+
+<!-- ═══ CH 1 ═══ -->
+<div class="ch" id="ch-1">
+<div class="cl">פרק ראשון</div>
+<h2>עץ שמדד זמן אחרת, מהרי האפניאים עד שולחן האוכל</h2>
+
+<p class="dc">צנובר אינו אגוז במובן הבוטני. הוא זרע של אורן. עצי אורן (Pinus) מייצרים קונוסים שבתוכם, בין הקשקשים, נמצאים הזרעים הכנפיים הקטנים שאנחנו קוראים להם צנוברים. מה שהופך את הצנובר לסחורה נדירה ויקרה כל כך הוא הזמן: עץ אורן מסחרי מתחיל להניב קונוסים בגיל 15-25 שנה. הקונוס עצמו לוקח שנתיים להבשיל. ואז, כשהוא נאסף, הגרעין חבוי עמוק בקשקש קשיח שחופים ממנו בעדינות, ברובם בידיים. אין קיצורי דרך. כל גרם צנובר הוא ציר זמן שלא ניתן לדחוס.</p>
+
+<p>בני אדם אוכלים צנוברים לפחות 10,000 שנה. גרעיני אורן נמצאו באתרים ניאוליתיים בכל רחבי אירופה ובמזרח. שבטי האינדיאנים בדרום-מערב ארה"ב חיו על Pinyon Pine, <em>Pinus edulis</em>, כמקור קלורי מרכזי. הרומאים הביאו את אורן הגלילי (<em>Pinus pinea</em>), "אורן הגן", לכל רחבי האימפריה לגידול מסחרי. אורן הגלילי גדל בים התיכון עד היום, ופרי הצנובר האיטלקי, <em>Pignoli</em>, הוא הסטנדרט הגסטרונומי שלפיו נמדדים כל האחרים.</p>
+
+<p>ב-1,000 שנות מסחר ים-תיכוני, צנוברים נסחרו כסחורת יוקרה לצד פלפל ועלי דפנה. במטבח הערבי הקלאסי, <em>كبة</em> עם צנוברים, <em>سبانخ</em> עם צנוברים, <em>رز</em> עם צנוברים: הצנובר הוא סמן של מנה ברמה. בבישול האיטלקי, פסטו ג'נובזה ללא Pignoli אינו פסטו. ביוון, הממתק <em>κουραμπιές</em> מבוסס עליו. הצנובר הוא גרעין שמגדיר מטבחים שלמים.</p>
+
+<div class="pull"><p>עץ אורן גלילי בוגר מייצר קילוגרם וחצי עד שלושה קילוגרם צנוברים קלופים בשנה. עץ בן 80 שנה מייצר כמות דומה לעץ בן 40. יש גנים באיטליה ובספרד שמגדלים אורנים לצנוברים מאז ימי הביניים, אותם עצים, אותם גנים, 400-600 שנה של יצור רצוף.</p></div>
+</div>
+
+<!-- ═══ CH 2 ═══ -->
+<div class="ch" id="ch-2">
+<div class="cl">פרק שני</div>
+<h2>גאוגרפיה, שלושה שווקים ומוצרים שונים לחלוטין</h2>
+
+<p class="dc">שוק הצנובר העולמי מסתכם בכ-25,000-35,000 טון בשנה, זעיר ביחס לקשיו (900,000 טון) או שקד (1,200,000 טון). אבל המחיר פר טון, 10,000-25,000 דולר לטון תלוי במקור ובסוג, הופך אותו לשוק בשווי 400-600 מיליון דולר. שלוש מדינות שולטות: סין, פקיסטן ורוסיה, כשאיטליה וספרד מייצרות כמויות קטנות אבל שולטות בסגמנט הפרמיום.</p>
+
+<div class="ng">
+    <div class="ni"><div class="nv">~30K</div><div class="nu">טון / שנה</div><div class="nl">ייצור עולמי</div></div>
+    <div class="ni"><div class="nv">$20K+</div><div class="nu">דולר / טון</div><div class="nl">Pignoli איטלקי</div></div>
+    <div class="ni"><div class="nv">15-25</div><div class="nu">שנות המתנה</div><div class="nl">עד ייצור ראשון</div></div>
+</div>
+
+<div class="pb-chart">
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇨🇳</span><span class="pb-name">סין</span></div><div class="pb-track"><div class="pb-fill" data-w="35" style="background:#2A5010"></div></div><span class="pb-pct">35%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇵🇰</span><span class="pb-name">פקיסטן/אפגניסטן</span></div><div class="pb-track"><div class="pb-fill" data-w="18" style="background:#4A7020"></div></div><span class="pb-pct">18%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇷🇺</span><span class="pb-name">רוסיה/סיביר</span></div><div class="pb-track"><div class="pb-fill" data-w="15" style="background:#7A9040"></div></div><span class="pb-pct">15%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇮🇷</span><span class="pb-name">איראן</span></div><div class="pb-track"><div class="pb-fill" data-w="10" style="background:#A0B060"></div></div><span class="pb-pct">10%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇮🇹</span><span class="pb-name">איטליה/ספרד</span></div><div class="pb-track"><div class="pb-fill" data-w="8" style="background:#C0C890"></div></div><span class="pb-pct">8%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🌍</span><span class="pb-name">אחרים</span></div><div class="pb-track"><div class="pb-fill" data-w="14" style="background:#DDD6CA"></div></div><span class="pb-pct">14%</span></div>
+    <div class="pb-note">הערכת ייצור עולמי · INC / FAO / Trade sources 2023</div>
+</div>
+
+<p>שלושה מוצרים שונים בשוק אחד: הצנובר הסיני (<em>Pinus koraiensis</em>, <em>P. yunnanensis</em>) ארוך ומחודד, נפח גדול, מחיר נמוך (8,000-12,000 דולר לטון). הצנובר מפקיסטן/אפגניסטן (<em>Pinus gerardiana</em>) קטן, ריחני, נחשב לפרמיום באסיה. הצנובר ים-תיכוני (<em>Pinus pinea</em>) עגלגל, שמנוני, המועדף במטבח גסטרונומי, 15,000-25,000 דולר לטון.</p>
+
+<div class="ab ab-w"><div class="tg">נקודה מסחרית</div><p>ישראל מייבאת צנוברים בעיקר מסין ומרוסיה לשוק הרחב. לשף-שוק ולשימוש גסטרונומי, מגיעים מים התיכון. ב-2021-2023 מחירי צנוברים עלו 40-60% בשל בצורות בסין, נגיפי עצים בספרד ועיכובי לוגיסטיקה. שוק שאי אפשר לגדל ממנו מהר.</p></div>
+
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>מקור</th><th>מין</th><th>צורה</th><th>שוק יעד</th><th>מחיר קירוב</th></tr>
+<tr><td>איטליה/ספרד</td><td>Pinus pinea</td><td>עגלגל, לבן-שנהב</td><td>גסטרונומיה, EU, US</td><td>$18,000-25,000/טון</td></tr>
+<tr><td>פקיסטן/אפגניסטן</td><td>Pinus gerardiana</td><td>קטן, מחודד</td><td>מזרח תיכון, הודו</td><td>$10,000-16,000/טון</td></tr>
+<tr><td>סין</td><td>Pinus koraiensis</td><td>ארוך, מחודד</td><td>סין, ייצוא גלובלי</td><td>$8,000-13,000/טון</td></tr>
+<tr><td>רוסיה/סיביר</td><td>Pinus sibirica</td><td>קטן, עגלגל</td><td>רוסיה, EU</td><td>$9,000-14,000/טון</td></tr>
+<tr><td>קוריאה/מנדז'וריה</td><td>Pinus koraiensis</td><td>בינוני, ריחני</td><td>סין, יפן, קוריאה</td><td>$11,000-15,000/טון</td></tr>
+</table></div>
+</div>
+
+<!-- ═══ CH 3 ═══ -->
+<div class="ch" id="ch-3">
+<div class="cl">פרק שלישי</div>
+<h2>למה הצנובר כל כך יקר, חשבון הזמן</h2>
+
+<p class="dc">אין גידול אחר בעולם האגוזים עם מחסום כניסה כמו צנובר. כדי להתחיל לייצר צנוברים, חקלאי נדרש לשתול עצים ולחכות 15-25 שנה לפרי ראשון. זה לא עסק שמישהו מתחיל. זה מורשת. הגנים הקיימים הם ירושה של דורות, שנבנתה לאורך מאות שנים. להוסיף היצע חדש לשוק הצנובר דורש החלטת השקעה שרוב בני האדם לא יראו את פירותיה בחייהם.</p>
+
+<h3>חישוב עלות הזמן</h3>
+<p>חקלאי שנוטע אורן גלילי בגיל 30 מתחיל להקטיר קונוסים בגיל 50-55. פרודוקטיביות מלאה בגיל 60-70 שלו. זה לא רציונלי כלכלית לאדם אחד. זו השקעה בנכס משפחתי שערכו גדל עם הגיל, בדיוק כמו כרם יין יוקרתי. ברטנים ובגנים הגדולים ביותר של Pinus pinea באיטליה ובפורטוגל, מדובר בנכסים בני מאות שנים שמועברים בירושה.</p>
+
+<h3>אסיף קשה</h3>
+<p>קונוסי אורן גדולים ומסרבנים לאיסוף מכני. רובם נאספים בידיים, לרוב בעזרת מוטות ארוכים שמכים בקונוסים לנפילה. הגרעינים, לאחר נשירת הקונוסים, חובים אחד אחד מהקשקש הקשיח. מכשור מכני קיים לפיצוח קונוסים, אך ההכנה לפני ולאחר נשארת עבודת ידיים. תנובה ממוצעת לדונם: 40-100 ק"ג גרעינים קלופים בשנה. לשם השוואה, שקד מניב 300-500 ק"ג לדונם.</p>
+
+<div class="ab ab-g"><div class="tg">מחזור קונוס</div><p>קונוס <em>Pinus pinea</em> לוקח שנתיים להבשיל מרגע ההאבקה. בשנה הראשונה הוא קטן ירוק. בשנה השנייה הוא גדל ומבשיל לגוון חום-עץ. כלומר: בכל נקודת זמן, על העץ ישנם קונוסים משנתיים שונות בו-זמנית. האסיף קורה פעם בשנה, בסתיו-חורף, כשהקונוסים הבשלים נפתחים.</p></div>
+</div>
+
+<!-- ═══ CH 4 ═══ -->
+<div class="ch" id="ch-4">
+<div class="cl">פרק רביעי</div>
+<h2>עיבוד, מקונוס לגרעין מוכן</h2>
+
+<p class="dc">הדרך מקונוס לגרעין מוכן למכירה ארוכה ועתירת עבודה. בניגוד לקשיו שיש בו סכנת רעלנים, בצנובר אין סכנה ביולוגית. הבעיה היא פיזית-מכנית: שחרור גרעין עדין ומשומן מקשקש קשיח ועקשן, ללא פגיעה בגרעין, בקנה מידה מסחרי.</p>
+
+<div class="proc-steps">
+    <div class="proc-step">
+        <div class="proc-step-num">1</div>
+        <div><div class="proc-step-title">אסיף קונוסים</div><div class="proc-step-body">בסתיו-חורף, כשהקונוסים מתחילים להיפתח. נאספים ביד או בהכאת מוטות. קונוס בשל של Pinus pinea שוקל 300-700 גרם ומכיל 50-100 גרעינים. אסיף מוקדם מדי, גרעינים לא בשלים. מאוחר מדי, הגרעינים נושרים ממנו בשדה.</div></div>
+    </div>
+    <div class="proc-step">
+        <div class="proc-step-num">2</div>
+        <div><div class="proc-step-title">ייבוש קונוסים</div><div class="proc-step-body">הנחת קונוסים בשמש או בתנורים ב-40-50 מעלות, 3-7 ימים. החום גורם לקשקשים להיפתח ולשחרר את הגרעינים. יבש מדי: גרעינים נשרים ואובדים. לח מדי: קשקשים לא נפתחים מספיק. שלב שלא ניתן למהר.</div></div>
+    </div>
+    <div class="proc-step">
+        <div class="proc-step-num">3</div>
+        <div><div class="proc-step-title">פיצוח קונוסים</div><div class="proc-step-body">מכונות פיצוח מגלגלות את הקונוסים בין גלילים כדי לשבור את הקשקשים. שחרור הגרעינים עם קליפתם הקשה. עוד שלב ניקוי לפרידת הקשקשים שבורים מהגרעינים.</div></div>
+    </div>
+    <div class="proc-step">
+        <div class="proc-step-num">4</div>
+        <div><div class="proc-step-title">פיצוח קליפת הגרעין</div><div class="proc-step-body">הגרעין עצמו עטוף בקליפה קשה. מכונות פיצוח עדינות פוצחות אותה ללא פגיעה בגרעין הפנימי. הדיוק קריטי: לחץ רב שובר גרעינים, לחץ מועט לא פוצח. Pignoli מיוצר לרוב בפיצוח ידני חלקי.</div></div>
+    </div>
+    <div class="proc-step">
+        <div class="proc-step-num">5</div>
+        <div><div class="proc-step-title">מיון וניקוי סופי</div><div class="proc-step-body">מיון אופטי לפי צבע, גודל, שלמות. גרעינים שבורים, כהים או פגומים מופרדים. פרמיום: גרעינים שלמים לחלוטין, בהיר-שנהב, אחיד בגודל. ניקיון ממשקע שמן שנפלט בפיצוח.</div></div>
+    </div>
+    <div class="proc-step">
+        <div class="proc-step-num">6</div>
+        <div><div class="proc-step-title">אריזה ואחסון</div><div class="proc-step-body">Vacuum או גז חנקן. צנובר עשיר בשמן רב-בלתי-רווי ומחמצן מהר. מקרר או מקפיא לאורך חיים. חיי מדף בטמפרטורת חדר, ללא ואקום: שלושה חודשים בלבד.</div></div>
+    </div>
+</div>
+
+<div class="ab ab-r"><div class="tg">Pine Mouth Syndrome</div><p>תופעה ידועה: אחרי אכילת צנוברים מסין, חלק מהאנשים חווים טעם מר-מתכתי בפה שמתחיל 12-48 שעות לאחר האכילה ונמשך 2-4 שבועות. הגורם לא ידוע לחלוטין, חשד לגרעינים מ-<em>Pinus armandii</em> (אורן סיני מסוים) שנמזגו בפיגנולי סינים. מחקרי FDA ואירופה לא הגיעו לוודאות. Pignoli ים-תיכוני לא מעורב בדיווחים.</p></div>
+</div>
+
+<!-- ═══ CH 5 ═══ -->
+<div class="ch" id="ch-5">
+<div class="cl">פרק חמישי</div>
+<h2>מינים ומקורות, לא כל צנובר שווה</h2>
+
+<p class="dc">המונח "צנובר" מסתיר מגוון ביולוגי גדול. ישנם כ-20 מיני אורן שמניבים גרעינים גדולים מספיק לאכילה מסחרית. הטעם, הגודל, הצורה, תכולת השמן ומחיר השוק משתנים בצורה משמעותית. קנייה של "צנוברים" ללא ציון מקור היא קניית חתול בשק.</p>
+
+<div class="vc">
+    <div class="vn">Pignoli · גאוות איטליה</div>
+    <div class="vt">Pinus pinea · ים תיכון, ספרד, פורטוגל, תורכיה</div>
+    <p>הסטנדרט הגסטרונומי. גרעין עגלגל-ארוך, לבן-שנהב, עם טעם חמאתי ועדין. ייצוא מאיטליה, ספרד ופורטוגל. מחיר: $18,000-25,000 לטון. ראוי לציון: עצי Pinus pinea גדלים לאורך כל הרצועה הים-תיכונית, כולל ישראל ולבנון, אך לא מנוצלים מסחרית בארצנו.</p>
+    <div class="vs">
+        <div class="vsi">צורה: <strong>עגלגל-ארוך</strong></div>
+        <div class="vsi">טעם: <strong>חמאתי, עדין</strong></div>
+        <div class="vsi"><strong>פסטו · גסטרונומיה · פרמיום</strong></div>
+    </div>
+</div>
+
+<div class="vc">
+    <div class="vn">Chilgoza · פקיסטן ואפגניסטן</div>
+    <div class="vt">Pinus gerardiana · הרי הימלאיה</div>
+    <p>גרעין ארוך ומחודד, קשה יותר לפיצוח, ריחני ועז בטעם. נחשב לפרמיום בהודו ובמזרח התיכון. נמכר לרוב עם קליפתו (In-shell) כנשנוש. חופים בידיים, לרוב על ידי נשים בכפרי הרי ה-Hindu Kush. ייצוא מוגבל, רוב הייצור לצריכה מקומית.</p>
+    <div class="vs">
+        <div class="vsi">צורה: <strong>ארוך, מחודד</strong></div>
+        <div class="vsi">שוק: <strong>הודו, פקיסטן, מזרח תיכון</strong></div>
+        <div class="vsi"><strong>In-shell · נשנוש · נישה</strong></div>
+    </div>
+</div>
+
+<div class="vc">
+    <div class="vn">Korean / Chinese · נפח השוק</div>
+    <div class="vt">Pinus koraiensis, P. yunnanensis · סין, קוריאה, רוסיה</div>
+    <p>הגרעין הנפוץ ביותר בשוק הגלובלי. ארוך, מחודד, עם טעם ניטרלי יותר מהים-תיכוני. מחיר נגיש, נפח ייצוא הגדול ביותר. הבעיה: בין ה-Korean/Chinese מוסתרים לפעמים גרעינים מ-Pinus armandii, הקשורים ל-Pine Mouth Syndrome. רכישה מספק אמין, עם זיהוי מין, קריטית.</p>
+    <div class="vs">
+        <div class="vsi">צורה: <strong>ארוך, מחודד</strong></div>
+        <div class="vsi">מחיר: <strong>$8,000-13,000/טון</strong></div>
+        <div class="vsi"><strong>נפח · שוק רחב · בישול</strong></div>
+    </div>
+</div>
+
+<div class="vc">
+    <div class="vn">Siberian · אורן ארז סיבירי</div>
+    <div class="vt">Pinus sibirica · רוסיה, קזחסטן</div>
+    <p>גרעין קטן, עגלגל, עשיר בשמן אומגה-3 (חומצה פינולנית) בשיעור גבוה יחסית. בשימוש ברפואה עממית רוסית ובמאכלים מסורתיים. שמן ארז סיבירי נסחר כ-Superfood בשוק הרוסי וב-EU. ייצוא מוגבל בגלל מדיניות יצוא רוסית.</p>
+    <div class="vs">
+        <div class="vsi">גודל: <strong>קטן</strong></div>
+        <div class="vsi">ייחוד: <strong>אומגה-3 גבוה</strong></div>
+        <div class="vsi"><strong>רוסיה · EU · Superfood</strong></div>
+    </div>
+</div>
+</div>
+
+<!-- ═══ CH 6 ═══ -->
+<div class="ch" id="ch-6">
+<div class="cl">פרק שישי</div>
+<h2>תזונה, צפיפות קלורית עם פרופיל מינרלים יוצא דופן</h2>
+
+<p class="dc">צנובר הוא אחד האגוזים העשירים ביותר במנגן, מינרל שרוב האנשים לא חושבים עליו. 100 גרם צנוברים מספקים 383% מהצריכה היומית המומלצת. המנגן חיוני לחילוף החומרים של עצמות, לתפקוד אנזימטי ולייצור אנרגיה. הצנובר גם עשיר בחומצה פינולנית, חומצת שומן פוליאנסטורית נדירה שנמצאת בעיקר בגרעינים מאורנים, ושנקשרה בחלק מהמחקרים לדיכוי תיאבון.</p>
+
+<div class="ng">
+    <div class="ni"><div class="nv">673</div><div class="nu">קלוריות / 100g</div><div class="nl">עתיר מאוד</div></div>
+    <div class="ni"><div class="nv">13.7g</div><div class="nu">חלבון / 100g</div><div class="nl">—</div></div>
+    <div class="ni"><div class="nv">68g</div><div class="nu">שומן / 100g</div><div class="nl">ברובו בלתי רווי</div></div>
+    <div class="ni"><div class="nv">383%</div><div class="nu">מנגן</div><div class="nl">ל-100g, DV</div></div>
+    <div class="ni"><div class="nv">169%</div><div class="nu">ויטמין K</div><div class="nl">ל-100g, DV</div></div>
+    <div class="ni"><div class="nv">71%</div><div class="nu">מגנזיום</div><div class="nl">ל-100g, DV</div></div>
+</div>
+
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>ערך תזונתי</th><th>ל-100 גרם</th><th>% צריכה יומית</th><th>הערה</th></tr>
+<tr><td>קלוריות</td><td>673 kcal</td><td>34%</td><td>הגבוה ביותר בין האגוזים</td></tr>
+<tr><td>שומן כללי</td><td>68.4g</td><td>88%</td><td>ברובו בלתי רווי</td></tr>
+<tr><td>שומן רב בלתי רווי</td><td>34.1g</td><td>—</td><td>כולל חומצה פינולנית נדירה</td></tr>
+<tr><td>שומן חד בלתי רווי</td><td>18.8g</td><td>—</td><td>—</td></tr>
+<tr><td>חלבון</td><td>13.7g</td><td>27%</td><td>נמוך יחסית לאגוזים</td></tr>
+<tr><td>פחמימות</td><td>13.1g</td><td>5%</td><td>נמוך</td></tr>
+<tr><td>סיבים</td><td>3.7g</td><td>13%</td><td>—</td></tr>
+<tr><td>מנגן</td><td>8.8mg</td><td>383%</td><td>הגבוה ביותר בין האגוזים</td></tr>
+<tr><td>ויטמין K</td><td>53.9μg</td><td>45%</td><td>גבוה יחסית לאגוז</td></tr>
+<tr><td>ויטמין E</td><td>9.3mg</td><td>62%</td><td>—</td></tr>
+<tr><td>מגנזיום</td><td>251mg</td><td>60%</td><td>—</td></tr>
+<tr><td>אבץ</td><td>6.4mg</td><td>58%</td><td>—</td></tr>
+<tr><td>נחושת</td><td>1.32mg</td><td>147%</td><td>—</td></tr>
+<tr><td>ברזל</td><td>5.53mg</td><td>31%</td><td>—</td></tr>
+</table></div>
+
+<div class="ab ab-w"><div class="tg">חומצה פינולנית</div><p>חומצת שומן פוליאנסטורית (<em>Pinolenic acid</em>) שנמצאת בריכוז ניכר רק באורנים, בעיקר ב-Pinus koraiensis וב-Pinus sibirica. אחוזה עומד על 14-19% מסך השומן. מחקרים ראשוניים (Pasman et al., 2008) הראו שהיא מעוררת הפרשת CCK, הורמון שובע, ועשויה לדכא תיאבון. שוק ה-Superfood השתמש בממצאים אלה לשיווק צמצום משקל.</p></div>
+</div>
+
+<!-- ═══ CH 7 ═══ -->
+<div class="ch" id="ch-7">
+<div class="cl">פרק שביעי</div>
+<h2>שימושים, ממטבח ים-תיכוני ועד רפואה עממית</h2>
+
+<p class="dc">צנובר הוא מרכיב גסטרונומי, לא חטיף. הטעם העדין-חמאתי שלו ופגיעותו לחום גבוה הופכים אותו לאינגרדיינט שמוסיפים בסוף, לא מבשלים בתוך המנה. קלייה קצרה, שתי-שלוש דקות על מחבת יבשה, מעצימה את הטעם פי כמה. מעבר לכך, שמן צנובר הוא שוק נישה קטן אבל צומח.</p>
+
+<h3>מטבח ים-תיכוני</h3>
+<p><strong>פסטו ג'נובזה:</strong> בזיליקום, שמן זית, שום, פרמג'אנו, Pignoli. בלי צנובר, זה לא הפסטו המקורי. <strong>מנאקיש:</strong> לחם לבנטיני עם צנוברים ועלי תרד. <strong>פילאף לבנוני/סורי:</strong> אורז עם בשר טחון וצנוברים קלויים. <strong>דולמה:</strong> עלי ענב ממולאים עם אורז, צנוברים וצימוקים. <strong>ספאנאקופיטה:</strong> פיתות ספנאקי יווניות עם צנוברים. הצנובר במטבח הלבנטיני הוא כמו הפטרוזיליה, הוא שם.</p>
+
+<h3>קינוחים</h3>
+<p>איטליה: <em>Torta della Nonna</em> (עוגת הסבתא) עם Pignoli על הציפוי. <em>Pignolata</em> סיציליאנית, פיתות מטוגנות בדבש עם צנוברים. ספרד: <em>Pasteles de Piñones</em>, עוגיות שקד וצנובר, אלמנט בסיסי של קינוח קטלאני.</p>
+
+<h3>שמן צנובר</h3>
+<p>שמן צנובר כבוש קר, בעיקר מ-Pinus sibirica (Siberian Pine Oil), נסחר ב-Superfood premium. תכולת חומצה פינולנית גבוהה. מחיר: $80-150 לליטר. שוק קטן אבל גדל, בעיקר בגרמניה, סקנדינביה ורוסיה.</p>
+
+<div class="ab ab-g"><div class="tg">ערך תרבותי</div><p>בישראל, "כבש עם צנוברים" הוא ביטוי של חגיגה. בלבנון ובסוריה, מנה בלי צנובר היא מנה חסרה. בטורקיה, <em>fıstık</em> (צנובר) מוסף לרוב קינוחי הסירופ. הצנובר הוא אחד המרכיבים המשותפים לכל מטבחי הסהר הפורה, מגבול מצרים ועד הר האלוואנד.</p></div>
+</div>
+
+<!-- ═══ CH 8 ═══ -->
+<div class="ch" id="ch-8">
+<div class="cl">פרק שמיני</div>
+<h2>בוטניקה, עצי אורן שמודדים זמן אחרת</h2>
+
+<p class="dc">עצי אורן (<em>Pinus</em>) הם מחטניים (Conifers) ממשפחת Pinaceae. קיימים כ-120 מיני אורן, מהם כ-20 שמניבים גרעינים גדולים לאכילה מסחרית. אורנים הם עצי ידע: הם צוברים ניסיון פנולוגי, מכוונים את פריחתם ויצירת קונוסיהם לפי אותות סביבתיים שנצברים לאורך שנים. עץ ש"יודע" שהיו לו שנות בצורת מסיים קונוסים פחות, עץ שחש שנות שפע מייצר יותר.</p>
+
+<p><em>Pinus pinea</em>, אורן הגלילי הים-תיכוני, מגיע לגובה 20-30 מ'. צורת הקיפוי שלו, שטוחה ופרוסה כמטרייה, מוכרת בכל ציורי נוף ים-תיכוני. הוא עץ שנשמר גם כנוי עירוני, ועמי האזור ניצלו זאת כמאות שנים, כשהוא מקשט את השדרה ומניב פרי לאותה המשפחה שבנתה בית לצידו.</p>
+
+<p>הואבקה מתרחשת ברוח, אבקת אורן נונה ידועה. קונוס הנקבה בשנה הראשונה קטן ורך. בשנה השנייה הוא מתקשה, מגדיל, ומבשיל לחום-ענבר. כשהוא בשל, הקשקשים נפתחים בתגובה לחום יבש. מנגנון חכם: הגרעינים משתחררים בסתיו-חורף, עם אוויר קריר ופחות שריפות, ועם בעלי חיים שמחפשים מזון לחורף ומפזרים אותם.</p>
+
+<div class="ab ab-g"><div class="tg">אורן ים-תיכוני בישראל</div><p><em>Pinus pinea</em> גדל בגנים ובפארקים בכל ישראל. עצים בוגרים עם קונוסים מלאים ניתן לראות ברחובות חיפה, תל אביב וירושלים. אף אחד לא אוסף אותם. המרחק בין אורן גדול בגן הכרמל לצנובר איטלקי ב-250 שקל לק"ג הוא בעיקר תעשייתי ולא בוטני.</p></div>
+</div>
+
+<!-- ═══ CH 9 ═══ -->
+<div class="ch" id="ch-9">
+<div class="cl">פרק תשיעי</div>
+<h2>אחסון ובטיחות</h2>
+
+<p class="dc">צנובר הוא אחד האגוזים הרגישים ביותר לאחסון. תכולת שמן גבוהה (68%), בשיעור גבוה של שומן רב-בלתי-רווי, הופכת אותו לפגיע מאוד לחמצון. גרעין צנובר קלוף, בטמפרטורת חדר, ללא אריזה מוגנת, מתחמצן בתוך שלושה חודשים. זה אגוז שדורש קירור כדרך חיים, לא כאופציה.</p>
+
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>מצב</th><th>אחסון</th><th>חיי מדף</th><th>סימן קלקול</th></tr>
+<tr><td>קלוף, אטום, ואקום</td><td>מקרר</td><td>6-9 חודשים</td><td>ריח שמן עפוש</td></tr>
+<tr><td>קלוף, אטום</td><td>מקפיא</td><td>12-18 חודשים</td><td>—</td></tr>
+<tr><td>קלוף, פתוח</td><td>מקרר</td><td>שבוע-שבועיים</td><td>מרירות, ריח</td></tr>
+<tr><td>קלוף, פתוח</td><td>טמפ' חדר</td><td>2-4 שבועות</td><td>חמצון מהיר</td></tr>
+<tr><td>In-Shell (עם קליפה)</td><td>מקרר</td><td>2-3 חודשים</td><td>הקליפה מגינה</td></tr>
+<tr><td>קלוי (dry roast)</td><td>אטום, מקרר</td><td>3-4 שבועות</td><td>חמצון מואץ</td></tr>
+</table></div>
+
+<div class="ab ab-w"><div class="tg">לסוחרים</div><p>צנוברים קלופים מיובאים נרכשים כמעט תמיד ב-Vacuum Pack, 500g-1kg. בדיקת איכות: ריח ניטרלי-קרמי, צבע לבן-שנהב אחיד, גרעינים שלמים. חמצון מתחיל מריח "שמן" שמתחזק למר. בדיקת Peroxide Value (PV) במעבדה: מעל 5 meq/kg, מוצר בתחילת חמצון. מעל 20, פסילה.</p></div>
+
+<h3>אלרגיות</h3>
+<p>צנובר אינו מוגדר רשמית כ"אגוז עץ" בתקנות ה-FDA האמריקני (הוא זרע, לא אגוז), אך ה-EU כן כולל אותו בסימון "Tree Nuts". אלרגיה לצנובר נדירה יחסית אך קיימת. חשוב יותר: Pine Mouth Syndrome אינו אלרגיה, אלא תופעת טעם שמעיקה אבל אינה מסוכנת ועוברת מאליה.</p>
+</div>
+
+<!-- ═══ CH 10 ═══ -->
+<div class="ch" id="ch-10">
+<div class="cl">פרק עשירי</div>
+<h2>סיכום, אגוז שלא ניתן לדחוס</h2>
+
+<p class="dc">צנובר הוא ההוכחה שיש מוצרים שהכלכלה המודרנית לא יכולה לקצר. אפשר לגדל עוף בשלושה חודשים. אפשר לייצר שוקולד בשבוע. אפשר לכתוש שמן ביום. לא ניתן לגדל עץ אורן מהיר יותר. לא ניתן לקצר את ה-15-25 שנה של המתנה. לא ניתן להחליף את עבודת הידיים בפיצוח הקונוסים בצורה שתשמור על האיכות. הצנובר יקר כי הוא אמיתי. כי הזמן שנבנה לתוכו אינו בר-תחלופה.</p>
+
+<p>בשוק של 2025, הצנובר מתמודד עם לחצים: שינויי אקלים פוגעים ביצור ב-Spain ובאיטליה, Pine Mouth Syndrome הזהיר קונים מסין, ומחיר גבוה מוביל להחלפה בשקדים קלויים ובממתקים זולים. אבל בשוק הגסטרונומי, ב-Fine Dining, בבית של מי שמכין פסטו אמיתי, אין תחליף. זו הנישה שהצנובר ימשיך לשלוט בה לאורך דורות.</p>
+
+<div class="pull"><p>כשאתם מפזרים צנוברים קלויים על פסטה, אתם אוכלים זרעים מעץ שנשתל לפני שנולדתם, מקונוסים שלקחו שנתיים להבשיל, מגרעינים שחופו בידיים. הזמן הזה הוא לא עלות. הוא הערך עצמו.</p></div>
+
+<h3>כיצד לקנות</h3>
+<p>בדקו מקור: Pignoli ים-תיכוני לגסטרונומיה, Chinese/Korean לבישול יומיומי בתקציב. הימנעו מקניית Chineseללא ציון מין ספציפי בגלל Pine Mouth. ריח נכון: ניטרלי-קרמי, ללא "שמן". צבע נכון: לבן-שנהב אחיד. תאריך: בדקו תאריך ייצור, לא רק תאריך פג תוקף. קנו כמות קטנה.</p>
+
+<h3>כיצד לאחסן</h3>
+<p>מקרר תמיד לאחר פתיחה. מקפיא לכמויות גדולות. לעולם לא בטמפרטורת חדר לאורך זמן. קלייה: מחבת יבשה, 2-3 דקות, עד שנהב-זהוב, ריח אגוזי. מיד להוצאה מהמחבת לפיזור, הם ממשיכים להישרף גם אחרי כיבוי האש.</p>
+</div>
+
+<div class="ft">
+    ערך ידע צרכני · Blue Star International · 2026<br>
+    מבוסס על נתוני USDA FoodData Central, FAO, INC, European Pine Nut Producers Association<br>
+    <span>נתוני שוק: ITC Trade Map 2024, Tridge Commodity Intelligence, Mintec Global</span>
+</div>
+
+</main>
+
+<button id="btt" aria-label="Back to top">&#8593;</button>
+
+<script>
+window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('progress-bar').style.width = (window.scrollY / h * 100) + '%';
+    const sections = document.querySelectorAll('.ch');
+    const dots = document.querySelectorAll('.nav-dot');
+    let current = "";
+    sections.forEach(s => { if (pageYOffset >= s.offsetTop - 200) current = s.id; });
+    dots.forEach(d => { d.classList.remove('active'); if (d.dataset.target === current) d.classList.add('active'); });
+    document.getElementById('btt').classList.toggle('visible', window.scrollY > 300);
+});
+
+document.getElementById('btt').onclick = () => window.scrollTo({top:0, behavior:'smooth'});
+
+document.querySelectorAll('.nav-dot').forEach(dot => {
+    dot.onclick = () => document.getElementById(dot.dataset.target).scrollIntoView({behavior:'smooth'});
+});
+
+if (window.IntersectionObserver) {
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            e.target.querySelectorAll('.pb-fill').forEach(b => { b.style.width = b.dataset.w + '%'; });
+            obs.unobserve(e.target);
+        });
+    }, {threshold: 0.3});
+    document.querySelectorAll('.pb-chart').forEach(el => obs.observe(el));
+}
+
+(function() {
+    function initScrollReveal() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.ch').forEach(card => {
+            card.classList.add('reveal');
+            observer.observe(card);
+        });
+    }
+
+    const dbName = 'StarkOS_DB';
+    const productId = 'pinenut';
+    function syncProductPage() {
+        const request = indexedDB.open(dbName, 1);
+        request.onsuccess = (e) => {
+            const db = e.target.result;
+            try {
+                const store = db.transaction('archive', 'readonly').objectStore('archive');
+                const getRequest = store.get(productId);
+                getRequest.onsuccess = () => {
+                    const data = getRequest.result;
+                    if (!data) return;
+                    function makeMedia(src) {
+                        const isVid = src.startsWith('data:video');
+                        const el = document.createElement(isVid ? 'video' : 'img');
+                        el.src = src;
+                        el.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+                        if (isVid) { el.autoplay = el.muted = el.loop = true; el.setAttribute('playsinline',''); }
+                        return el;
+                    }
+                    const heroH1 = document.getElementById('sync-title');
+                    if (heroH1 && data.name) heroH1.innerText = data.name;
+                    const heroDeck = document.getElementById('sync-desc');
+                    if (heroDeck && data.desc) heroDeck.innerText = data.desc;
+                    const heroSrc = data.media1 || data.media;
+                    const heroSlot = document.getElementById('slot-product-hero');
+                    if (heroSlot && heroSrc) {
+                        heroSlot.innerHTML = '';
+                        heroSlot.appendChild(makeMedia(heroSrc));
+                    }
+                };
+            } catch(e) {}
+        };
+    }
+
+    initScrollReveal();
+    window.addEventListener('load', syncProductPage);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>זרעי צ'יה · Blue Star International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── BLUE STAR OS · PREMIUM DARK THEME v4.0 ── */
+:root {
+    --bg: #0A0A0B; --text: #FAF7F0; --body: #D1CEC5;
+    --accent: #2A5A3A; --warm: #4A9A6A;
+    --card: rgba(20, 22, 20, 0.4); --radius: 20px;
+    --shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    background-color: var(--bg); color: var(--body);
+    font-family: 'Noto Sans Hebrew', sans-serif;
+    font-size: 18px; line-height: 1.9; overflow-x: hidden; position: relative;
+    background-image: linear-gradient(rgba(74,154,106,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(74,154,106,0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+body::before, body::after { content: ''; position: fixed; width: 600px; height: 600px; border-radius: 50%; filter: blur(120px); z-index: -2; opacity: 0.12; pointer-events: none; }
+body::before { background: var(--warm); top: -100px; left: -100px; }
+body::after { background: #1A3A2A; bottom: 20%; right: -150px; }
+#progress-bar { position:fixed; top:0; left:0; height:3px; background:var(--warm); width:0; z-index:1000; }
+.back-btn { position:absolute; top:40px; left:40px; z-index:10; display:flex; align-items:center; gap:8px; color:var(--text); text-decoration:none; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:2px; opacity:0.5; transition:0.3s; }
+.back-btn:hover { opacity:1; color:var(--warm); }
+#btt { position:fixed; bottom:30px; left:30px; width:40px; height:40px; background:var(--warm); color:#000; border:none; border-radius:50%; cursor:pointer; font-size:18px; display:none; z-index:1000; transition:0.3s; }
+#btt.visible { display:flex; align-items:center; justify-content:center; }
+#btt:hover { transform:scale(1.1); box-shadow:0 0 20px rgba(74,154,106,0.4); }
+.hero { padding:100px 40px 160px; text-align:center; color:var(--text); position:relative; }
+.hero-k { font-size:11px; font-weight:700; letter-spacing:5px; color:var(--warm); margin-bottom:20px; text-transform:uppercase; font-family:'Space Mono',monospace; }
+.hero h1 { font-family:'Frank Ruhl Libre',serif; font-size:90px; font-weight:900; line-height:0.8; margin-bottom:25px; letter-spacing:-2px; }
+.hero .deck { font-size:20px; opacity:0.8; max-width:650px; margin:0 auto 40px; font-weight:300; }
+.hero-img-wrap { max-width:900px; margin:0 auto -220px; height:500px; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); background:#000; border:1px solid rgba(255,255,255,0.05); }
+.hero-img-wrap img { width:100%; height:100%; object-fit:cover; }
+.hero-img-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:12px; background:#0A0A0B; }
+.hero-img-placeholder span { color:rgba(255,255,255,0.15); font-size:12px; letter-spacing:3px; font-family:'Space Mono',monospace; }
+.side-nav { position:fixed; top:50%; right:30px; transform:translateY(-50%); z-index:100; display:flex; flex-direction:column; gap:12px; }
+.nav-dot { width:10px; height:10px; border:none; border-radius:50%; opacity:0.35; cursor:pointer; transition:0.3s; box-shadow: 0 0 0 0.5px rgba(255,255,255,0.22), inset 0 0 0 0.5px rgba(255,255,255,0.08); background: transparent; }
+.nav-dot.active { opacity:1; transform:scale(1.4); background: radial-gradient(circle at 35% 35%, color-mix(in srgb, var(--warm) 90%, white 10%), var(--accent) 130%); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.12); }
+.con { max-width:800px; margin:280px auto 100px; padding:0 24px; position:relative; z-index:5; }
+.ch { background:var(--card); backdrop-filter:blur(25px); -webkit-backdrop-filter:blur(25px); padding:50px; border-radius:var(--radius); margin-bottom:40px; border:1px solid rgba(255,255,255,0.05); position:relative; overflow:hidden; color:var(--body); }
+.ch::before, .ch::after { content:'+'; position:absolute; font-family:'Space Mono',monospace; color:var(--warm); font-size:14px; opacity:0.4; }
+.ch::before { top:15px; left:15px; }
+.ch::after { bottom:15px; right:15px; }
+.ch h2 { font-family:'Frank Ruhl Libre',serif; font-size:38px; margin-bottom:25px; color:var(--text); border-right:5px solid var(--warm); padding-right:20px; line-height:1.1; }
+.ch h3 { font-family:'Frank Ruhl Libre',serif; font-size:22px; font-weight:700; color:var(--text); margin:36px 0 14px; padding-right:14px; border-right:3px solid var(--warm); }
+.ch p { margin-bottom:18px; color:var(--body); }
+.cl { font-size:10px; font-weight:700; color:var(--warm); letter-spacing:4px; text-transform:uppercase; margin-bottom:10px; display:block; font-family:'Space Mono',monospace; }
+.dc::first-letter { font-family:'Frank Ruhl Libre',serif; font-size:2.8em; font-weight:900; color:var(--warm); line-height:1; float:right; margin-left:8px; }
+em { color:#7AC49A; font-style:italic; }
+strong { color:var(--text); }
+.ab { padding:20px 24px; margin:28px 0; border-radius:0 8px 8px 0; }
+.ab .tg { font-size:10px; font-weight:700; letter-spacing:4px; text-transform:uppercase; margin-bottom:6px; }
+.ab p { margin:0; font-size:16px; line-height:1.75; }
+.ab-w { background:rgba(74,154,106,0.08); border-right:4px solid var(--warm); }
+.ab-w .tg { color:var(--warm); }
+.ab-g { background:rgba(20,80,40,0.2); border-right:4px solid var(--accent); }
+.ab-g .tg { color:#6AB880; }
+.ab-r { background:rgba(184,50,50,0.1); border-right:4px solid #B83030; }
+.ab-r .tg { color:#E06060; }
+.ab-r p { color:#DDB0B0; }
+.vc { background:rgba(25,30,25,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:22px; margin:18px 0; }
+.vc .vn { font-family:'Frank Ruhl Libre',serif; font-size:21px; font-weight:700; color:var(--text); }
+.vc .vt { font-size:12px; color:var(--warm); font-weight:600; margin-bottom:10px; }
+.vc p { font-size:16px; line-height:1.75; margin-bottom:0; color:var(--body); }
+.vc .vs { display:flex; gap:12px; flex-wrap:wrap; margin-top:14px; }
+.vc .vsi { background:rgba(255,255,255,0.04); padding:6px 12px; border-radius:5px; font-size:12px; color:#A0B0A0; }
+.vc .vsi strong { color:var(--text); }
+.ng { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:24px 0; }
+.ni { background:rgba(25,30,25,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:14px; text-align:center; }
+.ni .nv { font-family:'Frank Ruhl Libre',serif; font-size:26px; font-weight:700; color:var(--text); }
+.ni .nu { font-size:13px; color:#A0B0A0; margin-top:2px; }
+.ni .nl { font-size:11px; color:var(--warm); margin-top:3px; font-weight:600; }
+.pb-chart { margin:16px 0 8px; display:flex; flex-direction:column; gap:10px; }
+.pb-row { display:flex; align-items:center; gap:10px; }
+.pb-meta { display:flex; align-items:center; gap:6px; min-width:120px; justify-content:flex-end; }
+.pb-flag { font-size:18px; }
+.pb-name { font-size:13px; color:#A0B0A0; }
+.pb-track { flex:1; background:rgba(255,255,255,0.08); height:18px; border-radius:9px; overflow:hidden; }
+.pb-fill { height:100%; width:0; border-radius:9px; transition:width 1.2s cubic-bezier(0.22,1,0.36,1); }
+.pb-pct { font-family:'Frank Ruhl Libre',serif; font-size:14px; font-weight:700; color:var(--text); width:36px; text-align:left; }
+.pb-note { font-size:11px; color:#6B7068; opacity:.7; margin-top:10px; text-align:center; }
+.gt { width:100%; border-collapse:collapse; margin:25px 0; font-size:15px; border-top:1px solid rgba(255,255,255,0.05); }
+.gt th { background:rgba(0,0,0,0.5); color:var(--text); padding:14px; text-align:right; font-size:12px; letter-spacing:1px; border-bottom:1px solid rgba(255,255,255,0.1); }
+.gt td { padding:14px; border-bottom:1px solid rgba(255,255,255,0.05); color:var(--body); }
+.gt tr:nth-child(even) { background:rgba(255,255,255,0.02); }
+.pull { margin:40px 0; padding:45px; background:rgba(0,0,0,0.4); border-radius:var(--radius); text-align:center; border:1px solid rgba(74,154,106,0.2); }
+.pull p { font-family:'Frank Ruhl Libre',serif; font-size:22px; font-weight:500; color:var(--body); line-height:1.55; margin:0; font-style:italic; }
+.reveal { opacity:0; transform:translateY(50px); transition:all 0.8s cubic-bezier(0.2,1,0.2,1); }
+.reveal.active { opacity:1; transform:translateY(0); }
+.marquee-container { position:fixed; bottom:-3vh; left:0; width:100vw; overflow:hidden; z-index:-1; pointer-events:none; }
+.marquee-text { font-family:'Playfair Display',serif; font-size:15vw; white-space:nowrap; color:transparent; -webkit-text-stroke:1px rgba(255,255,255,0.03); animation:scrollText 40s linear infinite; }
+@keyframes scrollText { 0% { transform:translateX(0); } 100% { transform:translateX(-50%); } }
+.ft { text-align:center; padding:44px 24px; font-size:13px; color:#6B7068; border-top:1px solid rgba(255,255,255,0.06); margin-top:36px; }
+.proc-steps { display:flex; flex-direction:column; gap:20px; margin:24px 0; }
+.proc-step { display:flex; gap:20px; align-items:flex-start; }
+.proc-step-num { min-width:36px; height:36px; border-radius:50%; background:var(--warm); color:#000; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.proc-step-title { font-family:'Frank Ruhl Libre',serif; font-size:18px; font-weight:700; color:var(--text); margin-bottom:6px; }
+.proc-step-body { font-size:16px; color:var(--body); line-height:1.75; }
+.ch ol, .ch ul { padding-right:24px; margin:16px 0 18px; }
+.ch li { margin-bottom:10px; color:var(--body); line-height:1.8; }
+.ch ol li::marker { color:var(--warm); font-family:'Space Mono',monospace; font-size:12px; font-weight:700; }
+.ch ul li::marker { color:var(--warm); }
+@media (max-width:900px) {
+    .side-nav { display:none; }
+    .back-btn { top:20px; left:20px; }
+    .hero h1 { font-size:55px; }
+    .hero-img-wrap { height:300px; margin-bottom:-100px; }
+    .con { margin-top:150px; }
+    .ng { grid-template-columns:repeat(2,1fr); }
+}
+</style>
+<script src="../auth.js"></script>
+</head>
+<body>
+<div class="marquee-container"><div class="marquee-text">BLUE STAR INTERNATIONAL · GLOBAL COMMODITY ARCHIVE · BLUE STAR INTERNATIONAL · GLOBAL COMMODITY ARCHIVE ·</div></div>
+<div id="progress-bar"></div>
+<nav class="side-nav">
+    <div class="nav-dot active" data-target="ch-1"></div>
+    <div class="nav-dot" data-target="ch-2"></div>
+    <div class="nav-dot" data-target="ch-3"></div>
+    <div class="nav-dot" data-target="ch-4"></div>
+    <div class="nav-dot" data-target="ch-5"></div>
+    <div class="nav-dot" data-target="ch-6"></div>
+    <div class="nav-dot" data-target="ch-7"></div>
+    <div class="nav-dot" data-target="ch-8"></div>
+</nav>
+<section class="hero">
+    <a href="../../index.html" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>חזרה למסוף</a>
+    <div class="hero-k">ערך ידע חקלאי · Blue Star International</div>
+    <h1 id="sync-title">זרעי צ'יה</h1>
+    <p class="deck" id="sync-desc">הגרעין הקטן שהאצטקים קראו לו "כוח". אלפיים שנה של שכחה, עשור של התפוצצות עולמית. הסיפור של ה-Superfood שאמריקה הלטינית שלחה לכל פינה בעולם.</p>
+    <div class="hero-img-wrap" id="slot-product-hero"><div class="hero-img-placeholder"><span>מדיה_לא_נטענה</span></div></div>
+</section>
+<main class="con">
+
+<!-- ═══ CH 1 ═══ -->
+<div class="ch" id="ch-1">
+<div class="cl">פרק ראשון</div>
+<h2>אלפיים שנה של שכחה, עשור של שיבה</h2>
+<p class="dc">צ'יה (<em>Salvia hispanica</em>) הייתה אחד הגידולים החשובים ביותר במרכז אמריקה הקדם-קולומביאנית. האצטקים קראו לה "chia" במשמעות "כוח" בנאוואטל. לחימים, שליחים שרצו מאות קילומטרים בין ערים אצטקיות, נשאו ציידנייה של זרעי צ'יה. כף אחת, אמרו, מספיקה ל-24 שעות של מאמץ. לא ברור כמה מזה היה מדעי וכמה מיתולוגי, אבל הגרעין היה ממשי לגמרי.</p>
+<p>המאיה וה-Teotihuacán גידלו צ'יה לאורך מאות שנים לפני הספרדים. היא הייתה מס, מטבע, קורבן ומזון. ממצאים ארכיאולוגיים מעמק מקסיקו מתארכים גידול מאורגן לפחות ל-3,500 שנה לפני הספירה. בממלכות מסואמריקאיות, צ'יה עמדה בחשיבותה לצד תירס, שעועית וקישואים, ה"ארבעה גדולים" של מזון הרי המרכז.</p>
+<p>הספרדים שכבשו את מקסיקו במאה ה-16 עשו מה שמשגיחי מזון עשו לאורך ההיסטוריה: הם ביטלו גידולים שהיו קשורים לפולחן פגאני. צ'יה נעלמה מהחקלאות המסחרית. שרדה בשוליים, בגינות קטנות ובשימוש מסורתי מקומי. ל-400 שנה, שאר העולם לא ידע שהיא קיימת.</p>
+<div class="pull"><p>עד שנת 2005, היצוא העולמי של צ'יה היה פחות מ-1,000 טון. עד 2023, הוא הגיע ל-190,000 טון. אף גרעין לא עשה מסלול כזה בזמן כזה.</p></div>
+<div class="ab ab-w"><div class="tg">שם ומקור</div><p>Salvia hispanica, ממין Salvia, אך שונה לחלוטין מהמרווה הרגילה. מוצאה מרמות מרכז מקסיקו ועד גואטמלה, בגובה 400–2,500 מ'. הצמח פורח בסגול-לבן ומגיע ל-1 מטר גובה. הזרעים, הקטנים שבמשפחה, הם מה שמגיע לשוק.</p></div>
+</div>
+
+<!-- ═══ CH 2 ═══ -->
+<div class="ch" id="ch-2">
+<div class="cl">פרק שני</div>
+<h2>גאוגרפיה, מי מגדל ולאן זה זורם</h2>
+<p class="dc">שוק הצ'יה הוא בן עשור בלבד כשוק מסחרי גלובלי. עד 2010 הוא היה נישה צמחונית. בין 2010 ל-2020 הוא גדל פי עשרים. ב-2023, היצור העולמי עמד על כ-190,000–210,000 טון בשנה, ורוב הצמיחה עדיין לפנינו. שלוש מדינות שולטות: מקסיקו, פרגוואי וארגנטינה.</p>
+<div class="ng">
+    <div class="ni"><div class="nv">200K</div><div class="nu">טון</div><div class="nl">ייצור עולמי 2023</div></div>
+    <div class="ni"><div class="nv">$1.5B</div><div class="nu">שווי שוק</div><div class="nl">2024, צומח 12% לשנה</div></div>
+    <div class="ni"><div class="nv">~$2,000</div><div class="nu">$/טון FOB</div><div class="nl">מחיר ממוצע</div></div>
+</div>
+<div class="pb-chart">
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇲🇽</span><span class="pb-name">מקסיקו</span></div><div class="pb-track"><div class="pb-fill" data-w="35" style="background:#1A5A30"></div></div><span class="pb-pct">35%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇵🇾</span><span class="pb-name">פרגוואי</span></div><div class="pb-track"><div class="pb-fill" data-w="25" style="background:#2A7A45"></div></div><span class="pb-pct">25%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇦🇷</span><span class="pb-name">ארגנטינה</span></div><div class="pb-track"><div class="pb-fill" data-w="20" style="background:#4A9A6A"></div></div><span class="pb-pct">20%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇧🇴</span><span class="pb-name">בוליביה</span></div><div class="pb-track"><div class="pb-fill" data-w="10" style="background:#7ABA8A"></div></div><span class="pb-pct">10%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🌎</span><span class="pb-name">אחרים</span></div><div class="pb-track"><div class="pb-fill" data-w="10" style="background:#AAD0AA"></div></div><span class="pb-pct">10%</span></div>
+    <div class="pb-note">ייצור עולמי · ITC Trade Map 2023</div>
+</div>
+<p>ארה"ב, גרמניה, הולנד וסין הן המייבאות הגדולות. ישראל מייבאת כ-2,000–3,000 טון בשנה, בעיקר דרך יבואנים אירופיים ולאחרונה גם ישירות מדרום אמריקה. הביקוש הישראלי גדל משמעותית עם גל ה-Superfood שהגיע עם שנות ה-2010.</p>
+<div class="ab ab-w"><div class="tg">פוטנציאל חדש</div><p>אוסטרליה וספרד החלו בגידול מסחרי. אוסטרליה, עם האקלים הנכון ותקנות קפדניות, הפכה לספקית אמינה לשווקי אסיה ואירופה. Organic Chia ממקסיקו ומפרגוואי נסחרת בפרמיה של 25%–40% על קונבנציונלי.</p></div>
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>מדינה</th><th>ייצור (טון/שנה)</th><th>תפקיד</th><th>מגמה</th></tr>
+<tr><td>מקסיקו</td><td>70,000</td><td>מגדלת ומייצאת, מוצא היסטורי</td><td>↑ Organic צומח</td></tr>
+<tr><td>פרגוואי</td><td>50,000</td><td>מגדלת ומייצאת, צמיחה מהירה</td><td>↑↑ מהיר</td></tr>
+<tr><td>ארגנטינה</td><td>40,000</td><td>מגדלת, שוק מקומי גדול</td><td>↑ יציב</td></tr>
+<tr><td>בוליביה</td><td>20,000</td><td>מגדלת, רמות גבוהות</td><td>→ יציב</td></tr>
+<tr><td>אוסטרליה</td><td>8,000</td><td>מגדלת פרמיום, אסיה-פסיפיק</td><td>↑ מתחזק</td></tr>
+</table></div>
+</div>
+
+<!-- ═══ CH 3 ═══ -->
+<div class="ch" id="ch-3">
+<div class="cl">פרק שלישי</div>
+<h2>שני הצבעים, שחור ולבן</h2>
+<p class="dc">השאלה הנפוצה ביותר בשוק הצ'יה: מה ההבדל בין שחור ללבן? מהבחינה התזונתית, ההבדל זניח. שניהם מאותו מין, <em>Salvia hispanica</em>. הצ'יה הלבנה היא זן שנבחר לצבע בהיר יותר, לרוב עם תכולת שומן מעט גבוהה יותר. המחיר של הלבנה גבוה ב-15%–30% בגלל תפוקת שדה נמוכה יותר ורצון שוק.</p>
+<div class="vc">
+    <div class="vn">צ'יה שחורה · Black Chia</div>
+    <div class="vt">הסטנדרט המסחרי · 90% מהשוק</div>
+    <p>גרעינים שחורים עד אפור-כהה, קוטר 1–2 מ"מ. פרופיל תזונתי מלא: אומגה-3 (ALA), חלבון, סיבים, סידן. נסחר FOB בין 1,600 ל-2,200 דולר לטון תלוי באיכות, עונה ומקור. הגרעין הנפוץ בכל מוצרי Superfood.</p>
+    <div class="vs"><div class="vsi">נפח: <strong>~90% שוק</strong></div><div class="vsi">מחיר: <strong>$1,600–2,200/t</strong></div><div class="vsi"><strong>אוניברסלי · כל שימוש</strong></div></div>
+</div>
+<div class="vc">
+    <div class="vn">צ'יה לבנה · White Chia</div>
+    <div class="vt">פרמיום חזותי · אחיד בצבע</div>
+    <p>גרעינים לבנים עד שנהב-בהיר, אחידים. שוק שמחפש שקיפות ויזואלית: פודינג לבן, יוגורט, מאפים בהירים. תפוקת שדה נמוכה ב-20-30% מהשחורה. ההבדל התזונתי זניח. ההבדל השיווקי משמעותי.</p>
+    <div class="vs"><div class="vsi">נפח: <strong>~10% שוק</strong></div><div class="vsi">מחיר: <strong>$2,000–2,800/t</strong></div><div class="vsi"><strong>פרמיום · מאפים · ויזואל</strong></div></div>
+</div>
+<div class="vc">
+    <div class="vn">Organic · אורגני</div>
+    <div class="vt">פרמיה על כל מקור</div>
+    <p>Organic Chia מאושרת USDA ו-EU Organic נסחרת בפרמיה של 25%–45% על קונבנציונל. גדלה ללא קוטלי חרקים ודשנים סינתטיים. פרגוואי ומקסיקו הן המקורות הגדולים. הביקוש האירופי לאורגני גבוה בהרבה מהאמריקאי.</p>
+    <div class="vs"><div class="vsi">פרמיה: <strong>25%–45%</strong></div><div class="vsi">תעודות: <strong>USDA · EU · NOP</strong></div><div class="vsi"><strong>אירופה · פרמיום · צומח</strong></div></div>
+</div>
+</div>
+
+<!-- ═══ CH 4 ═══ -->
+<div class="ch" id="ch-4">
+<div class="cl">פרק רביעי</div>
+<h2>תזונה, מה שגורם לאנשים לשלם פרמיה</h2>
+<p class="dc">צ'יה נחשבת ל-Superfood לא בגלל שיווק, אלא בגלל שצפיפות התזונה שלה חריגה באמת. 100 גרם זרעי צ'יה מכילים 17.5 גרם חלבון, 34.4 גרם סיבים, ו-18 גרם אומגה-3 בצורת ALA. אלו מספרים שלא קיים גרעין אחר בשוק שמגיע אליהם בבת אחת. גם בכמות ריאלית של 20–30 גרם ביום, התוספת התזונתית משמעותית.</p>
+<div class="ng">
+    <div class="ni"><div class="nv">34.4g</div><div class="nu">סיבים / 100g</div><div class="nl">מהגבוהים בטבע</div></div>
+    <div class="ni"><div class="nv">17.5g</div><div class="nu">חלבון / 100g</div><div class="nl">כל חומצות האמינו</div></div>
+    <div class="ni"><div class="nv">17.8g</div><div class="nu">אומגה-3 ALA / 100g</div><div class="nl">המקור הצמחי הגבוה ביותר</div></div>
+    <div class="ni"><div class="nv">631mg</div><div class="nu">סידן / 100g</div><div class="nl">פי 5 מחלב</div></div>
+    <div class="ni"><div class="nv">7.7mg</div><div class="nu">ברזל / 100g</div><div class="nl">פי 3 מתרד</div></div>
+    <div class="ni"><div class="nv">335mg</div><div class="nu">מגנזיום / 100g</div><div class="nl">84% DV</div></div>
+</div>
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>ערך תזונתי</th><th>כמות ל-100g</th><th>% DV</th></tr>
+<tr><td>קלוריות</td><td>486 kcal</td><td>24%</td></tr>
+<tr><td>שומן כולל</td><td>30.7g</td><td>39%</td></tr>
+<tr><td>אומגה-3 (ALA)</td><td>17.8g</td><td></td></tr>
+<tr><td>אומגה-6</td><td>5.8g</td><td></td></tr>
+<tr><td>פחמימות</td><td>42.1g</td><td>15%</td></tr>
+<tr><td>סיבים תזונתיים</td><td>34.4g</td><td>123%</td></tr>
+<tr><td>חלבון</td><td>17.5g</td><td>35%</td></tr>
+<tr><td>סידן</td><td>631mg</td><td>63%</td></tr>
+<tr><td>זרחן</td><td>860mg</td><td>69%</td></tr>
+<tr><td>מגנזיום</td><td>335mg</td><td>84%</td></tr>
+<tr><td>מנגן</td><td>2.72mg</td><td>118%</td></tr>
+<tr><td>ברזל</td><td>7.7mg</td><td>43%</td></tr>
+<tr><td>אבץ</td><td>4.58mg</td><td>42%</td></tr>
+<tr><td>ויטמין B1</td><td>0.62mg</td><td>52%</td></tr>
+</table></div>
+<h3>ה-Gel Effect</h3>
+<p>שכבת ה-Mucilage, ג'ל סיבי מסיס שעוטף את הגרעין, סופגת עד 10–12 פעמים ממשקלה בנוזל תוך דקות. גרעין אחד נעלם בתוך בועת ג'ל שקופה. תכונה זו היא מה שהפכה את הצ'יה לפופולרית בפודינג, בשייקים ובמאפים: היא יוצרת מרקם ועוזרת לשמירה על לחות.</p>
+<div class="ab ab-w"><div class="tg">ALA ומה שחסר</div><p>האומגה-3 בצ'יה היא ALA (Alpha-Linolenic Acid), חומצה צמחית. כדי שהגוף ישתמש בה כ-EPA וכ-DHA, הצורות הפעילות, צריך המרה אנזימטית שיעילותה בבני אדם נמוכה: 5%–10% בלבד. לכן, צ'יה אינה תחליף לשמן דגים. היא מקור טוב לטבעוניים, אבל לא שווה ל-EPA/DHA ישיר.</p></div>
+</div>
+
+<!-- ═══ CH 5 ═══ -->
+<div class="ch" id="ch-5">
+<div class="cl">פרק חמישי</div>
+<h2>עיבוד, שרשרת ממדינת מקור לצרכן</h2>
+<p class="dc">צ'יה היא גרעין פשוט יחסית לעיבוד. אין Hulling, אין כתישה מורכבת, אין עיבוד בחום. הגרעין מגיע בשלמותו מהשדה לשולחן, תוך שלבי ניקוי ומיון. פשטות זו היא יתרון: עלויות עיבוד נמוכות. אבל גם הסיבה שאיכות הגרעין הגולמי, לחות, ניקיון, חופש מאפלטוקסין, קריטית.</p>
+<div class="proc-steps">
+    <div class="proc-step"><div class="proc-step-num">1</div><div><div class="proc-step-title">קציר</div><div class="proc-step-body">הצמח מתייבש בשדה. גבעולים נקצרים כשהזרעים בשלים. מכבשים חקלאיים מפרידים גרעין מגבעול. בשדות קטנים (רוב מקסיקו ופרגוואי), הדישה ידנית חלקית. תנובה ממוצעת: 500–700 ק"ג לדונם.</div></div></div>
+    <div class="proc-step"><div class="proc-step-num">2</div><div><div class="proc-step-title">ניקוי ראשוני</div><div class="proc-step-body">הסרת גבעולים, אבק, גרעינים פגומים ואבנים קטנות. מסננים רוטטים ושולחנות אוויר. גרעין גולמי מהשדה מכיל 3%–8% פסולת. אחרי ניקוי: &gt;99% נקי.</div></div></div>
+    <div class="proc-step"><div class="proc-step-num">3</div><div><div class="proc-step-title">ייבוש ובדיקת לחות</div><div class="proc-step-body">לחות מקסימלית: 10% לסטנדרט, 8% לפרמיום. לחות גבוהה גורמת לעובש ולהתפתחות אפלטוקסין. ייבוש מכני בטמפרטורות נמוכות (מתחת ל-40°C) שומר על פרופיל שומנים.</div></div></div>
+    <div class="proc-step"><div class="proc-step-num">4</div><div><div class="proc-step-title">מיון אופטי</div><div class="proc-step-body">הפרדת גרעינים כהים מלבנים (לשוק הלבן), הסרת גרעינים פגומים. מכונות Color Sorter מפרידות לפי גוון. מיון 2–4 פעמים לאיכות A+.</div></div></div>
+    <div class="proc-step"><div class="proc-step-num">5</div><div><div class="proc-step-title">בדיקות מעבדה</div><div class="proc-step-body">Aflatoxin (מקסימום 10 ppb לארה"ב, 4 ppb לאירופה), E.coli, Salmonella, לחות, FFA. תעודות Organic נבדקות. גרעין שנכשל, נפסל.</div></div></div>
+    <div class="proc-step"><div class="proc-step-num">6</div><div><div class="proc-step-title">אריזה ומשלוח</div><div class="proc-step-body">שקים של 25 ק"ג ל-Big Bags של 1,000 ק"ג. משלוח ב-FCL 20' מכיל כ-20–22 טון. אחסון: יבש, קריר, הרחק מריחות חזקים. חיי מדף: 24-36 חודשים.</div></div></div>
+</div>
+</div>
+
+<!-- ═══ CH 6 ═══ -->
+<div class="ch" id="ch-6">
+<div class="cl">פרק שישי</div>
+<h2>שימושים, מהמטבח לתעשייה</h2>
+<p class="dc">צ'יה נכנסה לשוק כגרעין שאוכלים ישיר, ספרינקל על יוגורט, לחם, שייק. היום, תעשיית המזון שלפה ממנה שמן, חלבון, מוצילאג', סיב מבודד. הגרעין הקטן הפך לחומר גלם לתעשייה. אבל השימוש הצרכני הישיר עדיין מהווה 70% מהשוק.</p>
+<h3>פודינג צ'יה</h3>
+<p>השימוש הצרכני הפופולרי ביותר. 3–4 כפות גרעינים, 240 מ"ל נוזל (חלב, חלב צמחי, מיץ), ערבוב, לילה במקרר. הג'ל יוצר מרקם פודינג. פשוט, מזין, ניתן להכנה מראש ל-3–4 ימים. זו הסיבה שצ'יה הצליחה: פשוטה להכנה, מוצגת יפה, תזונתית.</p>
+<h3>אפייה ו-Egg Replacement</h3>
+<p>צ'יה מוסיפים ללחם, לגרנולה, לחטיפי אנרגיה, ליוגורט. ב-Egg Replacement: כף אחת גרעין + 3 כפות מים = מחליף ביצה בתגובה לבישול (בגלל ה-Mucilage). פתרון לטבעונים באפייה. תעשיית הלחמים הפרמיום שילבה צ'יה כסמן "בריא ועשיר" שמאפשר תמחור גבוה יותר.</p>
+<h3>שמן צ'יה</h3>
+<p>Cold Press Chia Oil, מחיר 10,000–15,000 דולר לטון, שוק נישה לתוסף תזונה ולקוסמטיקה. תכולת ALA גבוהה הופכת אותו לנדיר בקוסמטיקה (נוגד חמצון, מזין עור). שוק קטן אבל בעל שולי רווח גבוהים.</p>
+<h3>חלבון מבודד</h3>
+<p>Chia Protein Isolate, 60-70% חלבון, מיועד לשייקי ספורט ומוצרי חלבון צמחי. מכיל את כל חומצות האמינו החיוניות. שוק צומח עם עלייה בביקוש לחלבון צמחי.</p>
+<div class="ab ab-g"><div class="tg">שוק מבוסס נתונים</div><p>Grand View Research (2024): שוק הצ'יה הגלובלי צפוי לגדול מ-1.5B ל-3.8B דולר עד 2030, CAGR של 12.2%. הצמיחה מונעת בעיקר על ידי אסיה (סין, הודו, יפן) וצמיחת שוק Vegan. אירופה נותרת השוק הנבשל ביותר.</p></div>
+</div>
+
+<!-- ═══ CH 7 ═══ -->
+<div class="ch" id="ch-7">
+<div class="cl">פרק שביעי</div>
+<h2>בוטניקה, גידול ואתגרי שדה</h2>
+<p class="dc">צ'יה (<em>Salvia hispanica</em>) היא חד-שנתית קצרת-יום, כלומר פריחתה מופעלת על ידי ימים קצרים. זה מגביל את אזורי הגידול לאזורים טרופיים ותת-טרופיים בין קווי הרוחב 30° דרומית ל-30° צפונית, בגובה 400–2,500 מ'. הגבלת גובה הרוחב היא הסיבה שצ'יה לא גדלה בצפון אירופה, בישראל, בארה"ב הצפונית ובמרבית מדינות מזג האוויר הממוזג.</p>
+<p>דרישות אקלים: טמפרטורות 15–35 מעלות, גשם 500–800 מ"מ. עמידה סבירה לבצורת. רגישה מאוד להקפאה. קרקע: מנוקזת, pH 6.0–8.0. בניגוד לסויה, אינה קובעת חנקן ולכן דורשת דישון.</p>
+<h3>מחזור גידול</h3>
+<p>זריעה: 100–120 יום לפני קציר. ניצנוץ: 3–7 ימים. פריחה: 60–75 יום אחרי זריעה. בשלות מלאה: 95–115 יום. קציר בגבעולים מיובשים בשדה עם קצירה מכנית. האתגר: בשלות לא אחידה בשדה, חלק מהצמחים מוכנים 2–3 שבועות לפני אחרים.</p>
+<h3>מחלות ומזיקים</h3>
+<p>צ'יה עמידה יחסית למחלות. האתגר הגדול ביותר הוא <em>Phytophthora</em> (ריקבון שורשים) בקרקע לחה מדי. בגידול אורגני, הגנה מינימלית ומחזור גידול פותרים רוב הבעיות. הצמח מפריש תרכובות שמחזיקות חלק מהמזיקים.</p>
+<div class="ab ab-w"><div class="tg">הגבלת גאוגרפיה</div><p>ישראל, בקו רוחב 31°N, נמצאת בגבול הצפוני של הגידול. ניסיונות גידול בדרום ישראל ובירדן הראו פוטנציאל אבל תנובות נמוכות. גידול מסחרי בישראל אינו כלכלי כרגע. האפשרות הריאלית: שת"פ עם מגדלים בפרגוואי וארגנטינה לאספקה ישירה.</p></div>
+</div>
+
+<!-- ═══ CH 8 ═══ -->
+<div class="ch" id="ch-8">
+<div class="cl">פרק שמיני</div>
+<h2>אחסון, בדיקות ואיכות בסחר</h2>
+<p class="dc">צ'יה היא גרעין יחסית יציב לאחסון. תכולת ה-Mucilage שומרת על הגרעין, ונוגדי החמצון הטבעיים מאטים חמצון שומנים. אבל בתנאי לחות, חום וחשיפה לאוויר, עלולים להתפתח בגרעין צ'יה עובש ואפלטוקסין. ניהול נכון של שרשרת האחסון קריטי.</p>
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>מוצר</th><th>תנאי אחסון</th><th>חיי מדף</th></tr>
+<tr><td>גרעין שלם</td><td>יבש &lt;15°C, לחות &lt;10%</td><td>24–36 חודשים</td></tr>
+<tr><td>גרעין טחון</td><td>מקרר, אריזה אטומה</td><td>3–6 חודשים</td></tr>
+<tr><td>שמן צ'יה</td><td>מקרר, הרחק מאור</td><td>12–18 חודשים</td></tr>
+<tr><td>פודינג מוכן</td><td>מקרר, מכוסה</td><td>5–7 ימים</td></tr>
+</table></div>
+<h3>פרמטרי איכות מסחרי</h3>
+<p><strong>לחות:</strong> מקסימום 10% לסטנדרט, 8% לפרמיום. <strong>גרעינים פגומים:</strong> מקסימום 2% ל-A grade. <strong>Aflatoxin:</strong> &lt;10 ppb ארה"ב, &lt;4 ppb אירופה. <strong>E.coli &amp; Salmonella:</strong> שלילי בכל הבדיקות. <strong>ALA:</strong> מינימום 17g/100g לאיכות נבחרת. <strong>Mucilage Content:</strong> 7-9% לגרעין איכותי.</p>
+<div class="ab ab-r"><div class="tg">אין אלרגיה מוכרת</div><p>בניגוד לשומשום, אגוזים וחיטה, צ'יה אינה מוכרת כאחד מהאלרגנים הגדולים. עם זאת, דיווחים על תגובות אלרגיות קיימים. מי שרגיש לצמחי Lamiaceae (מרווה, נענע, בזיל) יכול לפתח רגישות. מינוני כניסה מומלצים: להתחיל עם כמות קטנה.</p></div>
+<div class="ab ab-w"><div class="tg">כיצד לקנות</div><p>בדוק לחות ומראה: גרעינים יבשים, נפרדים, ללא גושים (גושים = לחות). ריח: נייטרלי, ללא עפוש. לפרמיום: בקש COA (Certificate of Analysis) עם בדיקות Aflatoxin ו-ALA. Organic: ודא תעודת NOP/EU Organic תקפה, לא רק הדפסה על אריזה.</p></div>
+<div class="pull"><p>גרעין שהיה מטבע ומס בציביליזציות שנעלמו, שנשכח 400 שנה, שחזר בעשור אחד לכל מדף סופרמרקט בעולם. אם יש גרעין שמספר על כוחה של ההיסטוריה החקלאית, זהו הוא.</p></div>
+</div>
+<div class="ft">
+    ערך ידע צרכני · Blue Star International · 2026<br>
+    מבוסס על USDA FoodData Central, FAO, Grand View Research, ITC Trade Map 2023-2024<br>
+    <span>Ethnobotany sources: Cahill et al. 2004, Ayerza &amp; Coates 2005</span>
+</div>
+</main>
+<button id="btt" aria-label="Back to top">&#8593;</button>
+<script>
+window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('progress-bar').style.width = (window.scrollY / h * 100) + '%';
+    const sections = document.querySelectorAll('.ch');
+    const dots = document.querySelectorAll('.nav-dot');
+    let current = "";
+    sections.forEach(s => { if (pageYOffset >= s.offsetTop - 200) current = s.id; });
+    dots.forEach(d => { d.classList.remove('active'); if (d.dataset.target === current) d.classList.add('active'); });
+    document.getElementById('btt').classList.toggle('visible', window.scrollY > 300);
+});
+document.getElementById('btt').onclick = () => window.scrollTo({top:0, behavior:'smooth'});
+document.querySelectorAll('.nav-dot').forEach(dot => {
+    dot.onclick = () => document.getElementById(dot.dataset.target).scrollIntoView({behavior:'smooth'});
+});
+if (window.IntersectionObserver) {
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            e.target.querySelectorAll('.pb-fill').forEach(b => { b.style.width = b.dataset.w + '%'; });
+            obs.unobserve(e.target);
+        });
+    }, {threshold: 0.3});
+    document.querySelectorAll('.pb-chart').forEach(el => obs.observe(el));
+}
+(function() {
+    function initScrollReveal() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.ch').forEach(card => { card.classList.add('reveal'); observer.observe(card); });
+    }
+    const dbName = 'StarkOS_DB';
+    const productId = window.location.pathname.split('/').pop().replace('.html', '') || 'chia';
+    function syncProductPage() {
+        const request = indexedDB.open(dbName, 1);
+        request.onsuccess = (e) => {
+            const db = e.target.result;
+            try {
+                const store = db.transaction('archive', 'readonly').objectStore('archive');
+                const getRequest = store.get(productId);
+                getRequest.onsuccess = () => {
+                    const data = getRequest.result;
+                    if (!data) return;
+                    function makeMedia(src) {
+                        const isVid = src.startsWith('data:video');
+                        const el = document.createElement(isVid ? 'video' : 'img');
+                        el.src = src; el.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+                        if (isVid) { el.autoplay = el.muted = el.loop = true; el.setAttribute('playsinline',''); }
+                        return el;
+                    }
+                    const heroH1 = document.getElementById('sync-title');
+                    if (heroH1 && data.name) heroH1.innerText = data.name;
+                    const heroDeck = document.getElementById('sync-desc');
+                    if (heroDeck && data.desc) heroDeck.innerText = data.desc;
+                    const heroSrc = data.media1 || data.media;
+                    const heroSlot = document.getElementById('slot-product-hero');
+                    if (heroSlot && heroSrc) { heroSlot.innerHTML = ''; heroSlot.appendChild(makeMedia(heroSrc)); }
+                };
+            } catch(e) {}
+        };
+    }
+    initScrollReveal();
+    window.addEventListener('load', syncProductPage);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>חמוציות · Blue Star International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg: #0D0809;
+    --text: #FAF0F2;
+    --body: #D8C8CA;
+    --accent: #701830;
+    --warm: #C03050;
+    --card: rgba(25,15,18,0.45);
+    --radius: 20px;
+    --shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    background-color: var(--bg); color: var(--body);
+    font-family: 'Noto Sans Hebrew', sans-serif; font-size: 18px; line-height: 1.9;
+    overflow-x: hidden; position: relative;
+    background-image: linear-gradient(rgba(192,48,80,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(192,48,80,0.03) 1px,transparent 1px);
+    background-size: 30px 30px;
+}
+body::before,body::after { content:''; position:fixed; width:600px; height:600px; border-radius:50%; filter:blur(120px); z-index:-2; opacity:.18; pointer-events:none; }
+body::before { background:#901030; top:-100px; left:-100px; }
+body::after { background:#400818; bottom:20%; right:-150px; }
+#progress-bar { position:fixed; top:0; left:0; height:3px; background:var(--warm); width:0; z-index:1000; }
+.back-btn { position:absolute; top:40px; left:40px; z-index:10; display:flex; align-items:center; gap:8px; color:var(--text); text-decoration:none; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:2px; opacity:.5; transition:.3s; }
+.back-btn:hover { opacity:1; color:var(--warm); }
+#btt { position:fixed; bottom:30px; left:30px; width:40px; height:40px; background:var(--warm); color:#000; border:none; border-radius:50%; cursor:pointer; font-size:18px; display:none; z-index:1000; transition:.3s; }
+#btt.visible { display:flex; align-items:center; justify-content:center; }
+#btt:hover { transform:scale(1.1); box-shadow:0 0 20px rgba(192,48,80,.4); }
+.hero { padding:100px 40px 160px; text-align:center; color:var(--text); position:relative; }
+.hero-k { font-size:11px; font-weight:700; letter-spacing:5px; color:var(--warm); margin-bottom:20px; text-transform:uppercase; font-family:'Space Mono',monospace; }
+.hero h1 { font-family:'Frank Ruhl Libre',serif; font-size:90px; font-weight:900; line-height:.8; margin-bottom:25px; letter-spacing:-2px; }
+.hero .deck { font-size:20px; opacity:.8; max-width:650px; margin:0 auto 40px; font-weight:300; }
+.hero-img-wrap { max-width:900px; margin:0 auto -220px; height:500px; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); background:#000; border:1px solid rgba(255,255,255,.05); }
+.hero-img-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:12px; background:#0D0809; }
+.hero-img-placeholder span { color:rgba(255,255,255,.15); font-size:12px; letter-spacing:3px; font-family:'Space Mono',monospace; }
+.side-nav { position:fixed; top:50%; right:30px; transform:translateY(-50%); z-index:100; display:flex; flex-direction:column; gap:12px; }
+.nav-dot { width:10px; height:10px; border:1px solid var(--warm); border-radius:50%; opacity:.3; cursor:pointer; transition:.3s; }
+.nav-dot.active { opacity:1; transform:scale(1.4); background:var(--warm); }
+.con { max-width:800px; margin:280px auto 100px; padding:0 24px; position:relative; z-index:5; }
+.ch { background:var(--card); backdrop-filter:blur(25px); -webkit-backdrop-filter:blur(25px); padding:50px; border-radius:var(--radius); margin-bottom:40px; border:1px solid rgba(255,255,255,.05); position:relative; overflow:hidden; color:var(--body); }
+.ch::before,.ch::after { content:'+'; position:absolute; font-family:'Space Mono',monospace; color:var(--warm); font-size:14px; opacity:.4; }
+.ch::before { top:15px; left:15px; }
+.ch::after { bottom:15px; right:15px; }
+.ch h2 { font-family:'Frank Ruhl Libre',serif; font-size:38px; margin-bottom:25px; color:var(--text); border-right:5px solid var(--warm); padding-right:20px; line-height:1.1; }
+.ch h3 { font-family:'Frank Ruhl Libre',serif; font-size:22px; font-weight:700; color:var(--text); margin:36px 0 14px; padding-right:14px; border-right:3px solid var(--warm); }
+.ch p { margin-bottom:18px; color:var(--body); }
+.cl { font-size:10px; font-weight:700; color:var(--warm); letter-spacing:4px; text-transform:uppercase; margin-bottom:10px; display:block; font-family:'Space Mono',monospace; }
+.dc::first-letter { font-family:'Frank Ruhl Libre',serif; font-size:2.8em; font-weight:900; color:var(--warm); line-height:1; float:right; margin-left:8px; }
+em { color:#E08098; font-style:italic; }
+strong { color:var(--text); }
+.ab { padding:20px 24px; margin:28px 0; border-radius:0 8px 8px 0; }
+.ab .tg { font-size:10px; font-weight:700; letter-spacing:4px; text-transform:uppercase; margin-bottom:6px; }
+.ab p { margin:0; font-size:16px; line-height:1.75; }
+.ab-w { background:rgba(192,48,80,.08); border-right:4px solid var(--warm); }
+.ab-w .tg { color:var(--warm); }
+.ab-g { background:rgba(100,10,30,.25); border-right:4px solid var(--accent); }
+.ab-g .tg { color:#B04060; }
+.ab-r { background:rgba(184,50,50,.1); border-right:4px solid #B83030; }
+.ab-r .tg { color:#E06060; }
+.ab-r p { color:#DDB0B0; }
+.vc { background:rgba(35,20,25,.7); border:1px solid rgba(255,255,255,.08); border-radius:10px; padding:22px; margin:18px 0; }
+.vc .vn { font-family:'Frank Ruhl Libre',serif; font-size:21px; font-weight:700; color:var(--text); }
+.vc .vt { font-size:12px; color:var(--warm); font-weight:600; margin-bottom:10px; }
+.vc p { font-size:16px; line-height:1.75; margin-bottom:0; color:var(--body); }
+.vc .vs { display:flex; gap:12px; flex-wrap:wrap; margin-top:14px; }
+.vc .vsi { background:rgba(255,255,255,.04); padding:6px 12px; border-radius:5px; font-size:12px; color:#B09098; }
+.vc .vsi strong { color:var(--text); }
+.ng { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:24px 0; }
+.ni { background:rgba(35,20,25,.7); border:1px solid rgba(255,255,255,.08); border-radius:8px; padding:14px; text-align:center; }
+.ni .nv { font-family:'Frank Ruhl Libre',serif; font-size:26px; font-weight:700; color:var(--text); }
+.ni .nu { font-size:13px; color:#B09098; margin-top:2px; }
+.ni .nl { font-size:11px; color:var(--warm); margin-top:3px; font-weight:600; }
+.pb-chart { margin:16px 0 8px; display:flex; flex-direction:column; gap:10px; }
+.pb-row { display:flex; align-items:center; gap:10px; }
+.pb-meta { display:flex; align-items:center; gap:6px; min-width:120px; justify-content:flex-end; }
+.pb-flag { font-size:18px; }
+.pb-name { font-size:13px; color:#B09098; }
+.pb-track { flex:1; background:rgba(255,255,255,.08); height:18px; border-radius:9px; overflow:hidden; }
+.pb-fill { height:100%; width:0; border-radius:9px; transition:width 1.2s cubic-bezier(.22,1,.36,1); }
+.pb-pct { font-family:'Frank Ruhl Libre',serif; font-size:14px; font-weight:700; color:var(--text); width:36px; text-align:left; }
+.pb-note { font-size:11px; color:#6B5058; opacity:.7; margin-top:10px; text-align:center; }
+.gt { width:100%; border-collapse:collapse; margin:25px 0; font-size:15px; border-top:1px solid rgba(255,255,255,.05); }
+.gt th { background:rgba(0,0,0,.5); color:var(--text); padding:14px; text-align:right; font-size:12px; letter-spacing:1px; border-bottom:1px solid rgba(255,255,255,.1); }
+.gt td { padding:14px; border-bottom:1px solid rgba(255,255,255,.05); color:var(--body); }
+.gt tr:nth-child(even) { background:rgba(255,255,255,.02); }
+.pull { margin:40px 0; padding:45px; background:rgba(0,0,0,.4); border-radius:var(--radius); text-align:center; border:1px solid rgba(192,48,80,.2); }
+.pull p { font-family:'Frank Ruhl Libre',serif; font-size:22px; font-weight:500; color:var(--body); line-height:1.55; margin:0; font-style:italic; }
+.reveal { opacity:0; transform:translateY(50px); transition:all .8s cubic-bezier(.2,1,.2,1); }
+.reveal.active { opacity:1; transform:translateY(0); }
+.marquee-container { position:fixed; bottom:-3vh; left:0; width:100vw; overflow:hidden; z-index:-1; pointer-events:none; }
+.marquee-text { font-family:'Playfair Display',serif; font-size:15vw; white-space:nowrap; color:transparent; -webkit-text-stroke:1px rgba(255,255,255,.03); animation:scrollText 40s linear infinite; }
+@keyframes scrollText { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.ft { text-align:center; padding:44px 24px; font-size:13px; color:#6B5058; border-top:1px solid rgba(255,255,255,.06); margin-top:36px; }
+.proc-steps { display:flex; flex-direction:column; gap:20px; margin:24px 0; }
+.proc-step { display:flex; gap:20px; align-items:flex-start; }
+.proc-step-num { min-width:36px; height:36px; border-radius:50%; background:var(--warm); color:#000; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.proc-step-title { font-family:'Frank Ruhl Libre',serif; font-size:18px; font-weight:700; color:var(--text); margin-bottom:6px; }
+.proc-step-body { font-size:16px; color:var(--body); line-height:1.75; }
+.ch ol,.ch ul { padding-right:24px; margin:16px 0 18px; }
+.ch li { margin-bottom:10px; color:var(--body); line-height:1.8; }
+.ch ol li::marker { color:var(--warm); font-family:'Space Mono',monospace; font-size:12px; font-weight:700; }
+.ch ul li::marker { color:var(--warm); }
+@media(max-width:900px){.side-nav{display:none}.back-btn{top:20px;left:20px}.hero h1{font-size:55px}.hero-img-wrap{height:300px;margin-bottom:-100px}.con{margin-top:150px}.ng{grid-template-columns:repeat(2,1fr)}}
+</style>
+<script src="../auth.js"></script>
+</head>
+<body>
+<div class="marquee-container"><div class="marquee-text">BLUE STAR INTERNATIONAL · GLOBAL COMMODITY ARCHIVE · BLUE STAR INTERNATIONAL · GLOBAL COMMODITY ARCHIVE ·</div></div>
+<div id="progress-bar"></div>
+<nav class="side-nav">
+  <div class="nav-dot active" data-target="ch-1"></div>
+  <div class="nav-dot" data-target="ch-2"></div>
+  <div class="nav-dot" data-target="ch-3"></div>
+  <div class="nav-dot" data-target="ch-4"></div>
+  <div class="nav-dot" data-target="ch-5"></div>
+  <div class="nav-dot" data-target="ch-6"></div>
+  <div class="nav-dot" data-target="ch-7"></div>
+  <div class="nav-dot" data-target="ch-8"></div>
+  <div class="nav-dot" data-target="ch-9"></div>
+  <div class="nav-dot" data-target="ch-10"></div>
+</nav>
+<section class="hero">
+  <a href="index.html" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>חזרה למסוף</a>
+  <div class="hero-k">ערך ידע · פירות יבשים · Blue Star International</div>
+  <h1 id="sync-title">חמוציות</h1>
+  <p class="deck" id="sync-desc">הפרי שאינדיאנים אכלו כדי לשרוד חורפי ניו אינגלנד, וכיום מניע שוק של מיליארד דולר בזכות מולקולה ביולוגית אחת: PAC.</p>
+  <div class="hero-img-wrap" id="slot-product-hero"><div class="hero-img-placeholder"><span>מדיה_לא_נטענה</span></div></div>
+</section>
+<main class="con">
+
+<div class="ch" id="ch-1">
+<div class="cl">פרק ראשון</div>
+<h2>מחמוצת הביצות של ניו אינגלנד להגנה מפני UTI</h2>
+<p class="dc">חמוצית (<em>Vaccinium macrocarpon</em>) גדלה בביצות כבול של צפון אמריקה, באזורים שבהם מעט מאוד גידולים אחרים שורדים. קרקע חומצית, מים רבים, חורפים קשים: תנאים שדוחים כל פרי אחר. שבטי ה-Wampanoag, Lenape ואחרים אכלו אותה טרייה, מיובשת ומעורבבת עם שומן ובשר, ה-Pemmican, מזון שרידה עתיר קלוריות שהחזיק חודשים ללא קירור. האירופים הכירו את הפרי בהתיישבות הראשונה בפלימות' ב-1621. ה-Pilgrim fathers קיבלו חמוציות מהאינדיאנים, ומאז הוא נקשר לסעודת ה-Thanksgiving.</p>
+<p>הגידול המסחרי התחיל בניו ג'רזי ב-1816, כשהנרי הול גילה שחמוציות גדלות טוב יותר כשחול מצטבר על שיחים. ממצא שהוביל לשיטת ה-Sand Spreading שעדיין בשימוש. עד סוף המאה ה-19, ביצות חמוציות בניו אינגלנד, ויסקונסין וניו ג'רזי הפכו לגידול מסחרי מלא. אסיף חמוציות, Wet Harvest, הפך לאחד המחזות החקלאיים הצבעוניים ביותר בעולם: הביצות מוצפות מים, ומכונות Water Reel מגלגלות את הפרי לאיים אדומים צפים.</p>
+<p>המותג Ocean Spray, קואופרטיב מגדלים שנוסד ב-1930, הפך את החמוציות ממרכיב עונתי לקטגוריה עולמית. המסע מ-1621 עד 2025 הוא סיפור של שיווק, מדע ופוליטיקת ביצות.</p>
+<div class="pull"><p>חמוצית היא אחד משלושה פירות ילידי צפון אמריקה שנסחרים בקנה מידה גלובלי, לצד בלוברי ואוכמניית קונקורד. שלושתם פותחו מצמחי בר אמריקניים, ושלושתם הפכו לשגרירים תזונתיים של היבשת.</p></div>
+</div>
+
+<div class="ch" id="ch-2">
+<div class="cl">פרק שני</div>
+<h2>גאוגרפיה ושוק עולמי</h2>
+<p class="dc">שוק החמוציות המיובשות מסתכם בכ-90,000-110,000 טון בשנה. ארה"ב (ויסקונסין, מסצ'וסטס, ניו ג'רזי) מייצרת 60% מהיצור העולמי. קנדה (בריטיש קולומביה, קוויבק) עוד 15%. שאר הייצור: צ'ילה, אורוגוואי ואירופה.</p>
+<div class="ng">
+  <div class="ni"><div class="nv">~100K</div><div class="nu">טון / שנה</div><div class="nl">חמוציות מיובשות</div></div>
+  <div class="ni"><div class="nv">$1.8B</div><div class="nu">שוק כולל</div><div class="nl">טרי + מיובש + מיץ</div></div>
+  <div class="ni"><div class="nv">60%</div><div class="nu">נתח ארה"ב</div><div class="nl">ויסקונסין מובילה</div></div>
+</div>
+<div class="pb-chart">
+  <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇺🇸</span><span class="pb-name">ארה"ב</span></div><div class="pb-track"><div class="pb-fill" data-w="60" style="background:#701020"></div></div><span class="pb-pct">60%</span></div>
+  <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇨🇦</span><span class="pb-name">קנדה</span></div><div class="pb-track"><div class="pb-fill" data-w="15" style="background:#A03050"></div></div><span class="pb-pct">15%</span></div>
+  <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇨🇱</span><span class="pb-name">צ'ילה</span></div><div class="pb-track"><div class="pb-fill" data-w="10" style="background:#C05070"></div></div><span class="pb-pct">10%</span></div>
+  <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🌍</span><span class="pb-name">אחרים</span></div><div class="pb-track"><div class="pb-fill" data-w="15" style="background:#DDD0D2"></div></div><span class="pb-pct">15%</span></div>
+  <div class="pb-note">ייצור חמוציות מיובשות · INC / USDA 2023</div>
+</div>
+<p>Ocean Spray שולט ב-65% מייצוא חמוציות ארה"ב. הוא מגדיר סטנדרטים, מנהל מחירים ומכתיב ברמה רבה את כיוון השוק. חמוציות מיובשות נסחרות FOB Boston/Los Angeles ב-$2,200-3,000 לטון (2024), תלוי ב-Sweetened לעומת Unsweetened.</p>
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>מדינה</th><th>ייצור (טון)</th><th>ייחוד</th><th>מגמה</th></tr>
+<tr><td>ארה"ב (WI, MA, NJ)</td><td>65,000</td><td>Ocean Spray, סטנדרט גלובלי</td><td>→ יציב</td></tr>
+<tr><td>קנדה (BC, QC)</td><td>15,000</td><td>איכות גבוהה, Organic</td><td>↑ צמיחה</td></tr>
+<tr><td>צ'ילה</td><td>10,000</td><td>עונה הפוכה, מחיר תחרותי</td><td>↑</td></tr>
+<tr><td>אורוגוואי</td><td>5,000</td><td>שוק EU</td><td>→</td></tr>
+<tr><td>בלארוס / פולין</td><td>5,000</td><td><em>V. oxycoccos</em>, חמוצית אירופית</td><td>→</td></tr>
+</table></div>
+<div class="ab ab-w"><div class="tg">שוק ישראלי</div><p>ישראל מייבאת חמוציות מיובשות בעיקר מארה"ב ומקנדה. הביקוש גדל עם מגמת ה-Superfood. שימוש עיקרי: תעשיית מאפים ובייגלה, גרנולה, סלטים ואכילה ישירה. מחיר קמעוני: 60-90 שקל לק"ג.</p></div>
+</div>
+
+<div class="ch" id="ch-3">
+<div class="cl">פרק שלישי</div>
+<h2>הפרדוקס של הסוכר: כמה מתיקות מחביאה חמוצית</h2>
+<p class="dc">חמוצית טרייה מכילה 4% סוכר בלבד. זהו הפרי הפחות מתוק שנסחר מסחרית. ללא הממתקה, אינו ניתן לאכילה ישירה על ידי רוב הצרכנים. החמוציות המיובשות שעל המדף מכילות 65-72% סוכר, לאחר ספיגת סוכר בתהליך הייבוש. הפרדוקס: פרי ה-Superfood שנמכר בשוק הבריאות מכיל יותר סוכר מ-100 גרם שוקולד חלב. זו לא הונאה, זה הכרח טכנולוגי. חמוצית ללא סוכר לא ניתן לייבש לרמת לחות יציבה מסחרית.</p>
+<p>הסוכר גם מאפשר את הארכת חיי המדף ומונע תסיסה. בשוק הנישה: Unsweetened Dried Cranberry קיים, עם Monk Fruit, Erythritol או Stevia במקום סוכר. מחיר: פרמיה של 50-80%. שוק: Keto, Paleo, סוכרתיים. עדיין נישה אבל גדלה ב-12% בשנה.</p>
+<div class="ab ab-r"><div class="tg">להשוות בעצמם</div><p>100 גרם Sweetened Dried Cranberry: 308 קלוריות, 72 גרם פחמימות, 65 גרם סוכר. לעומת 100 גרם חמוצית טרייה: 46 קלוריות, 12 גרם פחמימות, 4 גרם סוכר. הפרופיל הבריאותי של חמוצית טרייה ושל מיץ חמוציות בלתי ממותק שונה בתכלית מהחמוציות המיובשות הממותקות שעל המדף.</p></div>
+<div class="ab ab-g"><div class="tg">Apple Juice Sweetened</div><p>חלק מהיצרנים משתמשים ב-Apple Juice Concentrate כממתיק במקום סוכר לבן. המוצר מסומן "Sweetened with Fruit Juice" ומוצב בקטגוריה הבריאותית. ערך תזונתי: כמעט זהה. יתרון שיווקי: ניכר. יתרון גליקמי: מועט.</p></div>
+</div>
+
+<div class="ch" id="ch-4">
+<div class="cl">פרק רביעי</div>
+<h2>עיבוד, מהביצה הצפה לשקית הגרנולה</h2>
+<div class="proc-steps">
+  <div class="proc-step"><div class="proc-step-num">1</div><div><div class="proc-step-title">Wet Harvest</div><div class="proc-step-body">ספטמבר-אוקטובר. הביצה מוצפת מים, מכונות Water Reel מגלגלות פרי לצפות. קוטפי אדם מניחים מחסומי קצף, מרכזים את הפרי האדום לאי צף ומשאבות מעלות לרכבות. המחזה הצבעוני הזה הפך לאייקון שיווקי של Ocean Spray.</div></div></div>
+  <div class="proc-step"><div class="proc-step-num">2</div><div><div class="proc-step-title">מיון ראשוני</div><div class="proc-step-body">מיון לפי גודל, צבע ושלמות. פרי ירוק, שבור, נרקב מופרד. Bounce Board Test קלאסי: חמוצית בריאה קופצת 7 מחיצות עץ, פגועה נופלת. טכנולוגיה ישנה שנשארת בשימוש בגלל דיוקה הגבוה.</div></div></div>
+  <div class="proc-step"><div class="proc-step-num">3</div><div><div class="proc-step-title">שטיפה ופיצוח עדין</div><div class="proc-step-body">שטיפת לחץ נמוך. פיצוח עדין, Scarification, לפתיחת הקליפה לחדירת סוכר. ללא פתיחה הפרי לא סופג סוכר אחיד ונשאר קשה לאחר הייבוש.</div></div></div>
+  <div class="proc-step"><div class="proc-step-num">4</div><div><div class="proc-step-title">Sugar Infusion</div><div class="proc-step-body">השריה בתמיסת סוכר חמה, 60-65 Brix. הפרי סופג סוכר תוך 6-12 שעות. רמת סוכר סופית: 65-72 Brix. חלק מהייצור משתמש ב-Apple Juice Concentrate לסימון "ממותק בפירות".</div></div></div>
+  <div class="proc-step"><div class="proc-step-num">5</div><div><div class="proc-step-title">ייבוש בתנור</div><div class="proc-step-body">תנורי מנהרה, 70-80°C, 6-10 שעות. לחות יורדת ל-16-18%. ייבוש יתר גורם לקשיות ופגיעה ב-PAC. ייבוש חסר מוביל לתסיסה ולשינוי צבע.</div></div></div>
+  <div class="proc-step"><div class="proc-step-num">6</div><div><div class="proc-step-title">שמן ואריזה</div><div class="proc-step-body">ציפוי שמן קנולה קל (0.5-1%) למניעת הידבקות בין הפירות. מיון אופטי סופי לפי צבע ושלמות. אריזה בגז חנקן: שקיות 125g-1kg לצרכן, שקי 11kg לתעשיית מאפים.</div></div></div>
+</div>
+</div>
+
+<div class="ch" id="ch-5">
+<div class="cl">פרק חמישי</div>
+<h2>זנים ומוצרים</h2>
+<p class="dc">שוק החמוציות מפוצל בין שני שימושים עיקריים: מיץ ומיובש. מיץ חמוציות (Cranberry Juice Cocktail, 27% מיץ טהור) הוא השוק הגדול. חמוציות מיובשות הן השוק הצומח. בין שניהם: Cranberry Concentrate, Cranberry Powder, Cranberry Extract כמוסות.</p>
+<div class="vc"><div class="vn">Sweetened Dried Cranberry (SDC)</div><div class="vt">הסטנדרט הגלובלי · Ocean Spray ואחרים</div><p>המוצר העיקרי. פרי ממותק, מיובש, מצופה שמן קנולה קל. שלושה גדלים: Standard, Large, Whole. צבע אדום כהה עמוק, מרקם לעיס-רך. שימוש: גרנולה, סלטים, מאפים, מזווה. חיי מדף: 12-18 חודשים.</p><div class="vs"><div class="vsi">סוכר: <strong>65-72%</strong></div><div class="vsi">לחות: <strong>16-18%</strong></div><div class="vsi"><strong>צרכן · תעשייה · מאפים</strong></div></div></div>
+<div class="vc"><div class="vn">Juice-Sweetened Cranberry</div><div class="vt">ממותק מיץ תפוחים · שוק פרמיום</div><p>ממותק ב-Apple Juice Concentrate או Grape Juice. מסומן "No Added Sugar" ומוצב בקטגוריה האורגנית. מחיר 20-30% גבוה יותר. טעם מעט שונה, פחות ממתקי ויותר פירותי.</p><div class="vs"><div class="vsi"><strong>אורגני · נישה בריאות</strong></div><div class="vsi">פרמיה: <strong>20-30%</strong></div></div></div>
+<div class="vc"><div class="vn">Unsweetened Dried Cranberry</div><div class="vt">Keto / Paleo · ממותק תחליפים</div><p>ממותק ב-Erythritol, Monk Fruit או Stevia. קשה לייצור בגלל קושי בהשגת לחות יציבה. מחיר גבוה, פרמיה 50-80%. טעם: חמוץ עז, דורש הסתגלות. שוק קטן וצומח.</p><div class="vs"><div class="vsi"><strong>Keto · Paleo · סוכרתיים</strong></div><div class="vsi">פרמיה: <strong>50-80%</strong></div></div></div>
+<div class="vc"><div class="vn">Cranberry Extract / PAC 36mg</div><div class="vt">תוסף תזונה · Ellura, Theracran ואחרים</div><p>כמוסות ממיצוי חמוציות המכילות 36 מ"ג PAC לכמוסה, המינון שנחקר ב-RCTs למניעת UTI. שוק של $500 מיליון בשנה בצפון אמריקה. אינו תרופה, אינו מחליף טיפול אנטיביוטי.</p><div class="vs"><div class="vsi">PAC: <strong>36mg / כמוסה</strong></div><div class="vsi"><strong>UTI Prevention · שוק תוספים</strong></div></div></div>
+</div>
+
+<div class="ch" id="ch-6">
+<div class="cl">פרק שישי</div>
+<h2>תזונה ומדע, מולקולת PAC שמניעה שוק</h2>
+<p class="dc">הכוח של חמוציות הוא PAC, Proanthocyanidins מסוג A-type. אלה פולנולים בעלי מבנה ייחודי שנמצאים בריכוז גבוה בחמוצית ולמעשה כמעט ולא בשום פרי אחר. ה-PAC A-type מונע הידבקות של חיידקי <em>E. coli</em> לדפנות שלפוחית השתן, Anti-Adhesion. זה המנגנון שמאחורי טענות מניעת UTI. לא כל פוליפנול עובד כך. ה-A-Linkage הוא ספציפי לחמוצית. פרי גדול אדום אחר לא עובד.</p>
+<div class="ng">
+  <div class="ni"><div class="nv">308</div><div class="nu">קלוריות / 100g</div><div class="nl">ממותק</div></div>
+  <div class="ni"><div class="nv">2.5g</div><div class="nu">סיבים / 100g</div><div class="nl">9% DV</div></div>
+  <div class="ni"><div class="nv">13mg</div><div class="nu">ויטמין C / 100g</div><div class="nl">14% DV</div></div>
+  <div class="ni"><div class="nv">27%</div><div class="nu">מנגן DV</div><div class="nl">ל-100g</div></div>
+  <div class="ni"><div class="nv">5mg+</div><div class="nu">PAC</div><div class="nl">ל-100g (A-type)</div></div>
+  <div class="ni"><div class="nv">9,584</div><div class="nu">ORAC</div><div class="nl">יחידות / 100g</div></div>
+</div>
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>ערך תזונתי</th><th>100g (ממותק)</th><th>100g (טרי)</th><th>% DV (ממותק)</th></tr>
+<tr><td>קלוריות</td><td>308 kcal</td><td>46 kcal</td><td>15%</td></tr>
+<tr><td>פחמימות</td><td>82.5g</td><td>12.2g</td><td>30%</td></tr>
+<tr><td>סוכרים</td><td>72.6g</td><td>4.04g</td><td>—</td></tr>
+<tr><td>סיבים</td><td>5.3g</td><td>4.6g</td><td>19%</td></tr>
+<tr><td>שומן</td><td>1.37g</td><td>0.13g</td><td>2%</td></tr>
+<tr><td>ויטמין C</td><td>13mg</td><td>13.3mg</td><td>14%</td></tr>
+<tr><td>ויטמין E</td><td>2mg</td><td>1.32mg</td><td>13%</td></tr>
+<tr><td>ויטמין K</td><td>6μg</td><td>5.1μg</td><td>5%</td></tr>
+<tr><td>מנגן</td><td>0.6mg</td><td>0.36mg</td><td>26%</td></tr>
+<tr><td>נחושת</td><td>0.07mg</td><td>0.06mg</td><td>8%</td></tr>
+</table></div>
+<div class="ab ab-g"><div class="tg">מחקר UTI</div><p>מטה-אנליזה של Cochrane (2023) בחנה 50 מחקרי RCT עם 8,857 משתתפים. מסקנה: מוצרי חמוציות מפחיתים UTI חוזרות בנשים ב-26-30% לעומת פלסבו. המינון היעיל: 36 מ"ג PAC ביום. מיץ חמוציות מלא עובד, Cocktail (27% מיץ) פחות. מניעה, לא טיפול. אנטיביוטיקה נשארת הטיפול לזיהום קיים.</p></div>
+<div class="ab ab-w"><div class="tg">Quercetin ו-Anthocyanins</div><p>מעבר ל-PAC: חמוצית מכילה Quercetin (נוגד דלקת ו-Mast Cell stabilizer) ו-Anthocyanins ציאנידין, פאוניין, שניהם נוגדי חמצון עוצמתיים. מחקרים ראשוניים מראים קשר לבריאות לב-וסקולרית, עיכוב היווצרות פלאק בשיניים ופעילות אנטי-ויראלית. הנתונים בשלב מוקדם.</p></div>
+</div>
+
+<div class="ch" id="ch-7">
+<div class="cl">פרק שביעי</div>
+<h2>שימושים, ממטבח ועד תעשייה</h2>
+<p class="dc">חמוציות מיובשות הן מרכיב מטבח ברמת הכניסה הנמוכה ביותר, אפשר פשוט לפזר על סלט ולסיים. אבל הפוטנציאל הקולינרי עמוק יותר. הטעם החמצמץ-מתוק עם עומק אדמדם הוא קונטרסט מצוין לגבינות שומניות, לאגוזים שמניים ולבשר עשיר.</p>
+<h3>מטבח</h3>
+<p><strong>סלטים:</strong> חמוציות + גבינת עיזים + אגוזי מלך + בלסמי, קומבו קלאסי שעובד. <strong>מאפים:</strong> מאפינס, לחם בננה, עוגיות שיבולת שועל. <strong>רטבים:</strong> Cranberry Sauce לבשר הודו ולברווז. <strong>גרנולה:</strong> מרכיב בסיסי. <strong>Trail Mix:</strong> ביחד עם שקדים, קשיו ושוקולד מריר.</p>
+<h3>מיץ חמוציות</h3>
+<p>Cranberry Juice Cocktail: 27% מיץ טהור, 73% מים וסוכר. מכיל PAC נמוך. Pure Cranberry Juice (100%): חמוץ עז, מחיר גבוה, PAC גבוה. שוק המיץ: $700 מיליון בצפון אמריקה לבדה. מיץ חמוציות-תפוח, חמוציות-אוכמניה, הם השוק הצומח.</p>
+<h3>תוספי תזונה</h3>
+<p>Cranberry Extract Capsules שוות $500 מיליון בשנה. הפורמטים: כמוסות 36mg PAC, אבקה להמסה, טבליות לעיסה. יצרנים מובילים: Theracran, Ellura, AZO Cranberry. כולם מתבססים על אותה מולקולת PAC.</p>
+<div class="ab ab-w"><div class="tg">עם מה לא לשלב</div><p>חמוציות מגבירות את ספיגת ויטמין B12, אבל גם מקיימות אינטראקציה עם Warfarin (מדלל דם). ויטמין K בחמוציות נמוך, אבל ה-Salicylate content גבוה ויכול להשפיע על רמות INR. אנשים הנוטלים Warfarin צריכים להתייעץ עם רופא על כמויות גדולות.</p></div>
+</div>
+
+<div class="ch" id="ch-8">
+<div class="cl">פרק שמיני</div>
+<h2>בוטניקה, ביצות כבול ושיחים ורדרדים</h2>
+<p class="dc"><em>Vaccinium macrocarpon</em> הוא שיח נמוך, 20-60 ס"מ, ממשפחת Ericaceae. גדל בביצות כבול חומציות (pH 4.0-5.5), אזורים שכמעט ולא מגדלים שום פרי אחר. השיחים נשארים ירוקים כל השנה (Evergreen), והפרחים הוורדרדים הנשפכים לאחור נותנים שם: "Crane Berry" (פרח שנראה כראש עגור), שהתקצר לחמוצית.</p>
+<p>הביצות מוצפות בחורף כדי להגן על השיחים מכפור. בקיץ מוצפות לאסיף Wet Harvest. בין לבין הביצה "יבשה" אבל לחה. שיח חמוצית בוגר מניב 8-10 שנים לאחר שתיל. חיי שיח: 100+ שנה. ביצות שמתיישבים אמריקנים ניצלו ב-1800 עדיין בייצור מסחרי היום.</p>
+<div class="ab ab-g"><div class="tg">ויסקונסין</div><p>ויסקונסין מייצרת 62% מחמוציות ארה"ב. שטח ביצות: 21,000 דונם. האסיף: ספטמבר-אוקטובר. עיר Warrens Wisconsin מכריזה על עצמה "Cranberry Capital of the World" ועורכת פסטיבל שנתי עם 100,000 מבקרים. הנוף של שדות אדומים צפים הוא אחד מאייקוני האוטם האמריקני.</p></div>
+</div>
+
+<div class="ch" id="ch-9">
+<div class="cl">פרק תשיעי</div>
+<h2>אחסון ובטיחות</h2>
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>מוצר</th><th>אחסון</th><th>חיי מדף</th><th>הערה</th></tr>
+<tr><td>SDC ממותק, אטום</td><td>מחסן קריר, &lt;20°C</td><td>12-18 חודשים</td><td>Water Activity 0.55-0.65</td></tr>
+<tr><td>SDC ממותק, פתוח</td><td>מקרר, אטום</td><td>6-9 חודשים</td><td>מניעת לחות</td></tr>
+<tr><td>SDC ממותק</td><td>מקפיא</td><td>24+ חודשים</td><td>מרקם נשמר</td></tr>
+<tr><td>מיץ חמוציות 100%</td><td>מקרר לאחר פתיחה</td><td>7-10 ימים</td><td>—</td></tr>
+<tr><td>Extract כמוסות</td><td>מחסן קריר, יבש</td><td>2-3 שנים</td><td>לפי תווית</td></tr>
+</table></div>
+<h3>בטיחות ואינטראקציות</h3>
+<p>חמוציות מיובשות בטוחות לאוכלוסייה הכללית. שלוש הערות: <strong>Warfarin:</strong> כמויות גדולות יכולות לשנות INR. לדווח לרופא. <strong>אבני כליות:</strong> תכולת Oxalate בינונית, לא גבוהה, אבל אנשים עם היסטוריה של Calcium Oxalate Stones צריכים ליידע דיאטן. <strong>סוכר:</strong> הכמות הגבוהה בגרסה הממותקת רלוונטית לסוכרתיים.</p>
+</div>
+
+<div class="ch" id="ch-10">
+<div class="cl">פרק עשירי</div>
+<h2>סיכום, הפרי שחיה על מדע</h2>
+<p class="dc">חמוצית מיובשת היא אחד המוצרים הנדירים שהמדע לא הרס את השיווק, אלא חיזק אותו. כשה-Cochrane Review פרסם את ממצאי ה-UTI ב-2023, זה לא חדש לשוק, זה אישור. Ocean Spray בנתה נרטיב בריאותי סביב PAC לפני שהמחקרים הסתיימו. כשהסתיימו, הם הוכיחו שהנרטיב היה נכון.</p>
+<p>ב-2025, השוק עובר שינוי: Unsweetened Cranberry בצמיחה של 12% בשנה. Cranberry Extract מגיע ל-$500 מיליון. השימוש בתעשיית המאפים היפנית והקוריאנית גדל. ישראל מגלה חמוציות כמרכיב קולינרי מעבר ל-Trail Mix.</p>
+<div class="pull"><p>ביצת כבול בויסקונסין, pH 4.5, חורף עם שלג. שיח שגדל שם מאה שנה, מניב פרי שלא ניתן לאכול כמות שהוא, שממותק, מיובש ומאורז, מוכר ב-60 מדינות בשוק הבריאות. הדרך מהביצה לגרנולה היא 400 שנה של ידע שהצטבר.</p></div>
+<h3>כיצד לקנות</h3>
+<p>לאכילה ישירה: SDC Whole Berry, כהה ואחיד בצבע, רך ולא קשה. לשוק הבריאות: Juice-Sweetened או Unsweetened. למניעת UTI: Extract 36mg PAC, לא SDC. בדקו: תכולת PAC לכמוסה. ריח נכון: פירותי-מתוק, ללא חמיצות עפושה.</p>
+<h3>כיצד לאחסן</h3>
+<p>אריזה פתוחה: מקרר, אטום. ארוך טווח: מקפיא עד שנתיים. חמוציות מיובשות אינן סופגות ריחות חזק כמו אגוזים, אבל לחות חיצונית גורמת לעובש. שקית Zip-lock, מקרר, שישה חודשים אחרי פתיחה.</p>
+</div>
+
+<div class="ft">
+  ערך ידע צרכני · Blue Star International · 2026<br>
+  מבוסס על USDA FoodData Central, FAO, INC, Cochrane Review 2023 (UTI)<br>
+  <span>נתוני שוק: ITC Trade Map 2024, Ocean Spray Annual Report, Tridge Commodity Intelligence</span>
+</div>
+</main>
+<button id="btt" aria-label="Back to top">&#8593;</button>
+<script>
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+  document.getElementById('progress-bar').style.width=(window.scrollY/h*100)+'%';
+  const sections=document.querySelectorAll('.ch'),dots=document.querySelectorAll('.nav-dot');
+  let cur='';sections.forEach(s=>{if(pageYOffset>=s.offsetTop-200)cur=s.id;});
+  dots.forEach(d=>{d.classList.remove('active');if(d.dataset.target===cur)d.classList.add('active');});
+  document.getElementById('btt').classList.toggle('visible',window.scrollY>300);
+});
+document.getElementById('btt').onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+document.querySelectorAll('.nav-dot').forEach(dot=>{dot.onclick=()=>document.getElementById(dot.dataset.target).scrollIntoView({behavior:'smooth'});});
+if(window.IntersectionObserver){
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;e.target.querySelectorAll('.pb-fill').forEach(b=>{b.style.width=b.dataset.w+'%';});obs.unobserve(e.target);});},{threshold:0.3});
+  document.querySelectorAll('.pb-chart').forEach(el=>obs.observe(el));
+}
+(function(){
+  const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('active');});},{threshold:0,rootMargin:'0px 0px -50px 0px'});
+  document.querySelectorAll('.ch').forEach(card=>{card.classList.add('reveal');observer.observe(card);});
+  const dbName='StarkOS_DB',productId='cranberry';
+  window.addEventListener('load',()=>{
+    const req=indexedDB.open(dbName,1);
+    req.onsuccess=e=>{const db=e.target.result;try{const s=db.transaction('archive','readonly').objectStore('archive');const g=s.get(productId);g.onsuccess=()=>{const d=g.result;if(!d)return;function mkM(src){const isV=src.startsWith('data:video');const el=document.createElement(isV?'video':'img');el.src=src;el.style.cssText='width:100%;height:100%;object-fit:cover;';if(isV){el.autoplay=el.muted=el.loop=true;el.setAttribute('playsinline','');}return el;}const h1=document.getElementById('sync-title');if(h1&&d.name)h1.innerText=d.name;const dk=document.getElementById('sync-desc');if(dk&&d.desc)dk.innerText=d.desc;const src=d.media1||d.media;const sl=document.getElementById('slot-product-hero');if(sl&&src){sl.innerHTML='';sl.appendChild(mkM(src));}};}catch(e){}}};
+  });
+})();
+</script>
+</body>
+</html>

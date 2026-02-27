@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שקד · Blue Star International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── BLUE STAR OS · PREMIUM DARK THEME v4.0 ── */
+
+/* 1. MASTER VARIABLES (DARK MODE) */
+:root {
+    --bg: #0A0A0B; 
+    --text: #FAF7F0; 
+    --body: #D1CEC5; 
+    --accent: #8B6340; 
+    --warm: #B8894A;
+    --card: rgba(20, 20, 22, 0.4); 
+    --radius: 20px; 
+    --shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+/* 2. CORE TYPOGRAPHY & GRID BACKGROUND */
+body { 
+    background-color: var(--bg); 
+    color: var(--body); 
+    font-family: 'Noto Sans Hebrew', sans-serif; 
+    font-size: 18px; 
+    line-height: 1.9; 
+    overflow-x: hidden; 
+    position: relative;
+    background-image: 
+        linear-gradient(rgba(184, 137, 74, 0.03) 1px, transparent 1px), 
+        linear-gradient(90deg, rgba(184, 137, 74, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+
+/* 3. AMBIENT GLOW ORBS (3D DEPTH) */
+body::before, body::after {
+    content: ''; position: fixed; width: 600px; height: 600px; border-radius: 50%;
+    filter: blur(120px); z-index: -2; opacity: 0.15; pointer-events: none;
+}
+body::before { background: var(--warm); top: -100px; left: -100px; }
+body::after { background: #5A3E28; bottom: 20%; right: -150px; }
+
+/* 4. UTILITY BARS & BUTTONS */
+#progress-bar { position:fixed; top:0; left:0; height:3px; background:var(--warm); width:0; z-index:1000; }
+
+.back-btn {
+    position: absolute; top: 40px; left: 40px; z-index: 10; display: flex; align-items: center; gap: 8px;
+    color: var(--text); text-decoration: none; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px;
+    opacity: 0.5; transition: 0.3s;
+}
+.back-btn:hover { opacity: 1; color: var(--warm); }
+
+#backToTop { 
+    position: fixed; bottom: 30px; left: 30px; width: 40px; height: 40px; 
+    background: var(--warm); color: #000; border: none; border-radius: 50%; 
+    cursor: pointer; font-size: 18px; display: none; z-index: 1000; transition: 0.3s; 
+}
+#backToTop:hover { transform: scale(1.1); box-shadow: 0 0 20px rgba(184, 137, 74, 0.4); }
+
+/* 5. HERO SECTION */
+.hero { padding: 100px 40px 160px; text-align: center; color: var(--text); position: relative; }
+.hero-k { font-size: 11px; font-weight: 700; letter-spacing: 5px; color: var(--warm); margin-bottom: 20px; text-transform: uppercase; font-family: 'Space Mono', monospace; }
+.hero h1 { font-family:'Frank Ruhl Libre', serif; font-size: 90px; font-weight: 900; line-height: 0.8; margin-bottom: 25px; letter-spacing: -2px; }
+.hero .deck { font-size: 20px; opacity: 0.8; max-width: 650px; margin: 0 auto 40px; font-weight: 300; }
+
+.hero-img-wrap {
+    max-width: 900px; margin: 0 auto -220px; height: 500px; border-radius: var(--radius); overflow: hidden;
+    box-shadow: var(--shadow); background: #000; border: 1px solid rgba(255,255,255,0.05);
+}
+.hero-img-wrap video, .hero-img-wrap img { width:100%; height:100%; object-fit:cover; }
+.hero-img-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:12px; background:#0A0A0B; }
+.hero-img-placeholder span { color:rgba(255,255,255,0.15); font-size:12px; letter-spacing:3px; font-family:'Space Mono',monospace; }
+
+/* 6. SIDE NAVIGATION */
+.side-nav { position: fixed; top: 50%; right: 30px; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 12px; }
+.nav-dot { width: 10px; height: 10px; border: 1px solid var(--warm); border-radius: 50%; opacity: 0.3; cursor: pointer; transition: 0.3s; }
+.nav-dot.active { opacity: 1; transform: scale(1.4); background: var(--warm); }
+
+/* 7. CONTENT CARDS (GLASSMORPHISM) */
+.con { max-width: 800px; margin: 280px auto 100px; padding: 0 24px; position: relative; z-index: 5; }
+.ch { 
+    background: var(--card); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+    padding: 50px; border-radius: var(--radius); margin-bottom: 40px; 
+    border: 1px solid rgba(255,255,255,0.05); position: relative; overflow: hidden;
+    color: var(--body);
+}
+.ch::before, .ch::after { content: '+'; position: absolute; font-family: 'Space Mono', monospace; color: var(--warm); font-size: 14px; opacity: 0.4; }
+.ch::before { top: 15px; left: 15px; } 
+.ch::after { bottom: 15px; right: 15px; }
+
+.ch h2 { font-family:'Frank Ruhl Libre', serif; font-size: 38px; margin-bottom: 25px; color: var(--text); border-right: 5px solid var(--warm); padding-right: 20px; line-height: 1.1; }
+.ch h3 { font-family:'Frank Ruhl Libre', serif; font-size: 22px; font-weight: 700; color: var(--text); margin: 36px 0 14px; padding-right: 14px; border-right: 3px solid var(--warm); }
+.ch p { margin-bottom: 18px; color: var(--body); }
+.cl { font-size: 10px; font-weight: 700; color: var(--warm); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; display: block; font-family: 'Space Mono', monospace; }
+.dc::first-letter { font-family:'Frank Ruhl Libre', serif; font-size: 2.8em; font-weight: 900; color: var(--warm); line-height: 1; float: right; margin-left: 8px; }
+em { color: #C4A878; font-style: italic; }
+strong { color: var(--text); }
+
+/* 8. ASIDE BOXES */
+.ab { padding: 20px 24px; margin: 28px 0; border-radius: 0 8px 8px 0; }
+.ab .tg { font-size: 10px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 6px; }
+.ab p { margin: 0; font-size: 16px; line-height: 1.75; }
+.ab-w { background: rgba(184,137,74,0.08); border-right: 4px solid var(--warm); }
+.ab-w .tg { color: var(--warm); }
+.ab-g { background: rgba(90,62,40,0.2); border-right: 4px solid var(--accent); }
+.ab-g .tg { color: #C4A878; }
+.ab-r { background: rgba(184,50,50,0.1); border-right: 4px solid #B83030; }
+.ab-r .tg { color: #E06060; }
+.ab-r p { color: #DDB0B0; }
+
+/* 9. VARIETY CARDS */
+.vc { background: rgba(30,28,25,0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 22px; margin: 18px 0; }
+.vc .vn { font-family:'Frank Ruhl Libre', serif; font-size: 21px; font-weight: 700; color: var(--text); }
+.vc .vt { font-size: 12px; color: var(--warm); font-weight: 600; margin-bottom: 10px; }
+.vc p { font-size: 16px; line-height: 1.75; margin-bottom: 0; color: var(--body); }
+.vc .vs { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+.vc .vsi { background: rgba(255,255,255,0.04); padding: 6px 12px; border-radius: 5px; font-size: 12px; color: #A09080; }
+.vc .vsi strong { color: var(--text); }
+
+/* 10. NUTRITION GRID */
+.ng { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin: 24px 0; }
+.ni { background: rgba(30,28,25,0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 14px; text-align: center; }
+.ni .nv { font-family:'Frank Ruhl Libre', serif; font-size: 26px; font-weight: 700; color: var(--text); }
+.ni .nu { font-size: 13px; color: #A09080; margin-top: 2px; }
+.ni .nl { font-size: 11px; color: var(--warm); margin-top: 3px; font-weight: 600; }
+
+/* 11. CHART BLOCK */
+.cb { background: rgba(20,20,22,0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 24px; margin: 28px 0; }
+.cb .ct { font-family:'Frank Ruhl Libre', serif; font-size: 17px; font-weight: 700; margin-bottom: 14px; text-align: center; color: var(--text); }
+.pb-chart { margin: 16px 0 8px; display: flex; flex-direction: column; gap: 10px; }
+.pb-row { display: flex; align-items: center; gap: 10px; }
+.pb-meta { display: flex; align-items: center; gap: 6px; min-width: 120px; justify-content: flex-end; }
+.pb-flag { font-size: 18px; }
+.pb-name { font-size: 13px; color: #A09080; }
+.pb-track { flex: 1; background: rgba(255,255,255,0.08); height: 18px; border-radius: 9px; overflow: hidden; }
+.pb-fill { height: 100%; width: 0; border-radius: 9px; transition: width 1.2s cubic-bezier(0.22,1,0.36,1); }
+.pb-pct { font-family:'Frank Ruhl Libre', serif; font-size: 14px; font-weight: 700; color: var(--text); width: 36px; text-align: left; }
+.pb-note { font-size: 11px; color: #6B6058; opacity: .7; margin-top: 10px; text-align: center; }
+
+/* 12. TABLES */
+.gt { width: 100%; border-collapse: collapse; margin: 25px 0; font-size: 15px; border-top: 1px solid rgba(255,255,255,0.05); }
+.gt th { background: rgba(0,0,0,0.5); color: var(--text); padding: 14px; text-align: right; font-size: 12px; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.gt td { padding: 14px; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--body); }
+.gt tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+
+/* 13. PULL QUOTE */
+.pull { margin: 40px 0; padding: 45px; background: rgba(0,0,0,0.4); border-radius: var(--radius); text-align: center; border: 1px solid rgba(184,137,74,0.2); }
+.pull p { font-family:'Frank Ruhl Libre', serif; font-size: 22px; font-weight: 500; color: var(--body); line-height: 1.55; margin: 0; font-style: italic; }
+
+/* 14. SCROLL REVEAL */
+.reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.2, 1, 0.2, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+/* 15. MARQUEE */
+.marquee-container { position: fixed; bottom: -3vh; left: 0; width: 100vw; overflow: hidden; z-index: -1; pointer-events: none; }
+.marquee-text { font-family: 'Playfair Display', serif; font-size: 15vw; white-space: nowrap; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.03); animation: scrollText 40s linear infinite; }
+@keyframes scrollText { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* 16. FOOTER */
+.ft { text-align: center; padding: 44px 24px; font-size: 13px; color: #6B6058; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 36px; }
+.inner-ft { background: rgba(0,0,0,0.8); color: var(--text); padding: 60px 20px; text-align: center; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; opacity: 0.6; border-top: 1px solid rgba(255,255,255,0.05); }
+
+/* 17. MOBILE */
+@media (max-width: 900px) { 
+    .side-nav { display: none; } 
+    .back-btn { top: 20px; left: 20px; } 
+    .hero h1 { font-size: 55px; } 
+    .hero-img-wrap { height: 300px; margin-bottom: -100px; }
+    .con { margin-top: 150px; }
+    .ng { grid-template-columns: repeat(2,1fr); }
+}
+
+/* LIST STYLING FIX */
+.ch ol, .ch ul { padding-right: 24px; margin: 16px 0 18px; }
+.ch li { margin-bottom: 10px; color: var(--body); line-height: 1.8; }
+.ch ol li::marker { color: var(--warm); font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; }
+.ch ul li::marker { color: var(--warm); }
+
+/* PROCESS STEPS STYLING */
+.proc-steps { display: flex; flex-direction: column; gap: 20px; margin: 24px 0; }
+.proc-step { display: flex; gap: 20px; align-items: flex-start; }
+.proc-step-num {
+    min-width: 36px; height: 36px; border-radius: 50%;
+    background: var(--warm); color: #000;
+    font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.proc-step-title { font-family: 'Frank Ruhl Libre', serif; font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.proc-step-body { font-size: 16px; color: var(--body); line-height: 1.75; }
+
+/* Product Gallery - Stark OS */
+.product-gallery-wrapper { margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.06); }
+.product-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.gallery-item { aspect-ratio: 1; background: var(--card); border-radius: calc(var(--radius) / 2); overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.06); }
+.gallery-item-placeholder { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: rgba(255,255,255,0.12); text-align: center; }
+.gallery-item img, .gallery-item video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9); transition: filter 0.3s ease; }
+.gallery-item:hover img, .gallery-item:hover video { filter: brightness(1.1); }
+
+/* Inline Media Slots */
+.media-slot-inline {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--card);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 40px 0;
+    border: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.media-slot-inline img,
+.media-slot-inline video {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(0.92);
+    transition: filter 0.3s;
+}
+.media-slot-inline:hover img,
+.media-slot-inline:hover video { filter: brightness(1.05); }
+.media-slot-inline .slot-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.1);
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+</style>
+<script src="../auth.js"></script>
+</head>
+<body>
+<div class="marquee-container">
+    <div class="marquee-text">
+        BLUE STAR INTERNATIONAL · GLOBAL COMMODITY ARCHIVE · BLUE STAR INTERNATIONAL · GLOBAL COMMODITY ARCHIVE · 
+    </div>
+</div>
+<div id="progress-bar"></div>
+<nav class="side-nav">
+    <div class="nav-dot active" data-target="ch1"></div>
+    <div class="nav-dot" data-target="ch2"></div>
+    <div class="nav-dot" data-target="ch3"></div>
+    <div class="nav-dot" data-target="ch4"></div>
+    <div class="nav-dot" data-target="ch5"></div>
+    <div class="nav-dot" data-target="ch6"></div>
+    <div class="nav-dot" data-target="ch7"></div>
+    <div class="nav-dot" data-target="ch8"></div>
+    <div class="nav-dot" data-target="ch9"></div>
+    <div class="nav-dot" data-target="ch10"></div>
+</nav>
+<section class="hero">
+    <a href="index.html" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>חזרה למסוף</a>
+    <div class="hero-k">ערך ידע חקלאי · Blue Star International</div>
+    <h1 id="sync-title">שקד</h1>
+    <p class="deck" id="sync-desc">המלך הוותיק של אגוזי העץ. מגלגלת הברית, ועד שדות קליפורניה שמייצרים 80% מהייצור העולמי. מדריך מקיף מהעץ ועד הצלחת.</p>
+    <div class="hero-img-wrap" id="slot-product-hero">
+        <div class="hero-img-placeholder"><span>מדיה_לא_נטענה</span></div>
+    </div>
+</section>
+<main class="con">
+
+<!-- ═══ CH 1 ═══ -->
+<div class="ch" id="ch-1">
+<div class="cl">פרק ראשון</div>
+<h2>עשרת אלפים שנה של רעל, מוטציה אחת של מתיקות</h2>
+
+<p class="dc">לפני כעשרת אלפים שנה, באזור שנקרא היום הסהר הפורה, רצועה שנמתחת מישראל דרך סוריה ותורכיה ועד לאיראן, גדלו ביער עצי שקד בר. הפרי שלהם היה קטן, קשה, ורעיל. שקד בר מכיל אמיגדלין, תרכובת שמתפרקת בגוף לציאניד מימן. שמונה עד עשרה שקדים מרים מספיקים כדי להרוג ילד. בני אדם אכלו אותם בכל זאת, אחרי טיפול בחום או בשריה, אבל מדובר היה בהישרדות, לא בהנאה.</p>
+
+<p>ואז קרה משהו שעדיין מפליא גנטיקאים. מוטציה אחת בגן בודד, גן Sk על כרומוזום 5, השביתה את מערכת האנזימים P450 שאחראית לייצור האמיגדלין. עץ אחד, איפשהו בין הרי טיאן שאן בקזחסטן לעמק הבקעה בלבנון, הניב פתאום שקדים מתוקים. לא מרים, לא רעילים. אותו עץ כנראה נבחר על ידי בני אדם, שהבחינו בהבדל, שתלו את הזרעים שלו, ולאורך כשלושת אלפים דורות של סלקציה, הפכו את השקד מרעל למזון.</p>
+
+<div class="pull"><p>מוטציה אחת בגן בודד הפכה את השקד מרעל קטלני למזון בסיסי. שלושת אלפים דורות של סלקציה אנושית עשו את השאר.</p></div>
+
+<p>השקד היה מהעצים הראשונים שבויתו בהיסטוריה האנושית, ומסיבה טובה: בניגוד לרוב עצי הפרי, השקד מסוגל להפיק צאצאים איכותיים ישירות מזרעים, בלי צורך בהרכבה או ייחור. שתלת שקד, קיבלת עץ שדומה מאוד לאביו. זה הופך את הביות לפשוט יחסית, תכונה נדירה בעולם הצומח, ואחת הסיבות שהשקד התפשט כל כך מהר.</p>
+
+<p>הממצא הארכיאולוגי המוקדם ביותר של שקד מבויית הגיע מנומיירה, אתר מתקופת הברונזה הקדומה בירדן של ימינו. חוקרים מצאו 4,300 קליפות שקד חרוכות בתוך כלי אחסון קרמיים, לצד חיטת בר ושעורה, עדות לגידול מכוון, לא איסוף מזדמן. תיארוך פחמן-14 מעמיד את הממצאים בסביבות 3000 לפני הספירה. שקדים נמצאו גם באתרי הברונזה באי לסבוס וטרויה, שם התגלו למעלה מ-12,000 שקדים חרוכים בצנצנות אחסון.</p>
+
+<div class="ph-done" data-slot="almond-bloom">
+  <div class="img-ph"><div class="img-ph-title">📷 שקדייה בפריחה לבנה-ורודה</div></div>
+</div>
+
+<p>כשפתחו את קברו של תותנחמון במצרים, בשנת 1922, בין האוצרות שנמצאו היו שקדים, שהובאו כנראה מהלבנט, כמזון לעולם הבא. זה היה בסביבות 1325 לפני הספירה. שלוש מאות שנה קודם לכן, לפי המקרא, מטהו של אהרן הנביא הנץ שקדים בן לילה, אות אלוהי שבחר בשבט לוי. השקד מופיע עשר פעמים בתנ"ך: יעקב שולח שקדים במנחה למצרים ("מבחר פרי הארץ"), מנורת המקדש עוצבה בדמות פרחי שקד, וירמיהו רואה מקל שקד כסמל ליקיצה ולשמירה, משחק מילים בעברית בין "שקד" ל"שוקד".</p>
+
+<div class="ab"><div class="tg">שם עם היסטוריה</div><p>המילה "שקד" בעברית מגיעה מהשורש ש-ק-ד, שמשמעותו "לשקוד", "להקדים", "להיות ער". השקדייה היא העץ הראשון שמתעורר מתרדמת החורף, ולכן היא נקראת כך. ביוונית, <em>amygdálē</em>, שהפכה ללטינית <em>amygdala</em>, ומשם גם לשם האנטומי של אזור במוח: האמיגדלה, שצורתה מזכירה שקד.</p></div>
+</div>
+
+<!-- ═══ CH 2 ═══ -->
+<div class="ch" id="ch-2">
+<div class="cl">פרק שני</div>
+
+
+<h2>מדרך המשי ועד עמק סן חואקין</h2>
+
+<p class="dc">מהלבנט, השקד נסע בשני כיוונים. מערבה, לאורך חופי הים התיכון. היוונים אימצו אותו בהתלהבות, טענו שהוא מונע שכרות (ואכלו אותו לפני שתיית יין), ושילבו אותו במיתולוגיה שלהם: פיליס, שמתה משברון לב, הפכה לעץ שקד, וכשבעלה דמופון חזר וחיבק את העץ, הוא פרח מחדש. הרומאים לקחו את השקד לכל מקום שכבשו: ספרד, צפון אפריקה, צרפת. הם שתלו מטעים, שילבו שקדים ברטבים ועוגות, ובעקבות האימפריה, השקד הפך למרכיב קבוע של המטבח האירופי.</p>
+
+<p>מזרחה, דרך המשי. סוחרים פרסיים העבירו שקדים לאפגניסטן, להודו ולסין. בסין של שושלת טאנג (המאה ה-7), שקדים הופיעו בסעודות הקיסר ובטקסטים רפואיים. ברפואה ההודית, אַיוּרוֶדה, השקד נחשב למחזק מוח ולמשפר עור, ממש כמו שהיוונים טענו, מה שמרמז על מסלול ידע אחד שנע לאורך דרך המשי יחד עם הסחורה.</p>
+
+<p>בימי הביניים באירופה, השקד קיבל תפקיד מפתיע: חלב שקדים. בתקופות צום נוצריות שבהן מוצרי חלב אסורים, חלב שקדים שימש כתחליף, בדיוק כפי שהוא משמש כיום טבעונים. מרציפן, שנמצא בכל חנות ממתקים באירופה, פותח באותה תקופה. בחצרות מלכים ובבתי סוחרים, השקד היה נוכח בכל ארוחה.</p>
+
+<div class="ph-done" data-slot="almond-orchard-california">
+  <div class="img-ph"><div class="img-ph-title">📷 מטע שקדים בעמק סן חואקין, קליפורניה</div></div>
+</div>
+
+<p>לאמריקה השקד הגיע עם כריסטופר קולומבוס, קודם לדרום אמריקה, ורק בסוף המאה ה-17 לארה״ב. העצים הראשונים נשתלו באזור סן דייגו, אבל רק בשנות ה-1860 הגידול עבר לעמק סן חואקין, ושם הכל השתנה. האקלים הים-תיכוני של קליפורניה, קיצים חמים ויבשים, חורפים מתונים, היה מושלם. במהלך המאה ה-20, פיתוח מערכות השקיה מתקדמות, טכניקות הרכבה, וזנים חדשים הפכו את קליפורניה לבירת השקד של העולם.</p>
+
+<p>וישראל? הסיפור כאן עמוק הרבה יותר מסתם "עוד מדינה שמגדלת". השקד גדל בארץ ישראל מאז ומתמיד, הוא מוזכר עשר פעמים בתנ"ך, עדות ארכיאולוגית מגשר בנות יעקב (780,000 שנה לפני הספירה!) מצאה קליפות שקד בר ליד פטישים ומכתשי אבן, מוקדם הרבה לפני כל ביות. בסוף המאה ה-19, עם תחילת העלייה ובעידוד פקידי הברון רוטשילד, מושבות החלו לשתול מטעי שקדים בהיקף מסחרי. מחלות ומזיקים חיסלו את התעשייה בתחילת המאה ה-20, אבל מאז התחדשה.</p>
+
+<p>הזן הדומיננטי בישראל היום הוא <strong>"אום אל-פחם"</strong> שקרוי על שם העיר שבוואדי ערה שממנה הגיע העץ המקורי. כשמכון וולקני הוקם, חוקריו סרקו את הארץ ומצאו את עץ השקד עם היבול הטעים ביותר, וזה היה הוא. גרעין גדול, טעם מצוין, אהוב על ישראלים. החיסרון: יבול נמוך יחסית, ותלות מוחלטת בדבורים לאבקה. ומכיוון שאום אל-פחם פורח מוקדם, לעיתים בינואר, באמצע הגשמים, הדבורים לא יוצאות, וזו קטסטרופה.</p>
+
+<div class="ab"><div class="tg">זן "מתן", המהפכה הישראלית</div><p>ד"ר דורון הולנד ממכון וולקני פיתח זן חדש, <strong>"מתן"</strong> (על שם בנו הבכור). self-fertile, מאביק את עצמו בלי דבורים ובלי זן נלווה. הגרעין גדול יותר מאום אל-פחם, טעים, ובעל יבול גבוה בעשרות אחוזים. ההבדל יכול לעשות את הפער בין רווח להפסד לחקלאי. "מתן" מתחיל לתפוס מקום במטעים הישראליים.</p></div>
+
+<p>היום ענף השקד הישראלי מונה כ-6,200 הקטר, מקיבוץ נאות סמדר בדרום ועד קיבוץ דן בצפון. אזורי הגידול המרכזיים: עמק החולה, רמת הגולן הדרומית, גליל תחתון, עמק יזרעאל, שפלת יהודה. מכון וולקני, בשיתוף משרד החקלאות ושולחן השקד, ממשיכים לפתח זנים, לשפר עמידות ולהתמודד עם שינויי אקלים. ישראל לא תשפיע על המחיר העולמי, אבל בתחום הזנים ובמחקר, היא שחקנית מפתח.</p>
+</div>
+<div id="slot-inline-2" class="media-slot-inline"><div class="media-slot-placeholder">MEDIA_02</div></div>
+
+
+<!-- ═══ CH 3 ═══ -->
+<div class="ch" id="ch-3">
+<div class="cl">פרק שלישי</div>
+<h2>הגאוגרפיה, קליפורניה מול כולם</h2>
+
+<p class="dc">שוק השקד העולמי נשלט על ידי שחקן אחד בצורה שאין לה מקבילה כמעט בשום מוצר חקלאי אחר. קליפורניה מייצרת כ-77% מהשקדים בעולם. כדי להבין את המשמעות: כשקליפורניה חוטפת בצורת, מחירי שקד עולים בסיאול, במומבאי ובהמבורג. יצרן אחד, באזור גאוגרפי אחד, קובע את המחיר העולמי.</p>
+
+<div class="pb-chart">
+  <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇺🇸</span><span class="pb-name">ארה"ב (קליפורניה)</span></div><div class="pb-track"><div class="pb-fill" data-w="77" style="background:#5A4400"></div></div><span class="pb-pct">77%</span></div>
+  <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇦🇺</span><span class="pb-name">אוסטרליה</span></div><div class="pb-track"><div class="pb-fill" data-w="11" style="background:#8B6914"></div></div><span class="pb-pct">11%</span></div>
+  <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇪🇸</span><span class="pb-name">ספרד</span></div><div class="pb-track"><div class="pb-fill" data-w="7" style="background:#C4912A"></div></div><span class="pb-pct">7%</span></div>
+  <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇮🇷</span><span class="pb-name">איראן</span></div><div class="pb-track"><div class="pb-fill" data-w="3" style="background:#D4B87A"></div></div><span class="pb-pct">3%</span></div>
+  <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🌍</span><span class="pb-name">אחרים</span></div><div class="pb-track"><div class="pb-fill" data-w="2" style="background:#DDD6CA"></div></div><span class="pb-pct">2%</span></div>
+  <div class="pb-note">~1.5 מיליון טון גרעין · INC / USDA 2024</div>
+</div>
+</div>
+
+<!-- ═══ CH 4 ═══ -->
+<div class="ch" id="ch-4">
+<div class="cl">פרק רביעי</div>
+
+
+<h2>הזנים, כל שקד הוא לא אותו שקד</h2>
+
+<p class="dc">בקליפורניה לבדה מגדלים 13 זנים מרכזיים. הם מחולקים לשלוש קבוצות עיקריות: Nonpareil (הסטנדרט), Mission (גרעינים קטנים, כהים, קשיחים), ו-California (קבוצת ביניים). כל קבוצה מתאימה לשימושים אחרים, וההבדלים ביניהן, צורה, גודל, צבע קליפת הגרעין, תכולת שמן וטעם, משמעותיים.</p>
+
+<div class="vc"><div class="vn">Nonpareil</div><div class="vt">המלך, 40% מהייצור בקליפורניה</div><p>הזן הנחשק ביותר. גרעין שטוח, סימטרי, בצבע בהיר עם קליפה חלקה. קליפה חיצונית דקה (paper-shell) שנפתחת בקלות. טעם עדין ומתקתק. אחוז גרעין 60–65% מהאגוז בקליפה. הסטנדרט לקמעונאי, לחטיפים ולמוצרי פרימיום. חיסרון: רגיש במיוחד לגשמי קטיף ולמחלות.</p><div class="vs"><div class="vsi">גרעין: <strong>60–65%</strong></div><div class="vsi">צבע: <strong>בהיר, חלק</strong></div><div class="vsi">קליפה: <strong>paper-shell</strong></div><div class="vsi"><strong>קמעונאי, חטיפים, פרימיום</strong></div></div></div>
+
+<div class="vc"><div class="vn">Carmel</div><div class="vt">המאביק הקלאסי של Nonpareil</div><p>נשתל לצד Nonpareil כמאביק. גרעין צר ומעט ארוך, קליפה רכה, צבע בינוני. טעם אגוזי וטוב, אבל פחות אחיד מ-Nonpareil. משמש בעיקר לפריסה (sliced/slivered), קמח שקדים ותעשייה.</p><div class="vs"><div class="vsi">גרעין: <strong>55–60%</strong></div><div class="vsi">צבע: <strong>בינוני</strong></div><div class="vsi"><strong>פריסה, קמח, תעשייה</strong></div></div></div>
+
+<div class="vc"><div class="vn">Butte / Padre</div><div class="vt">צמד התעשייה, קטנים, קשיחים, אמינים</div><p>מקבוצת Mission. גרעינים קטנים, עגולים, עם קליפת גרעין קמטית וכהה. טעם אגוזי עמוק. קליפה קשה. נשתלים יחד כצמד מאביק. השימוש העיקרי: קלייה, טחינה לחמאה ושמן, ומוצרים שהצורה פחות חשובה בהם.</p><div class="vs"><div class="vsi">צבע: <strong>כהה, קמטי</strong></div><div class="vsi">קליפה: <strong>קשה</strong></div><div class="vsi"><strong>קלייה, חמאה, שמן</strong></div></div></div>
+
+<div class="vc"><div class="vn">Independence</div><div class="vt">מהפכן, שקד שלא צריך דבורים</div><p>הזן הצעיר בזירה ואחד המסקרנים ביותר. Self-fertile, לא צריך זן מאביק ולא תלוי בדבורים. גרעין בינוני-גדול, צבע בהיר. הנשתל ביותר בקליפורניה בשנים האחרונות. אם מגמת השתילה תימשך, Independence ישנה את מבנה הענף לחלוטין.</p><div class="vs"><div class="vsi">אבקה: <strong>עצמית</strong></div><div class="vsi">צבע: <strong>בהיר</strong></div><div class="vsi"><strong>פוטנציאל גבוה, עתידי</strong></div></div></div>
+
+<div class="vc"><div class="vn">Marcona</div><div class="vt">הספרדי, עגול, שמנוני, יוקרתי</div><p>לא קליפורני. זן ספרדי מסורתי, קצר ועגול, עם תכולת שמן גבוהה במיוחד ומרקם רך. טעם חמאתי-מתקתק שונה מכל שקד קליפורני. נמכר בדרך כלל מטוגן במעט שמן זית ומלח ים. נחשב ל-"foie gras של השקדים". מחיר גבוה פי שניים עד שלושה מ-Nonpareil.</p><div class="vs"><div class="vsi">מקור: <strong>ספרד</strong></div><div class="vsi">צורה: <strong>עגול, שטוח</strong></div><div class="vsi">שומן: <strong>גבוה מאוד</strong></div><div class="vsi"><strong>גורמה, טאפאס, קונדיטוריה</strong></div></div></div>
+
+<h3>סיווגים מסחריים</h3>
+<p>השקד נמכר בצורות מגוונות, ולכל צורה שימוש אחר:</p>
+
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>צורה</th><th>תיאור</th><th>שימוש עיקרי</th></tr>
+<tr><td><strong>Whole Natural</strong></td><td>שלם עם קליפת הגרעין</td><td>קלייה, חטיפים, דקורציה</td></tr>
+<tr><td><strong>Blanched Whole</strong></td><td>שלם, ללא קליפת גרעין (מולבן)</td><td>קונדיטוריה, מרציפן</td></tr>
+<tr><td><strong>Sliced</strong></td><td>פרוס לפלטות דקות</td><td>מאפים, סלטים, טופינג</td></tr>
+<tr><td><strong>Slivered</strong></td><td>חתוך לרצועות דקות</td><td>אורז, תבשילים, קישוט</td></tr>
+<tr><td><strong>Diced</strong></td><td>חתוך לקוביות קטנות</td><td>חטיפי אנרגיה, גרנולה</td></tr>
+<tr><td><strong>Meal / Flour</strong></td><td>טחון דק לקמח</td><td>אפייה ללא גלוטן, מקרונים</td></tr>
+</table></div>
+
+<div class="ab"><div class="tg">טיפ לצרכן</div><p><strong>Whole Natural מול Blanched:</strong> קליפת הגרעין (העור החום) מכילה סיבים ונוגדי חמצון. הסרתה (blanching) משפרת מראה אבל מפחיתה ערך תזונתי. לאכילה ישירה, natural עדיף. לאפייה שדורשת צבע לבן אחיד, blanched.</p></div>
+</div>
+
+<!-- ═══ CH 5 ═══ -->
+<div class="ch" id="ch-5">
+<div class="cl">פרק חמישי</div>
+<h2>מה בפנים, ה
+<div id="slot-inline-3" class="media-slot-inline"><div class="media-slot-placeholder">MEDIA_03</div></div>
+פרופיל התזונתי</h2>
+
+<p class="dc">מאה גרם של שקדים גולמיים מכילים כ-579 קלוריות. פחות מפקאן (690), פחות מאגוז מלך (654), אבל עדיין מספר שמחייב כבוד. ההבדל של השקד טמון בפרופיל: שקד הוא אחד ממקורות החלבון הגבוהים ביותר בעולם האגוזים, עם יחס חלבון-לשומן שמתאים למי שמחפש אנרגיה לצד בנייה.</p>
+
+<div class="ng">
+  <div class="ni"><div class="nv">579</div><div class="nu">קלוריות</div><div class="nl">ל-100 גרם</div></div>
+  <div class="ni"><div class="nv">49.9g</div><div class="nu">שומן</div><div class="nl">62% חד בלתי רווי</div></div>
+  <div class="ni"><div class="nv">21.2g</div><div class="nu">חלבון</div><div class="nl">צמחי</div></div>
+  <div class="ni"><div class="nv">12.5g</div><div class="nu">סיבים</div><div class="nl">50% מהיומי</div></div>
+  <div class="ni"><div class="nv">131%</div><div class="nu">ויטמין E</div><div class="nl">מהצריכה היומית</div></div>
+  <div class="ni"><div class="nv">0</div><div class="nu">כולסטרול</div><div class="nl">אפס</div></div>
+</div>
+
+<p>21.2 גרם חלבון למאה גרם, הכי הרבה מכל אגוז עץ נפוץ. 49.9 גרם שומן, מתוכם 62% חד בלתי רוויים (חומצה אולאית, כמו בשמן זית) ורק 7.5% רוויים. 12.5 גרם סיבים תזונתיים, חצי מהצריכה היומית המומלצת. אפס כולסטרול.</p>
+
+<p>מה שמייחד את השקד תזונתית: <strong>ויטמין E</strong> בצורת אלפא-טוקופרול, הצורה הפעילה ביותר ביולוגית. מאה גרם שקדים מספקים 131% מהצריכה היומית. מגנזיום, 67% מהיומי. מנגן, 114%. ריבופלאבין (B2), נחושת, זרחן, כולם בכמויות משמעותיות. ובנוסף: 22 גרם פחמימות, מתוכם רק 4.4 גרם סוכרים טבעיים.</p>
+
+<p>מנה סטנדרטית: כ-28 גרם, בערך 23 שקדים, כ-164 קלוריות. כל הנתונים הללו אינפורמטיביים, לא המלצה רפואית או תזונתית.</p>
+
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>רכיב תזונתי</th><th>כמות ל-100g</th><th>% צריכה יומית</th></tr>
+<tr><td>קלוריות</td><td>579 kcal</td><td>29%</td></tr>
+<tr><td>שומן כולל</td><td>49.9g</td><td>64%</td></tr>
+<tr><td>מתוכם חד בלתי רוויים</td><td>31.6g</td><td></td></tr>
+<tr><td>מתוכם רב בלתי רוויים</td><td>12.1g</td><td></td></tr>
+<tr><td>מתוכם רוויים</td><td>3.8g</td><td>19%</td></tr>
+<tr><td>כולסטרול</td><td>0mg</td><td>0%</td></tr>
+<tr><td>פחמימות</td><td>21.6g</td><td>8%</td></tr>
+<tr><td>סיבים תזונתיים</td><td>12.5g</td><td>50%</td></tr>
+<tr><td>סוכרים</td><td>4.4g</td><td></td></tr>
+<tr><td>חלבון</td><td>21.2g</td><td>42%</td></tr>
+<tr><td>ויטמין E (אלפא-טוקופרול)</td><td>25.6mg</td><td>131%</td></tr>
+<tr><td>ויטמין B2 (ריבופלאבין)</td><td>1.14mg</td><td>88%</td></tr>
+<tr><td>ניאצין (B3)</td><td>3.62mg</td><td>23%</td></tr>
+<tr><td>מגנזיום</td><td>270mg</td><td>67%</td></tr>
+<tr><td>מנגן</td><td>2.18mg</td><td>114%</td></tr>
+<tr><td>נחושת</td><td>1.03mg</td><td>115%</td></tr>
+<tr><td>זרחן</td><td>484mg</td><td>69%</td></tr>
+<tr><td>אשלגן</td><td>733mg</td><td>21%</td></tr>
+<tr><td>סידן</td><td>264mg</td><td>20%</td></tr>
+<tr><td>ברזל</td><td>3.71mg</td><td>21%</td></tr>
+<tr><td>אבץ</td><td>3.12mg</td><td>28%</td></tr>
+<tr><td colspan="3" style="font-size:11px;color:#8B7355;text-align:center;padding:10px">מקור: USDA FoodData Central · נתוני ייצור: INC / USDA FAS 2024-2025</td></tr>
+</table></div>
+</div>
+
+<!-- ═══ CH 6 ═══ -->
+<div class="ch" id="ch-6">
+<div class="cl">פרק שישי</div>
+
+
+<h2>מה עושים איתו</h2>
+
+<p class="dc">מרציפן, העיסה המתוקה של שקדים טחונים וסוכר, הוא כנראה מוצר השקד המפורסם ביותר באירופה, ושורשיו בימי הביניים. אבל זו רק ההתחלה. השקד הוא האגוז הרב-תכליתי ביותר שקיים: ממנו מייצרים חלב, חמאה, קמח, שמן, תמצית, פרלינים, נוגט, ומקרונים צרפתיים. קשה למצוא מרכיב אחד שמתפקד באותה רמה גם כחטיף, גם כקמח, גם כנוזל וגם כקישוט.</p>
+
+<p><strong>חלב שקדים</strong> המוצר שעושה קאמבק. הומצא בימי הביניים, נעלם למשך מאות שנים, וחזר בכוח בעשור האחרון כתחליף חלב צמחי. ב-2024, כ-110 אלף טון שקדים ברחבי העולם הוקצו לייצור חלב שקדים. ארה"ב מובילה עם 54% מהנתח. הסיבה לצמיחה: 65% מאוכלוסיית העולם סובלים מאי-סבילות ללקטוז.</p>
+
+<p><strong>קמח שקדים</strong> הבסיס לאפייה ללא גלוטן, ולמוצרים כמו מקרונים, פינאנסייה (עוגות חמאה צרפתיות), ולחם חלבון. <strong>חמאת שקדים</strong> אלטרנטיבה לחמאת בוטנים, עם תכולת חלבון ושומן בריא גבוהה יותר. <strong>שמן שקדים</strong> בעל נקודת עשן סבירה (כ-216°C), משמש הן בבישול והן בתעשיית הקוסמטיקה, ב-2024 הופנו כ-14 אלף טון שקדים לתעשיית הטיפוח, בעיקר לשמנים ותחליבים.</p>
+
+<p>בצד המלוח: שקדים קלויים עם מלח ורוזמרין, שקדים מעושנים, שקדי Marcona מטוגנים בשמן זית כטאפאס ספרדי, שקדים על דגים צלויים, בסלטים עם גבינות קשות ופירות. וכמובן, שקדים מצופים שוקולד, פרלינים, סוכריות דראז'ה. כמעט כל תעשיית הקונדיטוריה האירופית בנויה סביב שקדים.</p>
+
+<h3>שקד בתרבויות העולם</h3>
+<p>בהודו, שקדים (badam) נחשבים למזון מוח מספר אחת. אימהות הודיות משרות שקדים במים בלילה ומגישות לילדים בבוקר, אמונה שמבוססת על האיורוודה העתיקה ושנתמכת בחלקה על ידי מחקרים מודרניים על ויטמין E וזיכרון. הודו היא יעד הייצוא הגדול ביותר של שקדים קליפורניים, כ-192 אלף טון בשנה.</p>
+
+<p>בסין, שקדים נמכרים בעיקר כחטיף בטעמים שונים, וסאבי, שום ופלפל, חמש תבלינים, ומשמשים ברפואה הסינית המסורתית מאז שושלת טאנג. ביפן, חלב שקדים הפך לאחד התחליפים הצמחיים הפופולריים ביותר.</p>
+
+<p>במזרח התיכון, השקד בבית. בקלוי ומלוח ליד כוס קפה, בבקלאווה, במעמול, בחלווה. בלבנון וסוריה, שקדים ירוקים נאכלים עם מלח באביב. בישראל, השקד הוא חלק מהנוף: שקדיות פורחות הן סמל ט"ו בשבט, ו"השקדייה פורחת" של ישראל דוגן הוא שיר ילדות שכל ילד ישראלי מכיר.</p>
+
+<div class="ab"><div class="tg">שקד ירוק, המוצר הנסתר</div><p>בארצות הים התיכון, שקדים נאכלים ירוקים, לפני שהקליפה מתקשה. הם חמצמצים, פריכים, ונאכלים עם מלח או טבולים. בישראל, לבנון וסוריה זה מוצר עונתי מוכר. במערב, כמעט לא ידוע. חלק מהשפים הגדולים באירופה מציגים אותו כ-delicacy.</p></div>
+</div>
+
+<!-- ═══ CH 7 ═══ -->
+<div class="ch" id="ch-7">
+<div class="cl">פרק שביעי</div>
+<h2>נתונים מסחריים, USDA FoodData Central</h2>
+
+<p class="dc">לצד הפרופיל התזונתי המלא, חשוב לקרוא את נתוני הסיוו
+<div id="slot-inline-4" class="media-slot-inline"><div class="media-slot-placeholder">MEDIA_04</div></div>
+ג המסחרי. הדרגות קובעות שוק יעד, תמחור ומדפים. האיחוד האירופי מיישם פיקוח מחמיר על רמות אפלטוקסין בשקדים מיובאים. נתוני ייצור: INC / USDA FAS 2024-2025.</p>
+
+<div class="ph-done" data-slot="almond-map">
+  <div class="img-ph"><div class="img-ph-title">📷 מפת אזורי גידול שקד בעולם</div><div class="img-ph-desc">data-slot="almond-map"</div></div>
+</div>
+
+<div class="ph-done" data-slot="almond-grades">
+  <div class="img-ph"><div class="img-ph-title">📷 טבלת דרגות איכות USDA</div><div class="img-ph-desc">data-slot="almond-grades"</div></div>
+</div>
+</div>
+
+<!-- ═══ CH 8 ═══ -->
+<div class="ch" id="ch-8">
+<div class="cl">פרק שמיני</div>
+<h2>איכות, טריות ואחסון</h2>
+
+<p class="dc">שקד, כמו כל אגוז עתיר שומן, רגיש לחמצון. אבל בהשוואה לפקאן ולאגוז מלך, השקד יציב יותר, בעיקר בזכות תכולת ויטמין E הגבוהה שמשמשת כנוגד חמצון טבעי. עם זאת, אחסון לא נכון יגרום לרנסידיות, מרירות, ריח שומני-חמוצני, ואובדן הטעם העדין.</p>
+
+<p>איך מזהים שקד טרי? <strong>צבע</strong> גרעין בצבע שנהב עד חום בהיר אחיד, בלי כתמים כהים. <strong>מרקם</strong> פריך עם שבירה נקייה, לא גומי ולא רך. <strong>ריח</strong> אגוזי עדין, נעים. ריח חמוץ, צבעי או מעופש, סימן ברור לבעיה. <strong>טעם</strong> מתקתק-אגוזי. מרירות = רנסידיות או זיהום בשקד מר (גנטי, לא קשור לאחסון).</p>
+
+<div class="ab"><div class="tg">כללי אחסון</div><p>שקדים בקליפה, במקום קריר ויבש עד שנה. שקדים קלופים, במיכל אטום במקרר, עד שישה חודשים. במקפיא, עד שנתיים ויותר, בלי ירידה משמעותית באיכות. כמו כל אגוז: הרחק מאור, חום, לחות וריחות חזקים. שקדים סופגים ריח, לא לאחסן ליד בצל, שום או תבלינים חריפים.</p></div>
+
+<p>דגש חשוב: שקדים שעברו <strong>קלייה</strong> חיי מדף קצרים יותר. הקלייה מאיצה חמצון. שקדים קלויים נמכרים בדרך כלל באריזות ואקום או בחנקן, ברגע שהאריזה נפתחה, כדאי לצרוך תוך שבועות. שקדים גולמיים (raw) מחזיקים טוב יותר. ולפני שימוש, קלייה קלה של חמש דקות ב-170°C מחדשת ארומה ומשפרת מרקם.</p>
+</div>
+
+<!-- ═══ CH 9 ═══ -->
+<div class="ch" id="ch-9">
+<div class="cl">פרק תשיעי</div>
+<h2>רגישויות ודגשים בטיחותיים</h2>
+
+<p>השקד מסווג כ<strong>אגוז עץ</strong> (Tree Nut), אחד משמונת האלרגנים העיקריים שחייבים סימון. אלרגיה לאגוזי עץ מופיעה אצל 0.5%–3% מהאוכלוסייה ובדרך כלל נשארת לכל החיים.</p>
+
+<div class="ab" style="border-right-color:#B5864D"><div class="tg">דגש חשוב, שקד מר</div><p>שקד מר (<em>Prunus amygdalus var. amara</em>) נראה זהה לשקד מתוק אבל מכיל <strong>אמיגדלין</strong> שמתפרק לציאניד מימן. שקדים מרים מופיעים מדי פעם בתוך אצוות של שקד מתוק, בערך אחד מכל אלף. בכמויות קטנות הגוף מתמודד, אבל צריכת מספר רב של שקדים מרים מסוכנת. בישול וקלייה מפחיתים את הרעילות אבל לא מבטלים אותה לחלוטין. שמן שקד מר משמש בקונדיטוריה בריכוזים מאוד נמוכים, לטעם בלבד.</p></div>
+
+<p>בניגוד לפקאן שקשור מאוד לאגוז מלך, אלרגיה לשקד לא בהכרח מעידה על אלרגיה לכל אגוזי העץ, אבל רגישות צולבת קיימת, במיוחד עם אגוזי לוז ואגוזי ברזיל. כל מי שאובחן עם אלרגיה לאגוזי עץ צריך להיבדק ספציפית.</p>
+
+<p>דגשים נוספים: שקדים שלמים עלולים להוות <strong>סכנת חנק</strong> לילדים קטנים, עדיף טחון או פרוס. אחסון לקוי עלול לגרום לנוכחות <strong>אפלטוקסינים</strong> (רעלנים של עובש Aspergillus). האיחוד האירופי מיישם פיקוח מחמיר על רמות אפלטוקסין בשקדים מיובאים. ותמיד, לקרוא אזהרות "עלול להכיל" על אריזות.</p>
+</div>
+
+<!-- ═══ CH 10 ═══ -->
+<div class="ch" id="ch-10">
+<div class="cl">פרק עשירי</div>
+<h2>סיכום, מה שנשאר</h2>
+
+<p class="dc">השקד הוא מוצר שהעולם לא יודע כמה הוא תלוי בו. הוא נמצא בחלב הצמחי שבבית הקפה, בקמח של עוגת יום ההולדת, בשמן הפנים שעל המדף בחדר האמבטיה, בחטיף האנרגיה שבתיק ובקופסת המרציפן שבחנות. אין אגוז אחר שחודר לכל כך הרבה תחומים, מזון, קוסמטיקה, תרופות, חומרי גלם תעשייתיים.</p>
+
+<p>אבל מעבר לסטטיסטיקה ולשימושים, יש כאן סיפור לא שגרתי. פרי שהיה רעל קטלני ושמוטציה גנטית אחת, שינוי בודד בגן בודד, הפכה אותו למזון בסיסי. עץ שבני אדם בויתו כבר לפני חמשת אלפי שנה, שהופיע בקברי פרעונים ובדפי התנ"ך, שנסע לאורך דרך המשי מלבנון לסין, שהגיע לקליפורניה ותוך מאה שנה שלט בכל השוק העולמי.</p>
+
+<div class="pull"><p>לפרי שהתחיל כרעל, שהפך למנחה בין מלכים, שנסע על דרך המשי, שהניב תעשייה של מיליארדי דולרים, ושעדיין פורח בלבן כל חורף מחדש, יש מעט מקבילות בעולם הצומח.</p></div>
+
+<p><strong>לקנייה:</strong> Nonpareil, למראה ולחטיף. Mission/Butte, לקלייה ולחמאה. Marcona, לחוויה יוקרתית. שימו לב לצבע (בהיר ואחיד = טרי), מרקם (פריך = טוב), ואריזה (אטומה, רצוי ואקום).</p>
+
+<p><strong>בבית:</strong> מיכל אטום, מקרר או מקפיא. הרחק מריחות חזקים. קלייה קלה לפני שימוש. והכי חשוב: להבין שיש הבדל בין זנים, בין צורות עיבוד, ובין מקורות. עכשיו אתם יודעים.</p>
+</div>
+
+<div class="ft">
+  ערך ידע צרכני · Blue Star International · 2026<br>
+  מבוסס על נתוני Almond Board of California, INC, USDA, ומקורות פתוחים
+  <span>מידע תזונתי: USDA FoodData Central · נתוני ייצור: USDA FAS / INC 2024 · היסטוריה: Ken Albala, "Almonds along the Silk Road" · ארכיאולוגיה: R.T. Schaub, Numeira excavations</span>
+</div>
+
+</div><!-- /con -->
+
+<a href="../index.html" class="home-btn">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+  <span>ספרייה</span>
+</a>
+
+
+</div>
+
+<script>
+window.onscroll = () => {
+    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('progress-bar').style.width = (window.scrollY / h * 100) + '%';
+    const sections = document.querySelectorAll('.ch');
+    const dots = document.querySelectorAll('.nav-dot');
+    let current = "";
+    sections.forEach(s => { if (pageYOffset >= s.offsetTop - 200) current = s.id; });
+    dots.forEach(d => { d.classList.remove('active'); if (d.dataset.target === current) d.classList.add('active'); });
+// Back to top
+const btt = document.getElementById('btt');
+window.addEventListener('scroll', () => {
+    btt.classList.toggle('visible', window.scrollY > 300);
+});
+btt.onclick = () => window.scrollTo({top:0, behavior:'smooth'});
+};
+document.querySelectorAll('.nav-dot').forEach(dot => {
+    dot.onclick = () => document.getElementById(dot.dataset.target).scrollIntoView({behavior:'smooth'});
+});
+if (window.IntersectionObserver) {
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            e.target.querySelectorAll('.pb-fill').forEach(b => { b.style.width = b.dataset.w + '%'; });
+            obs.unobserve(e.target);
+        });
+    }, {threshold: 0.3});
+    document.querySelectorAll('.pb-chart').forEach(el => obs.observe(el));
+}
+(function() {
+    const dbName = 'StarkOS_DB';
+    const productId = window.location.pathname.split('/').pop().replace('.html', '') || 'almond';
+    function syncProductPage() {
+        const request = indexedDB.open(dbName, 1);
+        request.onsuccess = (e) => {
+            const db = e.target.result;
+            const store = db.transaction('archive', 'readonly').objectStore('archive');
+            const getRequest = store.get(productId);
+            getRequest.onsuccess = () => {
+                const data = getRequest.result;
+                if (!data) return;
+
+                function makeMedia(src) {
+                    const isVid = src.startsWith('data:video');
+                    const el = document.createElement(isVid ? 'video' : 'img');
+                    el.src = src;
+                    el.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+                    if (isVid) { el.autoplay = el.muted = el.loop = true; el.setAttribute('playsinline',''); }
+                    return el;
+                }
+
+                const heroH1 = document.getElementById('sync-title');
+                if (heroH1 && data.name) heroH1.innerText = data.name;
+                const heroDeck = document.getElementById('sync-desc');
+                if (heroDeck && data.desc) heroDeck.innerText = data.desc;
+
+                const heroSrc = data.media1 || data.media;
+                const heroSlot = document.getElementById('slot-product-hero');
+                if (heroSlot && heroSrc) {
+                    heroSlot.innerHTML = '';
+                    heroSlot.appendChild(makeMedia(heroSrc));
+                }
+
+                [['slot-inline-2', data.media2], ['slot-inline-3', data.media3], ['slot-inline-4', data.media4]].forEach(function([id, src]) {
+                    if (!src) return;
+                    const slot = document.getElementById(id);
+                    if (!slot) return;
+                    slot.innerHTML = '';
+                    slot.appendChild(makeMedia(src));
+                    slot.classList.add('has-media');
+                    slot.classList.remove('media-slot-placeholder');
+                });
+            };
+        };
+    }
+    // Scroll Reveal Engine
+    function initScrollReveal() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.ch').forEach(card => {
+            card.classList.add('reveal');
+            observer.observe(card);
+        });
+    }
+    
+    initScrollReveal();
+
+    window.addEventListener('load', syncProductPage);
+})();
+</script>
+
+<button class="back-to-top" id="btt" aria-label="Back to top">&#8593;</button>
+</body>
+</html>

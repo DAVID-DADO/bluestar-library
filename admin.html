@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLUE STAR · ADMIN TERMINAL v4.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Noto+Sans+Hebrew:wght@300;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root { --stark-bg: #0A0A0B; --stark-gold: #B8894A; --stark-white: #FAF7F0; --stark-glass: rgba(255, 255, 255, 0.03); --stark-border: rgba(255, 255, 255, 0.1); }
+* { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
+body { background: var(--stark-bg); color: var(--stark-white); font-family: 'Noto Sans Hebrew', sans-serif; display: flex; height: 100vh; overflow: hidden; }
+.sidebar { width: 320px; border-left: 1px solid var(--stark-border); padding: 30px 0 30px 0; display: flex; flex-direction: column; background: rgba(0,0,0,0.5); backdrop-filter: blur(20px); overflow-y: auto; }
+.sidebar-brand { font-family: 'Playfair Display', serif; font-size: 20px; letter-spacing: 5px; color: var(--stark-gold); font-weight: 900; padding: 0 30px 25px; }
+.category-tabs { display: flex; border-bottom: 1px solid var(--stark-border); margin-bottom: 10px; }
+.cat-tab { flex: 1; padding: 10px 5px; font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 1px; color: rgba(255,255,255,0.3); cursor: pointer; transition: 0.3s; text-align: center; border-bottom: 2px solid transparent; }
+.cat-tab:hover { color: var(--stark-gold); }
+.cat-tab.active { color: var(--stark-gold); border-bottom-color: var(--stark-gold); }
+.nav-group { display: none; }
+.nav-group.visible { display: block; }
+.nav-label { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 3px; color: rgba(255,255,255,0.2); padding: 12px 30px 6px; }
+.nav-item { padding: 13px 30px; font-family: 'Space Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.3); cursor: pointer; transition: 0.4s; border-bottom: 1px solid rgba(255,255,255,0.03); text-align: right; }
+.nav-item:hover, .nav-item.active { color: var(--stark-gold); letter-spacing: 1px; background: var(--stark-glass); border-bottom-color: rgba(184,137,74,0.2); }
+.editor-container { flex: 1; padding: 50px 60px; overflow-y: auto; display: flex; flex-direction: column; align-items: center; }
+.hero-header { text-align: center; margin-bottom: 50px; }
+.hero-header h1 { font-family: 'Playfair Display', serif; font-size: 70px; line-height: 0.8; letter-spacing: -4px; margin-top: 10px; }
+.hero-header span { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--stark-gold); letter-spacing: 5px; }
+.form-card { background: var(--stark-glass); backdrop-filter: blur(40px); border: 1px solid var(--stark-border); padding: 40px; width: 100%; max-width: 850px; margin-bottom: 25px; }
+.label { display: block; font-family: 'Space Mono', monospace; font-size: 10px; color: var(--stark-gold); margin-bottom: 15px; letter-spacing: 3px; text-align: right; }
+input, textarea { width: 100%; background: rgba(255,255,255,0.02); border: 1px solid var(--stark-border); padding: 18px; color: #fff; font-family: inherit; font-size: 17px; outline: none; transition: 0.4s; text-align: right; }
+input:focus, textarea:focus { border-color: var(--stark-gold); background: rgba(255,255,255,0.05); }
+.media-zone { width: 100%; aspect-ratio: 16/9; background: #000; border: 1px solid var(--stark-border); margin: 20px 0; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+.media-zone video, .media-zone img { width: 100%; height: 100%; object-fit: cover; }
+.action-bar { padding: 30px 0; width: 100%; display: flex; justify-content: center; }
+.push-btn { background: none; border: 1px solid var(--stark-gold); color: var(--stark-gold); padding: 20px 100px; font-family: 'Space Mono', monospace; font-size: 14px; letter-spacing: 5px; cursor: pointer; transition: 0.4s; }
+.push-btn:hover { background: var(--stark-gold); color: #000; box-shadow: 0 0 30px rgba(184, 137, 74, 0.3); }
+#status-msg { position: fixed; top: 30px; left: 30px; font-family: 'Space Mono', monospace; font-size: 10px; color: var(--stark-gold); padding: 10px; border: 1px solid var(--stark-gold); background: #000; display: none; z-index: 2000; }
+</style>
+</head>
+<body>
+<div id="status-msg">PUSH_SUCCESSFUL</div>
+<aside class="sidebar">
+    <div class="sidebar-brand">BLUE STAR</div>
+    <div class="category-tabs">
+        <div class="cat-tab active" data-cat="nuts">NUTS</div>
+        <div class="cat-tab" data-cat="seeds">SEEDS</div>
+        <div class="cat-tab" data-cat="dried">DRIED</div>
+    </div>
+
+    <div class="nav-group visible" id="group-nuts">
+        <div class="nav-label">NUTS // 9 UNITS</div>
+        <div class="nav-item active" data-id="almond" data-cat="nuts">UNIT_01 // שקד</div>
+        <div class="nav-item" data-id="cashew" data-cat="nuts">UNIT_02 // קשיו</div>
+        <div class="nav-item" data-id="walnut" data-cat="nuts">UNIT_03 // אגוז מלך</div>
+        <div class="nav-item" data-id="pecan" data-cat="nuts">UNIT_04 // פקאן</div>
+        <div class="nav-item" data-id="pistachio" data-cat="nuts">UNIT_05 // פיסטוק</div>
+        <div class="nav-item" data-id="hazelnut" data-cat="nuts">UNIT_06 // אגוז לוז</div>
+        <div class="nav-item" data-id="brazil" data-cat="nuts">UNIT_07 // אגוז ברזיל</div>
+        <div class="nav-item" data-id="macadamia" data-cat="nuts">UNIT_08 // מקדמיה</div>
+        <div class="nav-item" data-id="pinenut" data-cat="nuts">UNIT_09 // צנובר</div>
+    </div>
+    <div class="nav-group" id="group-seeds">
+        <div class="nav-label">SEEDS // 4 UNITS</div>
+        <div class="nav-item" data-id="sesame" data-cat="seeds">UNIT_10 // שומשום</div>
+        <div class="nav-item" data-id="sunflower" data-cat="seeds">UNIT_11 // חמניה</div>
+        <div class="nav-item" data-id="pumpkin-seeds" data-cat="seeds">UNIT_12 // גרעיני דלעת</div>
+        <div class="nav-item" data-id="chia" data-cat="seeds">UNIT_13 // זרעי צ'יה</div>
+    </div>
+    <div class="nav-group" id="group-dried">
+        <div class="nav-label">DRIED FRUITS // 8 UNITS</div>
+        <div class="nav-item" data-id="cranberry" data-cat="dried">UNIT_14 // חמוציות</div>
+        <div class="nav-item" data-id="mango" data-cat="dried">UNIT_15 // מנגו</div>
+        <div class="nav-item" data-id="prune" data-cat="dried">UNIT_16 // שזיף</div>
+        <div class="nav-item" data-id="raisins" data-cat="dried">UNIT_17 // צימוקים</div>
+        <div class="nav-item" data-id="apricot" data-cat="dried">UNIT_18 // משמש מיובש</div>
+        <div class="nav-item" data-id="date" data-cat="dried">UNIT_19 // תמר</div>
+        <div class="nav-item" data-id="pineapple" data-cat="dried">UNIT_20 // אננס מיובש</div>
+        <div class="nav-item" data-id="apple" data-cat="dried">UNIT_21 // תפוח מיובש</div>
+    </div>
+</aside>
+<main class="editor-container">
+    <div class="hero-header">
+        <span id="display-id">צומת_מערכת: ALMOND</span>
+        <h1 id="display-title">עריכת שקד</h1>
+    </div>
+    <div class="form-card">
+        <label class="label">שם המוצר (UNIT_NAME)</label>
+        <input type="text" id="in-name">
+    </div>
+    <div class="form-card">
+        <label class="label">תיאור מערכת (DATA_DECK)</label>
+        <textarea id="in-desc" rows="4"></textarea>
+    </div>
+    <div class="form-card">
+        <label class="label">ניהול מדיה (ASSET_MANAGER)</label>
+        <div class="media-zone" id="media-preview">
+            <span style="opacity:0.2; font-family:'Space Mono'; font-size:10px;">NULL_ASSET</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;">
+            <div>
+                <label style="font-size:10px;color:var(--stark-gold);letter-spacing:2px;font-family:'Space Mono',monospace;">HERO IMAGE <span id="ck-media1" style="color:#4CAF50;display:none;">&#10003;</span></label>
+                <input type="file" id="in-media1" accept="image/*,video/*" style="width:100%;margin-top:4px;">
+            </div>
+            <div>
+                <label style="font-size:10px;color:var(--stark-gold);letter-spacing:2px;font-family:'Space Mono',monospace;">GALLERY 2 <span id="ck-media2" style="color:#4CAF50;display:none;">&#10003;</span></label>
+                <input type="file" id="in-media2" accept="image/*,video/*" style="width:100%;margin-top:4px;">
+            </div>
+            <div>
+                <label style="font-size:10px;color:var(--stark-gold);letter-spacing:2px;font-family:'Space Mono',monospace;">GALLERY 3 <span id="ck-media3" style="color:#4CAF50;display:none;">&#10003;</span></label>
+                <input type="file" id="in-media3" accept="image/*,video/*" style="width:100%;margin-top:4px;">
+            </div>
+            <div>
+                <label style="font-size:10px;color:var(--stark-gold);letter-spacing:2px;font-family:'Space Mono',monospace;">GALLERY 4 <span id="ck-media4" style="color:#4CAF50;display:none;">&#10003;</span></label>
+                <input type="file" id="in-media4" accept="image/*,video/*" style="width:100%;margin-top:4px;">
+            </div>
+        </div>
+    </div>
+    <div class="form-card" style="display:grid; grid-template-columns: 1fr 1fr; gap:30px;">
+        <div><label class="label">שוק (MARKET_LOC)</label><input type="text" id="in-market"></div>
+        <div><label class="label">סטטוס (STATUS_METRIC)</label><input type="text" id="in-status"></div>
+    </div>
+    <div class="action-bar"><button class="push-btn" id="btn-save">PUSH_TO_CORE</button></div>
+</main>
+<script>
+const CATEGORY_MAP = {
+    almond:'nuts', cashew:'nuts', walnut:'nuts', pecan:'nuts', pistachio:'nuts',
+    hazelnut:'nuts', brazil:'nuts', macadamia:'nuts', pinenut:'nuts',
+    sesame:'seeds', sunflower:'seeds', 'pumpkin-seeds':'seeds', chia:'seeds',
+    cranberry:'dried', mango:'dried', prune:'dried', raisins:'dried', apricot:'dried', date:'dried', pineapple:'dried', apple:'dried'
+};
+let db, currentId = "almond";
+const req = indexedDB.open("StarkOS_DB", 1);
+req.onupgradeneeded = e => {
+    db = e.target.result;
+    if (!db.objectStoreNames.contains("archive")) db.createObjectStore("archive", { keyPath: "id" });
+};
+req.onsuccess = e => { db = e.target.result; load(currentId); };
+function load(id) {
+    const store = db.transaction("archive", "readonly").objectStore("archive");
+    const getReq = store.get(id);
+    getReq.onsuccess = () => {
+        const data = getReq.result || { id, name: "", desc: "", market: "", status: "" };
+        document.getElementById('in-name').value = data.name || "";
+        document.getElementById('in-desc').value = data.desc || "";
+        document.getElementById('in-market').value = data.market || "";
+        document.getElementById('in-status').value = data.status || "";
+        renderPreview(data.media1 || data.media || null);
+    };
+}
+function renderPreview(src) {
+    const v = document.getElementById('media-preview');
+    v.innerHTML = src ? "" : '<span style="opacity:0.2; font-family:\'Space Mono\'; font-size:10px;">NULL_ASSET</span>';
+    if (!src) return;
+    const isVid = src.includes("video") || src.startsWith("data:video");
+    const el = document.createElement(isVid ? 'video' : 'img');
+    el.src = src;
+    if (isVid) { el.autoplay = el.muted = el.loop = true; el.setAttribute('playsinline', ''); }
+    v.appendChild(el);
+}
+document.addEventListener('DOMContentLoaded', () => {
+    ['in-media1','in-media2','in-media3','in-media4'].forEach(id => {
+        document.getElementById(id).addEventListener('change', e => {
+            const file = e.target.files[0]; if (!file) return;
+            const ck = document.getElementById('ck-' + id.replace('in-',''));
+            const reader = new FileReader();
+            reader.onload = ev => {
+                window['_' + id.replace(/-/g,'_')] = ev.target.result;
+                if (id === 'in-media1') renderPreview(ev.target.result);
+                if (ck) { ck.style.display = 'inline'; ck.style.fontSize = '14px'; }
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+    // Category tab switching
+    document.querySelectorAll('.cat-tab').forEach(tab => {
+        tab.onclick = function() {
+            document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            document.querySelectorAll('.nav-group').forEach(g => g.classList.remove('visible'));
+            document.getElementById('group-' + this.dataset.cat).classList.add('visible');
+        };
+    });
+    // Nav item click
+    document.querySelectorAll('.nav-item').forEach(btn => {
+        btn.onclick = function() {
+            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentId = this.dataset.id;
+            // Switch to correct tab
+            const cat = CATEGORY_MAP[currentId];
+            document.querySelectorAll('.cat-tab').forEach(t => { t.classList.toggle('active', t.dataset.cat === cat); });
+            document.querySelectorAll('.nav-group').forEach(g => g.classList.remove('visible'));
+            document.getElementById('group-' + cat).classList.add('visible');
+            document.getElementById('display-id').innerText = "צומת_מערכת: " + currentId.toUpperCase();
+            document.getElementById('display-title').innerText = "עריכת " + this.innerText.split(' // ')[1];
+            load(currentId);
+        };
+    });
+});
+document.getElementById('btn-save').onclick = () => {
+    const readStore = db.transaction("archive", "readonly").objectStore("archive");
+    const getReq = readStore.get(currentId);
+    getReq.onsuccess = () => {
+        const existing = getReq.result || {};
+        const writeStore = db.transaction("archive", "readwrite").objectStore("archive");
+        const entry = {
+            id: currentId,
+            category: CATEGORY_MAP[currentId],
+            name: document.getElementById('in-name').value,
+            desc: document.getElementById('in-desc').value,
+            market: document.getElementById('in-market').value,
+            status: document.getElementById('in-status').value,
+            media1: window._in_media1 || existing.media1 || existing.media || null,
+            media2: window._in_media2 || existing.media2 || null,
+            media3: window._in_media3 || existing.media3 || null,
+            media4: window._in_media4 || existing.media4 || null
+        };
+        writeStore.put(entry).onsuccess = () => {
+            const s = document.getElementById('status-msg');
+            s.innerText = "המערכת_עודכנה: " + currentId.toUpperCase() + " [" + CATEGORY_MAP[currentId].toUpperCase() + "]";
+            s.style.display = 'block';
+            setTimeout(() => s.style.display='none', 2500);
+            window._in_media1 = window._in_media2 = window._in_media3 = window._in_media4 = null;
+            ['in-media1','in-media2','in-media3','in-media4'].forEach(id => {
+                document.getElementById(id).value = '';
+                const ck = document.getElementById('ck-' + id.replace('in-',''));
+                if (ck) ck.style.display = 'none';
+            });
+        };
+    };
+};
+</script>
+</body>
+</html>

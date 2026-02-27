@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>תפוח מיובש · Blue Star International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── BLUE STAR OS · PREMIUM DARK THEME v4.0 ── */
+:root {
+    --bg: #0A0A0B; --text: #FAF7F0; --body: #D1CEC5;
+    --accent: #3A5A18; --warm: #8AB840;
+    --card: rgba(14, 20, 8, 0.4); --radius: 20px;
+    --shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    background-color: var(--bg); color: var(--body);
+    font-family: 'Noto Sans Hebrew', sans-serif;
+    font-size: 18px; line-height: 1.9; overflow-x: hidden; position: relative;
+    background-image: linear-gradient(rgba(138,184,64,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(138,184,64,0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+body::before, body::after { content: ''; position: fixed; width: 600px; height: 600px; border-radius: 50%; filter: blur(120px); z-index: -2; opacity: 0.12; pointer-events: none; }
+body::before { background: var(--warm); top: -100px; left: -100px; }
+body::after { background: #2A4010; bottom: 20%; right: -150px; }
+#progress-bar { position:fixed; top:0; left:0; height:3px; background:var(--warm); width:0; z-index:1000; }
+.back-btn { position:absolute; top:40px; left:40px; z-index:10; display:flex; align-items:center; gap:8px; color:var(--text); text-decoration:none; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:2px; opacity:0.5; transition:0.3s; }
+.back-btn:hover { opacity:1; color:var(--warm); }
+#btt { position:fixed; bottom:30px; left:30px; width:40px; height:40px; background:var(--warm); color:#000; border:none; border-radius:50%; cursor:pointer; font-size:18px; display:none; z-index:1000; transition:0.3s; }
+#btt.visible { display:flex; align-items:center; justify-content:center; }
+#btt:hover { transform:scale(1.1); box-shadow:0 0 20px rgba(138,184,64,0.4); }
+.hero { padding:100px 40px 160px; text-align:center; color:var(--text); position:relative; }
+.hero-k { font-size:11px; font-weight:700; letter-spacing:5px; color:var(--warm); margin-bottom:20px; text-transform:uppercase; font-family:'Space Mono',monospace; }
+.hero h1 { font-family:'Frank Ruhl Libre',serif; font-size:90px; font-weight:900; line-height:0.8; margin-bottom:25px; letter-spacing:-2px; }
+.hero .deck { font-size:20px; opacity:0.8; max-width:650px; margin:0 auto 40px; font-weight:300; }
+.hero-img-wrap { max-width:900px; margin:0 auto -220px; height:500px; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); background:#000; border:1px solid rgba(255,255,255,0.05); }
+.hero-img-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:12px; background:#0A0A0B; }
+.hero-img-placeholder span { color:rgba(255,255,255,0.15); font-size:12px; letter-spacing:3px; font-family:'Space Mono',monospace; }
+.side-nav { position:fixed; top:50%; right:30px; transform:translateY(-50%); z-index:100; display:flex; flex-direction:column; gap:12px; }
+.nav-dot { width:10px; height:10px; border:none; border-radius:50%; opacity:0.35; cursor:pointer; transition:0.3s; box-shadow: 0 0 0 0.5px rgba(255,255,255,0.22), inset 0 0 0 0.5px rgba(255,255,255,0.08); background: transparent; }
+.nav-dot.active { opacity:1; transform:scale(1.4); background: radial-gradient(circle at 35% 35%, color-mix(in srgb, var(--warm) 90%, white 10%), var(--accent) 130%); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.12); }
+.con { max-width:800px; margin:280px auto 100px; padding:0 24px; position:relative; z-index:5; }
+.ch { background:var(--card); backdrop-filter:blur(25px); -webkit-backdrop-filter:blur(25px); padding:50px; border-radius:var(--radius); margin-bottom:40px; border:1px solid rgba(255,255,255,0.05); position:relative; overflow:hidden; color:var(--body); }
+.ch::before, .ch::after { content:'+'; position:absolute; font-family:'Space Mono',monospace; color:var(--warm); font-size:14px; opacity:0.4; }
+.ch::before { top:15px; left:15px; }
+.ch::after { bottom:15px; right:15px; }
+.ch h2 { font-family:'Frank Ruhl Libre',serif; font-size:38px; margin-bottom:25px; color:var(--text); border-right:5px solid var(--warm); padding-right:20px; line-height:1.1; }
+.ch h3 { font-family:'Frank Ruhl Libre',serif; font-size:22px; font-weight:700; color:var(--text); margin:36px 0 14px; padding-right:14px; border-right:3px solid var(--warm); }
+.ch p { margin-bottom:18px; color:var(--body); }
+.cl { font-size:10px; font-weight:700; color:var(--warm); letter-spacing:4px; text-transform:uppercase; margin-bottom:10px; display:block; font-family:'Space Mono',monospace; }
+.dc::first-letter { font-family:'Frank Ruhl Libre',serif; font-size:2.8em; font-weight:900; color:var(--warm); line-height:1; float:right; margin-left:8px; }
+em { color:#B8D870; font-style:italic; }
+strong { color:var(--text); }
+.ab { padding:20px 24px; margin:28px 0; border-radius:0 8px 8px 0; }
+.ab .tg { font-size:10px; font-weight:700; letter-spacing:4px; text-transform:uppercase; margin-bottom:6px; }
+.ab p { margin:0; font-size:16px; line-height:1.75; }
+.ab-w { background:rgba(138,184,64,0.08); border-right:4px solid var(--warm); }
+.ab-w .tg { color:var(--warm); }
+.ab-g { background:rgba(30,60,8,0.25); border-right:4px solid var(--accent); }
+.ab-g .tg { color:#80A830; }
+.ab-r { background:rgba(184,50,50,0.1); border-right:4px solid #B83030; }
+.ab-r .tg { color:#E06060; }
+.ab-r p { color:#DDB0B0; }
+.vc { background:rgba(14,20,8,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:22px; margin:18px 0; }
+.vc .vn { font-family:'Frank Ruhl Libre',serif; font-size:21px; font-weight:700; color:var(--text); }
+.vc .vt { font-size:12px; color:var(--warm); font-weight:600; margin-bottom:10px; }
+.vc p { font-size:16px; line-height:1.75; margin-bottom:0; color:var(--body); }
+.vc .vs { display:flex; gap:12px; flex-wrap:wrap; margin-top:14px; }
+.vc .vsi { background:rgba(255,255,255,0.04); padding:6px 12px; border-radius:5px; font-size:12px; color:#90A860; }
+.vc .vsi strong { color:var(--text); }
+.ng { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:24px 0; }
+.ni { background:rgba(14,20,8,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:14px; text-align:center; }
+.ni .nv { font-family:'Frank Ruhl Libre',serif; font-size:26px; font-weight:700; color:var(--text); }
+.ni .nu { font-size:13px; color:#90A860; margin-top:2px; }
+.ni .nl { font-size:11px; color:var(--warm); margin-top:3px; font-weight:600; }
+.pb-chart { margin:16px 0 8px; display:flex; flex-direction:column; gap:10px; }
+.pb-row { display:flex; align-items:center; gap:10px; }
+.pb-meta { display:flex; align-items:center; gap:6px; min-width:120px; justify-content:flex-end; }
+.pb-flag { font-size:18px; }
+.pb-name { font-size:13px; color:#90A860; }
+.pb-track { flex:1; background:rgba(255,255,255,0.08); height:18px; border-radius:9px; overflow:hidden; }
+.pb-fill { height:100%; width:0; border-radius:9px; transition:width 1.2s cubic-bezier(0.22,1,0.36,1); }
+.pb-pct { font-family:'Frank Ruhl Libre',serif; font-size:14px; font-weight:700; color:var(--text); width:36px; text-align:left; }
+.pb-note { font-size:11px; color:#506020; opacity:.7; margin-top:10px; text-align:center; }
+.gt { width:100%; border-collapse:collapse; margin:25px 0; font-size:15px; border-top:1px solid rgba(255,255,255,0.05); }
+.gt th { background:rgba(0,0,0,0.5); color:var(--text); padding:14px; text-align:right; font-size:12px; letter-spacing:1px; border-bottom:1px solid rgba(255,255,255,0.1); }
+.gt td { padding:14px; border-bottom:1px solid rgba(255,255,255,0.05); color:var(--body); }
+.gt tr:nth-child(even) { background:rgba(255,255,255,0.02); }
+.pull { margin:40px 0; padding:45px; background:rgba(0,0,0,0.4); border-radius:var(--radius); text-align:center; border:1px solid rgba(138,184,64,0.2); }
+.pull p { font-family:'Frank Ruhl Libre',serif; font-size:22px; font-weight:500; color:var(--body); line-height:1.55; margin:0; font-style:italic; }
+.reveal { opacity:0; transform:translateY(50px); transition:all 0.8s cubic-bezier(0.2,1,0.2,1); }
+.reveal.active { opacity:1; transform:translateY(0); }
+.marquee-container { position:fixed; bottom:-3vh; left:0; width:100vw; overflow:hidden; z-index:-1; pointer-events:none; }
+.marquee-text { font-family:'Playfair Display',serif; font-size:15vw; white-space:nowrap; color:transparent; -webkit-text-stroke:1px rgba(255,255,255,0.03); animation:scrollText 40s linear infinite; }
+@keyframes scrollText { 0% { transform:translateX(0); } 100% { transform:translateX(-50%); } }
+.ft { text-align:center; padding:44px 24px; font-size:13px; color:#506020; border-top:1px solid rgba(255,255,255,0.06); margin-top:36px; }
+.proc-steps { display:flex; flex-direction:column; gap:20px; margin:24px 0; }
+.proc-step { display:flex; gap:20px; align-items:flex-start; }
+.proc-step-num { min-width:36px; height:36px; border-radius:50%; background:var(--warm); color:#000; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.proc-step-title { font-family:'Frank Ruhl Libre',serif; font-size:18px; font-weight:700; color:var(--text); margin-bottom:6px; }
+.proc-step-body { font-size:16px; color:var(--body); line-height:1.75; }
+.ch ol, .ch ul { padding-right:24px; margin:16px 0 18px; }
+.ch li { margin-bottom:10px; color:var(--body); line-height:1.8; }
+.ch ol li::marker { color:var(--warm); font-family:'Space Mono',monospace; font-size:12px; font-weight:700; }
+.ch ul li::marker { color:var(--warm); }
+@media (max-width:900px) {
+    .side-nav { display:none; }
+    .back-btn { top:20px; left:20px; }
+    .hero h1 { font-size:55px; }
+    .hero-img-wrap { height:300px; margin-bottom:-100px; }
+    .con { margin-top:150px; }
+    .ng { grid-template-columns:repeat(2,1fr); }
+}
+</style>
+<script src="../auth.js"></script>
+</head>
+<body>
+<div class="marquee-container"><div class="marquee-text">BLUE STAR INTERNATIONAL · GLOBAL COMMODITY ARCHIVE · BLUE STAR INTERNATIONAL · GLOBAL COMMODITY ARCHIVE ·</div></div>
+<div id="progress-bar"></div>
+<nav class="side-nav">
+    <div class="nav-dot active" data-target="ch-1"></div>
+    <div class="nav-dot" data-target="ch-2"></div>
+    <div class="nav-dot" data-target="ch-3"></div>
+    <div class="nav-dot" data-target="ch-4"></div>
+    <div class="nav-dot" data-target="ch-5"></div>
+    <div class="nav-dot" data-target="ch-6"></div>
+    <div class="nav-dot" data-target="ch-7"></div>
+    <div class="nav-dot" data-target="ch-8"></div>
+    <div class="nav-dot" data-target="ch-9"></div>
+    <div class="nav-dot" data-target="ch-10"></div>
+</nav>
+<section class="hero">
+    <a href="../../index.html" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>חזרה למסוף</a>
+    <div class="hero-k">ערך ידע חקלאי · Blue Star International</div>
+    <h1 id="sync-title">תפוח מיובש</h1>
+    <p class="deck" id="sync-desc">7,500 זנים נוצרו. שלושה שולטים ב-50% מהשוק. הפרי שנסע עם כל גל הגירה אנושי, שהפך למטאפורה לחטא, לגילוי מדעי ולחברת הטכנולוגיה הגדולה בעולם, נולד מזן בר יחיד בקזחסטן שעדיין גדל שם כיום.</p>
+    <div class="hero-img-wrap" id="slot-product-hero"><div class="hero-img-placeholder"><span>מדיה_לא_נטענה</span></div></div>
+</section>
+<main class="con">
+
+<!-- ═══ CH 1 ═══ -->
+<div class="ch" id="ch-1">
+<div class="cl">פרק ראשון</div>
+<h2>הפרי שהאנושות לקחה איתה לכל גל הגירה</h2>
+<p class="dc">כל גידולי התפוח בעולם, כל 7,500 הזנים שנוצרו במשך אלפי שנות תרבות, צאצאים של זן בר יחיד שגדל בהרי טיאן שאן בדרום קזחסטן של היום. <em>Malus sieversii</em>. הוא עדיין גדל שם, ביערות הרים שהוכרזו אתר מורשת עולמי UNESCO, ענפיו כבדים מפירות שאיש לא טיפל בהם ואיש לא קצרם. ממצאים גנטיים משנת 2010 אישרו זאת סופית: מוצא התפוח המתורבת מנקודה אחת, פרי אחד, שלב אחד של היסטוריה.</p>
+<p>משם, עם תנועת האנושות לאורך הדרך הגדולה, הגיע התפוח לפרס, ליוון, לרומא. כל גל התיישבות לקח את הפרי הזה. כשהרומאים הרחיבו את האימפריה לצפון אירופה, עצי התפוח הלכו איתם. כשמתיישבים אירופאים הפליגו לאמריקה, לאוסטרליה ולניו זילנד, שתלו עצי תפוח בין הראשונים. ג'וני אפלסיד (John Chapman, 1774-1845), שנטע מטעי תפוחים לאורך גבול ההתיישבות האמריקאי, הפך למיתוס לאומי. אבל רוב תפוחיו היו מרירים ולא למאכל ישיר. הם שימשו לסיידר, משקה היומיום של האמריקאים לפני שמי שתייה בטוחים.</p>
+<p>הייבוש הוא הסיבה שהפרי הזה עבר כל הגירה בהצלחה. לפני קירור, פרי סתיו שלא יובש התקלקל תוך שבועות. ייבוש בשמש ובתנורים הפך את יבול הסתיו לאספקת חורף. ממצאים של תפוחים מיובשים נמצאו באתרים ניאוליתיים בשווייץ מלפני 5,000 שנה. <em>Apfelringen</em>, טבעות תפוח מיובשות על חוט, היו מאכל חורף קלאסי בדרום גרמניה ואוסטריה שנמצא בכל בית.</p>
+<div class="pull"><p>7,500 זנים נוצרו, 100 הגיעו לשוק המסחרי. שלושה זנים בלבד, Gala, Fuji ו-Golden Delicious, שולטים ב-50% מהייצור העולמי. גיוון של אלפי שנים, ממוקד בסוף לשלושה זוכים.</p></div>
+<div class="ab ab-w"><div class="tg">Malus sieversii · אבי כולם</div><p><em>Malus sieversii</em> גדל בר ביערות קזחסטן, קירגיזסטן ותאג'יקיסטן. הוא מייצר פירות בגדלים, בצבעים ובטעמים שמכסים את כל הספקטרום שאנחנו מכירים מהסופרמרקט, ממתוק מאוד לחמוץ מאוד, מאדום לירוק לצהוב. לאינסטיטוט ווילוב ברוסיה יש אוסף של אלפי זני <em>Malus sieversii</em> פראיים. כולם ממקור אחד.</p></div>
+</div>
+
+<!-- ═══ CH 2 ═══ -->
+<div class="ch" id="ch-2">
+<div class="cl">פרק שני</div>
+<h2>השוק: סין שולטת בנפח, ניו זילנד שולטת במחיר</h2>
+<p class="dc">תפוח הוא פרי אזור ממוזג. דורש חורף עם שעות צינה (Chilling Hours), קיץ לא קיצוני, גשמים מחולקים. זה מגביל את הגידול לאירופה, צפון אמריקה, דרום אמריקה וניו זילנד-אוסטרליה. סין היא החריג: אזורי הגבול הצפוניים שלה, Shaanxi ו-Gansu, הפכו לאזורי גידול ענקיים. ייצור עולמי: כ-86 מיליון טון טרי בשנה. שוק המיובש: כ-300,000-350,000 טון, שווי 600-750 מיליון דולר.</p>
+<div class="ng">
+    <div class="ni"><div class="nv">86M</div><div class="nu">טון/שנה</div><div class="nl">ייצור עולמי טרי 2023</div></div>
+    <div class="ni"><div class="nv">~$680M</div><div class="nu">שווי ייצוא מיובש</div><div class="nl">2024</div></div>
+    <div class="ni"><div class="nv">$1,800-5,000</div><div class="nu">דולר/טון</div><div class="nl">תלוי צורת עיבוד</div></div>
+</div>
+<div class="pb-chart">
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇨🇳</span><span class="pb-name">סין</span></div><div class="pb-track"><div class="pb-fill" data-w="45" style="background:#2A4010"></div></div><span class="pb-pct">45%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇺🇸</span><span class="pb-name">ארה"ב</span></div><div class="pb-track"><div class="pb-fill" data-w="15" style="background:#4A6820"></div></div><span class="pb-pct">15%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇵🇱</span><span class="pb-name">פולין</span></div><div class="pb-track"><div class="pb-fill" data-w="10" style="background:#6A8830"></div></div><span class="pb-pct">10%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇨🇱</span><span class="pb-name">צ'ילה</span></div><div class="pb-track"><div class="pb-fill" data-w="8" style="background:#8AAA40"></div></div><span class="pb-pct">8%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇩🇪</span><span class="pb-name">גרמניה</span></div><div class="pb-track"><div class="pb-fill" data-w="6" style="background:#AAC860"></div></div><span class="pb-pct">6%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🌍</span><span class="pb-name">אחרים</span></div><div class="pb-track"><div class="pb-fill" data-w="16" style="background:#C8D890"></div></div><span class="pb-pct">16%</span></div>
+    <div class="pb-note">ייצוא תפוח מיובש · ITC Trade Map 2023</div>
+</div>
+<p>סין שולטת בנפח בשל עלויות נמוכות. אבל בשוק הפרמיום, ארה"ב (Washington State), ניו זילנד וגרמניה מייצאות במחירים גבוהים בהרבה לשווקי EU, יפן ומזרח התיכון. ישראל מייבאת 1,500-2,500 טון תפוחים מיובשים בשנה, בעיקר מטורקיה, צ'ילה וסין.</p>
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>מדינה</th><th>ייצור טרי (M טון)</th><th>תפקיד בשוק המיובש</th><th>מגמה</th></tr>
+<tr><td>סין</td><td>47.5</td><td>נפח מסחרי ענק, מחיר נמוך</td><td>שולט בנפח</td></tr>
+<tr><td>ארה"ב</td><td>4.5</td><td>פרמיום, Apple Chips</td><td>יציב</td></tr>
+<tr><td>פולין</td><td>4.2</td><td>EU, Concentrate, מיובש</td><td>גדל</td></tr>
+<tr><td>צ'ילה</td><td>1.6</td><td>ייצוא דרום-צפון</td><td>גדל</td></tr>
+<tr><td>גרמניה</td><td>1.0</td><td>Organic, פרמיום EU</td><td>יציב</td></tr>
+<tr><td>טורקיה</td><td>3.8</td><td>שוק ישראל ומזרח תיכון</td><td>גדל</td></tr>
+</table></div>
+<div class="ab ab-g"><div class="tg">שוק ישראלי</div><p>ישראל מייבאת תפוחים מיובשים בעיקר מטורקיה (Fuji, Golden), וחלק קטן מצ'ילה ומגרמניה (Organic). ביקוש גבוה לפרמיום Organic Freeze Dried מגרמניה בשוק ילדים. תפוח מיובש לגרנולה מגיע בעיקר מסין ופולין במחירים תחרותיים.</p></div>
+</div>
+
+<!-- ═══ CH 3 ═══ -->
+<div class="ch" id="ch-3">
+<div class="cl">פרק שלישי</div>
+<h2>ארבע צורות מסחריות, ארבעה שווקים שונים</h2>
+<p class="dc">שוק תפוח מיובש מגוון יותר מרוב פירות יבשים. קיימות ארבע צורות מסחריות עיקריות עם שווקים, מחירים ולקוחות שונים. כל אחת מייצגת שלב שונה של עיבוד ופרמיה שונה. המחיר יכול להשתנות פי שישה בין הצורה הפשוטה לצורה המתקדמת, עבור אותו פרי.</p>
+<div class="vc">
+    <div class="vn">Dried Apple Rings / Slices · פרוסות וטבעות</div>
+    <div class="vt">הצורה הקלאסית · שוק הנשנוש</div>
+    <p>תפוח פרוס לטבעות (5-8 מ"מ) ומיובש בחום נמוך 60-70°C. עם או בלי קליפה, עם או בלי ליבה. SO2 או חומצה אסקורבית לשמירת צבע בהיר. ללא SO2: חום-זהוב. Organic Unsulfured: חום-כהה. מרקם: לעיסה, מרוכז. מחיר: 2,000-3,500 דולר לטון.</p>
+    <div class="vs"><div class="vsi">מחיר: <strong>$2,000-3,500/t</strong></div><div class="vsi">SO2: <strong>אופציונלי</strong></div><div class="vsi"><strong>נשנוש · גרנולה · ילדים</strong></div></div>
+</div>
+<div class="vc">
+    <div class="vn">Apple Chips · שבבים פריכים</div>
+    <div class="vt">Freeze Dried או Vacuum Fried · פרמיום</div>
+    <p>שני מסלולים: Freeze Dried (ייבוש הקפאה, פריך, שומר צבע וטעם, ללא שמן) ו-Vacuum Fried (טיגון בוואקום בשמן קוקוס, פריך, טעם עמוק). Freeze Dried: 6,000-12,000 דולר לטון. Vacuum Fried: 4,000-7,000. שוק ילדים ומבוגרים, פרמיום, אריזות מתנה. קטגוריה בצמיחה מהירה.</p>
+    <div class="vs"><div class="vsi">Freeze Dried: <strong>$6,000-12,000/t</strong></div><div class="vsi"><strong>פרמיום · ילדים · מתנות</strong></div></div>
+</div>
+<div class="vc">
+    <div class="vn">Dried Apple Chunks / Dices · נתחים</div>
+    <div class="vt">תעשייתי · מאפים · גרנולה</div>
+    <p>קוביות 8-15 מ"מ. מיועד בעיקר לתעשייה: גרנולות, Muesli, מאפים, דייסות מוכנות. מיכון מלא, אחידות גבוהה, מינון קל. מחיר: 1,800-2,800 דולר לטון. שוק B2B. הזן המשמש בצ'ילה ופולין מותאם לנפח זה.</p>
+    <div class="vs"><div class="vsi">מחיר: <strong>$1,800-2,800/t</strong></div><div class="vsi"><strong>תעשייה · גרנולה · מאפים</strong></div></div>
+</div>
+<div class="vc">
+    <div class="vn">Apple Powder · אבקת תפוח</div>
+    <div class="vt">תעשייה · ספורט · תוספי תזונה</div>
+    <p>Spray Dried Apple Powder: ריכוז גבוה, ספיגה מהירה. ויטמין C ופוליפנולים בצורה זמינה. שימוש: שייקי ספורט, אבקות תינוקות, תוספי תזונה. מחיר: 4,000-7,000 דולר לטון. שוק נישה בצמיחה עם שוק ה-Nutraceuticals.</p>
+    <div class="vs"><div class="vsi">מחיר: <strong>$4,000-7,000/t</strong></div><div class="vsi"><strong>תעשייה · ספורט · תינוקות</strong></div></div>
+</div>
+</div>
+
+<!-- ═══ CH 4 ═══ -->
+<div class="ch" id="ch-4">
+<div class="cl">פרק רביעי</div>
+<h2>תזונה: הפקטין שנתן לתפוח את המוניטין</h2>
+<p class="dc">האמרה "An apple a day keeps the doctor away" פורסמה לראשונה ב-1913 בוורשה ב-Notes and Queries. היא לא נכתבה על ידי רופא ולא מבוססת על מחקר. היא פשוט נשמעה נכון, ונשארה. מה שמעניין הוא שיש בה גרעין של אמת ביולוגית: הפקטין שבתפוח, סיב מסיס שמרוכז בקליפה ובאזור הליבה, עושה בדיוק מה שהאמרה הבטיחה. הוא מפחית ספיגת כולסטרול LDL, מייצב רמות סוכר ומזין חיידקי מעיים. בלי שאיש ב-1913 ידע אנטוס על פקטין.</p>
+<div class="ng">
+    <div class="ni"><div class="nv">243</div><div class="nu">קלוריות / 100g</div><div class="nl">מיובש טבעי</div></div>
+    <div class="ni"><div class="nv">65g</div><div class="nu">פחמימות / 100g</div><div class="nl">מתוכן ~57g סוכר</div></div>
+    <div class="ni"><div class="nv">8.7g</div><div class="nu">סיבים / 100g</div><div class="nl">גבוה לפרי מיובש</div></div>
+    <div class="ni"><div class="nv">450mg</div><div class="nu">אשלגן / 100g</div><div class="nl">10% DV</div></div>
+    <div class="ni"><div class="nv">4.6mg</div><div class="nu">ויטמין C / 100g</div><div class="nl">5% DV (מחומם)</div></div>
+    <div class="ni"><div class="nv">~0.4g</div><div class="nu">שומן / 100g</div><div class="nl">כמעט אפס</div></div>
+</div>
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>ערך תזונתי</th><th>כמות ל-100g</th><th>% DV</th></tr>
+<tr><td>קלוריות</td><td>243 kcal</td><td>12%</td></tr>
+<tr><td>פחמימות</td><td>65.1g</td><td>24%</td></tr>
+<tr><td>סוכרים</td><td>57.2g</td><td></td></tr>
+<tr><td>סיבים תזונתיים</td><td>8.7g</td><td>31%</td></tr>
+<tr><td>חלבון</td><td>0.9g</td><td>2%</td></tr>
+<tr><td>שומן</td><td>0.4g</td><td>1%</td></tr>
+<tr><td>ויטמין C</td><td>4.6mg</td><td>5%</td></tr>
+<tr><td>ויטמין K</td><td>3.5mcg</td><td>3%</td></tr>
+<tr><td>אשלגן</td><td>450mg</td><td>10%</td></tr>
+<tr><td>סידן</td><td>14mg</td><td>1%</td></tr>
+<tr><td>ברזל</td><td>1.4mg</td><td>8%</td></tr>
+<tr><td>מנגן</td><td>0.20mg</td><td>9%</td></tr>
+<tr><td>B6</td><td>0.09mg</td><td>5%</td></tr>
+</table></div>
+<h3>פקטין: מה שתעשיית ה-$1.2B לא מספרת</h3>
+<p>פקטין הוא פוליסכריד מסיס שנמצא בדופן התא הצמחי. בתפוח, הוא מרוכז בקליפה ובאזור הליבה. פקטין מתפרק בחום גבוה, לכן עיבוד בטמפרטורה נמוכה משמר יותר. הוא מהווה מזון לחיידקי מעיים (Prebiotic), מוריד ספיגת כולסטרול LDL ומייצב רמות סוכר. תעשיית הפקטין העולמית, 1.2 מיליארד דולר בשנה, מופקת בעיקר מ-Apple Pomace, גרגר הפסולת שנותר לאחר מיצוי מיץ תפוח בפולין, גרמניה וסין.</p>
+<div class="ab ab-w"><div class="tg">קליפה שווה 50-60% מהערך</div><p>50-60% מהפוליפנולים של תפוח נמצאים בקליפה, לא בבשר. תפוח מיובש עם קליפה מכיל פי 2-3 יותר נוגדי חמצון מאשר תפוח מקולף. Organic Apple Chips עם קליפה הם הגרסה הבריאה ביותר. ניתן לזהות: קליפה גלויה בשוליים בצבע ירוק-אדום.</p></div>
+</div>
+
+<!-- ═══ CH 5 ═══ -->
+<div class="ch" id="ch-5">
+<div class="cl">פרק חמישי</div>
+<h2>לא כל תפוח מתייבש: הזנים שעובדים</h2>
+<p class="dc">לא כל תפוח מתאים לייבוש. הקריטריון הראשון הוא יחס סוכר-חומצה: זן מתוק מדי יוצר מוצר כבד ודביק. זן חמוץ מדי יוצר מוצר שאינו נעים לנשנוש. הזנים הטובים ביותר לייבוש הם בעלי סוכר-חומצה מאוזן, בשר מוצק (לא רך), ולחות בינונית-נמוכה שמקצרת זמן ייבוש. Fuji, שנוצר ביפן ב-1962 ונשלט כיום בסין, הוא הדוגמה המושלמת: בשר מוצק, סוכר גבוה, חמיצות נמוכה.</p>
+<div class="vc">
+    <div class="vn">Fuji · פוג'י</div>
+    <div class="vt">יפן 1962 · שוק המסה</div>
+    <p>הזן הנמכר ביותר בעולם. מתוק מאוד, בשר פריך ומוצק, לחות בינונית. מתאים מאוד לייבוש: מוצר מתוק עם חמיצות מינימלית. צבע מיובש: זהוב-ורדרד. גדל בנפחים ענקיים בסין ובארה"ב. שוק המסה של Apple Chips ופרוסות מיובשות.</p>
+    <div class="vs"><div class="vsi"><strong>שוק מסה · נפח גבוה</strong></div><div class="vsi">מוצא: <strong>יפן, 1962</strong></div></div>
+</div>
+<div class="vc">
+    <div class="vn">Granny Smith · גרני סמית'</div>
+    <div class="vt">ירוק-חמוץ · Apple Chips פרמיום</div>
+    <p>חמוץ, פריך, ירוק. בשר מוצק מאוד מתאים לייבוש בלי ריכוך. צבע מיובש: ירוק-זית אטרקטיבי. טעם: חמוץ-מרענן. מועדף ב-Apple Chips פרמיום ובתעשיית המאפים שמחפשת חמיצות. ייצוא גדול מאוסטרליה ודרום אפריקה. מוצאו מקרי: אפייה אנה סמית' ב-1868 השליכה גרעיני תפוח לגינה ומצאה עץ שלא ידעה לזהות.</p>
+    <div class="vs"><div class="vsi"><strong>פרמיום · חמוץ · מאפים</strong></div><div class="vsi">מוצא: <strong>אוסטרליה, 1868</strong></div></div>
+</div>
+<div class="vc">
+    <div class="vn">Golden Delicious · גולדן</div>
+    <div class="vt">זהוב-מתוק · תעשייה</div>
+    <p>זן ותיק (1890), מתוק, צהוב, בשר רך יחסית. מיובש: קיטון מהיר אבל מרקם רך יותר. פופולרי בתעשיית Apple Juice Concentrate ובייצור מיובש לתעשיית מאפים. מסת גידול ענקית בפולין ובגרמניה. הזן שעליו מבוססת תעשיית הפקטין האירופית.</p>
+    <div class="vs"><div class="vsi"><strong>תעשייה · מיץ · מאפים</strong></div><div class="vsi">מוצא: <strong>ארה"ב, 1890</strong></div></div>
+</div>
+<div class="vc">
+    <div class="vn">Pink Lady (Cripps Pink)</div>
+    <div class="vt">פרמיום · שיווק מותגי</div>
+    <p>מותג מוגן (Cripps Pink), גדל בייחוד באוסטרליה, ניו זילנד ואיטליה. מאזן סוכר-חומצה מצוין, צבע ורוד-אדום אטרקטיבי, בשר מוצק. Apple Chips מ-Pink Lady נמכרים בפרמיה של 30-50% על Fuji. ויזואל יפה בגלל הפסים הורדרדים שנשמרים בייבוש.</p>
+    <div class="vs"><div class="vsi"><strong>פרמיום · מותגי · ויזואל</strong></div><div class="vsi">פרמיה: <strong>30-50%</strong></div></div>
+</div>
+<div class="pull"><p>Granny Smith הומצא בטעות. האפייה סמית' זרקה גרעיני תפוח לגינה ב-1868 ולא ידעה מאיזה זן. העץ שצמח הפך לאחד הזנים הנמכרים ביותר בעולם. הגנטיקה לפעמים עושה עבודה טובה יותר מהתכנון.</p></div>
+</div>
+
+<!-- ═══ CH 6 ═══ -->
+<div class="ch" id="ch-6">
+<div class="cl">פרק שישי</div>
+<h2>עיבוד: למה חמצון הוא האויב הראשי</h2>
+<p class="dc">ייבוש תפוח דורש טיפול בחמצון מהיר: תפוח חתוך משחים תוך דקות חשיפה לאוויר. זה האנזים Polyphenol Oxidase שמגיב עם חמצן. בלי טיפול, גם מוצר מיובש יהיה חום-כהה וטעמו ישתנה. כל קו ייבוש מקצועי כולל שלב מניעת חמצון ישיר אחרי החיתוך. ההבדל בין תפוח מיובש לבן-זהוב לתפוח חום-כהה הוא לרוב שאלה של SO2 מול Unsulfured, לא של איכות הפרי.</p>
+<div class="proc-steps">
+    <div class="proc-step"><div class="proc-step-num">1</div><div><div class="proc-step-title">קצירה ומיון</div><div class="proc-step-body">תפוחים נקצרים בבשלות מלאה. מיון לפי גודל, צבע ושלמות. פרי פגום, מכתמים, מחולת: לתעשיית מיץ, לא לייבוש פרמיום. תפוח קצור מוקדם מדי: עמילן גבוה, סוכר נמוך, טעם שטוח.</div></div></div>
+    <div class="proc-step"><div class="proc-step-num">2</div><div><div class="proc-step-title">קילוף וחיתוך</div><div class="proc-step-body">קילוף (לרוב) והסרת ליבה. חיתוך לטבעות 5-8 מ"מ, פרוסות, קוביות, או Slabs. מכונות קיצוב מדויקות לאחידות. עובי חיתוך אחיד קריטי לייבוש אחיד.</div></div></div>
+    <div class="proc-step"><div class="proc-step-num">3</div><div><div class="proc-step-title">מניעת חמצון</div><div class="proc-step-body">שלוש שיטות: (א) טבילה בתמיסת SO2 (Sodium Metabisulfite) 0.1-0.5% לכמה דקות. (ב) תמיסת חומצה אסקורבית (ויטמין C) 0.5-1% ללא SO2. (ג) Blanching בקיטור שמשמיד את האנזים. Natural Unsulfured משתמש בשיטות ב' או ג'.</div></div></div>
+    <div class="proc-step"><div class="proc-step-num">4</div><div><div class="proc-step-title">ייבוש</div><div class="proc-step-body">חום נמוך: 60-70°C, 6-12 שעות. לחות סופית: 10-16%. Freeze Dried: מינוס 40°C, ואקום, 20-36 שעות, לחות פחות מ-3%. Vacuum Fried: שמן, ואקום, 120°C, 20-40 דקות, לחות 3-5%.</div></div></div>
+    <div class="proc-step"><div class="proc-step-num">5</div><div><div class="proc-step-title">בדיקות ואריזה</div><div class="proc-step-body">לחות, Aw, SO2 (אם רלוונטי), Aflatoxin, E.coli. Apple Chips: אריזה בשקים עם חנקן (N2) להגנה מחמצון מחדש. פרוסות: שקים 5-12.5 ק"ג. Freeze Dried: שקיות אלומיניום אטומות.</div></div></div>
+</div>
+<div class="ab ab-w"><div class="tg">יחס המרה: לא מרווחי במיוחד</div><p>6-7 ק"ג תפוח טרי לייצור 1 ק"ג מיובש. מחיר תפוח טרי: 0.3-0.8 דולר לק"ג. מיובש: 2-5 דולר לק"ג. הפרמיה לא גבוהה במיוחד, מה שמסביר למה ייצור תפוח מיובש רווחי בעיקר בנפחים ובמדינות עם עלות עבודה נמוכה.</p></div>
+</div>
+
+<!-- ═══ CH 7 ═══ -->
+<div class="ch" id="ch-7">
+<div class="cl">פרק שביעי</div>
+<h2>שימושים: מגרנולה ועד תעשיית פקטין של מיליארד דולר</h2>
+<p class="dc">תפוח מיובש הוא חומר גלם שמשתלב ברוב קטגוריות המזון. הטעם המוכר, הסיבים, והמרקם הגמיש (פרוסות) או הפריך (Chips) מאפשרים שימוש בכל מקום שרוצים "טעם תפוח" בלי הלחות של פרי טרי. מה שפחות ידוע: הפסולת של ייצור מיץ תפוח, ה-Apple Pomace שנשאר אחרי הסחיטה, הוא מה שמניע תעשיית פקטין ב-1.2 מיליארד דולר בשנה.</p>
+<h3>נשנוש, ילדים וגרנולה</h3>
+<p>Apple Chips Freeze Dried הם אחד ממוצרי הנשנוש לילדים בצמיחה הגבוהה ביותר בשוק. בריאות תפוסה, טעים, קל לאריזה. גרנולה עם תפוח מיובש, Muesli ו-Granola Bars הם שוק B2B גדול. פרמטר מפתח לתעשייה: אחידות קוביות ולחות נמוכה שלא מרטיבה את השאר.</p>
+<h3>מאפים ותעשיית מזון</h3>
+<p>נתחי תפוח מיובשים ב-Strudel, עוגות תפוחים, Muffins ולחמי פרות. תפוח מיובש מוסיף לחות ומתיקות מבוקרת לאפייה בלי עודף נוזלים. Apple Sauce מרוכז ממיובש: שוק תעשיית גלידות, יוגורטים ורטבים.</p>
+<h3>תעשיית פקטין: הסוד של ה-Apple Pomace</h3>
+<p>Apple Pomace, הגרגר הרטוב שנותר אחרי מיצוי מיץ תפוח, הוא מקור 70% מהפקטין המסחרי בעולם. מפעלי מיץ גדולים בפולין, גרמניה וסין מוכרים Pomace לתעשיית פקטין. שוק פקטין: 1.2 מיליארד דולר בשנה. שימושים: ריבות, מוצרי חלב, תרופות, ציפוי ניירות. מה שנזרק בפועל שווה לפעמים יותר מהמוצר הראשי.</p>
+<h3>Cider ותעשיית שתייה</h3>
+<p>Dried Apple בתעשיית Craft Cider: תפוח מיובש מוסיפים לגיסוס לסיידר חורפי-מרוכז. Apple Powder בשייקים, Smoothies ואבקות ספורט. Apple Juice Concentrate (NFC, 70 Brix) הוא שוק נפרד, אחד הגדולים בפירות.</p>
+</div>
+
+<!-- ═══ CH 8 ═══ -->
+<div class="ch" id="ch-8">
+<div class="cl">פרק שמיני</div>
+<h2>אחסון: OTA הוא הסיכון שהסינים לא תמיד בודקים</h2>
+<p class="dc">תפוח מיובש הוא מהמוצרים היציבים יחסית בקטגוריית הפירות היבשים, בתנאי שהלחות מנוהלת נכון. האתגר הייחודי: חמצון ושחמת. גם אחרי ייבוש, אם המוצר נחשף לחמצן ולחות, ה-Polyphenol Oxidase ימשיך לפעול, הצבע יהפוך חום ויאבד ערך מסחרי. אבל הסיכון המסחרי הגדול יותר במוצרים מסין הוא Ochratoxin A, מיקוטוקסין שנוצר בתנאי לחות לא מבוקרת, ושה-EU מגביל בקפדנות.</p>
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>מוצר</th><th>טמפרטורה</th><th>לחות RH</th><th>אריזה</th><th>חיי מדף</th></tr>
+<tr><td>פרוסות וטבעות</td><td>10-18°C</td><td>50-60%</td><td>שקים אטומים</td><td>12-18 חודשים</td></tr>
+<tr><td>Apple Chips</td><td>15-22°C</td><td>פחות מ-50%</td><td>N2 flush</td><td>9-12 חודשים</td></tr>
+<tr><td>Freeze Dried</td><td>עד 25°C</td><td>פחות מ-40%</td><td>אלומיניום אטום</td><td>24-36 חודשים</td></tr>
+<tr><td>Apple Powder</td><td>10-20°C</td><td>פחות מ-40%</td><td>אטום, אנטי-לחות</td><td>24 חודשים</td></tr>
+</table></div>
+<h3>פרמטרי איכות מסחרי</h3>
+<p><strong>לחות:</strong> 10-16% לפרוסות, פחות מ-3% ל-Freeze Dried. <strong>Aw:</strong> מתחת ל-0.60. <strong>SO2 שיורי:</strong> מקסימום 500 ppm ל-EU, 0 ל-Unsulfured. <strong>Aflatoxin:</strong> פחות מ-10 ppb. <strong>צבע:</strong> אחיד, ללא כתמים שחורים (עובש) או חומים-כהים (חמצון חמור). <strong>OTA:</strong> פחות מ-10 ppb.</p>
+<h3>שחמת וחמצון</h3>
+<p>תפוח שהשחים: צבע חום-אפור, טעם מר-עפיץ. שלושה גורמים: (א) טיפול SO2 או אסקורבית לא מספיק לפני ייבוש. (ב) חשיפה לחמצן אחרי פתיחת אריזה. (ג) לחות גבוהה שמאפשרת פעילות אנזימטית. בדיקת קבלה: לפתוח שק ולבדוק צבע. שחמת קלה מקובלת ב-Grade B. שחמת חמורה: דחייה.</p>
+<div class="ab ab-r"><div class="tg">Ochratoxin A (OTA) · הסיכון מסין</div><p>OTA הוא מיקוטוקסין שמיוצר על ידי עובש (Aspergillus, Penicillium) בתנאי לחות. תפוח מיובש פגיע אם אוחסן בלחות גבוהה. האיחוד האירופי מגביל ל-10 ppb. בסין ובמדינות מסוימות, בקרת OTA פחות קפדנית. בקש COA עם בדיקת OTA בכל משלוח מסין.</p></div>
+</div>
+
+<!-- ═══ CH 9 ═══ -->
+<div class="ch" id="ch-9">
+<div class="cl">פרק תשיעי</div>
+<h2>המטאפורות של התפוח: מגן-עדן עד NASDAQ</h2>
+<p class="dc">אף פרי לא נשא כמות מטאפורות כמו התפוח. תפוח הגן, סמל החטא הקדמון שנחרת בתרבות המערבית, לא היה כנראה תפוח בכלל. המילה העברית בבראשית היא "פרי", ולא "תפוח". התרגום הלטיני של ז'רום, ה-Vulgate, השתמש ב-malum שמשמעותו גם "תפוח" וגם "רוע", משחק מילים שנתפר לנרטיב התיאולוגי. אבל כשמיקלאנג'לו ציאר בסיסטינה, הוא ציאר תפוח. ומאז, התפוח הוא הפרי הכי עמוס תרבותית בהיסטוריה.</p>
+<p>ניוטון ובעצם התפוח? גם כן ספק. הסיפור הנפוץ שתפוח נפל על ראשו ב-1666 נרשם לראשונה 60 שנה לאחר המקרה המדווח, על ידי ביוגרף. ניוטון עצמו אמר רק שראה תפוח נופל ותהה לאן הכוח מושך אותו. שלב קטן בין עצם היסטורי למיתוס תרבותי.</p>
+<p>ואז, 1976, סטיב ג'ובס ורוז ויין ועוד אחד בוחרים שם לחברה: Apple. ג'ובס הסביר מאוחר יותר שזה היה שם שאהב כי תפוח הוא כיף, לא מאיים, ו"fun, spirited". תפוח קזחסטני שנדד 6,000 שנה הפך לחברה השנייה הגדולה בשווי שוק בהיסטוריה.</p>
+<div class="ab ab-w"><div class="tg">William Tell ו-כדורי ניוטון</div><p>ויליאם טל, הגיבור השוויצרי שירה חץ בתפוח על ראש בנו, הוא סמל עצמאות לאומית. מקרים מדווחים דומים קיימים בפולקלור נורדי ודני, שמעלים ספק אם הסיפור היסטורי. אבל הוא הפך לביטוי אוניברסלי של אומץ ודיוק. תפוח אחד, שלושה גיבורים לאומיים שונים.</p></div>
+</div>
+
+<!-- ═══ CH 10 ═══ -->
+<div class="ch" id="ch-10">
+<div class="cl">פרק עשירי</div>
+<h2>הפרי שמצא את דרכו לכל מטבח בעולם</h2>
+<p class="dc">לא הייתה תוכנית. לא הייתה חברה שהפיצה את התפוח בעולם. הוא פשוט נסע. עם כל גל הגירה אנושי, עם כל כיבוש, עם כל קהילה שעברה ממקום למקום, עצי תפוח נשתלו מחדש. הם הסתגלו לאקלים צפוני וגבוה כי <em>Malus sieversii</em> כבר ידע קורי שלגים. הם הצליחו בגינות אירופיות כי הם דורשים בדיוק מה שהאקלים הממוזג נותן. ב-2025, 86 מיליון טון תפוחים נקצרים בשנה. שום פרי אחר לא מגיע לזה.</p>
+<p>ייבוש שמר את הפרי הזה בין ההגירות. לפני קירור, בין עונה לעונה, תפוח מיובש היה הצורה שאיפשרה לאנושות לשאת איתה את ה"תפוח" לכל אתר. היום, כשהקירור זמין, ייבוש הפך מנחיצות לבחירה. Apple Chips הם בחירה. פרוסות מיובשות לגרנולה הן בחירה. Freeze Dried לנסיעות, לטיולים, לאריזות מתנה, כולם בחירה. הפרי שנסע מהכרח, ממשיך לנסוע מבחירה.</p>
+<div class="pull"><p>הפרי שנולד מזן בר יחיד בקזחסטן, שנשלח ב-1666 ניוטון לחשוב על כבידה, שסייע לג'ובס לבחור שם ב-1976, גדל היום ב-86 מיליון טון בשנה. לא כל זרעון שנופל מהעץ הוא סתם זרע.</p></div>
+<h3>כיצד לקנות</h3>
+<p>לנשנוש: Freeze Dried Apple Chips, בדוק שהמוצר מ-EU או ארה"ב ל-OTA. לגרנולה ומאפים: פרוסות מיובשות, 10-16% לחות, Unsulfured אם הלקוח דורש. לתעשייה: Dices 8-12 מ"מ, בדוק אחידות. לפרמיום: Pink Lady Chips מאוסטרליה. בדוק SO2 על האריזה: 0 ppm ל-Organic, עד 500 ppm לסטנדרט.</p>
+<h3>כיצד לאחסן</h3>
+<p>פרוסות פתוחות: אטום ומקרר. פרוסות סגורות: מחסן קריר, 10-18°C, לחות פחות מ-60%. Freeze Dried: שמור בשקית אלומיניום אטומה, עד 36 חודשים. Apple Chips פתוח: צריכה תוך 2-3 ימים לפני שהפריכות הולכת. מקפיא: כן לפרוסות, לא ל-Chips.</p>
+</div>
+
+<div class="ft">
+    ערך ידע צרכני · Blue Star International · 2026<br>
+    מבוסס על USDA FoodData Central, FAO 2023, ITC Trade Map, Vavilov Institute<br>
+    <span>Botanical sources: Velasco et al. 2010 (genome sequencing), Dzhangaliev 2003 (wild Malus sieversii)</span>
+</div>
+</main>
+<button id="btt" aria-label="Back to top">&#8593;</button>
+<script>
+window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('progress-bar').style.width = (window.scrollY / h * 100) + '%';
+    const sections = document.querySelectorAll('.ch');
+    const dots = document.querySelectorAll('.nav-dot');
+    let current = "";
+    sections.forEach(s => { if (pageYOffset >= s.offsetTop - 200) current = s.id; });
+    dots.forEach(d => { d.classList.remove('active'); if (d.dataset.target === current) d.classList.add('active'); });
+    document.getElementById('btt').classList.toggle('visible', window.scrollY > 300);
+});
+document.getElementById('btt').onclick = () => window.scrollTo({top:0, behavior:'smooth'});
+document.querySelectorAll('.nav-dot').forEach(dot => {
+    dot.onclick = () => document.getElementById(dot.dataset.target).scrollIntoView({behavior:'smooth'});
+});
+if (window.IntersectionObserver) {
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            e.target.querySelectorAll('.pb-fill').forEach(b => { b.style.width = b.dataset.w + '%'; });
+            obs.unobserve(e.target);
+        });
+    }, {threshold: 0.3});
+    document.querySelectorAll('.pb-chart').forEach(el => obs.observe(el));
+}
+(function() {
+    function initScrollReveal() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.ch').forEach(card => { card.classList.add('reveal'); observer.observe(card); });
+    }
+    const dbName = 'StarkOS_DB';
+    const productId = window.location.pathname.split('/').pop().replace('.html','') || 'apple';
+    function syncProductPage() {
+        const request = indexedDB.open(dbName, 1);
+        request.onsuccess = (e) => {
+            const db = e.target.result;
+            try {
+                const store = db.transaction('archive','readonly').objectStore('archive');
+                const getRequest = store.get(productId);
+                getRequest.onsuccess = () => {
+                    const data = getRequest.result;
+                    if (!data) return;
+                    function makeMedia(src) {
+                        const isVid = src.startsWith('data:video');
+                        const el = document.createElement(isVid ? 'video' : 'img');
+                        el.src = src; el.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+                        if (isVid) { el.autoplay = el.muted = el.loop = true; el.setAttribute('playsinline',''); }
+                        return el;
+                    }
+                    const heroH1 = document.getElementById('sync-title');
+                    if (heroH1 && data.name) heroH1.innerText = data.name;
+                    const heroDeck = document.getElementById('sync-desc');
+                    if (heroDeck && data.desc) heroDeck.innerText = data.desc;
+                    const heroSrc = data.media1 || data.media;
+                    const heroSlot = document.getElementById('slot-product-hero');
+                    if (heroSlot && heroSrc) { heroSlot.innerHTML = ''; heroSlot.appendChild(makeMedia(heroSrc)); }
+                };
+            } catch(e) {}
+        };
+    }
+    initScrollReveal();
+    window.addEventListener('load', syncProductPage);
+})();
+</script>
+</body>
+</html>

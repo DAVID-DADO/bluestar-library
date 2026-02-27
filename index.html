@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLUE STAR · Global Commodity HUB · OS v4.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Noto+Sans+Hebrew:wght@300;400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root { 
+    --stark-bg: #0A0A0B; --stark-gold: #B8894A; --stark-white: #FAF7F0; 
+    --stark-border: rgba(255,255,255,0.08); --card-bg: rgba(255,255,255,0.02);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
+body { 
+    background: var(--stark-bg); color: var(--stark-white); 
+    font-family: 'Noto Sans Hebrew', sans-serif; overflow-x: hidden; 
+    background-image: linear-gradient(rgba(184,137,74,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(184,137,74,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+.masthead { 
+    display: flex; justify-content: space-between; align-items: center; 
+    padding: 15px 30px; border-bottom: 1px solid var(--stark-border); 
+    background: rgba(10,10,11,0.95); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px);
+}
+.masthead-brand { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 4px; color: var(--stark-gold); text-decoration: none; }
+.shuk-logo { height: 40px; filter: invert(1) brightness(1.2); }
+.hero { padding: 60px 30px 40px; text-align: center; border-bottom: 1px solid var(--stark-border); }
+.hero-h1 { font-family: 'Playfair Display', serif; font-size: clamp(35px,6vw,75px); font-weight: 900; line-height: 0.9; margin-bottom: 15px; }
+.hero-h1 em { font-style: normal; color: var(--stark-gold); }
+.data-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 5px; color: var(--stark-gold); margin-bottom: 10px; text-transform: uppercase; }
+
+/* ── SHELVES ── */
+.product-shelf { 
+    display: flex; flex-wrap: wrap; justify-content: center; 
+    gap: 16px; padding: 16px 20px 36px; max-width: 1500px; margin: 0 auto;
+}
+.nuts-shelf {
+    display: grid;
+    grid-template-columns: repeat(5, 228px);
+    justify-content: center;
+    gap: 16px;
+    padding: 16px 20px 28px;
+}
+.nuts-row-2 {
+    grid-column: 1 / -1;
+    display: flex; justify-content: center; gap: 20px;
+}
+
+/* ── CARD ── */
+.card { 
+    text-decoration: none; color: inherit; 
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    width: 228px;
+    transition: all 0.5s cubic-bezier(0.19,1,0.22,1);
+}
+.card-frame {
+    width: 202px; height: 202px; border-radius: 50%; 
+    border: 3px solid var(--stark-gold);
+    padding: 8px; margin-bottom: 10px;
+    position: relative; overflow: hidden;
+    transition: all 0.5s ease; background: var(--card-bg);
+}
+.card-media-slot {
+    width: 100%; height: 100%; border-radius: 50%;
+    overflow: hidden; background: #111;
+    position: relative; z-index: 1;
+}
+.card-media-slot video, .card-media-slot img { 
+    width: 100%; height: 100%; object-fit: cover; 
+    filter: grayscale(0.2) contrast(1.1); transition: 0.6s; 
+}
+.card-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; margin-bottom: 6px; transition: 0.3s; color: rgba(184,137,74,0.75); letter-spacing: 0.3px; }
+
+/* ── HOVER ── */
+.card:hover .card-frame { border-color: var(--stark-gold); transform: translateY(-6px); box-shadow: 0 12px 25px rgba(184,137,74,0.2); }
+.card:hover .card-media-slot video, .card:hover .card-media-slot img { filter: grayscale(0) contrast(1); transform: scale(1.08); }
+.card:hover .card-title { color: var(--stark-gold); }
+.card:hover .card-meta { opacity: 1; }
+
+/* ── CATEGORY ── */
+.category-section { padding: 24px 0 0; will-change: transform; }
+.category-header { display: flex; align-items: center; justify-content: center; gap: 15px; padding: 0 30px 10px; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.03); }
+.category-title { font-family: 'Playfair Display', serif; font-size: clamp(35px,6vw,75px); font-weight: 900; color: var(--stark-gold); }
+
+.ft { padding: 60px 30px; border-top: 1px solid var(--stark-border); text-align: center; }
+.ft-brand { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--stark-gold); margin-bottom: 10px; }
+.ft-meta { font-family: 'Space Mono', monospace; font-size: 8px; opacity: 0.3; letter-spacing: 3px; }
+@media (max-width: 1100px) { .nuts-shelf { grid-template-columns: repeat(3, 180px); } }
+@media (max-width: 600px) { .card { width: 150px; } .card-frame { width: 130px; height: 130px; } .nuts-shelf { grid-template-columns: repeat(2, 150px); } }
+</style>
+<script src="auth.js"></script>
+</head>
+<body>
+
+<header class="masthead">
+    <a href="#" class="masthead-brand">BLUE STAR INTERNATIONAL</a>
+
+    <span class="masthead-brand" style="opacity:0.15; font-size:8px;">OS v4.0</span>
+</header>
+
+<section class="hero">
+    <div class="data-label">Global Commodity Hub · OS v4.0</div>
+    <h1 class="hero-h1">אגוזים, זרעים<br><em>&amp; פירות יבשים</em></h1>
+</section>
+
+<!-- ── NUTS ── -->
+<section class="category-section" data-parallax="0.04">
+    <div class="category-header"><h2 class="category-title">אגוזים</h2></div>
+    <div class="product-shelf nuts-shelf">
+        <a href="Nuts/almond.html" class="card" data-id="almond">
+            <div class="card-frame"><div class="card-media-slot" id="slot-almond"></div></div>
+            <h3 class="card-title">שקד</h3>
+        </a>
+        <a href="Nuts/cashew.html" class="card" data-id="cashew">
+            <div class="card-frame"><div class="card-media-slot" id="slot-cashew"></div></div>
+            <h3 class="card-title">קשיו</h3>
+        </a>
+        <a href="Nuts/walnut.html" class="card" data-id="walnut">
+            <div class="card-frame"><div class="card-media-slot" id="slot-walnut"></div></div>
+            <h3 class="card-title">אגוז מלך</h3>
+        </a>
+        <a href="Nuts/pecan.html" class="card" data-id="pecan">
+            <div class="card-frame"><div class="card-media-slot" id="slot-pecan"></div></div>
+            <h3 class="card-title">פקאן</h3>
+        </a>
+        <a href="Nuts/pistachio.html" class="card" data-id="pistachio">
+            <div class="card-frame"><div class="card-media-slot" id="slot-pistachio"></div></div>
+            <h3 class="card-title">פיסטוק</h3>
+        </a>
+        <div class="nuts-row-2">
+            <a href="Nuts/hazelnut.html" class="card" data-id="hazelnut">
+                <div class="card-frame"><div class="card-media-slot" id="slot-hazelnut"></div></div>
+                <h3 class="card-title">אגוז לוז</h3>
+            </a>
+            <a href="Nuts/brazil.html" class="card" data-id="brazil">
+                <div class="card-frame"><div class="card-media-slot" id="slot-brazil"></div></div>
+                <h3 class="card-title">אגוז ברזיל</h3>
+            </a>
+            <a href="Nuts/macadamia.html" class="card" data-id="macadamia">
+                <div class="card-frame"><div class="card-media-slot" id="slot-macadamia"></div></div>
+                <h3 class="card-title">מקדמיה</h3>
+            </a>
+            <a href="Nuts/pinenut.html" class="card" data-id="pinenut">
+                <div class="card-frame"><div class="card-media-slot" id="slot-pinenut"></div></div>
+                <h3 class="card-title">צנובר</h3>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ── SEEDS ── -->
+<section class="category-section" data-parallax="0.025">
+    <div class="category-header"><h2 class="category-title">זרעים</h2></div>
+    <div class="product-shelf">
+        <a href="Seeds/sesame.html" class="card" data-id="sesame">
+            <div class="card-frame"><div class="card-media-slot" id="slot-sesame"></div></div>
+            <h3 class="card-title">שומשום</h3>
+        </a>
+        <a href="Seeds/sunflower.html" class="card" data-id="sunflower">
+            <div class="card-frame"><div class="card-media-slot" id="slot-sunflower"></div></div>
+            <h3 class="card-title">חמניה</h3>
+        </a>
+        <a href="Seeds/pumpkin-seeds.html" class="card" data-id="pumpkin-seeds">
+            <div class="card-frame"><div class="card-media-slot" id="slot-pumpkin-seeds"></div></div>
+            <h3 class="card-title">גרעיני דלעת</h3>
+        </a>
+        <a href="Seeds/chia.html" class="card" data-id="chia">
+            <div class="card-frame"><div class="card-media-slot" id="slot-chia"></div></div>
+            <h3 class="card-title">זרעי צ'יה</h3>
+        </a>
+    </div>
+</section>
+
+<!-- ── DRIED FRUITS ── -->
+<section class="category-section" data-parallax="0.01">
+    <div class="category-header"><h2 class="category-title">פירות יבשים</h2></div>
+    <div class="product-shelf">
+        <a href="Dried_Fruits/cranberry.html" class="card" data-id="cranberry">
+            <div class="card-frame"><div class="card-media-slot" id="slot-cranberry"></div></div>
+            <h3 class="card-title">חמוציות</h3>
+        </a>
+        <a href="Dried_Fruits/mango.html" class="card" data-id="mango">
+            <div class="card-frame"><div class="card-media-slot" id="slot-mango"></div></div>
+            <h3 class="card-title">מנגו</h3>
+        </a>
+        <a href="Dried_Fruits/prune.html" class="card" data-id="prune">
+            <div class="card-frame"><div class="card-media-slot" id="slot-prune"></div></div>
+            <h3 class="card-title">שזיף</h3>
+        </a>
+        <a href="Dried_Fruits/raisins.html" class="card" data-id="raisins">
+            <div class="card-frame"><div class="card-media-slot" id="slot-raisins"></div></div>
+            <h3 class="card-title">צימוקים</h3>
+        </a>
+        <a href="Dried_Fruits/apricot.html" class="card" data-id="apricot">
+            <div class="card-frame"><div class="card-media-slot" id="slot-apricot"></div></div>
+            <h3 class="card-title">משמש מיובש</h3>
+        </a>
+        <a href="Dried_Fruits/date.html" class="card" data-id="date">
+            <div class="card-frame"><div class="card-media-slot" id="slot-date"></div></div>
+            <h3 class="card-title">תמר</h3>
+        </a>
+        <a href="Dried_Fruits/pineapple.html" class="card" data-id="pineapple">
+            <div class="card-frame"><div class="card-media-slot" id="slot-pineapple"></div></div>
+            <h3 class="card-title">אננס מיובש</h3>
+        </a>
+        <a href="Dried_Fruits/apple.html" class="card" data-id="apple">
+            <div class="card-frame"><div class="card-media-slot" id="slot-apple"></div></div>
+            <h3 class="card-title">תפוח מיובש</h3>
+        </a>
+    </div>
+</section>
+
+<footer class="ft">
+    <div class="ft-brand">Blue Star International × Shuk Market</div>
+    <div class="ft-meta">© 2026 · ARCHIVE v4.0 · SYSTEM SYNC ACTIVE</div>
+</footer>
+
+<script>
+function syncFrontend() {
+    const request = indexedDB.open("StarkOS_DB", 1);
+    request.onsuccess = (e) => {
+        const db = e.target.result;
+        try {
+            const store = db.transaction("archive", "readonly").objectStore("archive");
+            store.getAll().onsuccess = (ev) => {
+                ev.target.result.forEach(product => {
+                    const slot = document.getElementById(`slot-${product.id}`);
+                    if (slot && (product.media1 || product.media)) {
+                        renderMediaToSlot(slot, product.media1 || product.media);
+                    }
+                });
+            };
+        } catch(err) {}
+    };
+}
+function renderMediaToSlot(slot, src) {
+    slot.innerHTML = "";
+    const isVid = src.includes("video") || src.startsWith("data:video");
+    const el = document.createElement(isVid ? 'video' : 'img');
+    el.src = src; el.style.width = "100%"; el.style.height = "100%"; el.style.objectFit = "cover";
+    if (isVid) { el.autoplay = true; el.muted = true; el.loop = true; el.setAttribute('playsinline', ''); }
+    slot.appendChild(el);
+}
+window.addEventListener('load', syncFrontend);
+
+// ── PARALLAX ──
+document.addEventListener('DOMContentLoaded', () => {
+    const parallaxSections = document.querySelectorAll('[data-parallax]');
+    if (!parallaxSections.length) return;
+    let ticking = false;
+    function applyParallax() {
+        parallaxSections.forEach(sec => {
+            const speed = parseFloat(sec.dataset.parallax);
+            const rect = sec.getBoundingClientRect();
+            const centerOffset = rect.top + rect.height / 2 - window.innerHeight / 2;
+            const shift = centerOffset * speed * -1;
+            sec.style.transform = `translateX(${shift}px)`;
+        });
+        ticking = false;
+    }
+    window.addEventListener('scroll', () => {
+        if (!ticking) { requestAnimationFrame(applyParallax); ticking = true; }
+    }, { passive: true });
+    applyParallax();
+});
+</script>
+</body>
+</html>

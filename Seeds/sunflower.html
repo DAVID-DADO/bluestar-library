@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>חמניה · Blue Star International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── BLUE STAR OS · PREMIUM DARK THEME v4.0 ── */
+
+:root {
+    --bg: #0A0A0B;
+    --text: #FAF7F0;
+    --body: #D1CEC5;
+    --accent: #6B7A2A;
+    --warm: #C8A830;
+    --card: rgba(20, 20, 22, 0.4);
+    --radius: 20px;
+    --shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    background-color: var(--bg);
+    color: var(--body);
+    font-family: 'Noto Sans Hebrew', sans-serif;
+    font-size: 18px;
+    line-height: 1.9;
+    overflow-x: hidden;
+    position: relative;
+    background-image:
+        linear-gradient(rgba(200, 168, 48, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200, 168, 48, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+
+body::before, body::after {
+    content: ''; position: fixed; width: 600px; height: 600px; border-radius: 50%;
+    filter: blur(120px); z-index: -2; opacity: 0.15; pointer-events: none;
+}
+body::before { background: var(--warm); top: -100px; left: -100px; }
+body::after { background: #3A4A10; bottom: 20%; right: -150px; }
+
+#progress-bar { position:fixed; top:0; left:0; height:3px; background:var(--warm); width:0; z-index:1000; }
+
+.back-btn {
+    position: absolute; top: 40px; left: 40px; z-index: 10; display: flex; align-items: center; gap: 8px;
+    color: var(--text); text-decoration: none; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px;
+    opacity: 0.5; transition: 0.3s;
+}
+.back-btn:hover { opacity: 1; color: var(--warm); }
+
+#btt {
+    position: fixed; bottom: 30px; left: 30px; width: 40px; height: 40px;
+    background: var(--warm); color: #000; border: none; border-radius: 50%;
+    cursor: pointer; font-size: 18px; display: none; z-index: 1000; transition: 0.3s;
+}
+#btt.visible { display: flex; align-items: center; justify-content: center; }
+#btt:hover { transform: scale(1.1); box-shadow: 0 0 20px rgba(200, 168, 48, 0.4); }
+
+.hero { padding: 100px 40px 160px; text-align: center; color: var(--text); position: relative; }
+.hero-k { font-size: 11px; font-weight: 700; letter-spacing: 5px; color: var(--warm); margin-bottom: 20px; text-transform: uppercase; font-family: 'Space Mono', monospace; }
+.hero h1 { font-family:'Frank Ruhl Libre', serif; font-size: 90px; font-weight: 900; line-height: 0.8; margin-bottom: 25px; letter-spacing: -2px; }
+.hero .deck { font-size: 20px; opacity: 0.8; max-width: 650px; margin: 0 auto 40px; font-weight: 300; }
+
+.hero-img-wrap {
+    max-width: 900px; margin: 0 auto -220px; height: 500px; border-radius: var(--radius); overflow: hidden;
+    box-shadow: var(--shadow); background: #000; border: 1px solid rgba(255,255,255,0.05);
+}
+.hero-img-wrap img { width:100%; height:100%; object-fit:cover; }
+.hero-img-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:12px; background:#0A0A0B; }
+.hero-img-placeholder span { color:rgba(255,255,255,0.15); font-size:12px; letter-spacing:3px; font-family:'Space Mono',monospace; }
+
+.side-nav { position: fixed; top: 50%; right: 30px; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 12px; }
+.nav-dot { width: 10px; height: 10px; border: 1px solid var(--warm); border-radius: 50%; opacity: 0.3; cursor: pointer; transition: 0.3s; }
+.nav-dot.active { opacity: 1; transform: scale(1.4); background: var(--warm); }
+
+.con { max-width: 800px; margin: 280px auto 100px; padding: 0 24px; position: relative; z-index: 5; }
+.ch {
+    background: var(--card); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+    padding: 50px; border-radius: var(--radius); margin-bottom: 40px;
+    border: 1px solid rgba(255,255,255,0.05); position: relative; overflow: hidden;
+    color: var(--body);
+}
+.ch::before, .ch::after { content: '+'; position: absolute; font-family: 'Space Mono', monospace; color: var(--warm); font-size: 14px; opacity: 0.4; }
+.ch::before { top: 15px; left: 15px; }
+.ch::after { bottom: 15px; right: 15px; }
+
+.ch h2 { font-family:'Frank Ruhl Libre', serif; font-size: 38px; margin-bottom: 25px; color: var(--text); border-right: 5px solid var(--warm); padding-right: 20px; line-height: 1.1; }
+.ch h3 { font-family:'Frank Ruhl Libre', serif; font-size: 22px; font-weight: 700; color: var(--text); margin: 36px 0 14px; padding-right: 14px; border-right: 3px solid var(--warm); }
+.ch p { margin-bottom: 18px; color: var(--body); }
+.cl { font-size: 10px; font-weight: 700; color: var(--warm); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; display: block; font-family: 'Space Mono', monospace; }
+.dc::first-letter { font-family:'Frank Ruhl Libre', serif; font-size: 2.8em; font-weight: 900; color: var(--warm); line-height: 1; float: right; margin-left: 8px; }
+em { color: #D4B870; font-style: italic; }
+strong { color: var(--text); }
+
+.ab { padding: 20px 24px; margin: 28px 0; border-radius: 0 8px 8px 0; }
+.ab .tg { font-size: 10px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 6px; }
+.ab p { margin: 0; font-size: 16px; line-height: 1.75; }
+.ab-w { background: rgba(200,168,48,0.08); border-right: 4px solid var(--warm); }
+.ab-w .tg { color: var(--warm); }
+.ab-g { background: rgba(90,120,40,0.2); border-right: 4px solid var(--accent); }
+.ab-g .tg { color: #A0C060; }
+.ab-r { background: rgba(184,50,50,0.1); border-right: 4px solid #B83030; }
+.ab-r .tg { color: #E06060; }
+.ab-r p { color: #DDB0B0; }
+
+.vc { background: rgba(30,28,25,0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 22px; margin: 18px 0; }
+.vc .vn { font-family:'Frank Ruhl Libre', serif; font-size: 21px; font-weight: 700; color: var(--text); }
+.vc .vt { font-size: 12px; color: var(--warm); font-weight: 600; margin-bottom: 10px; }
+.vc p { font-size: 16px; line-height: 1.75; margin-bottom: 0; color: var(--body); }
+.vc .vs { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+.vc .vsi { background: rgba(255,255,255,0.04); padding: 6px 12px; border-radius: 5px; font-size: 12px; color: #A09080; }
+.vc .vsi strong { color: var(--text); }
+
+.ng { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin: 24px 0; }
+.ni { background: rgba(30,28,25,0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 14px; text-align: center; }
+.ni .nv { font-family:'Frank Ruhl Libre', serif; font-size: 26px; font-weight: 700; color: var(--text); }
+.ni .nu { font-size: 13px; color: #A09080; margin-top: 2px; }
+.ni .nl { font-size: 11px; color: var(--warm); margin-top: 3px; font-weight: 600; }
+
+.cb { background: rgba(20,20,22,0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 24px; margin: 28px 0; }
+.cb .ct { font-family:'Frank Ruhl Libre', serif; font-size: 17px; font-weight: 700; margin-bottom: 14px; text-align: center; color: var(--text); }
+.pb-chart { margin: 16px 0 8px; display: flex; flex-direction: column; gap: 10px; }
+.pb-row { display: flex; align-items: center; gap: 10px; }
+.pb-meta { display: flex; align-items: center; gap: 6px; min-width: 120px; justify-content: flex-end; }
+.pb-flag { font-size: 18px; }
+.pb-name { font-size: 13px; color: #A09080; }
+.pb-track { flex: 1; background: rgba(255,255,255,0.08); height: 18px; border-radius: 9px; overflow: hidden; }
+.pb-fill { height: 100%; width: 0; border-radius: 9px; transition: width 1.2s cubic-bezier(0.22,1,0.36,1); }
+.pb-pct { font-family:'Frank Ruhl Libre', serif; font-size: 14px; font-weight: 700; color: var(--text); width: 36px; text-align: left; }
+.pb-note { font-size: 11px; color: #6B6058; opacity: .7; margin-top: 10px; text-align: center; }
+
+.gt { width: 100%; border-collapse: collapse; margin: 25px 0; font-size: 15px; border-top: 1px solid rgba(255,255,255,0.05); }
+.gt th { background: rgba(0,0,0,0.5); color: var(--text); padding: 14px; text-align: right; font-size: 12px; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.gt td { padding: 14px; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--body); }
+.gt tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+
+.pull { margin: 40px 0; padding: 45px; background: rgba(0,0,0,0.4); border-radius: var(--radius); text-align: center; border: 1px solid rgba(200,168,48,0.2); }
+.pull p { font-family:'Frank Ruhl Libre', serif; font-size: 22px; font-weight: 500; color: var(--body); line-height: 1.55; margin: 0; font-style: italic; }
+
+.reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.2, 1, 0.2, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+.marquee-container { position: fixed; bottom: -3vh; left: 0; width: 100vw; overflow: hidden; z-index: -1; pointer-events: none; }
+.marquee-text { font-family: 'Playfair Display', serif; font-size: 15vw; white-space: nowrap; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.03); animation: scrollText 40s linear infinite; }
+@keyframes scrollText { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+.ft { text-align: center; padding: 44px 24px; font-size: 13px; color: #6B6058; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 36px; }
+
+.proc-steps { display: flex; flex-direction: column; gap: 20px; margin: 24px 0; }
+.proc-step { display: flex; gap: 20px; align-items: flex-start; }
+.proc-step-num {
+    min-width: 36px; height: 36px; border-radius: 50%;
+    background: var(--warm); color: #000;
+    font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.proc-step-title { font-family: 'Frank Ruhl Libre', serif; font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.proc-step-body { font-size: 16px; color: var(--body); line-height: 1.75; }
+
+.media-slot-inline {
+    width: 100%; aspect-ratio: 16/9; background: var(--card); border-radius: var(--radius);
+    overflow: hidden; margin: 40px 0; border: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: center; position: relative;
+}
+.media-slot-placeholder { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; color: rgba(255,255,255,0.1); }
+
+.ch ol, .ch ul { padding-right: 24px; margin: 16px 0 18px; }
+.ch li { margin-bottom: 10px; color: var(--body); line-height: 1.8; }
+.ch ol li::marker { color: var(--warm); font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; }
+.ch ul li::marker { color: var(--warm); }
+
+@media (max-width: 900px) {
+    .side-nav { display: none; }
+    .back-btn { top: 20px; left: 20px; }
+    .hero h1 { font-size: 55px; }
+    .hero-img-wrap { height: 300px; margin-bottom: -100px; }
+    .con { margin-top: 150px; }
+    .ng { grid-template-columns: repeat(2,1fr); }
+}
+</style>
+<script src="../auth.js"></script>
+</head>
+<body>
+<div class="marquee-container">
+    <div class="marquee-text">
+        BLUE STAR INTERNATIONAL · GLOBAL COMMODITY ARCHIVE · BLUE STAR INTERNATIONAL · GLOBAL COMMODITY ARCHIVE ·
+    </div>
+</div>
+<div id="progress-bar"></div>
+<nav class="side-nav">
+    <div class="nav-dot active" data-target="ch-1"></div>
+    <div class="nav-dot" data-target="ch-2"></div>
+    <div class="nav-dot" data-target="ch-3"></div>
+    <div class="nav-dot" data-target="ch-4"></div>
+    <div class="nav-dot" data-target="ch-5"></div>
+    <div class="nav-dot" data-target="ch-6"></div>
+    <div class="nav-dot" data-target="ch-7"></div>
+    <div class="nav-dot" data-target="ch-8"></div>
+    <div class="nav-dot" data-target="ch-9"></div>
+    <div class="nav-dot" data-target="ch-10"></div>
+</nav>
+<section class="hero">
+    <a href="index.html" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>חזרה למסוף</a>
+    <div class="hero-k">ערך ידע חקלאי · Blue Star International</div>
+    <h1 id="sync-title">חמניה</h1>
+    <p class="deck" id="sync-desc">הצמח שפנה אל השמש ונהיה אחד מהגידולים המסחריים הגדולים בעולם. מזרע של שבטי הממוצ'יר עד שמן המטבח של מיליארדי אנשים.</p>
+    <div class="hero-img-wrap" id="slot-product-hero">
+        <div class="hero-img-placeholder"><span>מדיה_לא_נטענה</span></div>
+    </div>
+</section>
+<main class="con">
+
+<!-- ═══ CH 1 ═══ -->
+<div class="ch" id="ch-1">
+<div class="cl">פרק ראשון</div>
+<h2>הצמח שפנה לשמש, ממישורי אמריקה עד שדות אוקראינה</h2>
+
+<p class="dc">החמניה (<em>Helianthus annuus</em>) לא תמיד עקבה אחרי השמש. בניגוד לאמונה הרווחת, רק צמחים צעירים מבצעים הליוטרופיזם, תנועה מזרחה בבוקר ומערבה בערב. פרחים בוגרים נייחים, פונים מזרחה. הסיבה פרקטית לחלוטין: מבחינה המאביקים, שמש מזרחית מחממת פרחים, ממשכת יותר דבורים. הצמח, שגדל ל-3 מטר ויותר, מכיל עד 1,000 זרעים בראש פרח יחיד שיכול להגיע לקוטר של 30 ס"מ. אין צמח שמייצר יותר שמן לדונם מכל שאר הצמחים המדשנים.</p>
+
+<p>שבטי הממוצ'יר, הנאבאחו ואחרים בדרום-מזרח אמריקה הצפונית גידלו חמניה לפני כ-3,000 שנה. הם אכלו את הגרעינים, הכינו שמן לשיער וגוף, השתמשו בפרח כצבע ובשורש לרפואה. הם פיתחו זנים שגרעיניהם גדולים פי כמה מהצמח הבר. זו הייתה ההדמסטיקציה, תהליך עיצוב גנטי של מאות שנים.</p>
+
+<p>בשנת 1510 או קרוב לכך, הספרדים הביאו חמניות לאירופה. בהתחלה כצמח נוי בלבד. לקח כמאתיים שנה עד שרוסיה הבינה את הפוטנציאל השמני. הסיבה ההיסטורית: הכנסייה האורתודוקסית אסרה שמנים רבים בתקופת הצום, אך חמניה הגיעה מאוחר מדי לרשימת האיסורים. הצריכה בתקופת הצום הפכה להרגל, ומשם לתעשייה. ב-1830 פתחה רוסיה את המפעל המסחרי הראשון לשמן חמניות בעולם. האירוניה: הצמח האמריקני שהפך למוצר הלאומי הרוסי.</p>
+
+<div class="pull"><p>חמניה היא הגידול השמני היחיד שהוּדמסק בצפון אמריקה. שאר הגידולים השמניים הגדולים בעולם, סויה, קנולה, דקל שמן, כולם מוצאם מאסיה, אפריקה או דרום אמריקה. החמניה היא היוצא מן הכלל הצפון אמריקני.</p></div>
+</div>
+
+<!-- ═══ CH 2 ═══ -->
+<div class="ch" id="ch-2">
+<div class="cl">פרק שני</div>
+<h2>גאוגרפיה, מי מגדל ומי שולט בשוק</h2>
+
+<p class="dc">שוק שמן החמניות עבר טלטלה חסרת תקדים בפברואר 2022. רוסיה ואוקראינה יחד הגיעו ל-78% מייצוא שמן החמניות העולמי ב-2021. פלישת רוסיה לאוקראינה בפברואר 2022 סגרה נמלים, הפסיקה ייצוא ושלחה את מחירי השמן העולמיים לשיאים. זה שינה כמה דברים לצמיתות: הגיוון הגאוגרפי הפך מנושא אקדמי לצורך קיומי.</p>
+
+<div class="ng">
+    <div class="ni"><div class="nv">57.8M</div><div class="nu">טון גרעינים</div><div class="nl">ייצור עולמי 2023/24</div></div>
+    <div class="ni"><div class="nv">18.5M</div><div class="nu">טון שמן</div><div class="nl">ייצור שמן עולמי</div></div>
+    <div class="ni"><div class="nv">47%</div><div class="nu">נתח שוק</div><div class="nl">רוסיה + אוקראינה</div></div>
+</div>
+
+<div class="pb-chart">
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇺🇦</span><span class="pb-name">אוקראינה</span></div><div class="pb-track"><div class="pb-fill" data-w="27" style="background:#5A7010"></div></div><span class="pb-pct">27%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇷🇺</span><span class="pb-name">רוסיה</span></div><div class="pb-track"><div class="pb-fill" data-w="25" style="background:#8A9A3E"></div></div><span class="pb-pct">25%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇦🇷</span><span class="pb-name">ארגנטינה</span></div><div class="pb-track"><div class="pb-fill" data-w="10" style="background:#C4B82A"></div></div><span class="pb-pct">10%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇷🇴</span><span class="pb-name">רומניה</span></div><div class="pb-track"><div class="pb-fill" data-w="7" style="background:#D4C87A"></div></div><span class="pb-pct">7%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🌍</span><span class="pb-name">אחרים</span></div><div class="pb-track"><div class="pb-fill" data-w="31" style="background:#DDD6CA"></div></div><span class="pb-pct">31%</span></div>
+    <div class="pb-note">ייצור גרעינים עולמי · FAO/USDA 2023/24</div>
+</div>
+
+<p>אוקראינה הייתה מייצאת השמן הגדולה בעולם לפני 2022 עם 6-7 מיליון טון שמן בשנה. אחרי הפלישה, הייצוא צנח ל-3.5 מיליון טון ב-2022, ועלה בחזרה ל-5.3 מיליון טון ב-2023 דרך נמלי הדנובה ומסדרון חלופי. רוסיה, בניגוד לתחזיות, הגדילה ייצוא, ל-4.5 מיליון טון שמן ב-2023, בחלקו דרך נמלים אלטרנטיביים ובחלקו דרך ממסרים בטורקיה ובמדינות אחרות.</p>
+
+<div class="ab ab-w"><div class="tg">נקודה מסחרית</div><p>ישראל מייבאת שמן חמניות בעיקר מאוקראינה ומארגנטינה. ב-2022 הייתה מחסור ותחלופה לשמן קנולה בחלק מהשוק. הקצאות ל-2024 נורמלו. בורסת שמן החמניות מתנהגת כיום כנגזרת של הסיכון האוקראיני.</p></div>
+
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>מדינה</th><th>ייצור (מטון)</th><th>תפקיד</th><th>מגמה</th></tr>
+<tr><td>אוקראינה</td><td>12,700,000</td><td>מגדלת + מייצאת שמן #1</td><td>→ תלוי מלחמה</td></tr>
+<tr><td>רוסיה</td><td>17,500,000</td><td>מגדלת + מייצאת שמן #2</td><td>↑ גדולה</td></tr>
+<tr><td>ארגנטינה</td><td>4,000,000</td><td>מגדלת + מייצאת שמן</td><td>→ יציב</td></tr>
+<tr><td>רומניה</td><td>3,100,000</td><td>מגדלת, EU</td><td>↑ צמיחה</td></tr>
+<tr><td>טורקיה</td><td>1,800,000</td><td>מגדלת + מייצאת גרעינים</td><td>→ יציב</td></tr>
+<tr><td>סין</td><td>3,000,000</td><td>מגדלת, צריכה פנימית</td><td>↑ ביקוש פנים</td></tr>
+</table></div>
+</div>
+
+<!-- ═══ CH 3 ═══ -->
+<div class="ch" id="ch-3">
+<div class="cl">פרק שלישי</div>
+<h2>שני מוצרים, עולמות שונים: שמן וגרעין מזון</h2>
+
+<p class="dc">חמניה היא בעצם שתי תעשיות נפרדות שחולקות אותו צמח. תעשיית השמן מדברת בטונות ובדולרים לטון. תעשיית הגרעין מדברת בגרמים, בפרמיה ובפגמים. זן לשמן מכיל 45-50% שמן בגרעין ומצדיק כתישה. זן לגרעין מזון מכיל 25-30% שמן בלבד, אבל מגיע בגרעין גדול, נקי, עם קרום דק שנפשט בקלות. אותו שדה, אותו חקלאי, שני שווקים שונים לחלוטין.</p>
+
+<h3>זני שמן</h3>
+<p>זנים עתירי שמן כמו <strong>Peredovik</strong> (הסובייטי הקלאסי), <strong>Sunbred</strong>, <strong>Heliasol</strong> ועוד. שני סוגי שמן: <em>High Linoleic</em> (שמן רגיל, 65-70% חומצה לינולאית, אומגה 6, זול, לבישול ביתי) ו-<em>High Oleic</em> (HOSO, 80-90% חומצה אולאית, כמו שמן זית, יקר ב-15-20%, מתאים לטיגון עמוק ולמזון מתועש). ה-High Oleic הפך לשוק הצומח, בגלל יציבות חום גבוהה ותפיסת בריאות טובה יותר.</p>
+
+<h3>זני גרעין מזון</h3>
+<p>שני סוגים עיקריים: <strong>Striped</strong> (פסים, גדול, לחטיף ישיר, לציפורים) ו-<strong>Confectionery White</strong> (לבן, ללא קרום כהה, פרמיום, לממתקים ולמזון מעובד). הגרעין הלבן הוא מוצר הפרמיום, ואוקראינה ורומניה מובילות בייצורו. הסינים הם הקונים הגדולים ביותר של גרעיני פסים לחטיף.</p>
+
+<div class="ab ab-g"><div class="tg">בוטניקה</div><p>מה שנקרא "גרעין" בחמניה הוא בעצם זרע עם קרום. ה"קליפה" היא אכריין (achene), פרי-יבש חד-זרעי שאינו נפתח. הגרעין האמיתי בפנים כלול בכיסוי דק לבן-אפרפר. הפרח הגדול הוא בעצם תפרחת מורכבת (capitulum) של מאות פרחים קטנים, כל אחד מייצר גרעין אחד.</p></div>
+</div>
+
+<!-- ═══ CH 4 ═══ -->
+<div class="ch" id="ch-4">
+<div class="cl">פרק רביעי</div>
+<h2>עיבוד ומסחר, מהשדה לגרעין הקלוי</h2>
+
+<p class="dc">שרשרת האספקה של חמניה לגרעין מזון קצרה יחסית לאגוזים כמו קשיו, אבל יש בה מספיק שלבים לפתוח פערי מחיר משמעותיים. חקלאי שמוכר גרעין גולמי ב-400 דולר לטון, ואותו גרעין מגיע לצרכן הקצה ב-2,000-3,000 דולר לטון. הפרמיה על קנייה גולמית, עיבוד, מיון, קלייה ואריזה ניכרת.</p>
+
+<div class="proc-steps">
+    <div class="proc-step">
+        <div class="proc-step-num">1</div>
+        <div><div class="proc-step-title">קציר</div><div class="proc-step-body">בשלות בלחות 14-18%. הקצירה מוקדמת מדי פוגעת בשמן, מאוחרת מדי מגדילה אבדן בשדה. מכונות קצירה מיוחדות לחמניה עם מפרקים שמונעים השמטת ראשים.</div></div>
+    </div>
+    <div class="proc-step">
+        <div class="proc-step-num">2</div>
+        <div><div class="proc-step-title">ייבוש</div><div class="proc-step-body">הורדה ל-9-10% לחות לאחסון בטוח. מעל 11% לחות, סיכון לפטריות ואפלטוקסינים. גרעין לכתישה מיובש אחרת מגרעין מזון.</div></div>
+    </div>
+    <div class="proc-step">
+        <div class="proc-step-num">3</div>
+        <div><div class="proc-step-title">פיצוח ופילוח</div><div class="proc-step-body">לגרעין מזון: ניתוק האכריין, הפרדת הקרום מהגרעין הפנימי. שיטות מכניות עם מיון אוויר (aspiration). שלמות הגרעין קריטית לדרוג ולמחיר.</div></div>
+    </div>
+    <div class="proc-step">
+        <div class="proc-step-num">4</div>
+        <div><div class="proc-step-title">מיון וניקוי</div><div class="proc-step-body">לפי גודל (mm), צבע (לבן / שבור / כהה), ולחות. מיון אופטי-AI הולך ומחליף מיון ידני. לגרעין לבן פרמיום, מדרגי צבע ממוחשבים עם דיוק 99%.</div></div>
+    </div>
+    <div class="proc-step">
+        <div class="proc-step-num">5</div>
+        <div><div class="proc-step-title">קלייה ותיבול</div><div class="proc-step-body">לחטיף: קלייה יבשה 150-170 מעלות, 20-30 דקות. קלייה בשמן מעניקה קריספ אחר. תיבול: מלח, בצל, פפריקה, וריאציות אינסופיות. הקלייה מקצרת חיי מדף עם חמצון מוגבר.</div></div>
+    </div>
+    <div class="proc-step">
+        <div class="proc-step-num">6</div>
+        <div><div class="proc-step-title">אריזה</div><div class="proc-step-body">גז אינרטי (חנקן/ארגון) לייצוא, שקיות Vacuum לפרמיום. חיי מדף גרעין גולמי: 12 חודשים בקרח, קלוי: 6 חודשים. אריזת המגן קריטית לשמירת איכות.</div></div>
+    </div>
+</div>
+
+<div class="ab ab-w"><div class="tg">סחר עולמי</div><p>גרעין גולמי Confectionery White נסחר FOB בנמלי הים השחור ב-580-650 דולר לטון (2024). High Oleic שמן CNF נסחר ב-950-1,050 דולר לטון. הפרש המחיר בין High Linoleic ל-High Oleic שמן: 15-25%, תלוי ביקוש. שוק הגרעין הלבן מסתכם ב-500-700 אלף טון בשנה.</p></div>
+</div>
+
+<!-- ═══ CH 5 ═══ -->
+<div class="ch" id="ch-5">
+<div class="cl">פרק חמישי</div>
+<h2>זנים, דרגות וסיווג המסחרי</h2>
+
+<p class="dc">שוק גרעין החמניות אינו סטנדרטי כמו קשיו עם מערכת ה-W grades. הדרוג מבוסס על מפרטי לקוח, בעיקר לחות, פגמים, גודל ופרופיל שומן. שלוש קטגוריות מרכזיות שולטות: שמן, מזון וציפור. כל קטגוריה עם סטנדרטים שונים לחלוטין.</p>
+
+<div class="vc">
+    <div class="vn">Confectionery White · הפרמיום</div>
+    <div class="vt">גרעין לבן, ללא קרום, לממתקים ומוצרי מזון</div>
+    <p>הגרעין האמיתי, המנוקה מקרומו. לבן-שנהב, אחיד, עם לחות של 7-8% בדרך כלל. שימוש: שוקולד, ממתקים, גרנולה, חטיפי אנרגיה. הסינים הם הקונים הגדולים לייצוא, הגרמנים לשוק האירופי. ייצוא עיקרי: אוקראינה, רוסיה, ארגנטינה, רומניה.</p>
+    <div class="vs">
+        <div class="vsi">לחות: <strong>7-9%</strong></div>
+        <div class="vsi">פגמים: <strong>מקסימום 2%</strong></div>
+        <div class="vsi"><strong>ממתקים · שוקולד · גרנולה</strong></div>
+    </div>
+</div>
+
+<div class="vc">
+    <div class="vn">Striped · פסים לחטיף</div>
+    <div class="vt">גרעין עם קרום פסים שחור-לבן, לחטיף ישיר</div>
+    <p>הגרעין הגדול עם הקרום. המוצר הנצרך ביותר בנפח. בישראל זה מה שנמכר "גרעינים מלוחים". סין, ישראל, מזרח תיכון הם שוקי הגרעין הפסים. הגרעין הפסים קל יותר לגידול, עמיד יותר, ולכן נפח ייצורו גדול הרבה יותר.</p>
+    <div class="vs">
+        <div class="vsi">גודל: <strong>7-12 mm</strong></div>
+        <div class="vsi">שומן: <strong>25-30%</strong></div>
+        <div class="vsi"><strong>ישראל · סין · מזרח תיכון</strong></div>
+    </div>
+</div>
+
+<div class="vc">
+    <div class="vn">High Oleic · שמן פרמיום</div>
+    <div class="vt">80%+ חומצה אולאית, ליציבות חום גבוהה</div>
+    <p>זן שמן שפותח בשנות ה-80 כתחליף לשמן צמחי מוקשה (מרגרינה). יציבות חום גבוהה מאפשרת טיגון עמוק חוזר ונשנה ללא החמרת שמן. נחשב לבריא יותר בשל הפרופיל השומני הדומה לשמן זית. שימוש: מסעדות, מזון מהיר, חטיפים תעשייתיים.</p>
+    <div class="vs">
+        <div class="vsi">אולאית: <strong>80-90%</strong></div>
+        <div class="vsi">פרמיה: <strong>15-25%</strong></div>
+        <div class="vsi"><strong>מסעדות · מזון תעשייתי · פרמיום</strong></div>
+    </div>
+</div>
+</div>
+
+<!-- ═══ CH 6 ═══ -->
+<div class="ch" id="ch-6">
+<div class="cl">פרק שישי</div>
+<h2>תזונה, מה יש בגרעין הקטן</h2>
+
+<p class="dc">גרעיני חמניות הם אחד ממקורות ויטמין E הצפופים ביותר במזון הצמחי. 100 גרם גרעין גולמי מספקים 234% מהצריכה היומית המומלצת של טוקופרול. זה לא מקרי: ויטמין E הוא נוגד חמצון שמגן על השמן הרב-בלתי-רווי בגרעין מפני קלקול. הצמח שמר על השמן שלו בדרך שגם הצרכן נהנה ממנה.</p>
+
+<div class="ng">
+    <div class="ni"><div class="nv">584</div><div class="nu">קלוריות / 100g</div><div class="nl">עתיר אנרגיה</div></div>
+    <div class="ni"><div class="nv">20.8g</div><div class="nu">חלבון / 100g</div><div class="nl">מלא חומצות אמינו</div></div>
+    <div class="ni"><div class="nv">51%</div><div class="nu">שומן</div><div class="nl">ברובו בלתי רווי</div></div>
+    <div class="ni"><div class="nv">234%</div><div class="nu">ויטמין E</div><div class="nl">ל-100g, DV</div></div>
+    <div class="ni"><div class="nv">129%</div><div class="nu">סלניום</div><div class="nl">ל-100g, DV</div></div>
+    <div class="ni"><div class="nv">93%</div><div class="nu">מגנזיום</div><div class="nl">ל-100g, DV</div></div>
+</div>
+
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>ערך תזונתי</th><th>ל-100 גרם</th><th>% צריכה יומית</th><th>הערה</th></tr>
+<tr><td>קלוריות</td><td>584 kcal</td><td>29%</td><td>עתיר שומן ואנרגיה</td></tr>
+<tr><td>שומן כללי</td><td>51.5g</td><td>66%</td><td>ברובו בלתי רווי</td></tr>
+<tr><td>שומן רב בלתי רווי</td><td>23g</td><td>—</td><td>לינולאית (אומגה 6)</td></tr>
+<tr><td>שומן חד בלתי רווי</td><td>18.5g</td><td>—</td><td>בזן High Oleic: 45g</td></tr>
+<tr><td>חלבון</td><td>20.8g</td><td>42%</td><td>פרופיל חומצות אמינו מלא</td></tr>
+<tr><td>פחמימות</td><td>20g</td><td>7%</td><td>נמוך יחסית לאגוזים</td></tr>
+<tr><td>סיבים תזונתיים</td><td>8.6g</td><td>31%</td><td>גבוה מהממוצע</td></tr>
+<tr><td>ויטמין E (טוקופרול)</td><td>35.2mg</td><td>234%</td><td>מהגבוהים ביותר במזון</td></tr>
+<tr><td>תיאמין (B1)</td><td>1.48mg</td><td>123%</td><td>מקור מוביל</td></tr>
+<tr><td>B6</td><td>1.35mg</td><td>104%</td><td>—</td></tr>
+<tr><td>פולאט</td><td>227μg</td><td>57%</td><td>—</td></tr>
+<tr><td>סלניום</td><td>53μg</td><td>96%</td><td>נוגד חמצון חיוני</td></tr>
+<tr><td>מגנזיום</td><td>325mg</td><td>77%</td><td>גבוה מאוד</td></tr>
+<tr><td>אבץ</td><td>5mg</td><td>45%</td><td>—</td></tr>
+<tr><td>ברזל</td><td>5.25mg</td><td>29%</td><td>—</td></tr>
+</table></div>
+
+<div class="ab ab-w"><div class="tg">High Oleic לעומת High Linoleic</div><p>שמן חמניות High Oleic מכיל 80-90% חומצה אולאית. שמן חמניות רגיל מכיל 65-70% לינולאית (אומגה 6) ו-15-20% אולאית. ההבדל הבריאותי: אומגה 6 בעודף קשורה לדלקתיות כשהיחס אומגה6/אומגה3 גבוה. High Oleic, כמו שמן זית, נחשב לבחירה בריאה יותר. ההבדל המסחרי: מחיר גבוה יותר ב-15-25%, יציבות חום גבוהה יותר.</p></div>
+</div>
+
+<!-- ═══ CH 7 ═══ -->
+<div class="ch" id="ch-7">
+<div class="cl">פרק שביעי</div>
+<h2>שימושים, מהמטבח לתעשייה</h2>
+
+<p class="dc">חמניה היא צמח מרובה-שימושים בצורה יוצאת דופן. השמן הוא המוצר העיקרי, אבל הגרעין, הקמח, הפרח, הגבעול והקרום של השמן, כולם מגיעים לשוק. אין דבר שנזרק. אפילו ה"עוגה" שנשארת אחרי כתישת השמן, meal בשם המקצועי, הפכה לחלבון איכות גבוה לתעשיית המזון ולמזון בעלי חיים.</p>
+
+<h3>שמן הבישול</h3>
+<p>שמן חמניות הוא אחד משלושת השמנים הנצרכים ביותר בעולם, לצד שמן דקל ושמן סויה. נקודת עישון 230 מעלות (High Oleic), הגבוהה מרוב השמנים הצמחיים. טעם נייטרלי, צבע בהיר, מחיר נגיש. בישראל, שמן חמניות כפה על שמן תירס כשמן הנצרך הפופולרי לבישול ביתי.</p>
+
+<h3>גרעין חטיף</h3>
+<p>ישראל היא אחת מהמדינות עם הצריכה הגבוהה ביותר לנפש של גרעיני חמניות. הגרעין המלוח הוא חלק מהתרבות הספורטיבית, מהפוליטיקה ומבתי הקפה. סין היא שוק הגרעין החטיף הגדול בעולם, עם וריאציות תיבול אינסופיות מגרעין מסוקר ועד גרעין וינגר.</p>
+
+<h3>חלבון לתעשיית המזון</h3>
+<p>שמן חמניה אחרי כתישה מותיר meal עם 28-35% חלבון. ה-Sunflower Protein Concentrate הגיע ל-60-70% חלבון, ומשמש תחליף חלבון סויה בנוסחאות מזון תעשייתי. הביקוש גדל מכיוון שחמניה אינה GMO (בניגוד לסויה) ומוכרת לרוב ללא צורך בסימון נפרד.</p>
+
+<h3>פרחים וקישוט</h3>
+<p>תעשיית הפרחים המסחרית מגדלת זנים ספציפיים של חמניה לחתוך, עם גבעולים ישרים, ראשים בגדלים ובצבעים שונים. זן <em>Sunrich</em> הגיע בשנות ה-90 ושינה את שוק הפרחים. מכסת ייצוא פרחי חמניה בקולומביה ובקניה מגיעה למיליוני שטרות לחודש.</p>
+
+<div class="ab ab-g"><div class="tg">מעבר למזון</div><p>קרום השמן (Lecithin): אמולסיפייר בשוקולד, מרגרינה ומזון מעובד. Stover (גבעול, עלים): חומר גלם לנייר, בנייה קלה, מיצרף קומפוסט. כופתאות תנובת שמן: ביו-דיזל ניסיוני. פרח לצבע צהוב-חום טבעי. גרעין לפיד ציפורים: שוק ענק בצפון אמריקה ובאירופה.</p></div>
+</div>
+
+<!-- ═══ CH 8 ═══ -->
+<div class="ch" id="ch-8">
+<div class="cl">פרק שמיני</div>
+<h2>בוטניקה ואגרונומיה, גידול שדורש הבנה</h2>
+
+<p class="dc">חמניה היא תרבות עונה אחת, שנתית, עם מחזור חיים של 70-130 יום מנביטה לקציר, תלוי בזן ובאקלים. היא עמידה לבצורת יחסית לגידולים אחרים, בשל שורשים עמוקים עד 2 מטר שמגיעים לשכבות לחות עמוקות. אבל היא רגישה לעמידות בעד מים, ריקבון שורשים ופסטריה. אקלים אידיאלי: 18-25 מעלות, עם בצורת מוגדרת בסוף העונה לייבוש הגרעינים.</p>
+
+<p>הפרח הגדול, מה שנקרא "פרח", הוא תפרחת (capitulum) המורכבת מ-1,000-2,000 פרחוני פרח (florets). הפרחים החיצוניים הצהובים, ה-ray florets, הם עקרים, לנוי בלבד. הפרחים הפנימיים, ה-disc florets, הם הרביים, וכל אחד מהם מייצר גרעין. האבקה מתפזרת מחוץ לפנים, במרכז ומחוצה לו, בסדר ספיראלי מתמטי מדויק.</p>
+
+<p>הדפוס הספיראלי של הגרעינים, המפורסם בפיבונאצ'י, אינו מקרי. הוא מבטיח שאין גרעין שמוצל לחלוטין על ידי גרעין אחר, ממקסם חשיפת השמש וקצב ייצור הפוטוסינתזה. זה דפוס שמתאר גם קונכיות שבלולים, פריסת עלים וגלקסיות ספיראליות.</p>
+
+<div class="ab"><div class="tg">ניהול סיכוני כפור</div><p>חמניה פגיעה לכפור מתחת לאפס גם בשלבים מוקדמים. תקופת הגרעון (seed fill) הרגישה ביותר. חקלאים אוקראינים שמיצרים לייצוא מחשבים פנצ'ר קציר לפי תחזיות כפור ספטמבר. שינויי האקלים מזיזים את חלון הקציר האופטימלי, וזה אחד הגורמים לשונות גבוהה בתנובה שנה לשנה.</p></div>
+</div>
+
+<!-- ═══ CH 9 ═══ -->
+<div class="ch" id="ch-9">
+<div class="cl">פרק תשיעי</div>
+<h2>אחסון ובטיחות</h2>
+
+<p class="dc">גרעין חמניה עם לחות מעל 10% מאחסון הוא סיכון. הגרעין עתיר שומן, ורמת לחות גבוהה מזרזת גדילת פטריות ואפלטוקסינים. בנוסף, החמצון של השמן הרב-בלתי-רווי מהיר יחסית, ולכן גרעין קלוי מתקלקל מהר הרבה יותר מגרעין גולמי. נקודה מסחרית: קניית גרעין גולמי ואחסנתו נכונה עדיפה לכמויות גדולות.</p>
+
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>מוצר</th><th>אחסון</th><th>חיי מדף</th><th>תנאים</th></tr>
+<tr><td>גרעין גולמי</td><td>מחסן יבש, אטום</td><td>12 חודשים</td><td>לחות &lt;10%, 15-20°C</td></tr>
+<tr><td>גרעין קלוי / מלוח</td><td>אריזה אטומה</td><td>6-9 חודשים</td><td>הרחק מאור ישיר</td></tr>
+<tr><td>גרעין קלוי, פתוח</td><td>קופסה אטומה</td><td>2-3 חודשים</td><td>מקרר מאריך ל-6 חודשים</td></tr>
+<tr><td>שמן High Oleic, אטום</td><td>מחסן חשוך</td><td>24 חודשים</td><td>הרחק מחום ואור</td></tr>
+<tr><td>שמן High Linoleic, פתוח</td><td>מקרר</td><td>6 חודשים</td><td>מתחמצן מהר עם חשיפה</td></tr>
+</table></div>
+
+<div class="ab ab-r"><div class="tg">אזהרה לסוחרים</div><p>גרעין שמוחזר בגלל לחות גבוהה או חמצון שומן הוא הפסד מלא. בדיקות FFA (Free Fatty Acids) בשמן מסמנות חמצון. מעל 0.5% FFA, מחיר מופחת. מעל 2%, פסילה. בדיקות אורגנולפטיות (ריח, טעם) לא מספיקות, דרושות בדיקות מעבדה.</p></div>
+
+<h3>אלרגיות</h3>
+<p>חמניה היא אחד מ-14 האלרגנים המחויבים לסימון בתקינת האיחוד האירופי. אלרגיה לגרעין חמניות אינה נפוצה כמו אלרגיה לבוטנים, אבל יכולה לגרום לתגובות אנפילקטיות קשות. יש רגישות צולבת אפשרית עם צמחים ממשפחת Asteraceae (חרצית, קמומיל). שמן חמניות מזוקק אינו מכיל חלבון בדרך כלל ואינו אלרגני לרוב, אבל שמן קר יכיל שרידי חלבון.</p>
+</div>
+
+<!-- ═══ CH 10 ═══ -->
+<div class="ch" id="ch-10">
+<div class="cl">פרק עשירי</div>
+<h2>סיכום, מה שנשאר</h2>
+
+<p class="dc">חמניה היא אחת הדוגמאות הטהורות ביותר לאיך פוליטיקה, היסטוריה ואקלים יוצרים שוק. הצמח הגיע מאמריקה, השתרש ברוסיה בגלל איסורי הכנסייה, נהפך לייצוא ענק של ברית המועצות ואוקראינה, ואז מלחמה אחת ב-2022 הסדיחה את שרשרת האספקה העולמית תוך שבועות. שום שוק אגרו-קומודיטי אחר לא הפגין את הריכוזיות הגאוגרפית של חמניות בצורה כה אכזרית.</p>
+
+<p>ב-2025, השוק עדיין חי בצל 2022. מחירי השמן נורמלו אבל הגיוון הגאוגרפי שינה את כלל המשוואה. קונים אירופים שמייבאים עכשיו מארגנטינה ורומניה, מה שהיה נחשב לא-אפשרי ב-2020, הוא מציאות עסקית ב-2025.</p>
+
+<div class="pull"><p>כשאתם מטגנים בשמן חמניות, אתם משתמשים בשמן ממישורי אוקראינה או מהסטפות הרוסיות. שרשרת שהתחילה בגרעין שבמרכז פרח שפנה מזרחה, עברה כתישה, זיקוק, ייצוא ים שחור ונמל ים תיכוני, ומגיעה לבקבוק על המדף. הצמח שהאינדיאנים גידלו לפני 3,000 שנה לשמן שיער.</p></div>
+
+<h3>כיצד לקנות</h3>
+<p>לשמן ביתי רגיל: High Linoleic מספיק לגמרי. לטיגון עמוק תכוף: High Oleic שווה את הפרמיה. לגרעין חטיף: בדקו תאריך ייצור (לא תאריך פג תוקף), גרעין בהיר ואחיד, ריח נעים-אגוזי, קריספ. גרעין עם צבע כהה-אפרפר ריחני עפוש, לזרוק. לגרעין לבן Confectionery: תמיד אריזה אטומה, בקנייה בכמויות, בקרו לחות.</p>
+
+<h3>כיצד לאחסן</h3>
+<p>שמן: מחשכה, קר, אטום. גרעין גולמי: מיכל אטום, מחסן יבש. גרעין קלוי: מקרר אחרי פתיחה. גרעין חמניות סופג ריחות חיצוניים מהר יותר מרוב האגוזים.</p>
+</div>
+
+<div class="ft">
+    ערך ידע צרכני · Blue Star International · 2026<br>
+    מבוסס על נתוני USDA FoodData Central, FAO, INC, UFOP (Union zur Förderung von Oel- und Proteinpflanzen)<br>
+    <span>נתוני שוק: USDA WASDE Reports 2024, Oil World Statistical Yearbook, Mordor Intelligence</span>
+</div>
+
+</main>
+
+<button id="btt" aria-label="Back to top">&#8593;</button>
+
+<script>
+window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('progress-bar').style.width = (window.scrollY / h * 100) + '%';
+    const sections = document.querySelectorAll('.ch');
+    const dots = document.querySelectorAll('.nav-dot');
+    let current = "";
+    sections.forEach(s => { if (pageYOffset >= s.offsetTop - 200) current = s.id; });
+    dots.forEach(d => { d.classList.remove('active'); if (d.dataset.target === current) d.classList.add('active'); });
+    document.getElementById('btt').classList.toggle('visible', window.scrollY > 300);
+});
+
+document.getElementById('btt').onclick = () => window.scrollTo({top:0, behavior:'smooth'});
+
+document.querySelectorAll('.nav-dot').forEach(dot => {
+    dot.onclick = () => document.getElementById(dot.dataset.target).scrollIntoView({behavior:'smooth'});
+});
+
+if (window.IntersectionObserver) {
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            e.target.querySelectorAll('.pb-fill').forEach(b => { b.style.width = b.dataset.w + '%'; });
+            obs.unobserve(e.target);
+        });
+    }, {threshold: 0.3});
+    document.querySelectorAll('.pb-chart').forEach(el => obs.observe(el));
+}
+
+(function() {
+    function initScrollReveal() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.ch').forEach(card => {
+            card.classList.add('reveal');
+            observer.observe(card);
+        });
+    }
+
+    const dbName = 'StarkOS_DB';
+    const productId = 'sunflower';
+    function syncProductPage() {
+        const request = indexedDB.open(dbName, 1);
+        request.onsuccess = (e) => {
+            const db = e.target.result;
+            try {
+                const store = db.transaction('archive', 'readonly').objectStore('archive');
+                const getRequest = store.get(productId);
+                getRequest.onsuccess = () => {
+                    const data = getRequest.result;
+                    if (!data) return;
+                    function makeMedia(src) {
+                        const isVid = src.startsWith('data:video');
+                        const el = document.createElement(isVid ? 'video' : 'img');
+                        el.src = src;
+                        el.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+                        if (isVid) { el.autoplay = el.muted = el.loop = true; el.setAttribute('playsinline',''); }
+                        return el;
+                    }
+                    const heroH1 = document.getElementById('sync-title');
+                    if (heroH1 && data.name) heroH1.innerText = data.name;
+                    const heroDeck = document.getElementById('sync-desc');
+                    if (heroDeck && data.desc) heroDeck.innerText = data.desc;
+                    const heroSrc = data.media1 || data.media;
+                    const heroSlot = document.getElementById('slot-product-hero');
+                    if (heroSlot && heroSrc) {
+                        heroSlot.innerHTML = '';
+                        heroSlot.appendChild(makeMedia(heroSrc));
+                    }
+                };
+            } catch(e) {}
+        };
+    }
+
+    initScrollReveal();
+    window.addEventListener('load', syncProductPage);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>אגוז מלך · Blue Star International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── BLUE STAR OS · PREMIUM DARK THEME v4.0 ── */
+
+/* 1. MASTER VARIABLES (DARK MODE) */
+:root {
+    --bg: #0A0A0B; 
+    --text: #FAF7F0; 
+    --body: #D1CEC5; 
+    --accent: #8B6340; 
+    --warm: #B8894A;
+    --card: rgba(20, 20, 22, 0.4); 
+    --radius: 20px; 
+    --shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+/* 2. CORE TYPOGRAPHY & GRID BACKGROUND */
+body { 
+    background-color: var(--bg); 
+    color: var(--body); 
+    font-family: 'Noto Sans Hebrew', sans-serif; 
+    font-size: 18px; 
+    line-height: 1.9; 
+    overflow-x: hidden; 
+    position: relative;
+    background-image: 
+        linear-gradient(rgba(184, 137, 74, 0.03) 1px, transparent 1px), 
+        linear-gradient(90deg, rgba(184, 137, 74, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+
+/* 3. AMBIENT GLOW ORBS (3D DEPTH) */
+body::before, body::after {
+    content: ''; position: fixed; width: 600px; height: 600px; border-radius: 50%;
+    filter: blur(120px); z-index: -2; opacity: 0.15; pointer-events: none;
+}
+body::before { background: var(--warm); top: -100px; left: -100px; }
+body::after { background: #5A3E28; bottom: 20%; right: -150px; }
+
+/* 4. UTILITY BARS & BUTTONS */
+#progress-bar { position:fixed; top:0; left:0; height:3px; background:var(--warm); width:0; z-index:1000; }
+
+.back-btn {
+    position: absolute; top: 40px; left: 40px; z-index: 10; display: flex; align-items: center; gap: 8px;
+    color: var(--text); text-decoration: none; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px;
+    opacity: 0.5; transition: 0.3s;
+}
+.back-btn:hover { opacity: 1; color: var(--warm); }
+
+#backToTop { 
+    position: fixed; bottom: 30px; left: 30px; width: 40px; height: 40px; 
+    background: var(--warm); color: #000; border: none; border-radius: 50%; 
+    cursor: pointer; font-size: 18px; display: none; z-index: 1000; transition: 0.3s; 
+}
+#backToTop:hover { transform: scale(1.1); box-shadow: 0 0 20px rgba(184, 137, 74, 0.4); }
+
+/* 5. HERO SECTION */
+.hero { padding: 100px 40px 160px; text-align: center; color: var(--text); position: relative; }
+.hero-k { font-size: 11px; font-weight: 700; letter-spacing: 5px; color: var(--warm); margin-bottom: 20px; text-transform: uppercase; font-family: 'Space Mono', monospace; }
+.hero h1 { font-family:'Frank Ruhl Libre', serif; font-size: 90px; font-weight: 900; line-height: 0.8; margin-bottom: 25px; letter-spacing: -2px; }
+.hero .deck { font-size: 20px; opacity: 0.8; max-width: 650px; margin: 0 auto 40px; font-weight: 300; }
+
+.hero-img-wrap {
+    max-width: 900px; margin: 0 auto -220px; height: 500px; border-radius: var(--radius); overflow: hidden;
+    box-shadow: var(--shadow); background: #000; border: 1px solid rgba(255,255,255,0.05);
+}
+.hero-img-wrap video, .hero-img-wrap img { width:100%; height:100%; object-fit:cover; }
+.hero-img-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:12px; background:#0A0A0B; }
+.hero-img-placeholder span { color:rgba(255,255,255,0.15); font-size:12px; letter-spacing:3px; font-family:'Space Mono',monospace; }
+
+/* 6. SIDE NAVIGATION */
+.side-nav { position: fixed; top: 50%; right: 30px; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 12px; }
+.nav-dot { width: 10px; height: 10px; border: 1px solid var(--warm); border-radius: 50%; opacity: 0.3; cursor: pointer; transition: 0.3s; }
+.nav-dot.active { opacity: 1; transform: scale(1.4); background: var(--warm); }
+
+/* 7. CONTENT CARDS (GLASSMORPHISM) */
+.con { max-width: 800px; margin: 280px auto 100px; padding: 0 24px; position: relative; z-index: 5; }
+.ch { 
+    background: var(--card); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+    padding: 50px; border-radius: var(--radius); margin-bottom: 40px; 
+    border: 1px solid rgba(255,255,255,0.05); position: relative; overflow: hidden;
+    color: var(--body);
+}
+.ch::before, .ch::after { content: '+'; position: absolute; font-family: 'Space Mono', monospace; color: var(--warm); font-size: 14px; opacity: 0.4; }
+.ch::before { top: 15px; left: 15px; } 
+.ch::after { bottom: 15px; right: 15px; }
+
+.ch h2 { font-family:'Frank Ruhl Libre', serif; font-size: 38px; margin-bottom: 25px; color: var(--text); border-right: 5px solid var(--warm); padding-right: 20px; line-height: 1.1; }
+.ch h3 { font-family:'Frank Ruhl Libre', serif; font-size: 22px; font-weight: 700; color: var(--text); margin: 36px 0 14px; padding-right: 14px; border-right: 3px solid var(--warm); }
+.ch p { margin-bottom: 18px; color: var(--body); }
+.cl { font-size: 10px; font-weight: 700; color: var(--warm); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; display: block; font-family: 'Space Mono', monospace; }
+.dc::first-letter { font-family:'Frank Ruhl Libre', serif; font-size: 2.8em; font-weight: 900; color: var(--warm); line-height: 1; float: right; margin-left: 8px; }
+em { color: #C4A878; font-style: italic; }
+strong { color: var(--text); }
+
+/* 8. ASIDE BOXES */
+.ab { padding: 20px 24px; margin: 28px 0; border-radius: 0 8px 8px 0; }
+.ab .tg { font-size: 10px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 6px; }
+.ab p { margin: 0; font-size: 16px; line-height: 1.75; }
+.ab-w { background: rgba(184,137,74,0.08); border-right: 4px solid var(--warm); }
+.ab-w .tg { color: var(--warm); }
+.ab-g { background: rgba(90,62,40,0.2); border-right: 4px solid var(--accent); }
+.ab-g .tg { color: #C4A878; }
+.ab-r { background: rgba(184,50,50,0.1); border-right: 4px solid #B83030; }
+.ab-r .tg { color: #E06060; }
+.ab-r p { color: #DDB0B0; }
+
+/* 9. VARIETY CARDS */
+.vc { background: rgba(30,28,25,0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 22px; margin: 18px 0; }
+.vc .vn { font-family:'Frank Ruhl Libre', serif; font-size: 21px; font-weight: 700; color: var(--text); }
+.vc .vt { font-size: 12px; color: var(--warm); font-weight: 600; margin-bottom: 10px; }
+.vc p { font-size: 16px; line-height: 1.75; margin-bottom: 0; color: var(--body); }
+.vc .vs { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+.vc .vsi { background: rgba(255,255,255,0.04); padding: 6px 12px; border-radius: 5px; font-size: 12px; color: #A09080; }
+.vc .vsi strong { color: var(--text); }
+
+/* 10. NUTRITION GRID */
+.ng { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin: 24px 0; }
+.ni { background: rgba(30,28,25,0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 14px; text-align: center; }
+.ni .nv { font-family:'Frank Ruhl Libre', serif; font-size: 26px; font-weight: 700; color: var(--text); }
+.ni .nu { font-size: 13px; color: #A09080; margin-top: 2px; }
+.ni .nl { font-size: 11px; color: var(--warm); margin-top: 3px; font-weight: 600; }
+
+/* 11. CHART BLOCK */
+.cb { background: rgba(20,20,22,0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 24px; margin: 28px 0; }
+.cb .ct { font-family:'Frank Ruhl Libre', serif; font-size: 17px; font-weight: 700; margin-bottom: 14px; text-align: center; color: var(--text); }
+.pb-chart { margin: 16px 0 8px; display: flex; flex-direction: column; gap: 10px; }
+.pb-row { display: flex; align-items: center; gap: 10px; }
+.pb-meta { display: flex; align-items: center; gap: 6px; min-width: 120px; justify-content: flex-end; }
+.pb-flag { font-size: 18px; }
+.pb-name { font-size: 13px; color: #A09080; }
+.pb-track { flex: 1; background: rgba(255,255,255,0.08); height: 18px; border-radius: 9px; overflow: hidden; }
+.pb-fill { height: 100%; width: 0; border-radius: 9px; transition: width 1.2s cubic-bezier(0.22,1,0.36,1); }
+.pb-pct { font-family:'Frank Ruhl Libre', serif; font-size: 14px; font-weight: 700; color: var(--text); width: 36px; text-align: left; }
+.pb-note { font-size: 11px; color: #6B6058; opacity: .7; margin-top: 10px; text-align: center; }
+
+/* 12. TABLES */
+.gt { width: 100%; border-collapse: collapse; margin: 25px 0; font-size: 15px; border-top: 1px solid rgba(255,255,255,0.05); }
+.gt th { background: rgba(0,0,0,0.5); color: var(--text); padding: 14px; text-align: right; font-size: 12px; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.gt td { padding: 14px; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--body); }
+.gt tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+
+/* 13. PULL QUOTE */
+.pull { margin: 40px 0; padding: 45px; background: rgba(0,0,0,0.4); border-radius: var(--radius); text-align: center; border: 1px solid rgba(184,137,74,0.2); }
+.pull p { font-family:'Frank Ruhl Libre', serif; font-size: 22px; font-weight: 500; color: var(--body); line-height: 1.55; margin: 0; font-style: italic; }
+
+/* 14. SCROLL REVEAL */
+.reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.2, 1, 0.2, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+/* 15. MARQUEE */
+.marquee-container { position: fixed; bottom: -3vh; left: 0; width: 100vw; overflow: hidden; z-index: -1; pointer-events: none; }
+.marquee-text { font-family: 'Playfair Display', serif; font-size: 15vw; white-space: nowrap; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.03); animation: scrollText 40s linear infinite; }
+@keyframes scrollText { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* 16. FOOTER */
+.ft { text-align: center; padding: 44px 24px; font-size: 13px; color: #6B6058; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 36px; }
+.inner-ft { background: rgba(0,0,0,0.8); color: var(--text); padding: 60px 20px; text-align: center; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; opacity: 0.6; border-top: 1px solid rgba(255,255,255,0.05); }
+
+/* 17. MOBILE */
+@media (max-width: 900px) { 
+    .side-nav { display: none; } 
+    .back-btn { top: 20px; left: 20px; } 
+    .hero h1 { font-size: 55px; } 
+    .hero-img-wrap { height: 300px; margin-bottom: -100px; }
+    .con { margin-top: 150px; }
+    .ng { grid-template-columns: repeat(2,1fr); }
+}
+
+/* LIST STYLING FIX */
+.ch ol, .ch ul { padding-right: 24px; margin: 16px 0 18px; }
+.ch li { margin-bottom: 10px; color: var(--body); line-height: 1.8; }
+.ch ol li::marker { color: var(--warm); font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; }
+.ch ul li::marker { color: var(--warm); }
+
+/* PROCESS STEPS STYLING */
+.proc-steps { display: flex; flex-direction: column; gap: 20px; margin: 24px 0; }
+.proc-step { display: flex; gap: 20px; align-items: flex-start; }
+.proc-step-num {
+    min-width: 36px; height: 36px; border-radius: 50%;
+    background: var(--warm); color: #000;
+    font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.proc-step-title { font-family: 'Frank Ruhl Libre', serif; font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.proc-step-body { font-size: 16px; color: var(--body); line-height: 1.75; }
+
+/* Product Gallery - Stark OS */
+.product-gallery-wrapper { margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.06); }
+.product-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.gallery-item { aspect-ratio: 1; background: var(--card); border-radius: calc(var(--radius) / 2); overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.06); }
+.gallery-item-placeholder { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: rgba(255,255,255,0.12); text-align: center; }
+.gallery-item img, .gallery-item video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9); transition: filter 0.3s ease; }
+.gallery-item:hover img, .gallery-item:hover video { filter: brightness(1.1); }
+
+/* Inline Media Slots */
+.media-slot-inline {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--card);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 40px 0;
+    border: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.media-slot-inline img,
+.media-slot-inline video {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(0.92);
+    transition: filter 0.3s;
+}
+.media-slot-inline:hover img,
+.media-slot-inline:hover video { filter: brightness(1.05); }
+.media-slot-inline .slot-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.1);
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+</style>
+<script src="../auth.js"></script>
+</head>
+<body>
+<div class="marquee-container">
+    <div class="marquee-text">
+        BLUE STAR INTERNATIONAL · GLOBAL COMMODITY ARCHIVE · BLUE STAR INTERNATIONAL · GLOBAL COMMODITY ARCHIVE · 
+    </div>
+</div>
+<div id="progress-bar"></div>
+<nav class="side-nav">
+    <div class="nav-dot active" data-target="ch1"></div>
+    <div class="nav-dot" data-target="ch2"></div>
+    <div class="nav-dot" data-target="ch3"></div>
+    <div class="nav-dot" data-target="ch4"></div>
+    <div class="nav-dot" data-target="ch5"></div>
+    <div class="nav-dot" data-target="ch6"></div>
+    <div class="nav-dot" data-target="ch7"></div>
+    <div class="nav-dot" data-target="ch8"></div>
+    <div class="nav-dot" data-target="ch9"></div>
+    <div class="nav-dot" data-target="ch10"></div>
+</nav>
+<section class="hero">
+    <a href="index.html" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>חזרה למסוף</a>
+    <div class="hero-k">ערך ידע חקלאי · Blue Star International</div>
+    <h1 id="sync-title">אגוז מלך</h1>
+    <p class="deck" id="sync-desc">מאז יוון העתיקה ועד מחקרי אומגה-3 של היום. סיפורו של האגוז שפילוסופים אכלו, וכיום מדענים חוקרים.</p>
+    <div class="hero-img-wrap" id="slot-product-hero">
+        <div class="hero-img-placeholder"><span>מדיה_לא_נטענה</span></div>
+    </div>
+</section>
+<main class="con">
+
+<!-- ═══ CH 1 ═══ -->
+<div class="ch" id="ch-1">
+<div class="cl">פרק ראשון</div>
+<h2>תשעת אלפים שנה של בלוט מלכותי</h2>
+
+<p class="dc">לפני כ-9,000 שנה, באזור שנקרא היום איראן, בין הרי זאגרוס לרמות הקווקז, בני אדם כבר אכלו אגוזי מלך. ממצאים ארכיאולוגיים מהתקופה הניאוליתית, כ-7,000 לפני הספירה, מעידים על צריכת אגוזי מלך באזור פרס העתיקה, מה שהופך אותו לאחד ממזונות העץ העתיקים ביותר שהאנושות מכירה. באותם מקומות, בין הרי טיאן שאן בקזחסטן להרי הקווקז, שרדו עצים מתקופת הקרחונים האחרונה, בבידוד כמעט מוחלט, ומהם התפתח מין ה-<em>Juglans regia</em> שאנחנו מכירים היום.</p>
+
+<p>הפרסים הכתירו את האגוז הזה כמזון מלכותי, שמור למלכים ולחצר. מכאן השם: אגוז פרסי, Persian Walnut. כשהגיע לרומא קיבל שם מכובד עוד יותר: <em>Juglans regia</em>, בלוט יופיטר המלכותי. Jovis (יופיטר) + Glans (בלוט) = האגוז של האל. הרומאים לא סתם אהבו אותו, הם ייחסו לו כוח פיזי ואינטלקטואלי, ותיעדו אותו כסמל של פוריות, חוכמה ושפע. בטקסי חתונה רומיים, החתן זרק אגוזי מלך על האורחים.</p>
+
+<div class="pull"><p>הרומאים קראו לו Juglans regia, הבלוט המלכותי של יופיטר, אביר האלים. מפרס לרומא, משיירות משי לספינות סוחר, אגוז המלך לא נשאר במקום אחד.</p></div>
+
+<p>מפרס, האגוז נסע בשני מסלולים. מערבה, דרך תורכיה ויוון. אלכסנדר הגדול הביא את ה"אגוז הפרסי" למקדוניה במאה הרביעית לפני הספירה, ושם הוצלב עם זנים מקומיים. הרומאים שתלו מטעים בכל רחבי דרום אירופה וצפון אפריקה, שרידי אגוזי מלך נמצאו במטענים של ספינות רומיות שטבעו, ובחורבות פומפיי. מזרחה, שיירות הסוחרים נשאו אגוזי מלך מפרס דרך אפגניסטן להודו ולסין. מחקר גנטי מראה שהגיעו לסין לפני כאלפיים שנה.</p>
+
+<div class="ab"><div class="tg">למה "אגוז אנגלי"?</div><p>אנגליה מעולם לא גידלה אגוזי מלך באופן מסחרי. אבל מהמאה ה-17, סוחרי הצי המסחרי הבריטי הובילו את הפצת האגוז לנמלים ברחבי העולם, כולל לאמריקה. כיוון שהמלחים האנגלים היו אלה שמכרו אותם, הוא נקרא "English Walnut". המילה "walnut" עצמה מגיעה מאנגלית עתיקה, <em>wealhhnutu</em>, "האגוז הזר". גם שם ידעו שהוא לא מכאן.</p></div>
+
+<p>לאמריקה, האגוז הגיע עם המסיונרים הפרנציסקנים בסוף המאה ה-18. הם שתלו את העצים הראשונים בקליפורניה, ומאז, עמק המרכזי הפך למרכז ייצור עולמי. תשעת אלפים שנה, מהרי זאגרוס ועד למקורות המים של סן חואקין.</p>
+
+<div class="img-ph" data-slot="walnut-orchard">
+  <div class="img-ph-title">📷 מטע אגוזי מלך בעמק המרכזי, קליפורניה</div>
+  <div class="img-ph-desc">שדרות עצים בוגרים בזמן הקציר</div>
+</div>
+</div>
+
+<!-- ═══ CH 2 ═══ -->
+<div class="ch" id="ch-2">
+<div class="cl">פרק שני</div>
+
+
+<h2>הגאוגרפיה, סין שולטת, קליפורניה מייצאת</h2>
+
+<p class="dc">שוק אגוזי המלך שונה מהשקד ומהפקאן. אין כאן שחקן אחד דומיננטי, יש שניים גדולים ואחריהם רשימה ארוכה. סין מייצרת כ-50% מהייצור העולמי, ארה"ב כ-14%, ואחריהן איראן, טורקיה, צ'ילה, אוקראינה והאיחוד האירופי. הייצור העולמי בעונת 2024/25: כ-2.9 מיליון טון.</p>
+
+<div class="pb-chart">
+  <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇨🇳</span><span class="pb-name">סין</span></div><div class="pb-track"><div class="pb-fill" data-w="50" style="background:#3D2B1F"></div></div><span class="pb-pct">50%</span></div>
+  <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇺🇸</span><span class="pb-name">ארה"ב</span></div><div class="pb-track"><div class="pb-fill" data-w="14" style="background:#6B4832"></div></div><span class="pb-pct">14%</span></div>
+  <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇮🇷</span><span class="pb-name">איראן</span></div><div class="pb-track"><div class="pb-fill" data-w="10" style="background:#9B7858"></div></div><span class="pb-pct">10%</span></div>
+  <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇹🇷</span><span class="pb-name">טורקיה</span></div><div class="pb-track"><div class="pb-fill" data-w="5" style="background:#C4A87A"></div></div><span class="pb-pct">5%</span></div>
+  <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇨🇱</span><span class="pb-name">צ'ילה</span></div><div class="pb-track"><div class="pb-fill" data-w="4" style="background:#D4C09A"></div></div><span class="pb-pct">4%</span></div>
+  <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🌍</span><span class="pb-name">אחרים</span></div><div class="pb-track"><div class="pb-fill" data-w="17" style="background:#DDD6CA"></div></div><span class="pb-pct">17%</span></div>
+  <div class="pb-note">~2.9 מיליון טון · INC / USDA FAS 2024/25</div>
+</div>
+
+<div class="ng">
+  <div class="ni"><div class="nv">1.45M</div><div class="nu">טון</div><div class="nl">סין · #1</div></div>
+  <div class="ni"><div class="nv">~650K</div><div class="nu">טון</div><div class="nl">ארה"ב · #2</div></div>
+  <div class="ni"><div class="nv">~290K</div><div class="nu">טון</div><div class="nl">איראן · #3</div></div>
+</div>
+
+<p>סין מגדלת בעיקר לצריכה פנימית. הביקוש הסיני לאגוזי מלך עצום, בפרט לאגוזי מלך "דקורטיביים" שמחיר זוג מהם יכול להגיע לאלפי דולרים עבור קולנים בצבעים ובתבניות נדירות. ארה"ב, לעומת זאת, מייצאת כ-60% מהתפוקה שלה, בעיקר מקליפורניה, לשווקי אסיה, אירופה והמזרח התיכון.</p>
+
+<div class="ab"><div class="tg">צ'ילה עולה</div><p>ייצוא הקליפורני עומד בלחץ גובר מצ'ילה. האקלים דומה, עלויות ייצור נמוכות יותר, והמרחק לאסיה קצר. בעשור האחרון, צ'ילה הכפילה את שטחי הגידול. קליפורניה מגיבה בהשקעה בזנים חדשים ובאוטומציה.</p></div>
+
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>מדינה</th><th>ייצור (טון)</th><th>תפקיד</th><th>מגמה</th></tr>
+<tr><td>סין</td><td>~1,450,000</td><td>מגדלת + צרכנית #1</td><td>→ יציב, צריכה פנים</td></tr>
+<tr><td>ארה"ב (קליפורניה)</td><td>~650,000</td><td>מגדלת + מייצאת</td><td>↓ לחץ מחירים</td></tr>
+<tr><td>איראן</td><td>~290,000</td><td>מגדלת + מייצאת</td><td>→ סנקציות מגבילות</td></tr>
+<tr><td>טורקיה</td><td>~145,000</td><td>מגדלת</td><td>↑ צמיחה</td></tr>
+<tr><td>צ'ילה</td><td>~120,000</td><td>מגדלת + מייצאת</td><td>↑↑ מהירה</td></tr>
+<tr><td>אוקראינה</td><td>~110,000</td><td>מגדלת</td><td>↓ מלחמה</td></tr>
+</table></div>
+</div>
+<div id="slot-inline-2" class="media-slot-inline"><div class="media-slot-placeholder">MEDIA_02</div></div>
+
+
+<!-- ═══ CH 3 ═══ -->
+<div class="ch" id="ch-3">
+<div class="cl">פרק שלישי</div>
+<h2>עיבוד ודרגות USDA</h2>
+
+<p class="dc">אגוז מלך הוא פחות מורכב מבחינת עיבוד מאשר קשיו, אבל יש לו מערכת דירוג ברורה ומדויקת שקובעת את המחיר בשוק הבינלאומי. הדירוג לפי שניים: גודל (גרעין שלם מול חצאים מול חתיכות) וצבע (ארבעה ציוני בהירות). כל שילוב של גודל וצבע הוא מוצר אחר עם מחיר אחר.</p>
+
+<h3>שלבי העיבוד</h3>
+<p>קציר, בספטמבר-נובמבר. ניעור מכני של העצים, איסוף. קילוף הקליפה הירוקה החיצונית (hull) תוך שעות, חמצון הקליפה גורם לכתמי עור שבועות. ייבוש, הורדה ל-8% לחות. פיצוח מכני. מיון לפי גודל וצבע. אריזה ואחסון קריר.</p>
+
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>דרגת צבע</th><th>תיאור</th><th>שוק</th><th>מחיר יחסי</th></tr>
+<tr><td><strong>Extra Light</strong></td><td>בהיר מאוד, זהוב-שנהב</td><td>פרימיום, מתנות, קמעונאי</td><td>גבוה ביותר</td></tr>
+<tr><td><strong>Light</strong></td><td>בהיר, זהוב-חום בהיר</td><td>קמעונאי, חטיפים</td><td>גבוה</td></tr>
+<tr><td><strong>Light Amber</strong></td><td>ענבר-חום בינוני</td><td>מגוון, קמעונאי ותעשייה</td><td>בינוני</td></tr>
+<tr><td><strong>Amber</strong></td><td>כהה</td><td>תעשיית מזון, אפייה</td><td>נמוך</td></tr>
+</table></div>
+
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>דרגת גודל</th><th>תיאור</th><th>שימוש</th></tr>
+<tr><td><strong>Halves (חצאים)</strong></td><td>שני חצאי גרעין שלמים</td><td>מראה, חטיף, שולחן</td></tr>
+<tr><td><strong>Pieces (חתיכות)</strong></td><td>Large / Medium / Small / Midget</td><td>אפייה, בישול, גרנולה</td></tr>
+<tr><td><strong>Flour (קמח)</strong></td><td>טחון דק</td><td>ציפוי, בצק, תעשייה</td></tr>
+</table></div>
+
+<div class="ab"><div class="tg">ההבדל במחיר</div><p>Extra Light Halves לעומת Amber Pieces, ההבדל יכול להיות פי שלושה עד ארבעה במחיר. הפרמיום על הצבע הבהיר ועל השלמות גבוה. בשוק הישראלי, Extra Light Halves מגיעות בעיקר מקליפורניה. חתיכות זולות יותר לרוב מאיראן או צ'ילה.</p></div>
+</div>
+
+<!-- ═══ CH 4 ═══ -->
+<div class="ch" id="ch-4">
+<div class="cl">פרק רביעי</div>
+
+
+<h2>זנים, מי מגיע מאיפה ומה ההבדל</h2>
+
+<p class="dc">בשוק הבינלאומי, אגוזי מלך מוגדרים בעיקר לפי מקור גאוגרפי. אבל בתוך קליפורניה, מדינת הייצור המוביל לייצוא, הזן הוא גורם מכריע. Chandler הוא הזן שקבע את הסטנדרט, ו-95% מהמטעות החדשות שנשתלות בקליפורניה הן Chandler.</p>
+
+<div class="vc">
+  <div class="vn">Chandler</div>
+  <div class="vt">הזן השולט · 60%+ מהמטעות בקליפורניה</div>
+  <p>זן פורה ומסחרי שפותח באוניברסיטת UC Davis בשנות ה-70. גרעין גדול, בהיר (Extra Light), שלם ויפה לעין. זמן קציר מוקדם יחסית. העץ מניב יבול גבוה כבר מהשנה השלישית. הדומיננטיות שלו בקליפורניה כה גדולה שבשוק הבינלאומי "California Walnut" ו-"Chandler" הפכו כמעט נרדפים.</p>
+  <div class="vs">
+    <div class="vsi">גרעין: <strong>גדול, Extra Light</strong></div>
+    <div class="vsi">יבול: <strong>גבוה מאוד</strong></div>
+    <div class="vsi"><strong>ייצוא, פרימיום עולמי</strong></div>
+  </div>
+</div>
+
+<div class="vc">
+  <div class="vn">Howard</div>
+  <div class="vt">החלופה הקליפורנית</div>
+  <p>גרעין בהיר ואיכותי, אבל מעט קטן יותר מ-Chandler. יתרון: פריחה מאוחרת, עמידות טובה יותר למחלות. משמש בעיקר לייצוא ולשוק הקמעונאי. נפוץ בצפון קליפורניה שם האקלים קצת שונה.</p>
+  <div class="vs">
+    <div class="vsi">גרעין: <strong>בינוני, בהיר</strong></div>
+    <div class="vsi"><strong>ייצוא, קמעונאי</strong></div>
+  </div>
+</div>
+
+<div class="vc">
+  <div class="vn">Franquette</div>
+  <div class="vt">הצרפתי, מאוחר ומעודן</div>
+  <p>זן צרפתי קלאסי. פריחה מאוחרת מאוד, אפריל-מאי, מה שמגן עליו מכפור באזורים קרים. גרעין בינוני, צבע בהיר מעולה, טעם עדין ומורכב. נגדל באורגון ובוושינגטון, ובדרום צרפת שם שמן Périgord עשוי בחלקו ממנו. מתאים לאקלימים קרירים יותר.</p>
+  <div class="vs">
+    <div class="vsi">מקור: <strong>צרפת</strong></div>
+    <div class="vsi">פריחה: <strong>מאוחרת מאוד</strong></div>
+    <div class="vsi"><strong>גורמה, שמן, שווקי פרימיום</strong></div>
+  </div>
+</div>
+
+<div class="vc">
+  <div class="vn">זנים פרסיים ואיראניים</div>
+  <div class="vt">גרעינים קטנים, טעם עמוק</div>
+  <p>עשרות זנים מקומיים. הגרעינים לרוב קטנים יותר מהקליפורניים, אבל בעלי טעם אגוזי עשיר ומרוכז, מה שעשה להם שם בשוקי גורמה. קליפה קשה יותר, לעיתים קשה לפיצוח. משמשים גם לייצור שמן אגוזי מלך איכותי. הסנקציות על איראן מגבילות את נגישותם לשוקים מסוימים.</p>
+  <div class="vs">
+    <div class="vsi">גרעין: <strong>קטן, טעם עמוק</strong></div>
+    <div class="vsi"><strong>שמן, גורמה, רפואה מסורתית</strong></div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ CH 5 ═══ -->
+<div class="ch" id="ch-5">
+<div class="cl">פרק חמישי</div>
+<h2>תזונה, אומג
+<div id="slot-inline-3" class="media-slot-inline"><div class="media-slot-placeholder">MEDIA_03</div></div>
+ה-3 בראש הרשימה</h2>
+
+<p class="dc">אגוז מלך הוא האגוז העשיר ביותר בחומצות שומן אומגה-3 מכל אגוזי העץ. זה הנתון שקובע את הזהות התזונתית שלו. בעוד שרוב האגוזים עשירים בשומנים חד בלתי רוויים, אגוז המלך עשיר בשומנים רב בלתי רוויים, במיוחד חומצה אלפא-לינולנית (ALA), חומצת אומגה-3 שהגוף אינו מייצר בעצמו.</p>
+
+<div class="ng">
+  <div class="ni"><div class="nv">654</div><div class="nu">קלוריות / 100g</div><div class="nl">פחות מפקאן ומקדמיה</div></div>
+  <div class="ni"><div class="nv">65.2g</div><div class="nu">שומן כולל</div><div class="nl">72% רב בלתי רווי</div></div>
+  <div class="ni"><div class="nv">15.2g</div><div class="nu">חלבון</div><div class="nl">צמחי</div></div>
+  <div class="ni"><div class="nv">6.7g</div><div class="nu">סיבים</div><div class="nl">27% מהיומי</div></div>
+  <div class="ni"><div class="nv">2.5g</div><div class="nu">אומגה-3 ALA</div><div class="nl">ל-28 גרם (מנה)</div></div>
+  <div class="ni"><div class="nv">163%</div><div class="nu">מנגן</div><div class="nl">מהצריכה היומית</div></div>
+</div>
+
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>ערך תזונתי</th><th>ל-100 גרם</th><th>% צריכה יומית</th><th>הערה</th></tr>
+<tr><td>קלוריות</td><td>654 kcal</td><td>—</td><td>פחות מפקאן (690) ומקדמיה (718)</td></tr>
+<tr><td>שומן כולל</td><td>65.2g</td><td>84%</td><td>72% רב בלתי רווי</td></tr>
+<tr><td>אומגה-6 (LA)</td><td>38.1g</td><td>—</td><td>גבוה</td></tr>
+<tr><td>אומגה-3 (ALA)</td><td>9.1g</td><td>—</td><td>#1 באגוזי עץ</td></tr>
+<tr><td>שומן חד בלתי רווי</td><td>8.9g</td><td>—</td><td>נמוך יחסית</td></tr>
+<tr><td>שומן רווי</td><td>6.1g</td><td>31%</td><td>—</td></tr>
+<tr><td>חלבון</td><td>15.2g</td><td>30%</td><td>פחות מהשקד (21.2g)</td></tr>
+<tr><td>פחמימות</td><td>13.7g</td><td>5%</td><td>נמוך</td></tr>
+<tr><td>סיבים תזונתיים</td><td>6.7g</td><td>24%</td><td>גבוה לאגוז</td></tr>
+<tr><td>מנגן</td><td>3.41mg</td><td>163%</td><td>מהגבוהים במזון</td></tr>
+<tr><td>נחושת</td><td>1.59mg</td><td>89%</td><td>—</td></tr>
+<tr><td>מגנזיום</td><td>158mg</td><td>39%</td><td>—</td></tr>
+<tr><td>זרחן</td><td>346mg</td><td>49%</td><td>—</td></tr>
+<tr><td>ויטמין B6</td><td>0.54mg</td><td>42%</td><td>—</td></tr>
+<tr><td>תיאמין (B1)</td><td>0.34mg</td><td>28%</td><td>—</td></tr>
+</table></div>
+
+<div class="ab"><div class="tg">האגוז שדומה למוח</div><p>הדמיון הוויזואלי בין גרעין אגוז מלך למוח אנושי הוא מפתיע: שני חצאים סימטריים, קפלים, ואפילו "ממברנה" מפרידה. ברפואה עתיקה, סינית, פרסית ואירופית, האמינו ב"תורת הסימנים" (Doctrine of Signatures): מזון שדומה לאיבר, מרפא אותו. מחקר מודרני, באופן מעניין, מצא שאכן יש קשר בין צריכת אגוזי מלך לשיפור פונקציות קוגניטיביות.</p></div>
+
+<p>2.5 גרם ALA למנה של 28 גרם, כ-14 חצאים, הכמות הגבוהה ביותר מכל אגוז עץ. מחקר שנמשך עשרים שנה מצא שצריכה של חמש מנות אגוזי מלך בשבוע קשורה לירידה של 25% בסיכון למוות ממחלות לב.</p>
+</div>
+
+<!-- ═══ CH 6 ═══ -->
+<div class="ch" id="ch-6">
+<div class="cl">פרק שישי</div>
+
+
+<h2>שימושים, מחטיף ועד שמן פרימיום</h2>
+
+<p class="dc">אגוז מלך הוא אגוז של ניגודים. הוא יכול להיות פרימיום, חצאים בהירים בקופסת זכוכית, או תעשייתי, טחון לקמח בתוך חטיף אנרגיה. הוא נמצא בעוגות ובלחמים, בסלטים ובפסטה, בגבינות ובמרקים. וכמו השקד, גם ממנו מייצרים שמן, אבל שמן אגוזי מלך הוא מוצר שונה לגמרי.</p>
+
+<h3>שמן אגוזי מלך</h3>
+<p>בעל טעם אגוזי עמוק ועשיר, נקודת עשן נמוכה (160°C). לא לטיגון, לסלטים, לגימור מנות, לויניגרטים. מפורסם במיוחד במטבח הצרפתי באזור פריגורד (דורדון). שמן פרימיום אמיתי.</p>
+
+<h3>באפייה ובישול</h3>
+<p>בראוניז, עוגת אגוזים, בננה ברד, בקלאווה. קלויים עם דבש וקינמון, חטיף קלאסי. בסלטים עם גבינה כחולה, אגסים, רוקט. פסטו אגוזי מלך, במקום צנוברים, תחליף מועדף בחלק ממטבחי איטליה. גבינות עם אגוזי מלך מוטבעים נפוצות בצרפת, איטליה, וגם בישראל.</p>
+
+<h3>אגוז מלך בתרבויות העולם</h3>
+<p>באיראן, נאכל טרי עם גבינה לבנה ולוואש. חטיפי נוגט (gaz) עם אגוזי מלך הם מתנה מסורתית. בסין, מסוכרים כחטיף חורפי פופולרי, ומרכיב ברפואה הסינית המסורתית (חיזוק כליות ומוח). בצרפת, Vin de Noix, יין ירוק מאגוזי מלך טריים, וליקרים אזוריים. בטורקיה, חורשק עם אגוזי מלך.</p>
+
+<p>ובישראל, אגוז מלך הוא האגוז של החורף. בשווקים, אגוזים בקליפה נמכרים מנובמבר עד פברואר. הם חלק מתפריט ט"ו בשבט יחד עם שקדים, תמרים ותאנים, ובמטבח הישראלי המודרני, בסלטים, בצד דגים ובקינוחים. עצי אגוז מלך גדלים ברמת הגולן ובגליל העליון בהיקפים קטנים.</p>
+
+<div class="img-ph" data-slot="walnut-products">
+  <div class="img-ph-title">📷 Extra Light Halves, מוכנים לייצוא</div>
+  <div class="img-ph-desc">חצאים בהירים שלמים, דרגת פרימיום</div>
+</div>
+</div>
+
+<!-- ═══ CH 7 ═══ -->
+<div class="ch" id="ch-7">
+<div class="cl">פרק שביעי</div>
+<h2>בוטניקה, העץ שמרעיל שכנים</h2>
+
+<p class="dc">עץ אגוז המלך, <em>Juglans regia</em>, שייך למשפחת הג'וגלנדיים (
+<div id="slot-inline-4" class="media-slot-inline"><div class="media-slot-placeholder">MEDIA_04</div></div>
+Juglandaceae), אותה משפחה של הפקאן ואגוז השחור האמריקאי. עץ נשיר, עם עלווה ריחנית, שיכול להגיע ל-25 מטר וחיות מעל 200 שנה. הגזע מפתח קליפה אפורה וסדוקה אופיינית עם הגיל. בקליפורניה, מטעות מסחריות משתמשות בזני גמד המגיעים ל-10-15 מטר לנוחות קציר.</p>
+
+<p>הפרח: חד-מיני על אותו עץ, זכרי (עגילים ארוכים) ונקבי (קטן, בקצות ענפים חדשים). האבקה על ידי רוח. פרחים זכריים ונקביים פורחים לעיתים בזמנים שונים, מה שמחייב זן נוסף כמאביק, או זנים self-fertile כמו Chandler.</p>
+
+<p>הפרי: דרופה. מבחוץ, קליפה ירוקה ובשרנית (hull) שמשחירה ומתפוצחת עם הבשלה. בפנים, קליפה קשה (shell) שמגינה על הגרעין. הגרעין עצמו, שני אונות שמחוברות ומחולקות בממברנה. מקצירים כשהקליפה הירוקה מתחילה להתפצח.</p>
+
+<div class="ab ab-r"><div class="tg">ג'וגלון, הרעל של השכנים</div><p>שורשי אגוז המלך מפרישים ג'וגלון, חומר אלאלופתי שרעיל לצמחים רבים. עגבניות, תפוחי אדמה, אפרסמון, אוכמניות, ושאר צמחים לא יגדלו בקרבת עץ אגוז מלך. חקלאים יודעים לשמור מרחק. הג'וגלון גם רעיל לסוסים, מגע עם עלים או נסורת גורם ללמיניטיס (דלקת פרסות). צבע אגוזים יכול לצבוע עור ובגדים חום כהה לשבועות.</p></div>
+
+<p>עץ מסחרי מתחיל לתת יבול שמיש כעבור 5-7 שנים ומגיע לשיא כעבור 10-15 שנה. עץ בוגר יניב 10-14 ק"ג גרעינים בשנה. הקמים בקליפורניה מבוססים לרוב על שתילת עצים מורכבים, גרפט על כנה של אגוז שחור, שמקנה לעץ עמידות לנמטודות אדמה.</p>
+</div>
+
+<!-- ═══ CH 8 ═══ -->
+<div class="ch" id="ch-8">
+<div class="cl">פרק שמיני</div>
+<h2>איכות, טריות ואחסון</h2>
+
+<p class="dc">אגוז מלך הוא האגוז הרגיש ביותר לחמצון מכל האגוזים הנפוצים. הסיבה: תכולת שומן רב בלתי רווי גבוהה במיוחד, 72% מהשומן. שומנים רב בלתי רוויים נחמצנים מהר, הרבה יותר מהר משומנים חד בלתי רוויים (כמו בשקד) או שומנים רוויים. התוצאה: אגוז מלך שלא מאוחסן נכון יהפוך למריר-חמצמץ תוך שבועות.</p>
+
+<h3>כיצד לזהות אגוז מלך טרי</h3>
+<p><strong>צבע:</strong> גרעין בהיר זהוב, ללא כתמים כהים. <strong>מרקם:</strong> פריך, נשבר בנקיון, לא גומי. <strong>ריח:</strong> אגוזי עדין. ריח צבעי (כמו שמן לינולאום), סימן ברור לרנסידיות. <strong>טעם:</strong> אגוזי עם מרירות קלה נעימה. מרירות חריפה שורפת, אגוז ישן.</p>
+
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>מיקום</th><th>משך</th><th>תנאים</th></tr>
+<tr><td>בקליפה, מקום קריר</td><td>עד 3 חודשים</td><td>אוורור, הרחק מאור</td></tr>
+<tr><td>גרעינים קלופים, טמפ' חדר</td><td>2–3 שבועות</td><td>מיכל אטום</td></tr>
+<tr><td>מקרר, מיכל אטום</td><td>עד חודשיים</td><td>הרחק מריחות חזקים</td></tr>
+<tr><td>מקפיא</td><td>עד שנה</td><td>שקית Ziploc, ניתן לאכול ישר</td></tr>
+</table></div>
+
+<div class="ab"><div class="tg">כלל ברזל</div><p>קנו ממקומות עם מחזור מהיר. בדקו צבע, בהיר שווה טרי. ריח צבעי שווה זרוק. אחסנו מיד במקרר, אגוז מלך הוא לא אגוז שמשאירים על השולחן. קלייה קלה, 5 דקות ב-170°C, מחדשת ארומה אבל קלו רק מה שאוכלים מיד, קלוי מתדרדר עוד יותר מהר.</p></div>
+
+<p>אגוז מלך סופג ריחות בקלות. לעולם לא ליד בצל, שום, תבלינים חזקים או מוצרים ריחניים. האויב: אור, חום, לחות, חמצן.</p>
+</div>
+
+<!-- ═══ CH 9 ═══ -->
+<div class="ch" id="ch-9">
+<div class="cl">פרק תשיעי</div>
+<h2>אלרגיות ובטיחות</h2>
+
+<p class="dc">אגוז מלך מסווג כאגוז עץ (Tree Nut), אחד משמונת האלרגנים העיקריים שחייבים סימון בארה"ב ובאיחוד האירופי. אלרגיה לאגוזי עץ יכולה לגרום לתגובה אנפילקטית ובדרך כלל נשארת לכל החיים. אגוז מלך ופקאן שייכים לאותה משפחה בוטנית, Juglandaceae, ולכן רגישות צולבת ביניהם שכיחה במיוחד.</p>
+
+<div class="ab ab-r"><div class="tg">רגישות צולבת</div><p>מי שאלרגי לאגוז מלך צריך לנקוט זהירות מיוחדת עם <strong>פקאן</strong> (אותה משפחה). רגישות צולבת עם שקד ואגוזי לוז פחות שכיחה, אבל קיימת. בדיקה אלרגולוגית ספציפית היא הדרך הנכונה.</p></div>
+
+<p>אגוזי מלך שלמים עלולים להוות סכנת חנק לילדים קטנים. אחסון לקוי עלול לגרום לנוכחות אפלטוקסינים, לכן חשוב לקנות ממקורות אמינים ולא לאכול אגוזים שנראים מעופשים, כהים באופן חריג, או בעלי ריח חריג.</p>
+
+<p>הג'וגלון שמפריש עץ אגוז המלך רעיל לסוסים, מגע של סוסים עם עלים או נסורת עלול לגרום ללמיניטיס. צבע הגרעין והקליפה הירוקה יכול לצבוע עור ובגדים חום-שחור שקשה להסרה.</p>
+</div>
+
+<!-- ═══ CH 10 ═══ -->
+<div class="ch" id="ch-10">
+<div class="cl">פרק עשירי</div>
+<h2>סיכום, מה שנשאר</h2>
+
+<p class="dc">אגוז מלך הוא אולי האגוז בעל ההיסטוריה העמוקה ביותר. שום אגוז אחר לא קיבל שם של אל, יופיטר, מלך האלים הרומיים. שום אגוז אחר לא נסע מפרס לסין לאירופה לאמריקה במסלול כל כך ברור ומתועד. ושום אגוז אחר לא דומה כל כך למוח האנושי, מה שהפך אותו לסמל של חוכמה וידע בכל תרבות שפגשה אותו.</p>
+
+<p>מבחינה תזונתית, אגוז המלך עומד בפני עצמו בזכות נתון אחד: אומגה-3. שום אגוז עץ אחר לא מתקרב לתכולת ה-ALA שלו. זה מה שהופך אותו ל"אגוז הבריאות", עם מחקר קליני שתומך בכך.</p>
+
+<div class="pull"><p>מהגנים המלכותיים של פרס דרך שיירות דרך המשי, ספינות רומיות שטבעו, ומסיונרים בקליפורניה, אגוז שנקרא על שם מלך האלים הגיע לכל שולחן בעולם. בתשעת אלפים שנה, הוא לא איבד דבר.</p></div>
+
+<h3>כיצד לקנות</h3>
+<p>Extra Light Halves, למראה ולחטיף. Light Halves לאיזון מחיר-איכות. Pieces (חתיכות) לאפייה ובישול, אותו טעם, מחיר נמוך ב-30–40%. בדקו: צבע בהיר שווה טרי, ריח צבעי שווה זרוק, מרקם פריך שווה נכון.</p>
+
+<h3>כיצד לאחסן</h3>
+<p>מקרר, מיכל אטום, מיד אחרי הקנייה. במקפיא לטווח ארוך. הרחק מאור וריחות חזקים. קלייה קלה רק לפני שימוש מיידי.</p>
+
+<h3>הכי חשוב</h3>
+<p>אגוז מלך הוא לא אגוז שמשאירים על השולחן. הוא רגיש, שומני, ומתדרדר מהר. תתייחסו אליו בהתאם, והוא יתגמל אתכם בטעם שאין דומה לו.</p>
+</div>
+
+<div class="ft">
+  ערך ידע צרכני · Blue Star International · 2026<br>
+  מבוסס על נתוני California Walnut Board, USDA FoodData Central, INC / USDA FAS 2024/25<br>
+  <span>היסטוריה: P. Pollegioni et al. PLOS One 2017 · נתוני שוק: INC Statistical Yearbook 2024 · תזונה: USDA FoodData Central</span>
+</div>
+
+</div><!-- /con -->
+
+
+</div>
+
+<script>
+window.onscroll = () => {
+    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('progress-bar').style.width = (window.scrollY / h * 100) + '%';
+    const sections = document.querySelectorAll('.ch');
+    const dots = document.querySelectorAll('.nav-dot');
+    let current = "";
+    sections.forEach(s => { if (pageYOffset >= s.offsetTop - 200) current = s.id; });
+    dots.forEach(d => { d.classList.remove('active'); if (d.dataset.target === current) d.classList.add('active'); });
+// Back to top
+const btt = document.getElementById('btt');
+window.addEventListener('scroll', () => {
+    btt.classList.toggle('visible', window.scrollY > 300);
+});
+btt.onclick = () => window.scrollTo({top:0, behavior:'smooth'});
+};
+document.querySelectorAll('.nav-dot').forEach(dot => {
+    dot.onclick = () => document.getElementById(dot.dataset.target).scrollIntoView({behavior:'smooth'});
+});
+if (window.IntersectionObserver) {
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            e.target.querySelectorAll('.pb-fill').forEach(b => { b.style.width = b.dataset.w + '%'; });
+            obs.unobserve(e.target);
+        });
+    }, {threshold: 0.3});
+    document.querySelectorAll('.pb-chart').forEach(el => obs.observe(el));
+}
+(function() {
+    const dbName = 'StarkOS_DB';
+    const productId = window.location.pathname.split('/').pop().replace('.html', '') || 'walnut';
+    function syncProductPage() {
+        const request = indexedDB.open(dbName, 1);
+        request.onsuccess = (e) => {
+            const db = e.target.result;
+            const store = db.transaction('archive', 'readonly').objectStore('archive');
+            const getRequest = store.get(productId);
+            getRequest.onsuccess = () => {
+                const data = getRequest.result;
+                if (!data) return;
+
+                function makeMedia(src) {
+                    const isVid = src.startsWith('data:video');
+                    const el = document.createElement(isVid ? 'video' : 'img');
+                    el.src = src;
+                    el.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+                    if (isVid) { el.autoplay = el.muted = el.loop = true; el.setAttribute('playsinline',''); }
+                    return el;
+                }
+
+                const heroH1 = document.getElementById('sync-title');
+                if (heroH1 && data.name) heroH1.innerText = data.name;
+                const heroDeck = document.getElementById('sync-desc');
+                if (heroDeck && data.desc) heroDeck.innerText = data.desc;
+
+                const heroSrc = data.media1 || data.media;
+                const heroSlot = document.getElementById('slot-product-hero');
+                if (heroSlot && heroSrc) {
+                    heroSlot.innerHTML = '';
+                    heroSlot.appendChild(makeMedia(heroSrc));
+                }
+
+                [['slot-inline-2', data.media2], ['slot-inline-3', data.media3], ['slot-inline-4', data.media4]].forEach(function([id, src]) {
+                    if (!src) return;
+                    const slot = document.getElementById(id);
+                    if (!slot) return;
+                    slot.innerHTML = '';
+                    slot.appendChild(makeMedia(src));
+                    slot.classList.add('has-media');
+                    slot.classList.remove('media-slot-placeholder');
+                });
+            };
+        };
+    }
+    // Scroll Reveal Engine
+    function initScrollReveal() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.ch').forEach(card => {
+            card.classList.add('reveal');
+            observer.observe(card);
+        });
+    }
+    
+    initScrollReveal();
+
+    window.addEventListener('load', syncProductPage);
+})();
+</script>
+
+<button class="back-to-top" id="btt" aria-label="Back to top">&#8593;</button>
+</body>
+</html>

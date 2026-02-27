@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>אננס מיובש · Blue Star International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg: #0A0A0B; --text: #FAF7F0; --body: #D1CEC5;
+    --accent: #6A5A08; --warm: #D4B830;
+    --card: rgba(22, 20, 8, 0.4); --radius: 20px;
+    --shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    background-color: var(--bg); color: var(--body);
+    font-family: 'Noto Sans Hebrew', sans-serif;
+    font-size: 18px; line-height: 1.9; overflow-x: hidden; position: relative;
+    background-image: linear-gradient(rgba(212,184,48,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(212,184,48,0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+body::before, body::after { content:''; position:fixed; width:600px; height:600px; border-radius:50%; filter:blur(120px); z-index:-2; opacity:0.12; pointer-events:none; }
+body::before { background:var(--warm); top:-100px; left:-100px; }
+body::after { background:#4A4005; bottom:20%; right:-150px; }
+#progress-bar { position:fixed; top:0; left:0; height:3px; background:var(--warm); width:0; z-index:1000; }
+.back-btn { position:absolute; top:40px; left:40px; z-index:10; display:flex; align-items:center; gap:8px; color:var(--text); text-decoration:none; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:2px; opacity:0.5; transition:0.3s; }
+.back-btn:hover { opacity:1; color:var(--warm); }
+#btt { position:fixed; bottom:30px; left:30px; width:40px; height:40px; background:var(--warm); color:#000; border:none; border-radius:50%; cursor:pointer; font-size:18px; display:none; z-index:1000; transition:0.3s; }
+#btt.visible { display:flex; align-items:center; justify-content:center; }
+#btt:hover { transform:scale(1.1); box-shadow:0 0 20px rgba(212,184,48,0.4); }
+.hero { padding:100px 40px 160px; text-align:center; color:var(--text); position:relative; }
+.hero-k { font-size:11px; font-weight:700; letter-spacing:5px; color:var(--warm); margin-bottom:20px; text-transform:uppercase; font-family:'Space Mono',monospace; }
+.hero h1 { font-family:'Frank Ruhl Libre',serif; font-size:90px; font-weight:900; line-height:0.8; margin-bottom:25px; letter-spacing:-2px; }
+.hero .deck { font-size:20px; opacity:0.8; max-width:650px; margin:0 auto 40px; font-weight:300; }
+.hero-img-wrap { max-width:900px; margin:0 auto -220px; height:500px; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); background:#000; border:1px solid rgba(255,255,255,0.05); }
+.hero-img-wrap video, .hero-img-wrap img { width:100%; height:100%; object-fit:cover; }
+.hero-img-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:12px; background:#0A0A0B; }
+.hero-img-placeholder span { color:rgba(255,255,255,0.15); font-size:12px; letter-spacing:3px; font-family:'Space Mono',monospace; }
+.side-nav { position:fixed; top:50%; right:30px; transform:translateY(-50%); z-index:100; display:flex; flex-direction:column; gap:12px; }
+.nav-dot { width:10px; height:10px; border:1px solid var(--warm); border-radius:50%; opacity:0.3; cursor:pointer; transition:0.3s; }
+.nav-dot.active { opacity:1; transform:scale(1.4); background:var(--warm); }
+.con { max-width:800px; margin:280px auto 100px; padding:0 24px; position:relative; z-index:5; }
+.ch { background:var(--card); backdrop-filter:blur(25px); -webkit-backdrop-filter:blur(25px); padding:50px; border-radius:var(--radius); margin-bottom:40px; border:1px solid rgba(255,255,255,0.05); position:relative; overflow:hidden; color:var(--body); }
+.ch::before, .ch::after { content:'+'; position:absolute; font-family:'Space Mono',monospace; color:var(--warm); font-size:14px; opacity:0.4; }
+.ch::before { top:15px; left:15px; }
+.ch::after { bottom:15px; right:15px; }
+.ch h2 { font-family:'Frank Ruhl Libre',serif; font-size:38px; margin-bottom:25px; color:var(--text); border-right:5px solid var(--warm); padding-right:20px; line-height:1.1; }
+.ch h3 { font-family:'Frank Ruhl Libre',serif; font-size:22px; font-weight:700; color:var(--text); margin:36px 0 14px; padding-right:14px; border-right:3px solid var(--warm); }
+.ch p { margin-bottom:18px; color:var(--body); }
+.cl { font-size:10px; font-weight:700; color:var(--warm); letter-spacing:4px; text-transform:uppercase; margin-bottom:10px; display:block; font-family:'Space Mono',monospace; }
+.dc::first-letter { font-family:'Frank Ruhl Libre',serif; font-size:2.8em; font-weight:900; color:var(--warm); line-height:1; float:right; margin-left:8px; }
+em { color:#E8D86A; font-style:italic; }
+strong { color:var(--text); }
+.ab { padding:20px 24px; margin:28px 0; border-radius:0 8px 8px 0; }
+.ab .tg { font-size:10px; font-weight:700; letter-spacing:4px; text-transform:uppercase; margin-bottom:6px; }
+.ab p { margin:0; font-size:16px; line-height:1.75; }
+.ab-w { background:rgba(212,184,48,0.08); border-right:4px solid var(--warm); }
+.ab-w .tg { color:var(--warm); }
+.ab-g { background:rgba(60,50,5,0.25); border-right:4px solid var(--accent); }
+.ab-g .tg { color:#B09820; }
+.ab-r { background:rgba(184,50,50,0.1); border-right:4px solid #B83030; }
+.ab-r .tg { color:#E06060; }
+.ab-r p { color:#DDB0B0; }
+.vc { background:rgba(22,20,8,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:22px; margin:18px 0; }
+.vc .vn { font-family:'Frank Ruhl Libre',serif; font-size:21px; font-weight:700; color:var(--text); }
+.vc .vt { font-size:12px; color:var(--warm); font-weight:600; margin-bottom:10px; }
+.vc p { font-size:16px; line-height:1.75; margin-bottom:0; color:var(--body); }
+.vc .vs { display:flex; gap:12px; flex-wrap:wrap; margin-top:14px; }
+.vc .vsi { background:rgba(255,255,255,0.04); padding:6px 12px; border-radius:5px; font-size:12px; color:#B0A860; }
+.vc .vsi strong { color:var(--text); }
+.ng { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:24px 0; }
+.ni { background:rgba(22,20,8,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:14px; text-align:center; }
+.ni .nv { font-family:'Frank Ruhl Libre',serif; font-size:26px; font-weight:700; color:var(--text); }
+.ni .nu { font-size:13px; color:#B0A860; margin-top:2px; }
+.ni .nl { font-size:11px; color:var(--warm); margin-top:3px; font-weight:600; }
+.pb-chart { margin:16px 0 8px; display:flex; flex-direction:column; gap:10px; }
+.pb-row { display:flex; align-items:center; gap:10px; }
+.pb-meta { display:flex; align-items:center; gap:6px; min-width:120px; justify-content:flex-end; }
+.pb-flag { font-size:18px; }
+.pb-name { font-size:13px; color:#B0A860; }
+.pb-track { flex:1; background:rgba(255,255,255,0.08); height:18px; border-radius:9px; overflow:hidden; }
+.pb-fill { height:100%; width:0; border-radius:9px; transition:width 1.2s cubic-bezier(0.22,1,0.36,1); }
+.pb-pct { font-family:'Frank Ruhl Libre',serif; font-size:14px; font-weight:700; color:var(--text); width:36px; text-align:left; }
+.pb-note { font-size:11px; color:#7A6820; opacity:.7; margin-top:10px; text-align:center; }
+.gt { width:100%; border-collapse:collapse; margin:25px 0; font-size:15px; border-top:1px solid rgba(255,255,255,0.05); }
+.gt th { background:rgba(0,0,0,0.5); color:var(--text); padding:14px; text-align:right; font-size:12px; letter-spacing:1px; border-bottom:1px solid rgba(255,255,255,0.1); }
+.gt td { padding:14px; border-bottom:1px solid rgba(255,255,255,0.05); color:var(--body); }
+.gt tr:nth-child(even) { background:rgba(255,255,255,0.02); }
+.pull { margin:40px 0; padding:45px; background:rgba(0,0,0,0.4); border-radius:var(--radius); text-align:center; border:1px solid rgba(212,184,48,0.2); }
+.pull p { font-family:'Frank Ruhl Libre',serif; font-size:22px; font-weight:500; color:var(--body); line-height:1.55; margin:0; font-style:italic; }
+.reveal { opacity:0; transform:translateY(50px); transition:all 0.8s cubic-bezier(0.2,1,0.2,1); }
+.reveal.active { opacity:1; transform:translateY(0); }
+.marquee-container { position:fixed; bottom:-3vh; left:0; width:100vw; overflow:hidden; z-index:-1; pointer-events:none; }
+.marquee-text { font-family:'Playfair Display',serif; font-size:15vw; white-space:nowrap; color:transparent; -webkit-text-stroke:1px rgba(255,255,255,0.03); animation:scrollText 40s linear infinite; }
+@keyframes scrollText { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.ft { text-align:center; padding:44px 24px; font-size:13px; color:#7A6820; border-top:1px solid rgba(255,255,255,0.06); margin-top:36px; }
+.proc-steps { display:flex; flex-direction:column; gap:20px; margin:24px 0; }
+.proc-step { display:flex; gap:20px; align-items:flex-start; }
+.proc-step-num { min-width:36px; height:36px; border-radius:50%; background:var(--warm); color:#000; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.proc-step-title { font-family:'Frank Ruhl Libre',serif; font-size:18px; font-weight:700; color:var(--text); margin-bottom:6px; }
+.proc-step-body { font-size:16px; color:var(--body); line-height:1.75; }
+.ch ol, .ch ul { padding-right:24px; margin:16px 0 18px; }
+.ch li { margin-bottom:10px; color:var(--body); line-height:1.8; }
+.ch ol li::marker { color:var(--warm); font-family:'Space Mono',monospace; font-size:12px; font-weight:700; }
+.ch ul li::marker { color:var(--warm); }
+@media (max-width:900px) {
+    .side-nav { display:none; }
+    .back-btn { top:20px; left:20px; }
+    .hero h1 { font-size:55px; }
+    .hero-img-wrap { height:300px; margin-bottom:-100px; }
+    .con { margin-top:150px; }
+    .ng { grid-template-columns:repeat(2,1fr); }
+}
+</style>
+<script src="../auth.js"></script>
+</head>
+<body>
+<div class="marquee-container"><div class="marquee-text">BLUE STAR INTERNATIONAL · GLOBAL COMMODITY ARCHIVE · BLUE STAR INTERNATIONAL · GLOBAL COMMODITY ARCHIVE · </div></div>
+<div id="progress-bar"></div>
+<nav class="side-nav">
+    <div class="nav-dot active" data-target="ch-1"></div>
+    <div class="nav-dot" data-target="ch-2"></div>
+    <div class="nav-dot" data-target="ch-3"></div>
+    <div class="nav-dot" data-target="ch-4"></div>
+    <div class="nav-dot" data-target="ch-5"></div>
+    <div class="nav-dot" data-target="ch-6"></div>
+    <div class="nav-dot" data-target="ch-7"></div>
+    <div class="nav-dot" data-target="ch-8"></div>
+    <div class="nav-dot" data-target="ch-9"></div>
+    <div class="nav-dot" data-target="ch-10"></div>
+</nav>
+<section class="hero">
+    <a href="../../index.html" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>חזרה למסוף</a>
+    <div class="hero-k">ערך ידע חקלאי · Blue Star International</div>
+    <h1 id="sync-title">אננס מיובש</h1>
+    <p class="deck" id="sync-desc">פרי ששכרו אותו ביום כדי להציג באירועים חברתיים ולא לאכול. שהפך מסמל עושר של אצולה אירופאית לשק ב-3 דולר. והאנזים שלו עדיין אוכל אותך בחזרה.</p>
+    <div class="hero-img-wrap" id="slot-product-hero"><div class="hero-img-placeholder"><span>מדיה_לא_נטענה</span></div></div>
+</section>
+<main class="con">
+
+<!-- ═══ CH 1 ═══ -->
+<div class="ch reveal" id="ch-1">
+<div class="cl">פרק ראשון</div>
+<h2>הפרי שהאצולה האירופאית שכרה ביום ולא אכלה</h2>
+
+<p class="dc">באנגליה של המאה ה-17, מי שביקש להפגין עושר באירוע חברתי הניח על השולחן אננס. לא לאכילה, אלא לשם הצגה. אננס עלה אז כ-5,000 פאונד בערכי היום. מעטים יכלו להרשות לעצמם לגדל אחד, ונפתחו עסקים להשכרת אננסים: משפחות עשירות שכרו פרי לערב, הציגו אותו על השולחן כפריט נוי, והחזירו אותו בבוקר. אכילתו נחשבה לבזבוז. ערכו היה גדול יותר כשהוא שלם.</p>
+
+<p>קריסטופר קולומבוס מצא את הפרי ב-1493 בגוואדלופה. הוא הביא פרי אחד לספרד. תוך 50 שנה הספרדים והפורטוגזים הובילו אותו לאפריקה, הודו, אסיה ואוקיינוסיה. לא משום שהיה נדיר באזורים הטרופיים, שכן לא היה כזה. אולם האירופאים לא הכירו אותו, ומה שאינו מוכר מיוחס לו ערך. הפרי הזר עם הכתר הפך בתוך עשורים לסמל הסטטוס האולטימטיבי.</p>
+
+<div class="pull"><p>האצולה האירופאית שכרה אננסים ביום כדי להציגם באירועים חברתיים. לא לאכול. לא לגעת. רק להניח על השולחן ולהצהיר: אנחנו יכולים להרשות לעצמנו.</p></div>
+
+<p>בבריטניה המציאו את ה-<em>Pineapple Pits</em>: בורות מחוממים תת-קרקעיים עם חלונות זכוכית שמדמים אקלים טרופי בלב אנגליה הגשומה. גידול אננס אחד דרש שנתיים עבודה, חום מתמיד ומאות שעות טיפול. רק האצולה העשירה ביותר יכלה להרשות זאת לעצמה. הפרי הפך לסמל ה-Hospitality, האורח הנכבד, שנותר עד היום בעיצוב ובאדריכלות.</p>
+
+<div class="ab ab-w">
+    <div class="tg">שם מדעי</div>
+    <p><em>Ananas comosus</em>, ממשפחת Bromeliaceae. השם מגיע מ-<em>nanas</em>, המילה בשפת הטוּפי לפרי ריחני. ה-A בראש הוא הגייה ספרדית פורטוגזית. <em>Comosus</em> — מצויץ, על שם עלי הכתר. אותו כתר שנראה קישוט הוא בפועל ניב שני: שותלים אותו באדמה ותוך 18 חודשים צומח פרי חדש.</p>
+</div>
+</div>
+
+<!-- ═══ CH 2 ═══ -->
+<div class="ch reveal" id="ch-2">
+<div class="cl">פרק שני</div>
+<h2>דול, הוואי, ואיך תאגיד הפך פרי מלכים לשימורים של 39 סנט</h2>
+
+<p class="dc">ב-1901, ג'יימס דול קנה 61 אקר בהוואי ושתל אננסים. ב-1903, הוא כבר מכר שימורי אננס. ב-1950, הוואי ייצרה 75% מכל האננס המשומר בעולם, ו-Dole שלט ברוב ממנה. הפרי שאצולה אירופאית שכרה ביום לצורך ערב אחד הפך לדבר שאמהות שמות בעוגה כי הוא עולה 39 סנט לפחית. התהליך ארך פחות מ-50 שנה.</p>
+
+<p>הטכנולוגיה שאפשרה את זה לא הייתה הגידול. הייתה המכונה שהמציא Henry Ginaca ב-1913: ה-<em>Ginaka Machine</em>, שקולפת, מסירה ליבה וחותכת אננס שלם בשניות. לפני כן היה עיבוד האננס מלאכה ידנית, איטית ויקרה. לאחר מכן, Dole הכניס 1,200 פחיות לדקה ממפעל אחד. ספר האצולה נסגר. עידן השימורים נפתח.</p>
+
+<div class="ab ab-g">
+    <div class="tg">הוואי היום</div>
+    <p>הוואי כמעט שלא מגדלת אננס מסחרי. העלויות גבוהות מדי בהשוואה לקוסטה ריקה ולפיליפינים. מטע האננס האחרון של Dole בהוואי נסגר ב-2009. המפעל הפך למוזיאון ולאטרקציה תיירותית. תאגיד שבנה אימפריה על פרי, ובסוף האימפריה עצמה הפכה לתצוגה.</p>
+</div>
+
+<h3>קוסטה ריקה, המהפכה השקטה</h3>
+<p>ב-1990, פותח זן MD-2, Extra Sweet: גוף עגול, עמוד שדרה רך שנאכל עד הקצה, מתיקות גבוהה, חיי מדף של שלושה שבועות. Del Monte ו-Dole הקימו מטעים תאגידיים ענקיים בפלאנורה צנטרל. ב-1990, קוסטה ריקה ייצרה 300 אלף טון. ב-2023, 2.8 מיליון טון. פי תשעה תוך 33 שנה. כ-80% מהאננס שמגיע לחנויות בעולם היום הוא MD-2.</p>
+
+<div class="pb-chart" id="pb-pineapple"></div>
+<div class="pb-note">ייצוא אננס מיובש עולמי · ITC Trade Map 2023</div>
+</div>
+
+<!-- ═══ CH 3 ═══ -->
+<div class="ch reveal" id="ch-3">
+<div class="cl">פרק שלישי</div>
+<h2>Bromelain, האנזים שאוכל אותך בחזרה</h2>
+
+<p class="dc">מי ששם אננס טרי בג'לו גילה שהג'לו לא התקשה. אין זה מקרה. אננס מכיל <strong>Bromelain</strong>, תערובת של ציסטאין-פרוטאזות שמפרקות חלבון בטמפרטורת גוף. ג'לטין הוא חלבון. Bromelain מפרקת אותו לפני שיספיק להתגבש. ניתן לעקוף זאת רק באמצעות אננס משומר, שבו הפסטור הרס את האנזים. אננס טרי אינו מאפשר זאת.</p>
+
+<p>זו הסיבה שהפה שורף לאחר אכילת אננס טרי: Bromelain מתחיל לפרק את רקמת הפה. הפרי, למעשה, מפרק את רקמות הפה. בכמויות רגילות הדבר אינו מסוכן, אלא תחושה בלבד. אולם הדבר ממחיש את יכולותיו של רכיב זה בבשר, בעיכול, ובתעשיות שלמות שנבנו עליו.</p>
+
+<div class="pull"><p>אננס טרי אוכל אותך בחזרה. Bromelain מפרק רקמת פה כמו שהוא מפרק בשר. הפרי מכיל אנזים שמודיע בבירור שהוא לא פסיבי.</p></div>
+
+<h3>Bromelain כתעשייה</h3>
+<p>ליבת האננס, החלק הקשה שרוב האנשים זורקים, היא המקור העיקרי ל-Bromelain מסחרי. מהליבה מחלצים, מזקקים ומוכרים לשלוש תעשיות: תרופות לעיכול ותוספי אנזימים, מרכך בשר תעשייתי לנתחים קשים, ותעשיית הקוסמטיקה לקרמי פנים ומסכות אנזימטיות. שוק ה-Bromelain העולמי מוערך בכ-120 מיליון דולר בשנה.</p>
+
+<div class="ab ab-w">
+    <div class="tg">Bromelain ומיובש</div>
+    <p>בייבוש בחום נמוך מתחת ל-65°C, חלק מה-Bromelain נשמר פעיל. בחום גבוה הוא מתפרק. לכן אננס Natural בטמפרטורה נמוכה עדיין מכיל פעילות אנזימטית חלקית. ב-Candied שעבר חימום ארוך: כמעט אפס. Freeze Dried שומר כמעט את הכל.</p>
+</div>
+</div>
+
+<!-- ═══ CH 4 ═══ -->
+<div class="ch reveal" id="ch-4">
+<div class="cl">פרק רביעי</div>
+<h2>הביולוגיה, פרי שהוא בעצם מאות פירות שהתאחו</h2>
+
+<p class="dc">מה שנהוג לכנות "אננס" הוא בפועל <em>מאות פירות</em> שהתמזגו. כל עין (Eye) שנראית על פני הקליפה היא פרי בודד, Fruitlet, שצמח מפרח נפרד ומיזג עם שכניו לתצורה אחת. הפרי הוא קולקטיב ביולוגי, Syncarp. כך ניתן להסביר מדוע קליפת האננס אינה גמישה כמו מנגו: מבחינה בוטנית אלה לא קליפה אחת אלא שאריות של מאות מעטפות שהתאחדו.</p>
+
+<p>תכונה מפתיעה נוספת: אננס אינו פורח מעצמו. הוא צריך להיחשף לאתילן, גז בשלות, כדי להניע פריחה. בטבע עץ מתפרק בשכנות משחרר אתילן, מסמן לאננס שהזמן הגיע. בגידול מסחרי, חקלאים חושפים את הצמחים לאתילן בתנאים מבוקרים, או מניחים תפוחים בצד השדה, המפרישים אתילן באופן טבעי. בלי הסינכרון הזה כל צמח יפרח בזמנו שלו, הקצירה לא תהיה אחידה, והייצור המסחרי הופך לבלתי אפשרי.</p>
+
+<div class="ab ab-w">
+    <div class="tg">מחזור חיים</div>
+    <p>אין שותלים מזרעים, אלא כתר (Crown) מהפרי הקודם, או ניצן צדדי (Slip/Sucker). פרי ראשון לאחר 18 עד 20 חודשים. פרי שני מאותו צמח לאחר 12 חודשים נוספים. חיי שדה: 3 עד 5 שנים, 2 עד 3 גלי קצירה. הכתר שנראה כקישוט הוא ניב השנה הבאה.</p>
+</div>
+
+<h3>דרישות גידול</h3>
+<p>אננס עמיד באופן מפתיע. שורשיו שטחיים ורחבים, מה שמאפשר לו לשרוד בבצורות קצרות. הוא גדל בטמפרטורות 20-30°C, מת בכפור, מעדיף קרקע חומצית pH 4.5-5.5 ולא דורש גשם רב. זה מה שאפשר לקוסטה ריקה לגדל אותו בקנה מידה תעשייתי בעלות שאף מדינה אחרת אינה מסוגלת להתחרות בה.</p>
+</div>
+
+<!-- ═══ CH 5 ═══ -->
+<div class="ch reveal" id="ch-5">
+<div class="cl">פרק חמישי</div>
+<h2>מהשדה לשק, מה קורה ל-7 קילוגרם פרי</h2>
+
+<p class="dc">אננס הוא 87% מים. קילוגרם אחד של אננס מיובש Natural התחיל כ-7-8 קילוגרם פרי טרי. כל שלב מסיר שכבה: קילוף מוריד 15%, הסרת ליבה עוד 10%, הייבוש עצמו מסיר את ה-75% הנותרים. מה שנשאר הוא ריכוז של כל מה שהיה בפרי. ולעיתים, אם העבודה לא נעשתה כראוי, גם הפגמים.</p>
+
+<div class="proc-steps">
+    <div class="proc-step">
+        <div class="proc-step-num">01</div>
+        <div><div class="proc-step-title">קצירה</div><div class="proc-step-body">קצירה ידנית כשהפרי בשל: צבע ירוק עם זהוב בבסיס, ריח אננסי עז. אננס לא ממשיך להתמתק אחרי שנקטף, בניגוד למנגו או בננה. מה שנקצר הוא מה שיגיע לשולחן.</div></div>
+    </div>
+    <div class="proc-step">
+        <div class="proc-step-num">02</div>
+        <div><div class="proc-step-title">קילוף והסרת ליבה</div><div class="proc-step-body">מכונה ייעודית קולפת, מסירה ליבה וחותכת לטבעות תוך שניות. הליבה הקשה שצרכנים אינם אוכלים היא המקור העיקרי ל-Bromelain מסחרי. מפעלים מתוחכמים מוכרים אותה לחילוץ אנזים במקום להשליכה.</div></div>
+    </div>
+    <div class="proc-step">
+        <div class="proc-step-num">03</div>
+        <div><div class="proc-step-title">השריה (לגרסה מסוכרת בלבד)</div><div class="proc-step-body">Osmotic Dehydration: הפרוסות משרות בסירופ סוכר בריכוז עולה, 40%, לאחר מכן 60%, ולבסוף 70%. הסוכר חודר לתא והמים יוצאים. תהליך של 12-24 שעות. הפרי יוצא ספוג בסוכר. בגרסת Natural מדלגים על שלב זה.</div></div>
+    </div>
+    <div class="proc-step">
+        <div class="proc-step-num">04</div>
+        <div><div class="proc-step-title">ייבוש</div><div class="proc-step-body">Natural: 60-70°C, 8-16 שעות, עד לחות 12-16%. Candied: 55-65°C, 10-20 שעות, עד 16-20%. Freeze Dried: ואקום מינוס 40°C, 24-48 שעות. שלוש שיטות, שלושה מוצרים שונים לגמרי.</div></div>
+    </div>
+    <div class="proc-step">
+        <div class="proc-step-num">05</div>
+        <div><div class="proc-step-title">מיון ואריזה</div><div class="proc-step-body">מיון ידני לפסילת חתיכות שרופות או שבורות. בדיקת לחות, Aw, SO₂. בעיה נפוצה: פרוסות Candied נדבקות. מניעה: ציפוי קל בסוכר כתוש לפני אריזה.</div></div>
+    </div>
+</div>
+</div>
+
+<!-- ═══ CH 6 ═══ -->
+<div class="ch reveal" id="ch-6">
+<div class="cl">פרק שישי</div>
+<h2>Natural לעומת Candied, ההבדל שיצרנים לא תמיד מסבירים</h2>
+
+<p class="dc">הצרכן רואה "אננס מיובש" ומניח שמדובר בפרי. לעיתים זה נכון, ולעיתים מדובר בממתק עם מעט פרי בפנים. Candied אינו גרסה מתוקה יותר של אותו מוצר. אלא תהליך שמחליף את מיץ הפרי בסוכר ברמה התאית. התוצאה אינה פרי מיובש, אלא ספוג סוכר שפעם היה פרי.</p>
+
+<div class="vc">
+    <div class="vn">Natural Dried</div>
+    <div class="vt">ללא סוכר מוסף</div>
+    <p>ייבוש ישיר ללא השריה. צבע: כתום-חום טבעי, לא אחיד לחלוטין. מרקם לעוס ומרוכז. טעם חמוץ-מתוק עז עם עומק. סוכר: רק טבעי, כ-50-55 גרם ל-100 גרם. Bromelain פעיל חלקית. מדף: 12-18 חודש.</p>
+    <div class="vs"><span class="vsi">סוכר טבעי בלבד</span><span class="vsi">Bromelain חלקי</span><span class="vsi">מדף 12-18 חודש</span></div>
+</div>
+<div class="vc">
+    <div class="vn">Candied</div>
+    <div class="vt">עם סוכר מוסף</div>
+    <p>עבר Osmotic Dehydration בסירופ סוכר. צבע: צהוב-כתום בהיר ואחיד. מרקם רך וגמיש. סוכר: 70-80 גרם ל-100 גרם, רובו מוסף. Bromelain: כמעט אפס. מדף: 18-24 חודש. נפוץ בתעשיית אפייה, Fruitcake, גרנולה מסחרית.</p>
+    <div class="vs"><span class="vsi">סוכר 70-80 גרם</span><span class="vsi">Bromelain אפס</span><span class="vsi">מדף 18-24 חודש</span></div>
+</div>
+<div class="vc">
+    <div class="vn">Freeze Dried</div>
+    <div class="vt">פרמיום</div>
+    <p>ואקום בטמפרטורה תת-אפסית. מסיר 95% מהמים בלי חום. שומר על צבע, ויטמינים ו-Bromelain ב-85-95% מהמקור. מרקם פריך לגמרי. מחיר פי 3-4 מ-Natural. נישת ספורט, Smoothie Bowls, מזון מסע.</p>
+    <div class="vs"><span class="vsi">שומר ויטמינים 85-95%</span><span class="vsi">מרקם פריך</span><span class="vsi">פרמיום</span></div>
+</div>
+
+<div class="ab ab-r">
+    <div class="tg">תיוג</div>
+    <p>מוצר שמכיל סוכר מוסף חייב לציין "סוכר" ברשימת הרכיבים. בדיקה פשוטה: אם כתוב "סוכר" ברכיבים, זה Candied. אם כתוב רק "אננס", זה Natural. SO₂ חייב בציון אם ≥ 10 ppm.</p>
+</div>
+</div>
+
+<!-- ═══ CH 7 ═══ -->
+<div class="ch reveal" id="ch-7">
+<div class="cl">פרק שביעי</div>
+<h2>תזונה, מה שנשמר ומה שנעלם</h2>
+
+<p class="dc">הייבוש מרכז ומחסל בו זמנית. ויטמין C בפרי טרי: 47 מ"ג ל-100 גרם. הריכוז לאחר ייבוש אמור לעלות, שכן המים יוצאים. אולם החום הורס ויטמין C. בייבוש חום בינוני, כ-60-70% מהוויטמין C אובד. מה שנשאר בפרי מיובש Natural טוב: כ-36 מ"ג, עדיין 40% מהצריכה היומית. Candied שעבר חימום ארוך: כ-8 מ"ג בלבד.</p>
+
+<div class="ng">
+    <div class="ni"><div class="nv">346</div><div class="nu">קלוריות</div><div class="nl">ל-100 גרם Natural</div></div>
+    <div class="ni"><div class="nv">83g</div><div class="nu">פחמימות</div><div class="nl">מתוכן ~70g סוכר</div></div>
+    <div class="ni"><div class="nv">3.8g</div><div class="nu">סיבים</div><div class="nl">Dietary Fiber</div></div>
+    <div class="ni"><div class="nv">36mg</div><div class="nu">ויטמין C</div><div class="nl">40% DV · Natural בלבד</div></div>
+    <div class="ni"><div class="nv">2.6mg</div><div class="nu">מנגן</div><div class="nl">113% DV</div></div>
+    <div class="ni"><div class="nv">695mg</div><div class="nu">אשלגן</div><div class="nl">15% DV</div></div>
+</div>
+
+<h3>מנגן, המינרל שאף אחד לא מדבר עליו</h3>
+<p>אננס מיובש הוא אחד המקורות הצמחיים הנדירים למנגן בריכוז גבוה. מנגן חיוני לפעולת אנזימים, לבניית עצם ולמטבוליזם של פחמימות. 100 גרם Natural מכסים 113% מהצריכה היומית. אין זה נתון שמופיע בפרסומים, אולם הוא נמצא שם.</p>
+
+<div class="ab ab-r">
+    <div class="tg">סוכר גבוה</div>
+    <p>אננס מיובש Natural מכיל כ-70 גרם סוכר ל-100 גרם. GI: 56-65. מנה ריאלית היא 30-40 גרם, לא 100. מי שמנהל רמות סוכר בדם נדרש לשים לב לכמות, גם כשהמוצר מוצג כ"טבעי" ו"ללא תוספות".</p>
+</div>
+</div>
+
+<!-- ═══ CH 8 ═══ -->
+<div class="ch reveal" id="ch-8">
+<div class="cl">פרק שמיני</div>
+<h2>שימושים, מגרנולה לפרליינים ועד תרופות</h2>
+
+<p class="dc">אננס מיובש נע בין שתי זהויות: נשנוש בריאות שמופיע ב-Trail Mix, ומרכיב ממתקים שמופיע ב-Fruitcake ובשוקולד. שתיהן קיימות בו-זמנית, לפעמים על אותו מדף, עם אריזה דומה. ההבדל ביניהן מתבטא בדרך כלל בתג המחיר וברשימת הרכיבים.</p>
+
+<h3>צריכה ישירה וגרנולה</h3>
+<p>פרוסות וטבעות Natural הן מרכיב קבוע ב-Trail Mix איכותי, גרנולה פרמיום ו-Fruit & Nut. הטעם החמוץ-מתוק החזק פועל גם בכמות קטנה ומעניק נוכחות בתערובות מבלי להשתלט. ספורטאים ומטיילים מעדיפים אותן על פירות מיובשים אחרים בזכות יחס משקל לאנרגיה נוח.</p>
+
+<h3>אפייה והמורשת של Dole</h3>
+<p>Candied Pineapple הוא מרכיב קלאסי ב-Fruitcake הבריטי ובפרליינים. Pineapple Upside Down Cake, עוגה שנוצרה ב-1926 בעקבות קמפיין פרסומי של Dole, הפכה לאחת העוגות הנפוצות ביותר במאה ה-20. הפרסומת שכנעה מיליוני אמהות אמריקאיות שהדרך לעוגה מושלמת עוברת דרך פחית אננס. והדבר עבד.</p>
+
+<h3>תעשיית Bromelain</h3>
+<p>מליבת האננס, לאחר העיבוד, מופק Bromelain טהור: שוק שערכו כ-120 מיליון דולר בשנה. טאבלטים לעיכול ונוגדי דלקת, מרכך בשר תעשייתי, קרמי פנים בתעשיית הקוסמטיקה. מפעלים שמוכרים גם אננס מיובש וגם Bromelain מהליבה כמעט שאינם מאבדים דבר מהפרי.</p>
+</div>
+
+<!-- ═══ CH 9 ═══ -->
+<div class="ch reveal" id="ch-9">
+<div class="cl">פרק תשיעי</div>
+<h2>איכות, מה מסגיר אננס מיובש גרוע</h2>
+
+<p class="dc">אננס מיובש קל יחסית לזיהוי איכות משום שצבעו נאמן. פרי שיובש כהלכה עובר מצהוב כתום לגוון חום עמוק. פרי שעבר ייבוש שגוי, הוסיפו לו צבע, או שהוא ישן, נראה אחרת. אולם ישנן בעיות שאינן נראות לעין.</p>
+
+<h3>צבע</h3>
+<p>Natural: כתום-חום עמוק עם גוון לא אחיד, תקין. Candied: צהוב-כתום בהיר ואחיד, תקין. דגלים אדומים: חיוורון קיצוני (נקצר לא בשל), כתמים שחורים-חומים (Maillard מוגזם, ייבוש חם מדי), צהוב ניאון אחיד מדי ב-Natural (צבע מלאכותי).</p>
+
+<h3>בעיית ההדבקות</h3>
+<p>אננס Candied הוא אחד הפירות הנוטים ביותר להידבקות. תכולת הסוכר הגבוהה והלחות הבינונית יוצרים פרוסות שמתדבקות לגוש. בדיקת קבלה: פתיחת שק וניסיון להפריד פרוסות ביד. הידבקות שדורשת כוח מעידה על לחות גבוהה מדי בעת האריזה.</p>
+
+<table class="gt">
+    <tr><th>פרמטר</th><th>Natural</th><th>Candied</th></tr>
+    <tr><td>לחות יעד</td><td>12-16%</td><td>16-20%</td></tr>
+    <tr><td>Aw</td><td>מתחת ל-0.60</td><td>מתחת ל-0.65</td></tr>
+    <tr><td>SO₂</td><td>לרוב אין</td><td>עד 100 ppm</td></tr>
+    <tr><td>אחסון</td><td>10-20°C, RH 50-60%</td><td>15-22°C, RH 50-60%</td></tr>
+    <tr><td>מדף</td><td>12-18 חודש</td><td>18-24 חודש</td></tr>
+</table>
+
+<div class="ab ab-r">
+    <div class="tg">Aflatoxin</div>
+    <p>אננס מיובש פחות פגיע מאגוזים, אך אינו חסין. פרי שנארז בלחות גבוהה ואוחסן בחום מאפשר לעובש Aspergillus לגדול. ה-EU מגביל ל-10 ppb. COA עדכני עם בדיקת Aflatoxin חובה בכל משלוח.</p>
+</div>
+</div>
+
+<!-- ═══ CH 10 ═══ -->
+<div class="ch reveal" id="ch-10">
+<div class="cl">פרק עשירי</div>
+<h2>סיכום, פרי שעשה את הדרך מטירה לסופרמרקט</h2>
+
+<p class="dc">אננס הוא אחד הפירות הנדירים שעשה את הדרך הארוכה ביותר ממוצא לנגישות מלאה. מפרי שאצולה אירופאית שכרה ביום כדי לא לאכול, דרך ה-Pineapple Pits הבריטיים, דרך מהפכת Dole בהוואי, דרך MD-2 בקוסטה ריקה, ועד השק שעולה 3 דולר. כל שלב בסיפור הזה הוא שינוי של מי מחזיק את הפרי ולמה.</p>
+
+<p>מה שלא השתנה הוא הביולוגיה. הוא עדיין קולקטיב של מאות פירות. הוא עדיין לא יפרח בלי אתילן. ה-Bromelain שלו עדיין אוכל אותך בחזרה. וג'לו עם אננס טרי עדיין לא יתקשה.</p>
+
+<h3>מדריך רכישה</h3>
+<p><strong>לקנייה:</strong> קראו רכיבים לפני הכל. "סוכר" ברשימה, זה Candied. רק "אננס", זה Natural. בדקו צבע: כתום-חום עמוק בלי כתמים שחורים. בדקו מרקם: גמיש, פרוסות נפרדות בקלות. בדקו ריח: מתוק פירותי, לא חמצמץ. Freeze Dried: צבע צהוב-כתום בהיר, מרקם פריך שמתפרק בפה.</p>
+
+<table class="gt">
+    <tr><th>קריטריון</th><th>טוב</th><th>גרוע</th></tr>
+    <tr><td>צבע (Natural)</td><td>כתום-חום עמוק, לא אחיד</td><td>חיוור, ניאון, כתמים שחורים</td></tr>
+    <tr><td>צבע (Candied)</td><td>צהוב-כתום בהיר ואחיד</td><td>כהה מדי, כתמים, אפרורי</td></tr>
+    <tr><td>מרקם</td><td>גמיש, פרוסות נפרדות</td><td>דביק, גוש, שביר</td></tr>
+    <tr><td>ריח</td><td>מתוק פירותי-טרופי</td><td>חמצמץ, עובשי, כימי</td></tr>
+    <tr><td>תווית</td><td>רכיבים ברורים, תאריך, מקור</td><td>חסר מידע, "Natural" עם סוכר</td></tr>
+</table>
+
+<div class="pull"><p>אין פרי אחר שעשה את הדרך הזאת: מסמל יוקרה שלא נאכל, דרך תאגיד שהפך אותו לשימורים, עד חטיף של ילדים. וה-Bromelain שלו עדיין מפרק בשר. הפרי לא שכח מהיכן הוא בא.</p></div>
+
+<div class="ft">
+    ערך ידע צרכני · Blue Star International · 2026<br>
+    מבוסס על USDA FoodData Central, FAO 2023, ITC Trade Map<br>
+    <span>Historical sources: Bartholomew et al. 2003 "The Pineapple: Botany, Production and Uses" · Dole Food Company archives · Collins 1960</span>
+</div>
+</div>
+
+</main>
+<button id="btt" aria-label="חזרה למעלה">↑</button>
+<script>
+window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('progress-bar').style.width = (window.scrollY / h * 100) + '%';
+    const sections = document.querySelectorAll('.ch');
+    const dots = document.querySelectorAll('.nav-dot');
+    let current = '';
+    sections.forEach(s => { if (pageYOffset >= s.offsetTop - 200) current = s.id; });
+    dots.forEach(d => { d.classList.remove('active'); if (d.dataset.target === current) d.classList.add('active'); });
+    document.getElementById('btt').classList.toggle('visible', window.scrollY > 300);
+});
+document.getElementById('btt').onclick = () => window.scrollTo({top:0, behavior:'smooth'});
+document.querySelectorAll('.nav-dot').forEach(dot => {
+    dot.onclick = () => document.getElementById(dot.dataset.target).scrollIntoView({behavior:'smooth'});
+});
+if (window.IntersectionObserver) {
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            e.target.querySelectorAll('.pb-fill').forEach(b => { b.style.width = b.dataset.w + '%'; });
+            obs.unobserve(e.target);
+        });
+    }, {threshold: 0.3});
+    document.querySelectorAll('.pb-chart').forEach(el => obs.observe(el));
+    const revObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+    }, {threshold: 0, rootMargin: '0px 0px -50px 0px'});
+    document.querySelectorAll('.reveal').forEach(card => revObs.observe(card));
+}
+const pbData = [
+    { flag:'🇨🇷', name:'קוסטה ריקה', pct:30, color:'#D4B830' },
+    { flag:'🇵🇭', name:'פיליפינים',   pct:22, color:'#A89020' },
+    { flag:'🇹🇭', name:'תאילנד',      pct:18, color:'#8A7018' },
+    { flag:'🇮🇩', name:'אינדונזיה',   pct:12, color:'#6A5010' },
+    { flag:'🇬🇭', name:'גאנה',        pct:8,  color:'#4A3808' },
+    { flag:'🌍',  name:'אחרות',       pct:10, color:'#302808' },
+];
+const pbWrap = document.getElementById('pb-pineapple');
+if (pbWrap) {
+    pbData.forEach(r => {
+        pbWrap.innerHTML += `<div class="pb-row">
+            <div class="pb-meta"><span class="pb-flag">${r.flag}</span><span class="pb-name">${r.name}</span></div>
+            <div class="pb-track"><div class="pb-fill" style="background:${r.color}" data-w="${r.pct}"></div></div>
+            <div class="pb-pct">${r.pct}%</div>
+        </div>`;
+    });
+    setTimeout(() => document.querySelectorAll('.pb-fill').forEach(b => b.style.width = b.dataset.w + '%'), 600);
+}
+(function() {
+    const productId = window.location.pathname.split('/').pop().replace('.html','') || 'pineapple';
+    function syncProductPage() {
+        try {
+            const request = indexedDB.open('StarkOS_DB', 1);
+            request.onsuccess = (e) => {
+                const db = e.target.result;
+                const store = db.transaction('archive','readonly').objectStore('archive');
+                store.get(productId).onsuccess = (ev) => {
+                    const data = ev.target.result;
+                    if (!data) return;
+                    function makeMedia(src) {
+                        const isVid = src.startsWith('data:video');
+                        const el = document.createElement(isVid ? 'video' : 'img');
+                        el.src = src; el.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+                        if (isVid) { el.autoplay = el.muted = el.loop = true; el.setAttribute('playsinline',''); }
+                        return el;
+                    }
+                    if (data.title) document.getElementById('sync-title').textContent = data.title;
+                    if (data.desc)  document.getElementById('sync-desc').textContent  = data.desc;
+                    const heroSrc = data.media1 || data.media;
+                    const heroSlot = document.getElementById('slot-product-hero');
+                    if (heroSlot && heroSrc) { heroSlot.innerHTML = ''; heroSlot.appendChild(makeMedia(heroSrc)); }
+                };
+            };
+        } catch(e) {}
+    }
+    window.addEventListener('load', syncProductPage);
+})();
+</script>
+</body>
+</html>

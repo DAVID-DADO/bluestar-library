@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>משמש מיובש · Blue Star International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── BLUE STAR OS · PREMIUM DARK THEME v4.0 ── */
+:root {
+    --bg: #0A0A0B; --text: #FAF7F0; --body: #D1CEC5;
+    --accent: #7A3A10; --warm: #D4703A;
+    --card: rgba(22, 18, 14, 0.4); --radius: 20px;
+    --shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    background-color: var(--bg); color: var(--body);
+    font-family: 'Noto Sans Hebrew', sans-serif;
+    font-size: 18px; line-height: 1.9; overflow-x: hidden; position: relative;
+    background-image: linear-gradient(rgba(212,112,58,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(212,112,58,0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+body::before, body::after { content: ''; position: fixed; width: 600px; height: 600px; border-radius: 50%; filter: blur(120px); z-index: -2; opacity: 0.13; pointer-events: none; }
+body::before { background: var(--warm); top: -100px; left: -100px; }
+body::after { background: #5A2A08; bottom: 20%; right: -150px; }
+#progress-bar { position:fixed; top:0; left:0; height:3px; background:var(--warm); width:0; z-index:1000; }
+.back-btn { position:absolute; top:40px; left:40px; z-index:10; display:flex; align-items:center; gap:8px; color:var(--text); text-decoration:none; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:2px; opacity:0.5; transition:0.3s; }
+.back-btn:hover { opacity:1; color:var(--warm); }
+#btt { position:fixed; bottom:30px; left:30px; width:40px; height:40px; background:var(--warm); color:#000; border:none; border-radius:50%; cursor:pointer; font-size:18px; display:none; z-index:1000; transition:0.3s; }
+#btt.visible { display:flex; align-items:center; justify-content:center; }
+#btt:hover { transform:scale(1.1); box-shadow:0 0 20px rgba(212,112,58,0.4); }
+.hero { padding:100px 40px 160px; text-align:center; color:var(--text); position:relative; }
+.hero-k { font-size:11px; font-weight:700; letter-spacing:5px; color:var(--warm); margin-bottom:20px; text-transform:uppercase; font-family:'Space Mono',monospace; }
+.hero h1 { font-family:'Frank Ruhl Libre',serif; font-size:90px; font-weight:900; line-height:0.8; margin-bottom:25px; letter-spacing:-2px; }
+.hero .deck { font-size:20px; opacity:0.8; max-width:650px; margin:0 auto 40px; font-weight:300; }
+.hero-img-wrap { max-width:900px; margin:0 auto -220px; height:500px; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); background:#000; border:1px solid rgba(255,255,255,0.05); }
+.hero-img-wrap img { width:100%; height:100%; object-fit:cover; }
+.hero-img-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:12px; background:#0A0A0B; }
+.hero-img-placeholder span { color:rgba(255,255,255,0.15); font-size:12px; letter-spacing:3px; font-family:'Space Mono',monospace; }
+.side-nav { position:fixed; top:50%; right:30px; transform:translateY(-50%); z-index:100; display:flex; flex-direction:column; gap:12px; }
+.nav-dot { width:10px; height:10px; border:none; border-radius:50%; opacity:0.35; cursor:pointer; transition:0.3s; box-shadow: 0 0 0 0.5px rgba(255,255,255,0.22), inset 0 0 0 0.5px rgba(255,255,255,0.08); background: transparent; }
+.nav-dot.active { opacity:1; transform:scale(1.4); background: radial-gradient(circle at 35% 35%, color-mix(in srgb, var(--warm) 90%, white 10%), var(--accent) 130%); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.12); }
+.con { max-width:800px; margin:280px auto 100px; padding:0 24px; position:relative; z-index:5; }
+.ch { background:var(--card); backdrop-filter:blur(25px); -webkit-backdrop-filter:blur(25px); padding:50px; border-radius:var(--radius); margin-bottom:40px; border:1px solid rgba(255,255,255,0.05); position:relative; overflow:hidden; color:var(--body); }
+.ch::before, .ch::after { content:'+'; position:absolute; font-family:'Space Mono',monospace; color:var(--warm); font-size:14px; opacity:0.4; }
+.ch::before { top:15px; left:15px; }
+.ch::after { bottom:15px; right:15px; }
+.ch h2 { font-family:'Frank Ruhl Libre',serif; font-size:38px; margin-bottom:25px; color:var(--text); border-right:5px solid var(--warm); padding-right:20px; line-height:1.1; }
+.ch h3 { font-family:'Frank Ruhl Libre',serif; font-size:22px; font-weight:700; color:var(--text); margin:36px 0 14px; padding-right:14px; border-right:3px solid var(--warm); }
+.ch p { margin-bottom:18px; color:var(--body); }
+.cl { font-size:10px; font-weight:700; color:var(--warm); letter-spacing:4px; text-transform:uppercase; margin-bottom:10px; display:block; font-family:'Space Mono',monospace; }
+.dc::first-letter { font-family:'Frank Ruhl Libre',serif; font-size:2.8em; font-weight:900; color:var(--warm); line-height:1; float:right; margin-left:8px; }
+em { color:#E89A6A; font-style:italic; }
+strong { color:var(--text); }
+.ab { padding:20px 24px; margin:28px 0; border-radius:0 8px 8px 0; }
+.ab .tg { font-size:10px; font-weight:700; letter-spacing:4px; text-transform:uppercase; margin-bottom:6px; }
+.ab p { margin:0; font-size:16px; line-height:1.75; }
+.ab-w { background:rgba(212,112,58,0.08); border-right:4px solid var(--warm); }
+.ab-w .tg { color:var(--warm); }
+.ab-g { background:rgba(100,60,10,0.2); border-right:4px solid var(--accent); }
+.ab-g .tg { color:#C08050; }
+.ab-r { background:rgba(184,50,50,0.1); border-right:4px solid #B83030; }
+.ab-r .tg { color:#E06060; }
+.ab-r p { color:#DDB0B0; }
+.vc { background:rgba(28,22,16,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:22px; margin:18px 0; }
+.vc .vn { font-family:'Frank Ruhl Libre',serif; font-size:21px; font-weight:700; color:var(--text); }
+.vc .vt { font-size:12px; color:var(--warm); font-weight:600; margin-bottom:10px; }
+.vc p { font-size:16px; line-height:1.75; margin-bottom:0; color:var(--body); }
+.vc .vs { display:flex; gap:12px; flex-wrap:wrap; margin-top:14px; }
+.vc .vsi { background:rgba(255,255,255,0.04); padding:6px 12px; border-radius:5px; font-size:12px; color:#B0A090; }
+.vc .vsi strong { color:var(--text); }
+.ng { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:24px 0; }
+.ni { background:rgba(28,22,16,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:14px; text-align:center; }
+.ni .nv { font-family:'Frank Ruhl Libre',serif; font-size:26px; font-weight:700; color:var(--text); }
+.ni .nu { font-size:13px; color:#B0A090; margin-top:2px; }
+.ni .nl { font-size:11px; color:var(--warm); margin-top:3px; font-weight:600; }
+.pb-chart { margin:16px 0 8px; display:flex; flex-direction:column; gap:10px; }
+.pb-row { display:flex; align-items:center; gap:10px; }
+.pb-meta { display:flex; align-items:center; gap:6px; min-width:120px; justify-content:flex-end; }
+.pb-flag { font-size:18px; }
+.pb-name { font-size:13px; color:#B0A090; }
+.pb-track { flex:1; background:rgba(255,255,255,0.08); height:18px; border-radius:9px; overflow:hidden; }
+.pb-fill { height:100%; width:0; border-radius:9px; transition:width 1.2s cubic-bezier(0.22,1,0.36,1); }
+.pb-pct { font-family:'Frank Ruhl Libre',serif; font-size:14px; font-weight:700; color:var(--text); width:36px; text-align:left; }
+.pb-note { font-size:11px; color:#7A6050; opacity:.7; margin-top:10px; text-align:center; }
+.gt { width:100%; border-collapse:collapse; margin:25px 0; font-size:15px; border-top:1px solid rgba(255,255,255,0.05); }
+.gt th { background:rgba(0,0,0,0.5); color:var(--text); padding:14px; text-align:right; font-size:12px; letter-spacing:1px; border-bottom:1px solid rgba(255,255,255,0.1); }
+.gt td { padding:14px; border-bottom:1px solid rgba(255,255,255,0.05); color:var(--body); }
+.gt tr:nth-child(even) { background:rgba(255,255,255,0.02); }
+.pull { margin:40px 0; padding:45px; background:rgba(0,0,0,0.4); border-radius:var(--radius); text-align:center; border:1px solid rgba(212,112,58,0.2); }
+.pull p { font-family:'Frank Ruhl Libre',serif; font-size:22px; font-weight:500; color:var(--body); line-height:1.55; margin:0; font-style:italic; }
+.reveal { opacity:0; transform:translateY(50px); transition:all 0.8s cubic-bezier(0.2,1,0.2,1); }
+.reveal.active { opacity:1; transform:translateY(0); }
+.marquee-container { position:fixed; bottom:-3vh; left:0; width:100vw; overflow:hidden; z-index:-1; pointer-events:none; }
+.marquee-text { font-family:'Playfair Display',serif; font-size:15vw; white-space:nowrap; color:transparent; -webkit-text-stroke:1px rgba(255,255,255,0.03); animation:scrollText 40s linear infinite; }
+@keyframes scrollText { 0% { transform:translateX(0); } 100% { transform:translateX(-50%); } }
+.ft { text-align:center; padding:44px 24px; font-size:13px; color:#7A6050; border-top:1px solid rgba(255,255,255,0.06); margin-top:36px; }
+.proc-steps { display:flex; flex-direction:column; gap:20px; margin:24px 0; }
+.proc-step { display:flex; gap:20px; align-items:flex-start; }
+.proc-step-num { min-width:36px; height:36px; border-radius:50%; background:var(--warm); color:#000; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.proc-step-title { font-family:'Frank Ruhl Libre',serif; font-size:18px; font-weight:700; color:var(--text); margin-bottom:6px; }
+.proc-step-body { font-size:16px; color:var(--body); line-height:1.75; }
+.ch ol, .ch ul { padding-right:24px; margin:16px 0 18px; }
+.ch li { margin-bottom:10px; color:var(--body); line-height:1.8; }
+.ch ol li::marker { color:var(--warm); font-family:'Space Mono',monospace; font-size:12px; font-weight:700; }
+.ch ul li::marker { color:var(--warm); }
+@media (max-width:900px) {
+    .side-nav { display:none; }
+    .back-btn { top:20px; left:20px; }
+    .hero h1 { font-size:55px; }
+    .hero-img-wrap { height:300px; margin-bottom:-100px; }
+    .con { margin-top:150px; }
+    .ng { grid-template-columns:repeat(2,1fr); }
+}
+</style>
+<script src="../auth.js"></script>
+</head>
+<body>
+<div class="marquee-container"><div class="marquee-text">BLUE STAR INTERNATIONAL · GLOBAL COMMODITY ARCHIVE · BLUE STAR INTERNATIONAL · GLOBAL COMMODITY ARCHIVE ·</div></div>
+<div id="progress-bar"></div>
+<nav class="side-nav">
+    <div class="nav-dot active" data-target="ch-1"></div>
+    <div class="nav-dot" data-target="ch-2"></div>
+    <div class="nav-dot" data-target="ch-3"></div>
+    <div class="nav-dot" data-target="ch-4"></div>
+    <div class="nav-dot" data-target="ch-5"></div>
+    <div class="nav-dot" data-target="ch-6"></div>
+    <div class="nav-dot" data-target="ch-7"></div>
+    <div class="nav-dot" data-target="ch-8"></div>
+    <div class="nav-dot" data-target="ch-9"></div>
+    <div class="nav-dot" data-target="ch-10"></div>
+</nav>
+<section class="hero">
+    <a href="../../index.html" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>חזרה למסוף</a>
+    <div class="hero-k">ערך ידע חקלאי · Blue Star International</div>
+    <h1 id="sync-title">משמש מיובש</h1>
+    <p class="deck" id="sync-desc">הפרי ששמו המדעי הוא שקר בן 4,000 שנה. עיר טורקית אחת שולטת ב־60% מהייצוא העולמי, וגז אחד מפצל אותו לשני מוצרים שונים לחלוטין: כתום או חום, ויטמין C או ויטמין A, רך או לעיס. כל השאר זה פרטים.</p>
+    <div class="hero-img-wrap" id="slot-product-hero"><div class="hero-img-placeholder"><span>מדיה_לא_נטענה</span></div></div>
+</section>
+<main class="con">
+
+<!-- ═══ CH 1 ═══ -->
+<div class="ch" id="ch-1">
+<div class="cl">פרק ראשון</div>
+<h2>הטעות שנצרבה בלטינית</h2>
+<p class="dc">בשנת 1753, לינאוס כתב בשמו המדעי של המשמש: <em>Prunus armeniaca</em>. מארמניה. הרומאים קיבלו את הפרי דרך ארמניה והניחו שזה מקורו. הנחה שנשארה ללא עוררין 2,000 שנה. מחקר גנטי מ־2019, שהשווה 900 זנים מ־35 מדינות, הוכיח שהמשמש התפתח בהרי טיאן שאן, בגבול שבין סין לקזחסטן. משם הוא חצה את פרס, עלה לארמניה, ודרכה הגיע לרומא. שגיאה של 4,000 שנה, חרוטה בשמו המדעי, שאיש לא מתכוון לתקן.</p>
+<p>הגידול המתועד הקדום ביותר: צפון סין, לפני 4,000 שנה. הפרסים פיתחו תרבות משמשים ענפה לפני 2,500 שנה. הצבאות הרומיים הביאו את הפרי לים התיכון סביב המאה הראשונה לפני הספירה. בספרד של השליטה הערבית, <em>al-barquq</em> הערבי הפך ל־albaricoque הספרדית, ול־abricot הצרפתית, ול־apricot האנגלית. בכל שפה שם אחר, באף שפה שם נכון.</p>
+<p>ייבוש משמשים ישן כמעט כמו הגידול עצמו. פרי קיץ עדין מתקלקל תוך ימים ללא קירור. ייבוש בשמש סילק 80% מהמים ויצר מוצר שמחזיק חודשים. לאורך אלפי שנים, גגות הכפרים בטורקיה, סוריה ואיראן היו מכוסים ברבדי משמשים חצויים בכל קיץ. טכנולוגיית שימור שלא דורשת דבר מלבד שמש וסבלנות.</p>
+<div class="pull"><p>הכפר Malatya בדרום מזרח טורקיה מייצר כ־60% מהמשמשים המיובשים של העולם. עיר שלמה שההיסטוריה שלה כתובה בכתום.</p></div>
+<div class="ab ab-w"><div class="tg">שם ומשפחה</div><p>Prunus armeniaca, ממשפחת הוורדניים (Rosaceae), קרוב ל־prunus persica (אפרסק), prunus domestica (שזיף) ו־prunus amygdalus (שקד). כל פירות ה־Prunus חולקים מבנה זהה: גלעין קשה, בשר עסיסי, עור דק. המשמש, הקל ביניהם, מתייבש מהר יותר ושומר על טעמו טוב יותר משאר בני משפחתו.</p></div>
+</div>
+
+<!-- ═══ CH 2 ═══ -->
+<div class="ch" id="ch-2">
+<div class="cl">פרק שני</div>
+<h2>מונופול הכתום: עיר אחת, 60% מהעולם</h2>
+<p class="dc">שוק המשמש המיובש מרוכז באופן שאין לו אח בעולם הפירות היבשים. טורקיה לבדה שולטת ב־60% עד 75% מהייצוא העולמי, וכמעט הכל מגיע מאזור אחד: Malatya, עיר של 800,000 תושבים בדרום מזרח אנטוליה. לא מדובר בנוחות גאוגרפית. האקלים היבש, הגובה של 900 מטר, ולילות הקיץ הקרירים יוצרים תנאים שאף אזור אחר לא הצליח לשחזר באותה עקביות.</p>
+<div class="ng">
+    <div class="ni"><div class="nv">280K</div><div class="nu">טון</div><div class="nl">ייצוא עולמי 2023</div></div>
+    <div class="ni"><div class="nv">~$850M</div><div class="nu">שווי שוק</div><div class="nl">ייצוא גלובלי 2024</div></div>
+    <div class="ni"><div class="nv">~$2,500</div><div class="nu">$/טון FOB</div><div class="nl">Malatya standard</div></div>
+</div>
+<div class="pb-chart">
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇹🇷</span><span class="pb-name">טורקיה</span></div><div class="pb-track"><div class="pb-fill" data-w="68" style="background:#7A3010"></div></div><span class="pb-pct">68%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇺🇿</span><span class="pb-name">אוזבקיסטן</span></div><div class="pb-track"><div class="pb-fill" data-w="10" style="background:#B05020"></div></div><span class="pb-pct">10%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇮🇷</span><span class="pb-name">איראן</span></div><div class="pb-track"><div class="pb-fill" data-w="8" style="background:#D07040"></div></div><span class="pb-pct">8%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇪🇸</span><span class="pb-name">ספרד</span></div><div class="pb-track"><div class="pb-fill" data-w="6" style="background:#E09060"></div></div><span class="pb-pct">6%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🇦🇫</span><span class="pb-name">אפגניסטן</span></div><div class="pb-track"><div class="pb-fill" data-w="4" style="background:#EAB080"></div></div><span class="pb-pct">4%</span></div>
+    <div class="pb-row"><div class="pb-meta"><span class="pb-flag">🌍</span><span class="pb-name">אחרים</span></div><div class="pb-track"><div class="pb-fill" data-w="4" style="background:#D4C0A0"></div></div><span class="pb-pct">4%</span></div>
+    <div class="pb-note">ייצוא עולמי משמש מיובש · ITC Trade Map 2023</div>
+</div>
+<p>גרמניה, הולנד וארה"ב הן המייבאות הגדולות. ישראל מייבאת 2,500 עד 4,000 טון בשנה, בעיקר מטורקיה, עם חלק קטן מאוזבקיסטן לשוק הפרמיום. הביקוש הישראלי יציב: חגים (פסח, ראש השנה), שוק הבריאות, ותעשיית הממתקים.</p>
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>מדינה</th><th>ייצור טרי (טון)</th><th>ייצוא מיובש</th><th>מגמה</th></tr>
+<tr><td>טורקיה</td><td>850,000</td><td>~190,000 טון</td><td>↑ יציב, Malatya מרכז</td></tr>
+<tr><td>אוזבקיסטן</td><td>400,000</td><td>~28,000 טון</td><td>↑ גדל, Organic צומח</td></tr>
+<tr><td>איראן</td><td>350,000</td><td>~22,000 טון</td><td>→ תלוי סנקציות</td></tr>
+<tr><td>ספרד</td><td>180,000</td><td>~17,000 טון</td><td>→ EU שוק מקומי</td></tr>
+<tr><td>אפגניסטן</td><td>90,000</td><td>~11,000 טון</td><td>↓ אי יציבות</td></tr>
+<tr><td>פקיסטן</td><td>75,000</td><td>~5,000 טון</td><td>↑ פוטנציאל</td></tr>
+</table></div>
+<div class="ab ab-w"><div class="tg">ישראל</div><p>ישראל גידלה משמשים מסחרית בצפון ובבקעה. גידול מקומי ירד מאוד בשל עלויות ידניות ותחרות טורקית. משמש ישראלי טרי, בעיקר זן Musch Musch, עדיין נמכר בקיץ, אבל תעשיית הייבוש כמעט ואינה קיימת בארץ. הייצוא הטורקי, עם עלות נמוכה ועדיפות גאוגרפית, שולט.</p></div>
+</div>
+
+<!-- ═══ CH 3 ═══ -->
+<div class="ch" id="ch-3">
+<div class="cl">פרק שלישי</div>
+<h2>גז אחד, שני פירות שונים לחלוטין</h2>
+<p class="dc">כשפותחים שק משמש מיובש כתום בהיר, הצבע הזה אינו טבעי. משמש שמתייבש ללא התערבות הופך חום כהה, כמעט שחור. הכתום הוא תוצאה של דיוקסיד גופרית (SO2), גז ששומר על הפיגמנט, על המרקם ועל ויטמין C. ללא SO2, הפרי מאבד ויטמין C אבל שומר על בטא קרוטן, ומפתח טעם עמוק וקרמלי. זה לא שאחד טוב יותר מהשני. הם פשוט שני מוצרים שונים, עם קהלים שונים, שמתחילים מאותו פרי.</p>
+<div class="vc">
+    <div class="vn">Malatya Standard · הזהב הטורקי</div>
+    <div class="vt">אזור Malatya, דרום מזרח טורקיה · שוק המסה</div>
+    <p>הבסיס של שוק המשמש המיובש העולמי. גרעין אחד, ייבוש שמש, גופרת SO2 לשמירת צבע. גודל: 30 עד 50 מ"מ לפרי יבש. צבע: כתום ענבר. מרקם: חצי רך. נסחר FOB Mersin ב־2,200 עד 2,800 דולר לטון, תלוי בגודל ובעונה. שיא העונה: אוגוסט עד ספטמבר. הזן המרכזי: Hacihaliloglu.</p>
+    <div class="vs"><div class="vsi">גודל: <strong>30-50g/pcs</strong></div><div class="vsi">SO2: <strong>כן</strong></div><div class="vsi"><strong>שוק המסה · כל עולם</strong></div></div>
+</div>
+<div class="vc">
+    <div class="vn">Natural / Unsulfured · חום וטבעי</div>
+    <div class="vt">ללא SO2, ייבוש מלא · שוק בריאות ו־Organic</div>
+    <p>פרי מיובש ללא גופרת. הצבע הופך לחום כהה כמעט שחור. הטעם עמוק, קרמלי, ריכוזי יותר. ויטמין A (בטא קרוטן) נשמר בצורה טובה יותר לפי חלק מהמחקרים. מחיר דומה לסטנדרד, לפעמים נמוך יותר בגלל פחות עיבוד. מבוקש בשוק טבעי, בחנויות Organic, ובשוק מזרח אירופי.</p>
+    <div class="vs"><div class="vsi">SO2: <strong>אפס</strong></div><div class="vsi">צבע: <strong>חום כהה</strong></div><div class="vsi"><strong>בריאות · Organic · מסורתי</strong></div></div>
+</div>
+<div class="vc">
+    <div class="vn">Jumbo / Extra Large · פרמיום גודל</div>
+    <div class="vt">פרי גדול, מראה מושלם, קמעונאי פרמיום</div>
+    <p>פרי ממוין לפי גודל: מינימום 40 עד 45 מ"מ. מדורג 1 או Extra. נסחר בפרמיה של 20% עד 40% על Standard. מיועד לאריזות מתנה, גיפט בוקסים, קמעונאי פרמיום. יפן ומדינות המפרץ הן הלקוחות הגדולים. Malatya Jumbo Extra הוא ה־brand המוכר ביותר.</p>
+    <div class="vs"><div class="vsi">גודל: <strong>&gt;40g/pcs</strong></div><div class="vsi">פרמיה: <strong>20-40%</strong></div><div class="vsi"><strong>מתנות · יפן · מפרץ</strong></div></div>
+</div>
+<div class="vc">
+    <div class="vn">Organic Apricot · אורגני</div>
+    <div class="vt">בעיקר מאוזבקיסטן ומטורקיה · פרמיה EU</div>
+    <p>Organic Dried Apricot מאושר EU Organic / USDA. מגיע בשני סוגים: Organic Sulfured (כתום, עם SO2 מאושר אורגני) ו־Organic Unsulfured (חום). המקור האוזבקי נחשב איכותי במיוחד: אקלים יבש, גידול מסורתי, מעט שימוש בחומרי הדברה. פרמיה של 30% עד 50% על קונבנציונל.</p>
+    <div class="vs"><div class="vsi">פרמיה: <strong>30-50%</strong></div><div class="vsi">מקור: <strong>אוזבקיסטן · טורקיה</strong></div><div class="vsi"><strong>EU · אמריקה · פרמיום</strong></div></div>
+</div>
+<div class="pull"><p>הצבע הכתום של המשמש המיובש הוא לא סימן לטריות. הוא סימן שמישהו כיפר אותו בגז. הצבע החום הוא הצבע האמיתי של פרי שעבר ייבוש טבעי.</p></div>
+</div>
+
+<!-- ═══ CH 4 ═══ -->
+<div class="ch" id="ch-4">
+<div class="cl">פרק רביעי</div>
+<h2>240% ויטמין A: הפרי שצובע את העין מבפנים</h2>
+<p class="dc">למשמש מיובש יש מאפיין תזונתי שאין כמעט לאף פרי יבש אחר: 100 גרם מכילים 2,163 מק"ג RAE של ויטמין A, כ־240% מהצריכה היומית המומלצת. הצבע הכתום הוא בטא קרוטן, פרו ויטמין A, פיגמנט ומקור תזונתי בו זמנית. ככל שהצבע כתום עז יותר, ריכוז הנוטריאנטים גבוה יותר. פרי חיוור, פחות.</p>
+<div class="ng">
+    <div class="ni"><div class="nv">241kcal</div><div class="nu">קלוריות</div><div class="nl">ל־100g</div></div>
+    <div class="ni"><div class="nv">240%</div><div class="nu">ויטמין A</div><div class="nl">מהצריכה היומית</div></div>
+    <div class="ni"><div class="nv">1,160mg</div><div class="nu">אשלגן / 100g</div><div class="nl">פי 3 מבננה</div></div>
+    <div class="ni"><div class="nv">7.3g</div><div class="nu">סיבים</div><div class="nl">ל־100g</div></div>
+    <div class="ni"><div class="nv">53g</div><div class="nu">פחמימות</div><div class="nl">מתוכן 46g סוכר</div></div>
+    <div class="ni"><div class="nv">38%</div><div class="nu">נחושת</div><div class="nl">מהצריכה היומית</div></div>
+</div>
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>ערך תזונתי</th><th>כמות ל־100g</th><th>% DV</th></tr>
+<tr><td>קלוריות</td><td>241 kcal</td><td>12%</td></tr>
+<tr><td>פחמימות</td><td>62.6g</td><td>23%</td></tr>
+<tr><td>מתוכן סוכרים</td><td>53.4g</td><td></td></tr>
+<tr><td>סיבים</td><td>7.3g</td><td>26%</td></tr>
+<tr><td>חלבון</td><td>3.4g</td><td>7%</td></tr>
+<tr><td>ויטמין A (RAE)</td><td>2,163 mcg</td><td>240%</td></tr>
+<tr><td>ויטמין E</td><td>4.3mg</td><td>29%</td></tr>
+<tr><td>ויטמין C</td><td>1mg (מיובש)</td><td>1%</td></tr>
+<tr><td>ברזל</td><td>2.7mg</td><td>15%</td></tr>
+<tr><td>אשלגן</td><td>1,160mg</td><td>25%</td></tr>
+<tr><td>מגנזיום</td><td>32mg</td><td>8%</td></tr>
+<tr><td>סידן</td><td>55mg</td><td>4%</td></tr>
+<tr><td>נחושת</td><td>0.34mg</td><td>38%</td></tr>
+</table></div>
+<div class="ab ab-w"><div class="tg">בטא קרוטן וספיגה</div><p>ויטמין A קריטי לראייה בחושך, לשמירת רקמות עין, ולמניעת ניוון מקולרי. אבל ספיגת בטא קרוטן תלויה בשומן. אכילת משמש עם אגוז, שקד, או כף שמן זית מגבירה ספיגה פי 4 עד 6 לעומת אכילה לבד. ללא שומן, רוב הבטא קרוטן פשוט עובר דרך מערכת העיכול מבלי להיספג.</p></div>
+<div class="ab ab-r"><div class="tg">סוכר וסוכרת</div><p>100 גרם משמש מיובש מכילים 53 גרם סוכר ו־241 קלוריות. מדד גליקמי (GI): 31 עד 42 (נמוך בינוני, בגלל הסיבים). אנשים עם סוכרת צריכים לשים לב לגודל המנה: 30 עד 40 גרם למנה. המנה הסבירה היא 5 עד 7 פירות ולא כוס שלמה.</p></div>
+</div>
+
+<!-- ═══ CH 5 ═══ -->
+<div class="ch" id="ch-5">
+<div class="cl">פרק חמישי</div>
+<h2>מהעץ לשק: שישה שלבים שקובעים הכל</h2>
+<p class="dc">תהליך הייבוש הוא לב הסחר במשמש, והאיכות הסופית נקבעת ברובה בשלבים הראשונים. מגדל שממהר לקטוף, חוסך בגיפרות, או מייבש לא אחיד, מייצר פרי שנסחר במחיר נמוך ב־30% עד 40% מפרי בשל שטופל נכון. ב־Malatya, ההבדל בין Grade 1 ל־Grade 3 הוא לא גנטיקה. הוא סבלנות.</p>
+<div class="proc-steps">
+    <div class="proc-step"><div class="proc-step-num">1</div><div><div class="proc-step-title">קטיף בשלות מלאה</div><div class="proc-step-body">קטיף ידני של פירות בשלים אך מוצקים. פרי רך מדי מתייבש לא אחיד. בשלות נמדדת לפי צבע, ריח, ומרקם. בגבעות Malatya, קטיף מתבצע יולי עד אוגוסט בידי פועלים עונתיים.</div></div></div>
+    <div class="proc-step"><div class="proc-step-num">2</div><div><div class="proc-step-title">חיתוך והוצאת גרעין</div><div class="proc-step-body">הפרי נחצה ידנית לשניים, הגרעין מוסר. חיתוך נקי חשוב: פרי שנפגע במהלך חיתוך מייבש לא אחיד ויוצר כתמים. גרעינים לעיתים נמכרים בנפרד: ליבת הגרעין (Apricot Kernel) לתעשיית הקוסמטיקה ולשמן.</div></div></div>
+    <div class="proc-step"><div class="proc-step-num">3</div><div><div class="proc-step-title">גיפרות (SO2 Fumigation)</div><div class="proc-step-body">לפרי כתום: הפרי החצוי נחשף לעשן דיוקסיד גופרית (SO2) במנהרות סגורות, 2 עד 4 שעות. SO2 עוצר חמצון אנזימטי, שומר צבע, מאריך חיי מדף, ומשמיד עובש. רמה מאושרת: עד 2,000 ppm באיחוד האירופי. לפרי Natural: שלב זה מדולג לחלוטין.</div></div></div>
+    <div class="proc-step"><div class="proc-step-num">4</div><div><div class="proc-step-title">ייבוש שמש</div><div class="proc-step-body">הפרי מפוזר על רשתות על גגות או שטחים פתוחים. 8 עד 15 יום בשמש ישירה, תלוי בטמפרטורה ובלחות. לחות סופית: 16% עד 20%. בחלק מהמתקנים המודרניים, ייבוש מכני (תנורי dehydration) מקצר ל־24 עד 36 שעות.</div></div></div>
+    <div class="proc-step"><div class="proc-step-num">5</div><div><div class="proc-step-title">התנאה (Conditioning)</div><div class="proc-step-body">לאחר ייבוש, הפרי עובר Conditioning: אחסון בתנאי לחות מבוקרת שמשווה לחות אחידה בכל הפרי. פרי שעבר ייבוש לא אחיד, חיצון יבש מדי ופנים עדיין לח, מקבל איזון. תהליך של שבוע עד שלושה שבועות.</div></div></div>
+    <div class="proc-step"><div class="proc-step-num">6</div><div><div class="proc-step-title">מיון ואריזה</div><div class="proc-step-body">מיון לפי גודל (Jumbo, 1, 2, 3), צבע, וסחורה פגומה. בדיקות SO2 (לסולפייטד), לחות, E.coli, ואפלטוקסין. אריזה בשקים של 12.5 ק"ג (סטנדרט ייצוא טורקי) עד קרטונים של 5 ק"ג לקמעונאות.</div></div></div>
+</div>
+<div class="ab ab-w"><div class="tg">גרעין המשמש</div><p>גרעין המשמש (Apricot Kernel) הוא תוצר לוואי בעל ערך. Bitter Apricot Kernels מכילים amygdalin (שמתפרק לציאניד) ומסוכנים לצריכה ישירה בכמויות גדולות. Sweet Kernels (זנים מסוימים) משמשים לייצור שמן Carrier Oil בקוסמטיקה ולבישול. שמן Apricot Kernel נסחר ב־2,000 עד 4,000 דולר לטון.</p></div>
+</div>
+
+<!-- ═══ CH 6 ═══ -->
+<div class="ch" id="ch-6">
+<div class="cl">פרק שישי</div>
+<h2>מלחמת הגופרית: SO2 והפיצול שמגדיר את השוק</h2>
+<p class="dc">אין נושא שמחלק את שוק הפירות היבשים כמו SO2. לצד אחד: SO2 שומר על צבע, על ויטמין C, על מרקם, ועל חיי מדף. לצד השני: SO2 הוא חומר שמעלה רגישות באנשים עם אסטמה, ושוק הבריאות מתייחס אליו כאל רעל. שתי הגישות נכונות בו זמנית, אבל לשוק קשה להחזיק שתי אמיתות.</p>
+<h3>מהו SO2 ומה הוא עושה</h3>
+<p>דיוקסיד גופרית (SO2 / sulfur dioxide) הוא גז המשמש כחומר שימור מאושר באיחוד האירופי (E220) ובישראל. הוא עוצר חמצון אנזימטי, התהליך שמשחים פירות חתוכים. ב־100 גרם משמש מיובש סולפייטד נמצאים כ־50 עד 100 מ"ג SO2 שיורי. רגישות לסולפיטים קיימת ב־1% עד 2% מהאוכלוסייה, בעיקר באנשים עם אסטמה.</p>
+<h3>SO2 וליבל חובה</h3>
+<p>בישראל, EU, ובארה"ב: מוצרים המכילים מעל 10 ppm SO2 חייבים בסימון "מכיל סולפיטים". בפרי מיובש הרמות גבוהות בהרבה. כל קונה מסחרי מבקש COA עם בדיקת SO2 כחלק מסטנדרט. ערכים מעל 2,000 ppm (גבול EU) פוסלים משלוח.</p>
+<div class="ab ab-r"><div class="tg">אוכלוסיות בסיכון</div><p>אנשים עם אסטמה או רגישות ידועה לסולפיטים צריכים להימנע ממשמש כתום בהיר ולבחור בחום כהה Unsulfured. ילדים עם אסטמה: בדיקת רגישות לפני הכנסה תדירה לתפריט. רוב האוכלוסייה: SO2 ברמות הקיימות בפרי מיובש בטוח לחלוטין.</p></div>
+<div class="ab ab-g"><div class="tg">מה ה־Unsulfured מרוויח ומפסיד</div><p>פרי Unsulfured מאבד ויטמין C כמעט לחלוטין בייבוש ללא SO2. אבל בטא קרוטן (ויטמין A) נשמר טוב. מחקר שפורסם ב־Food Chemistry (2019) מצא שבחלק מהמדגמים, Unsulfured מכיל בטא קרוטן גבוה יותר בגלל קצב ריכוז שונה. הטעם: עמוק ומרוכז יותר. המרקם: לרוב יבש ולעיסה יותר.</p></div>
+</div>
+
+<!-- ═══ CH 7 ═══ -->
+<div class="ch" id="ch-7">
+<div class="cl">פרק שביעי</div>
+<h2>העץ האמיץ עם עקב אכילס</h2>
+<p class="dc">עץ המשמש הוא פרדוקס בוטני: הוא שורד חורפים של מינוס 30 מעלות, אבל כפור לילי אחד באביב יכול להשמיד את כל היבול. הוא פורח כבר בפברואר עד מרץ, לפני העלים, בדיוק בתקופה שבה כפור אביבי עדיין סביר. זו לא חולשה אבולוציונית. בבית הגידול המקורי, הרי טיאן שאן, הפריחה המוקדמת נותנת יתרון תחרותי על פירות אחרים. אבל ב־Malatya של 2024, כשהאקלים כבר לא אותו אקלים, הפריחה המוקדמת הפכה לסיכון קיומי.</p>
+<p>דרישות עץ: שעות צינה (Chilling Hours) של 300 עד 1,000 שעות מתחת ל־7°C בחורף. ללא Chilling מספיק, הפריחה לא מסתנכרנת ותנובה נפגעת. קרקע: מנוקזת, pH 6.0 עד 7.5. רגיש להצפה. עץ בוגר: 4 עד 6 מטר גובה, חי 20 עד 25 שנה. תנובה בשנה טובה: 50 עד 100 ק"ג לעץ.</p>
+<h3>זני Malatya</h3>
+<p><strong>Hacihaliloglu</strong>: הזן המסחרי הגדול ביותר. מתוק, נוח לייבוש, גרעין נפרד בקלות. שיא של שוק ייצוא Malatya. <strong>Kabaaşı</strong>: גדול יותר, מתאים ל־Jumbo Grade. <strong>Soğancı</strong>: פרי עגלגל, מיובש מצוין. זנים מסורתיים אוזבקים כוללים Subkhoni ו־Kандак, עם פרי גדול ומתוק מאוד.</p>
+<h3>אתגרי שינוי אקלים</h3>
+<p>Malatya חוותה ב־2022 עד 2024 גלי חום חריגים ביולי אוגוסט, שגרמו לפרי לייבש מהר מדי על העץ לפני הקטיף. כפור אביבי בלתי צפוי ב־2022 הוריד תנובה ב־40%. שינוי אקלים הוא האיום הגדול ביותר על רציפות ייצור המשמש בטורקיה, ומדינות כאוזבקיסטן ופקיסטן נכנסות לשוק כחלופות גאוגרפיות.</p>
+<div class="ab ab-w"><div class="tg">Malatya 2023</div><p>עונת 2023 הייתה חלשה יחסית: גשמים מועטים ב־Malatya צמצמו תנובה ב־20% לעומת ממוצע. מחירי FOB עלו בהתאם מ־2,100 ל־2,700 דולר לטון לסטנדרט, עם Jumbo שהגיע ל־3,500+. לקוחות שאין להם חוזים ארוכי טווח שילמו פרמיה משמעותית.</p></div>
+</div>
+
+<!-- ═══ CH 8 ═══ -->
+<div class="ch" id="ch-8">
+<div class="cl">פרק שמיני</div>
+<h2>הפרי שסופג ריח בצל דרך קרטון</h2>
+<p class="dc">משמש מיובש, בניגוד למה שנדמה, אינו מוצר שאפשר לשכוח במחסן ולחזור אליו שנה אחר כך. לחות גבוהה מדי: עובש ו־Fermentation. חום גבוה: SO2 מתנדף מהר, צבע משתנה, מרקם נפגע. קור: מעולה, אבל עלייה חדה בטמפרטורה יוצרת עיבוי מים על הפרי. והמשמש סופג ריחות מסביבתו. מחסן שבו גם בצלים ושומים ייתן פרי שריחו ישתנה לצמיתות.</p>
+<div style="overflow-x:auto"><table class="gt">
+<tr><th>תנאי</th><th>אחסון ארוך</th><th>אחסון קצר</th><th>חיי מדף</th></tr>
+<tr><td>טמפרטורה</td><td>0-5°C</td><td>15-18°C</td><td>24 חודשים / 6-9 חודשים</td></tr>
+<tr><td>לחות יחסית</td><td>55-65% RH</td><td>55-65% RH</td><td>מעל 70%: עובש</td></tr>
+<tr><td>אריזה</td><td>אטומה, אטמוספרה מוגנת</td><td>אטומה</td><td>MAP ממליך ל־premium</td></tr>
+<tr><td>הפרדה</td><td>הרחק מבצל/שום</td><td>הרחק מריחות חזקים</td><td>הפרי סופג ריחות</td></tr>
+</table></div>
+<h3>פרמטרי איכות מסחרי</h3>
+<p><strong>לחות:</strong> 16% עד 18% לסטנדרט, מעל 20% פסילה. <strong>SO2 שיורי:</strong> מקסימום 2,000 ppm (EU). <strong>Aflatoxin:</strong> פחות מ־10 ppb כולל, פחות מ־2 ppb Aflatoxin B1. <strong>Moisture Activity (Aw):</strong> מקסימום 0.65 למניעת עובש. <strong>גודל:</strong> Jumbo (מעל 40g), Grade 1 (30 עד 40g), Grade 2 (20 עד 30g), Grade 3 (פחות מ־20g). <strong>פרי פגום:</strong> מקסימום 2% ל־Grade 1.</p>
+<div class="ab ab-w"><div class="tg">כיצד לקנות</div><p>לשוק המסה: Malatya Grade 1 Sulfured, צבע כתום אחיד, ריח מתוק ללא כבדות. לשוק בריאות: Unsulfured Organic, חום כהה, ריח עמוק ומרוכז. לפרמיום: Jumbo Grade 1 Malatya. לאיכות: בדוק שהפרי אינו סוכרי (גבישי לבן = ריכוז סוכר גבוה, מקובל אבל מעיד על אחסון ישן).</p></div>
+</div>
+
+<!-- ═══ CH 9 ═══ -->
+<div class="ch" id="ch-9">
+<div class="cl">פרק תשיעי</div>
+<h2>הגרעין שהפך לתעשיית מיליונים</h2>
+<p class="dc">כשמפצחים גרעין משמש, בפנים יש ליבה שנראית כמו שקד קטן. הליבה הזו היא מוצר בפני עצמו, עם שוק, מחיר, ושרשרת אספקה נפרדים לחלוטין מהפרי המיובש. שני סוגים: Bitter Kernels, שמכילים amygdalin (שמתפרק לציאניד), ו־Sweet Kernels, שבטוחים לאכילה ומשמשים לייצור שמן. שמן Apricot Kernel, ששימש את המלוכה הפרסית עוד במאה ה־6, הוא היום רכיב סטנדרטי בקוסמטיקה ברמה גבוהה.</p>
+<p>שמן Apricot Kernel עשיר בחומצה אולאית (60% עד 70%) וחומצה לינולאית (20% עד 30%). המרקם קל ונספג מהר בעור, מה שהפך אותו ל־Carrier Oil מועדף לשמנים אתריים ולעיסויים. שוק שמן Apricot Kernel העולמי מוערך ב־250 עד 350 מיליון דולר, עם צמיחה שנתית של 5% עד 7%, מונע על ידי ביקוש לקוסמטיקה טבעית. המחיר: 2,000 עד 4,000 דולר לטון, תלוי באיכות ובהסמכה אורגנית.</p>
+<div class="ab ab-r"><div class="tg">סכנה: Bitter Kernels</div><p>Bitter Apricot Kernels מכילים 3% עד 5% amygdalin. בעיכול, amygdalin מתפרק לציאניד מימן (HCN). 20 עד 40 ליבות מרות עלולים להיות מנה קטלנית למבוגר. EFSA קבע ב־2016 שאפילו שלוש ליבות מרות עלולות לחרוג מסף הציאניד הבטוח. השוק ל"ליבות משמש לבריאות" (Laetrile / B17) פעיל ומסוכן. אין עדות מדעית לטענות ריפוי, יש עדות למקרי הרעלה.</p></div>
+<div class="ab ab-g"><div class="tg">שווקים מפתיעים</div><p>פקיסטן וטורקיה מייצאות ליבות משמש מתוקות לדרום קוריאה, שם הן נצלות ומועלות כחטיף (살구씨). באיטליה, Amaretti di Saronno מכילים ליבות משמש מרות (מבושלות, שמפרקות את ה־amygdalin) ולא שקדים כפי שרבים מניחים. המוצר האיטלקי המפורסם ביותר שמכיל "שקדים" בעצם מכיל משמש.</p></div>
+</div>
+
+<!-- ═══ CH 10 ═══ -->
+<div class="ch" id="ch-10">
+<div class="cl">פרק עשירי</div>
+<h2>העתיד: כשהאקלים מאיים על העיר שמחזיקה 60%</h2>
+<p class="dc">המשמש המיובש הוא סחורה שתלויה בעיר אחת יותר מכל מוצר חקלאי מיובש אחר. ו־Malatya נמצאת תחת לחץ. ב־2022, כפור אביבי הוריד תנובה ב־40%. ב־2023, גשמים מועטים צמצמו את הגודל ואת האיכות. ב־2024, גלי חום בקיץ גרמו לפרי לייבש על העץ לפני שהמגדלים הספיקו לקטוף. שלוש שנים רצופות של חריגות אקלימיות, באזור שמגדיר את מחיר הסחורה העולמי.</p>
+<p>השוק כבר מגיב. אוזבקיסטן מגדילה ייצוא ב־15% עד 20% בשנה, עם דגש על Organic. פקיסטן, שהייתה שחקנית זניחה, מתחילה לבנות תשתיות עיבוד. ספרד מגדילה גידול עבור שוק ה־EU הפנימי. אף אחת מהן לא מאיימת על Malatya בטווח הקצר, אבל כל שנת אקלים קשה מאיצה את הפיזור.</p>
+<p>למגדלי Malatya יש יתרון שקשה להעתיק: 150 שנות ידע מצטבר בייבוש, מיון, ושיווק. הזנים המקומיים (Hacihaliloglu, Kabaaşı) מותאמים לקרקע ולאקלים. תשתיות הייצוא (נמל Mersin, בתי אריזה) כבר קיימות. אבל ידע ותשתיות לא מגנים מפני כפור.</p>
+<div class="pull"><p>60% מהמשמש המיובש בעולם מגיע מאזור אחד, בהרים ליד עיר אחת בדרום מזרח טורקיה. כשהאקלים בעיר הזו משתנה, המחיר בכל סופרמרקט בעולם משתנה איתו.</p></div>
+<div class="ab ab-w"><div class="tg">מה זה אומר לקונה</div><p>חוזים ארוכי טווח (Forward Contracts) עם יצואנים מ־Malatya הם הגנה מפני תנודתיות עונתית. פיזור מקורות לאוזבקיסטן (Organic) ולספרד (EU) מפחית סיכון. מעקב אחרי תחזיות אקלים ב־Malatya בפברואר מרץ (תקופת פריחה) ויולי אוגוסט (תקופת ייבוש) נותן יתרון של 4 עד 6 חודשים על מחירי שוק.</p></div>
+<div class="ft">
+    ערך ידע צרכני · Blue Star International · 2026<br>
+    מבוסס על USDA FoodData Central, FAO, ITC Trade Map 2023-2024, Turkish Exporters Assembly (TIM)<br>
+    <span>Botanical sources: Prunus armeniaca taxonomy, Zohary &amp; Hopf 2000, Vavilov Institute germplasm data</span>
+</div>
+</div>
+</main>
+<button id="btt" aria-label="Back to top">&#8593;</button>
+<script>
+window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('progress-bar').style.width = (window.scrollY / h * 100) + '%';
+    const sections = document.querySelectorAll('.ch');
+    const dots = document.querySelectorAll('.nav-dot');
+    let current = "";
+    sections.forEach(s => { if (pageYOffset >= s.offsetTop - 200) current = s.id; });
+    dots.forEach(d => { d.classList.remove('active'); if (d.dataset.target === current) d.classList.add('active'); });
+    document.getElementById('btt').classList.toggle('visible', window.scrollY > 300);
+});
+document.getElementById('btt').onclick = () => window.scrollTo({top:0, behavior:'smooth'});
+document.querySelectorAll('.nav-dot').forEach(dot => {
+    dot.onclick = () => document.getElementById(dot.dataset.target).scrollIntoView({behavior:'smooth'});
+});
+if (window.IntersectionObserver) {
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            e.target.querySelectorAll('.pb-fill').forEach(b => { b.style.width = b.dataset.w + '%'; });
+            obs.unobserve(e.target);
+        });
+    }, {threshold: 0.3});
+    document.querySelectorAll('.pb-chart').forEach(el => obs.observe(el));
+}
+(function() {
+    function initScrollReveal() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.ch').forEach(card => { card.classList.add('reveal'); observer.observe(card); });
+    }
+    const dbName = 'StarkOS_DB';
+    const productId = window.location.pathname.split('/').pop().replace('.html', '') || 'apricot';
+    function syncProductPage() {
+        const request = indexedDB.open(dbName, 1);
+        request.onsuccess = (e) => {
+            const db = e.target.result;
+            try {
+                const store = db.transaction('archive', 'readonly').objectStore('archive');
+                const getRequest = store.get(productId);
+                getRequest.onsuccess = () => {
+                    const data = getRequest.result;
+                    if (!data) return;
+                    function makeMedia(src) {
+                        const isVid = src.startsWith('data:video');
+                        const el = document.createElement(isVid ? 'video' : 'img');
+                        el.src = src; el.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+                        if (isVid) { el.autoplay = el.muted = el.loop = true; el.setAttribute('playsinline',''); }
+                        return el;
+                    }
+                    const heroH1 = document.getElementById('sync-title');
+                    if (heroH1 && data.name) heroH1.innerText = data.name;
+                    const heroDeck = document.getElementById('sync-desc');
+                    if (heroDeck && data.desc) heroDeck.innerText = data.desc;
+                    const heroSrc = data.media1 || data.media;
+                    const heroSlot = document.getElementById('slot-product-hero');
+                    if (heroSlot && heroSrc) { heroSlot.innerHTML = ''; heroSlot.appendChild(makeMedia(heroSrc)); }
+                };
+            } catch(e) {}
+        };
+    }
+    initScrollReveal();
+    window.addEventListener('load', syncProductPage);
+})();
+</script>
+</body>
+</html>

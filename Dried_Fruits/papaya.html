@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>פפאיה מיובשת · Blue Star International</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg: #0A0A0B; --text: #FAF7F0; --body: #D1CEC5;
+    --accent: #6A3A08; --warm: #C87820;
+    --card: rgba(22, 14, 4, 0.45); --radius: 20px;
+    --shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    background-color: var(--bg); color: var(--body);
+    font-family: 'Noto Sans Hebrew', sans-serif;
+    font-size: 18px; line-height: 1.9; overflow-x: hidden; position: relative;
+    background-image: linear-gradient(rgba(200,120,32,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(200,120,32,0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+body::before, body::after { content: ''; position: fixed; width: 600px; height: 600px; border-radius: 50%; filter: blur(120px); z-index: -2; opacity: 0.13; pointer-events: none; }
+body::before { background: var(--warm); top: -100px; left: -100px; }
+body::after { background: #5A2A04; bottom: 20%; right: -150px; }
+#progress-bar { position:fixed; top:0; left:0; height:3px; background:var(--warm); width:0; z-index:1000; }
+.back-btn { position:absolute; top:40px; left:40px; z-index:10; display:flex; align-items:center; gap:8px; color:var(--text); text-decoration:none; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:2px; opacity:0.5; transition:0.3s; }
+.back-btn:hover { opacity:1; color:var(--warm); }
+#btt { position:fixed; bottom:30px; left:30px; width:40px; height:40px; background:var(--warm); color:#000; border:none; border-radius:50%; cursor:pointer; font-size:18px; display:none; z-index:1000; transition:0.3s; }
+#btt.visible { display:flex; align-items:center; justify-content:center; }
+#btt:hover { transform:scale(1.1); box-shadow:0 0 20px rgba(200,120,32,0.4); }
+.hero { padding:100px 40px 160px; text-align:center; color:var(--text); position:relative; }
+.hero-k { font-size:11px; font-weight:700; letter-spacing:5px; color:var(--warm); margin-bottom:20px; text-transform:uppercase; font-family:'Space Mono',monospace; }
+.hero h1 { font-family:'Frank Ruhl Libre',serif; font-size:90px; font-weight:900; line-height:0.8; margin-bottom:25px; letter-spacing:-2px; }
+.hero .deck { font-size:20px; opacity:0.8; max-width:650px; margin:0 auto 40px; font-weight:300; }
+.hero-img-wrap { max-width:900px; margin:0 auto -220px; height:500px; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); background:#000; border:1px solid rgba(255,255,255,0.05); }
+.hero-img-wrap video, .hero-img-wrap img { width:100%; height:100%; object-fit:cover; }
+.hero-img-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:12px; background:#0A0A0B; }
+.hero-img-placeholder span { color:rgba(255,255,255,0.15); font-size:12px; letter-spacing:3px; font-family:'Space Mono',monospace; }
+.side-nav { position:fixed; top:50%; right:30px; transform:translateY(-50%); z-index:100; display:flex; flex-direction:column; gap:12px; }
+.nav-dot { width:10px; height:10px; border:1px solid var(--warm); border-radius:50%; opacity:0.3; cursor:pointer; transition:0.3s; }
+.nav-dot.active { opacity:1; transform:scale(1.4); background:var(--warm); }
+.con { max-width:800px; margin:280px auto 100px; padding:0 24px; position:relative; z-index:5; }
+.ch { background:var(--card); backdrop-filter:blur(25px); -webkit-backdrop-filter:blur(25px); padding:50px; border-radius:var(--radius); margin-bottom:40px; border:1px solid rgba(255,255,255,0.05); position:relative; overflow:hidden; color:var(--body); }
+.ch::before, .ch::after { content:'+'; position:absolute; font-family:'Space Mono',monospace; color:var(--warm); font-size:14px; opacity:0.4; }
+.ch::before { top:15px; left:15px; }
+.ch::after { bottom:15px; right:15px; }
+.ch h2 { font-family:'Frank Ruhl Libre',serif; font-size:38px; margin-bottom:25px; color:var(--text); border-right:5px solid var(--warm); padding-right:20px; line-height:1.1; }
+.ch h3 { font-family:'Frank Ruhl Libre',serif; font-size:22px; font-weight:700; color:var(--text); margin:36px 0 14px; padding-right:14px; border-right:3px solid var(--warm); }
+.ch p { margin-bottom:18px; color:var(--body); }
+.cl { font-size:10px; font-weight:700; color:var(--warm); letter-spacing:4px; text-transform:uppercase; margin-bottom:10px; display:block; font-family:'Space Mono',monospace; }
+.dc::first-letter { font-family:'Frank Ruhl Libre',serif; font-size:2.8em; font-weight:900; color:var(--warm); line-height:1; float:right; margin-left:8px; }
+em { color:#E8A050; font-style:italic; }
+strong { color:var(--text); }
+.ab { padding:20px 24px; margin:28px 0; border-radius:0 8px 8px 0; }
+.ab .tg { font-size:10px; font-weight:700; letter-spacing:4px; text-transform:uppercase; margin-bottom:6px; }
+.ab p { margin:0; font-size:16px; line-height:1.75; }
+.ab-w { background:rgba(200,120,32,0.08); border-right:4px solid var(--warm); }
+.ab-w .tg { color:var(--warm); }
+.ab-g { background:rgba(60,40,5,0.25); border-right:4px solid var(--accent); }
+.ab-g .tg { color:#C08820; }
+.ab-r { background:rgba(184,50,50,0.1); border-right:4px solid #B83030; }
+.ab-r .tg { color:#E06060; }
+.ab-r p { color:#DDB0B0; }
+.vc { background:rgba(22,14,4,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:22px; margin:18px 0; }
+.vc .vn { font-family:'Frank Ruhl Libre',serif; font-size:21px; font-weight:700; color:var(--text); }
+.vc .vt { font-size:12px; color:var(--warm); font-weight:600; margin-bottom:10px; }
+.vc p { font-size:16px; line-height:1.75; margin-bottom:0; color:var(--body); }
+.vc .vs { display:flex; gap:12px; flex-wrap:wrap; margin-top:14px; }
+.vc .vsi { background:rgba(255,255,255,0.04); padding:6px 12px; border-radius:5px; font-size:12px; color:#C09060; }
+.vc .vsi strong { color:var(--text); }
+.ng { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:24px 0; }
+.ni { background:rgba(22,14,4,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:14px; text-align:center; }
+.ni .nv { font-family:'Frank Ruhl Libre',serif; font-size:26px; font-weight:700; color:var(--text); }
+.ni .nu { font-size:13px; color:#C09060; margin-top:2px; }
+.ni .nl { font-size:11px; color:var(--warm); margin-top:3px; font-weight:600; }
+.pb-chart { margin:16px 0 8px; display:flex; flex-direction:column; gap:10px; }
+.pb-row { display:flex; align-items:center; gap:10px; }
+.pb-meta { display:flex; align-items:center; gap:6px; min-width:120px; justify-content:flex-end; }
+.pb-flag { font-size:18px; }
+.pb-name { font-size:13px; color:#C09060; }
+.pb-track { flex:1; background:rgba(255,255,255,0.08); height:18px; border-radius:9px; overflow:hidden; }
+.pb-fill { height:100%; width:0; border-radius:9px; transition:width 1.2s cubic-bezier(0.22,1,0.36,1); }
+.pb-pct { font-family:'Frank Ruhl Libre',serif; font-size:14px; font-weight:700; color:var(--text); width:36px; text-align:left; }
+.pb-note { font-size:11px; color:#7A5020; opacity:.7; margin-top:10px; text-align:center; }
+.gt { width:100%; border-collapse:collapse; margin:25px 0; font-size:15px; border-top:1px solid rgba(255,255,255,0.05); }
+.gt th { background:rgba(0,0,0,0.5); color:var(--text); padding:14px; text-align:right; font-size:12px; letter-spacing:1px; border-bottom:1px solid rgba(255,255,255,0.1); }
+.gt td { padding:14px; border-bottom:1px solid rgba(255,255,255,0.05); color:var(--body); }
+.gt tr:nth-child(even) { background:rgba(255,255,255,0.02); }
+.pull { margin:40px 0; padding:45px; background:rgba(0,0,0,0.4); border-radius:var(--radius); text-align:center; border:1px solid rgba(200,120,32,0.2); }
+.pull p { font-family:'Frank Ruhl Libre',serif; font-size:22px; font-weight:500; color:var(--body); line-height:1.55; margin:0; font-style:italic; }
+.reveal { opacity:0; transform:translateY(50px); transition:all 0.8s cubic-bezier(0.2,1,0.2,1); }
+.reveal.active { opacity:1; transform:translateY(0); }
+.marquee-container { position:fixed; bottom:-3vh; left:0; width:100vw; overflow:hidden; z-index:-1; pointer-events:none; }
+.marquee-text { font-family:'Playfair Display',serif; font-size:15vw; white-space:nowrap; color:transparent; -webkit-text-stroke:1px rgba(255,255,255,0.03); animation:scrollText 40s linear infinite; }
+@keyframes scrollText { 0% { transform:translateX(0); } 100% { transform:translateX(-50%); } }
+.ft { text-align:center; padding:44px 24px; font-size:13px; color:#7A5020; border-top:1px solid rgba(255,255,255,0.06); margin-top:36px; }
+.proc-steps { display:flex; flex-direction:column; gap:20px; margin:24px 0; }
+.proc-step { display:flex; gap:20px; align-items:flex-start; }
+.proc-step-num { min-width:36px; height:36px; border-radius:50%; background:var(--warm); color:#000; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.proc-step-title { font-family:'Frank Ruhl Libre',serif; font-size:18px; font-weight:700; color:var(--text); margin-bottom:6px; }
+.proc-step-body { font-size:16px; color:var(--body); line-height:1.75; }
+.ch ol, .ch ul { padding-right:24px; margin:16px 0 18px; }
+.ch li { margin-bottom:10px; color:var(--body); line-height:1.8; }
+.ch ol li::marker { color:var(--warm); font-family:'Space Mono',monospace; font-size:12px; font-weight:700; }
+.ch ul li::marker { color:var(--warm); }
+.media-slot-inline { width:100%; aspect-ratio:16/9; background:var(--card); border-radius:var(--radius); overflow:hidden; margin:40px 0; border:1px solid rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:center; position:relative; }
+.media-slot-inline img, .media-slot-inline video { width:100%; height:100%; object-fit:cover; }
+.media-slot-placeholder { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; color:rgba(255,255,255,0.1); }
+@media (max-width:900px) {
+    .side-nav { display:none; }
+    .back-btn { top:20px; left:20px; }
+    .hero h1 { font-size:55px; }
+    .hero-img-wrap { height:300px; margin-bottom:-100px; }
+    .con { margin-top:150px; }
+    .ng { grid-template-columns:repeat(2,1fr); }
+}
+</style>
+<script src="../auth.js"></script>
+</head>
+<body>
+<div class="marquee-container"><div class="marquee-text">BLUE STAR INTERNATIONAL · GLOBAL COMMODITY ARCHIVE · BLUE STAR INTERNATIONAL · GLOBAL COMMODITY ARCHIVE · </div></div>
+<div id="progress-bar"></div>
+<nav class="side-nav">
+    <div class="nav-dot active" data-target="ch-1"></div>
+    <div class="nav-dot" data-target="ch-2"></div>
+    <div class="nav-dot" data-target="ch-3"></div>
+    <div class="nav-dot" data-target="ch-4"></div>
+    <div class="nav-dot" data-target="ch-5"></div>
+    <div class="nav-dot" data-target="ch-6"></div>
+    <div class="nav-dot" data-target="ch-7"></div>
+    <div class="nav-dot" data-target="ch-8"></div>
+    <div class="nav-dot" data-target="ch-9"></div>
+    <div class="nav-dot" data-target="ch-10"></div>
+</nav>
+<section class="hero">
+    <a href="../../index.html" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>חזרה למסוף</a>
+    <div class="hero-k">ערך ידע חקלאי · Blue Star International</div>
+    <h1 id="sync-title">פפאיה מיובשת</h1>
+    <p class="deck" id="sync-desc">פרי שאין לו גרסת בר. שנברא, לא נמצא. וכשהספרדים הבינו מה יש בידיהם, הם שינו את שמו וחיסלו את ההיסטוריה שלו.</p>
+    <div class="hero-img-wrap" id="slot-product-hero"><div class="hero-img-placeholder"><span>מדיה_לא_נטענה</span></div></div>
+</section>
+<main class="con">
+
+<!-- ═══ CH 1 ═══ -->
+<div class="ch reveal" id="ch-1">
+<div class="cl">פרק ראשון</div>
+<h2>הפרי שאין לו עבר בר, רק עתיד מתורבת</h2>
+
+<p class="dc">פפאיה, <em>Carica papaya</em>, היא אחת מהתעלומות הגדולות של הבוטניקה. כמעט כל הפירות שאנחנו אוכלים היום קיימים גם בטבע הפרוע. לתפוח יש <em>Malus sieversii</em> בהרי קזחסטן. לאבוקדו יש אבות בר באמריקה המרכזית. לתמר יש פרא באפריקה ובמזרח התיכון. לפפאיה אין. אף מדע לא הצליח לזהות אב קדמון בר שממנו הגיע הפרי שמוכרים בכל שוק בעולם.</p>
+
+<p>המשמעות: הפפאיה שאנחנו אוכלים היא יצירה אנושית. היא נוצרה על ידי עמים ילידים במרכז אמריקה, ככל הנראה בדרום מקסיקו או בגואטמלה, לאורך אלפי שנים של ברירה מכוונת. זה לא ביות של פרי קיים. זה גידול פרי חדש. אחד הדברים הנדירים ביותר בתולדות החקלאות.</p>
+
+<div class="pull"><p>כמעט כל פרי ממוצא ידוע. לפפאיה אין אב קדמון בר מאומת. היא לא נמצאה, היא נברייה.</p></div>
+
+<p>כשהספרדים הגיעו לאמריקה במאה ה-16 ומצאו את הפרי, הם ניסו לתת לו שם. הם קראו לו <em>papaya</em>, ומקור המילה שנוי במחלוקת: יש הטוענים שהיא מהשפה הקריבית <em>Taíno</em>, שבה <em>ababai</em> הוא שמו. אחרים מצביעים על גרסאות במיה ואחרות. מה שבטוח הוא שהשם המקורי, בכל שפה ילידית שהיה, נמחק. הספרדים נתנו לו שם חדש, ייצאו אותו לעולם, ומה שהיה ידע מקומי של אלפי שנים הפך למוצר מסחרי עם מוצא ספרדי על הפנים.</p>
+
+<div class="ab ab-w">
+    <div class="tg">עובדה בוטנית</div>
+    <p>פפאיה אינה עץ אמיתי. הגזע שלה עשוי רקמה ריאה-ירוקה, לא עץ. מבחינה בוטנית היא <strong>עשב ענקי</strong> שיכול להגיע ל-10 מטר גובה. זה מסביר את קצב הגדילה המטורף: שנה מזרע לפרי ראשון.</p>
+</div>
+</div>
+
+<!-- ═══ CH 2 ═══ -->
+<div class="ch reveal" id="ch-2">
+<div class="cl">פרק שני</div>
+<h2>חמישה מאות שנה של כיבוש, ובסוף פפאיה בכל מקום</h2>
+
+<p class="dc">בשנת 1519 הרמן קורטס מגיע למקסיקו. בשנת 1526 הנחת יסוד להתיישבות ספרדית בפנמה. עד 1550 הפרי כבר גדל בשני חופי אמריקה הדרומית. עד 1600 הוא הגיע לאירופה, לאפריקה, להודו ולמלזיה. זה לא תפוצה של פרי. זה תפוצה של כיבוש. הספרדים והפורטוגזים לקחו את הפפאיה ודחפו אותה לכל בנדל שבו שלטו, לפני שהעולם הספיק להבין מה קורה.</p>
+
+<p>אחת הסיבות להתפשטות המהירה הייתה ייחודית: הפפאיה גדלה כמעט בכל מקום שיש בו חום ולחות. היא לא דורשת קרקע מיוחדת, לא אקלים נדיר, לא גובה מסוים. זרק זרע לאדמה חמה ולחה, ותוך שנה יש עץ ופרי. מיסיונרים ספרדים השתמשו בה כמקור מזון בטוח בכל מקום שיצאו. בתוך מאה שנה הפכה לאחד מהפירות הנפוצים ביותר בכל הטרופיקה.</p>
+
+<div class="ab ab-g">
+    <div class="tg">מרוץ השמות</div>
+    <p>בספרדית: <em>papaya</em>. בפורטוגזית: <em>mamão</em>. בהינדי: <em>papita</em>. בסינית: <em>木瓜 mùguā</em>. בסוואהילי: <em>papai</em>. בכל מקום שם אחר. אבל השם המקורי, בשפת הטאינו שדיברו אנשים שכבר לא קיימים, נשכח לחלוטין.</p>
+</div>
+
+<p>עד המאה ה-20 הפכה הודו ליצרנית הגדולה בעולם, עם למעלה מ-6 מיליון טון בשנה. פרי שנברא במקסיקו, הופץ על ידי ספרדים, ומגודל כיום בעיקר בהודו ובברזיל. זה הגלובליזציה לפני שהייתה לה שם.</p>
+
+<div class="pb-chart" id="pb-papaya"></div>
+<div class="pb-note">ייצור פפאיה טרייה עולמי · FAO 2023</div>
+</div>
+
+<!-- ═══ CH 3 ═══ -->
+<div class="ch reveal" id="ch-3">
+<div class="cl">פרק שלישי</div>
+<h2>הפפאין, האנזים שתעשיות שלמות נבנו עליו</h2>
+
+<p class="dc">בתוך הפפאיה הירוקה, לפני שהיא מתבשלת, יש חלב לבן. עמי הקריביים ידעו על הנוזל הזה אלפי שנים לפני שהמדע הבין מה הוא. הם עטפו בשר קשה בעלי פפאיה ירוקה ומצאו שלמחרת הוא רך יותר. הם שפשפו את העור בנוזל מהגזע ומצאו שפצעים מתרפאים מהר יותר. הם אכלו פפאיה לאחר ארוחות כבדות וחשו שהכל מתעכל בקלות. זה לא פולקלור. זה ביוכימיה.</p>
+
+<p>ב-1879 בידד המדע לראשונה את הרכיב האחראי: <strong>פפאין</strong>, פרוטאז ציסטאין שמפרק קשרי פפטיד בחלבונים. מאז, תעשיות שלמות נבנו עליו. תעשיית הבשר משתמשת בפפאין לריכוך תעשייתי של נתחים קשים. תעשיית הבירה משתמשת בו למניעת עכירות. תעשיית הבד משתמשת בו לעיבוד צמר. תעשיית הקוסמטיקה מכניסה אותו לקרמי פנים ומסכות. תעשיית הרפואה חוקרת שימושים נגד דלקת.</p>
+
+<div class="pull"><p>אנשי הקריביים ידעו לרכך בשר עם עלי פפאיה אלפי שנים לפני שהמדע הבין למה. הם לא ידעו מה זה פפאין. הם ידעו שזה עובד.</p></div>
+
+<div class="ab ab-w">
+    <div class="tg">הריכוז בפרי</div>
+    <p>פפאין מרוכז בעיקר בפפאיה ירוקה ובגרעינים. בעת ייבוש, חלק מהפעילות האנזימטית נהרסת מחום. אבל גם בפרי המיובש, עקבות פפאין פעיל נמצאים. זה אחד הגורמים לכך שפפאיה מיובשת קלה לעיכול יחסית לפירות מיובשים אחרים.</p>
+</div>
+
+<h3>הגרעינים, הדבר שכולם זורקים</h3>
+<p>לגרעיני הפפאיה השחורים יש טעם חריף ופלפלי ותכולת פפאין גבוהה מהפרי עצמו. בחלק מהמטבחים האסייתים והאפריקאים משתמשים בהם כתחליף לפלפל. מחקרים ראשוניים בחנו תכונות אנטי-פרזיטיות. במרבית מפעלי הייבוש, הגרעינים נזרקים. זה כנראה טעות.</p>
+</div>
+
+<!-- ═══ CH 4 ═══ -->
+<div class="ch reveal" id="ch-4">
+<div class="cl">פרק רביעי</div>
+<h2>מהשדה ליבוש, שבועות של מלאכה בשביל חבילה</h2>
+
+<p class="dc">פפאיה טרייה היא 88% מים. פפאיה מיובשת היא 14 עד 20% מים. כל קילוגרם של מוצר מוגמר מתחיל בכ-6 עד 7 קילוגרם של פרי טרי. זה לא רק חישוב כלכלי. זה גם מסביר למה הטעם מרוכז כל כך, ולמה הצבע עמוק כל כך. הייבוש הוא לא הסרת מים. הוא דחיסה של כל מה שהיה בפרי לצורה קטנה וניידת.</p>
+
+<div class="proc-steps">
+    <div class="proc-step">
+        <div class="proc-step-num">01</div>
+        <div><div class="proc-step-title">קטיף בשלות 80-90%</div><div class="proc-step-body">פפאיה לייבוש נקטפת לפני בשלות מלאה. פרי בשל מדי רך מדי לעיבוד ומרוכז מדי בסוכר. הבשלות האידיאלית: קצות הפרי מתחילים להצהיב, הבשר עדיין מוצק.</div></div>
+    </div>
+    <div class="proc-step">
+        <div class="proc-step-num">02</div>
+        <div><div class="proc-step-title">קילוף, גרעון, חיתוך</div><div class="proc-step-body">מלאכה ידנית במרבית המפעלים. הקליפה מוסרת, הגרעינים מוצאים. הפרי נחתך לרצועות אחידות של 1 עד 2 ס"מ. אחידות חיתוך קריטית לייבוש שווה.</div></div>
+    </div>
+    <div class="proc-step">
+        <div class="proc-step-num">03</div>
+        <div><div class="proc-step-title">טיפול מקדים, הבחירה</div><div class="proc-step-body">כאן מתפצלים הדרכים. גרסה מסוכרת: השריה בתמיסת סוכר 60-70% למשך 12-24 שעות לפני ייבוש. גרסה טבעית: ייבוש ישיר, לעיתים עם SO₂ לשימור צבע. גרסה אורגנית: ייבוש ישיר ללא כל תוסף.</div></div>
+    </div>
+    <div class="proc-step">
+        <div class="proc-step-num">04</div>
+        <div><div class="proc-step-title">ייבוש, 8 עד 14 שעות</div><div class="proc-step-body">אוויר חם ב-60 עד 70 מעלות. ייבוש מהיר מדי שורף ומשנה צבע. ייבוש איטי מדי מאפשר עובש. היעד: לחות 14-22% בהתאם לסוג. בדיקת לחות בסוף כל מנה.</div></div>
+    </div>
+    <div class="proc-step">
+        <div class="proc-step-num">05</div>
+        <div><div class="proc-step-title">מיון ואריזה</div><div class="proc-step-body">מיון ידני להוצאת חתיכות שרופות, שבורות או בצבע חריג. אריזה בשקיות ואקום בתוך קרטון. כל שקית: בדיקת לחות אחרונה לפני סגירה.</div></div>
+    </div>
+</div>
+
+<div class="ab ab-g">
+    <div class="tg">ייבוש שמש לעומת ייבוש תעשייתי</div>
+    <p>בחלקים מתאילנד ומהודו עדיין מייבשים בשמש. עלות נמוכה, טעם עמוק יותר לטענת חלק מהיצרנים, אבל שליטה פחותה על לחות ותוצאה. ייבוש תעשייתי עקבי יותר ומאפשר בקרת איכות קשיחה. רוב הנפח המסחרי מגיע מתנורי ייבוש.</p>
+</div>
+</div>
+
+<!-- ═══ CH 5 ═══ -->
+<div class="ch reveal" id="ch-5">
+<div class="cl">פרק חמישי</div>
+<h2>הזנים, לא כל הפפאיות שוות</h2>
+
+<p class="dc">מבחוץ, פפאיה נראית פשוטה: פרי ירוק-צהוב גדול. אבל בתוך המין הבודד <em>Carica papaya</em> נפתח עולם של זנים עם הבדלים קיצוניים בגודל, צבע בשר, תכולת סוכר, ואיכות לייבוש. מה שהצרכן רואה על המדף כ"פפאיה מיובשת" יכול להגיע מפרי שנראה שונה לחלוטין מהזן שאחריו.</p>
+
+<div class="vc">
+    <div class="vn">Maradol</div>
+    <div class="vt">מקסיקו · גואטמלה · קובה</div>
+    <p>הזן המסחרי הנפוץ ביותר לייבוש. פרי גדול מאוד, 2 עד 5 קילוגרם. בשר כתום-אדמדם עמוק, מתוק מאוד, תכולת סוכר גבוהה שמתאימה לגרסה המסוכרת. תשואה גבוהה לדונם, עמיד לטיפול. פיתוח קובני מהשנות ה-50 שכבש את אמריקה הלטינית.</p>
+    <div class="vs"><span class="vsi">2-5 ק"ג לפרי</span><span class="vsi">בשר כתום-אדום</span><span class="vsi">סוכר גבוה</span></div>
+</div>
+<div class="vc">
+    <div class="vn">Solo / Sunrise</div>
+    <div class="vt">הוואי · תאילנד · ברזיל</div>
+    <p>פרי קטן, 400 עד 700 גרם. בשר צהוב-כתום, מתוק ועדין. פותח בהוואי בשנות ה-70 ומשם הופץ לתאילנד ולברזיל. מועדף לשוק הטרי בשל גודלו הנוח לצרכן, אבל יחס מוצק-מים גבוה מאפשר ייבוש פרמיום עם פחות כיווץ.</p>
+    <div class="vs"><span class="vsi">400-700 גרם לפרי</span><span class="vsi">בשר צהוב-כתום</span><span class="vsi">מיובש פרמיום</span></div>
+</div>
+<div class="vc">
+    <div class="vn">Red Lady F1</div>
+    <div class="vt">תאילנד · טייוון · הודו · וייטנאם</div>
+    <p>היברידי מסחרי שפיתחה חברת טייוואנית ב-1990. עמיד במחלות, תשואה גבוהה, בשר כתום-אדום אחיד. נפוץ מאוד בוייטנאם ובתאילנד כיום. אחידות הצבע שלו אחרי ייבוש יוצאת דופן. רוב הפפאיה המיובשת מתאילנד כיום היא Red Lady.</p>
+    <div class="vs"><span class="vsi">היברידי F1</span><span class="vsi">צבע אחיד אחרי ייבוש</span><span class="vsi">עמיד מחלות</span></div>
+</div>
+
+<div class="ab ab-w">
+    <div class="tg">עונתיות</div>
+    <p>פפאיה אינה עונתית קלאסית. עץ ממשיך לפרות כמעט לאורך כל השנה בתנאי אקלים מתאימים. שיאי הייצור באמריקה הלטינית: יולי-נובמבר. בדרום-מזרח אסיה: מרץ-יוני. זה אחד היתרונות המסחריים הגדולים שלה, אספקה רציפה ללא עונתיות חדה.</p>
+</div>
+</div>
+
+<!-- ═══ CH 6 ═══ -->
+<div class="ch reveal" id="ch-6">
+<div class="cl">פרק שישי</div>
+<h2>מה בפנים, תזונה שנדחסת מפרי שלם</h2>
+
+<p class="dc">כשמייבשים פפאיה, מוציאים את המים ומשאירים את כל השאר. הוויטמינים, המינרלים, הסוכרים, הסיבים. ל-100 גרם פפאיה טרייה יש 43 קלוריות. ל-100 גרם פפאיה מיובשת, ללא סוכר מוסף, יש כ-250 קלוריות. אבל גם ויטמין C שמשוכפל מרמה של 62 מ"ג לפרי טרי לכ-20 עד 40 מ"ג גם אחרי ייבוש, בניגוד לפירות אחרים שמאבדים את רוב הוויטמין C בתהליך. פפאיה מחזיקה חלק ממנו.</p>
+
+<div class="ng">
+    <div class="ni"><div class="nv">250-320</div><div class="nu">קלוריות</div><div class="nl">ל-100 גרם מיובש</div></div>
+    <div class="ni"><div class="nv">65-79g</div><div class="nu">פחמימות</div><div class="nl">מתוכן סוכרים טבעיים + מוסף</div></div>
+    <div class="ni"><div class="nv">2.5g</div><div class="nu">סיבים</div><div class="nl">Dietary Fiber</div></div>
+    <div class="ni"><div class="nv">20-40mg</div><div class="nu">ויטמין C</div><div class="nl">שרידי ייבוש</div></div>
+    <div class="ni"><div class="nv">950 IU</div><div class="nu">ויטמין A</div><div class="nl">Beta-Carotene</div></div>
+    <div class="ni"><div class="nv">0.5g</div><div class="nu">שומן</div><div class="nl">כמעט אפס</div></div>
+</div>
+
+<h3>Beta-Carotene, מה שנותן את הצבע</h3>
+<p>הצבע הכתום של הפפאיה הוא Beta-Carotene, קדם-ויטמין A. ככל שהפרי כתום יותר, כך ריכוז ה-Beta-Carotene גבוה יותר. בתהליך הייבוש, הצבע מתעצם כי המים יוצאים והפיגמנט מתרכז. פפאיה מיובשת שנראית חיוורת-צהובה בדרך כלל היא או זן אחר, או נקטפה לא בשלה, או עברה ייבוש שפגע בפיגמנט.</p>
+
+<div class="ab ab-r">
+    <div class="tg">אלרגיה ורגישות Latex-Fruit</div>
+    <p>פפאיה מכילה <strong>כיטינאז</strong>, אנזים שדומה מבנית לחלבוני הלטקס. כ-30 עד 50% מהסובלים מאלרגיה לגומי (latex allergy) עלולים לפתח תגובה צולבת לפפאיה. תסמינים: גירוד בפה, נפיחות שפתיים, עד תגובה אנפילקטית במקרים קיצוניים. מגע עם הנוזל של פפאיה ירוקה מסוכן יותר מאכילת פרי בשל.</p>
+</div>
+</div>
+
+<!-- ═══ CH 7 ═══ -->
+<div class="ch reveal" id="ch-7">
+<div class="cl">פרק שביעי</div>
+<h2>מסוכרת ולא מסוכרת, ההבדל שיצרנים לא תמיד מסבירים</h2>
+
+<p class="dc">כשקונים פפאיה מיובשת, השאלה הראשונה שלא תמיד שואלים היא: האם יש בה סוכר מוסף? התשובה משנה כמעט הכל. פפאיה טבעית מיובשת היא פרי בצורה דחוסה. פפאיה מסוכרת היא ממתק שהגיע פעם מעץ.</p>
+
+<div class="vc">
+    <div class="vn">Natural Dried · ללא סוכר</div>
+    <div class="vt">פרמיום</div>
+    <p>מיובשת ישירות, ללא השריה בסוכר. צבע כתום-זהוב עמוק, מרקם לעוס ועדיין קצת מושך. טעם פרותי עם חמיצות קלה. לחות 14 עד 18%. נדירה בשוק ויקרה יותר. תכולת סוכר: 30 עד 40 גרם ל-100 גרם, הכל טבעי מהפרי. תוחלת מדף קצרה יותר.</p>
+    <div class="vs"><span class="vsi">סוכר טבעי בלבד</span><span class="vsi">לחות 14-18%</span><span class="vsi">מדף 12 חודש</span></div>
+</div>
+<div class="vc">
+    <div class="vn">Sweetened · מסוכרת</div>
+    <div class="vt">מאס מרקט</div>
+    <p>הפרי מושרה בתמיסת סוכר לפני הייבוש. הסוכר חודר לרקמה, מחליף חלק מהמים ומאפשר ייבוש אחיד יותר ותוחלת מדף ארוכה יותר. הטעם מתוק מאוד, הצבע עז וכהה יותר בשל הריאקציית מייאר. תכולת סוכר: 55 עד 70 גרם ל-100 גרם, חלקו מוסף. לחות 18 עד 22%.</p>
+    <div class="vs"><span class="vsi">סוכר מוסף 15-30%</span><span class="vsi">לחות 18-22%</span><span class="vsi">מדף 18 חודש</span></div>
+</div>
+
+<div class="ab ab-w">
+    <div class="tg">INS 110 — צהוב שקיעה</div>
+    <p>חלק מהיצרנים מוסיפים צבע מלאכותי INS 110 (Sunset Yellow) כדי לעצב את הכתום. הצבע מאושר בסטנדרטים רבים אך מעלה חששות בחלק מהמחקרים. על פי תקנות האיחוד האירופי, חובה לציין על תווית: "עשוי להשפיע לרעה על הפעילות והתשומת לב בילדים." בדיקה פשוטה: פפאיה עם כתום עז אחיד מדי, חשדו.</p>
+</div>
+</div>
+
+<!-- ═══ CH 8 ═══ -->
+<div class="ch reveal" id="ch-8">
+<div class="cl">פרק שמיני</div>
+<h2>איכות, טריות, ומה שמסגיר פפאיה גרועה</h2>
+
+<p class="dc">פפאיה מיובשת קשה יותר לבדיקה ויזואלית מאשר אגוז ברזיל, שאפשר לחתוך ולראות מיד אם הוא טוב. עם פרי מיובש, רוב הסימנים הם עדינים יותר, ורק חלקם גלויים לעין ללא ציוד. אבל יש כמה דברים שלא ניתן להסתיר.</p>
+
+<h3>צבע</h3>
+<p>פפאיה טבעית מיובשת איכותית: כתום-זהוב עמוק, לא אחיד לחלוטין. פפאיה מסוכרת איכותית: כתום עמוק עם גוון חום קל. דגלים אדומים: חיוורון קיצוני (נקטף לא בשל, ייבוש יתר), כתום ניאון אחיד מדי (צבע מלאכותי), כתמים חומים כהים מסביב לקצוות (Maillard מוגזם, ייבוש בחום גבוה מדי), אפרוריות (עובש ראשוני).</p>
+
+<h3>מרקם</h3>
+<p>גמיש, לעוס, לא נשבר בלחיצה קלה. פפאיה יבשה מדי שנשברת בקלות: ייבשו יתר על המידה, או ישנה. פפאיה דביקה שמתגלגלת לגוש: נארזה בלחות גבוהה מדי, סיכון לעובש. פפאיה שמשאירה שמן על האצבעות: תקינה, שומן טבעי מהפרי.</p>
+
+<h3>ריח</h3>
+<p>פפאיה מיובשת צריכה לריח מתוק-פרותי, עם גוון טרופי. ריח חמצמץ: חמצון. ריח עובשי: לחות גבוהה בתחנת ביניים. ריח כימי חריף: SO₂ בעודף, בדרך כלל מתפוגג בפתיחה אבל מעיד על שימוש אגרסיבי בחומרים.</p>
+
+<div class="ab ab-r">
+    <div class="tg">SO₂ — סולפיט</div>
+    <p>SO₂ הוא חומר שימור שמונע חמצון ושומר על צבע. מותר עד 2,000 ppm על פי תקנות האיחוד האירופי. אצל רגישים לסולפיטים, שהם כ-1% מהאוכלוסייה ובעיקר אסתמטיקאים, SO₂ עלול לגרום להתכווצות סמפונות, כאב ראש ותגובות עוריות. חובה לציין על תווית אם SO₂ ≥ 10 ppm.</p>
+</div>
+</div>
+
+<!-- ═══ CH 9 ═══ -->
+<div class="ch reveal" id="ch-9">
+<div class="cl">פרק תשיעי</div>
+<h2>אחסון, ומה שקורה כשלא שמים לב</h2>
+
+<p class="dc">פרי מיובש נראה כאילו הוא יכול לשבת בארון לנצח. זה אשליה. תהליכים מיקרוביולוגיים ופיזיקו-כימיים לא נעצרים, הם רק מואטים. בתנאי אחסון שגויים, פפאיה מיובשת יכולה להפוך לבלתי אכילה תוך שבועות. בתנאים נכונים, היא עומדת 12 עד 18 חודש בלי לאבד דבר משמעותי.</p>
+
+<table class="gt">
+    <tr><th>תנאי</th><th>אחסון נכון</th><th>מה קורה כשלא</th></tr>
+    <tr><td>טמפרטורה</td><td>15-20°C</td><td>מעל 25°C: האצת חמצון, שינוי צבע וטעם</td></tr>
+    <tr><td>לחות יחסית</td><td>מתחת ל-60%</td><td>מעל 65%: ספיגת לחות, התגבשות, סיכון עובש</td></tr>
+    <tr><td>אור</td><td>חשכה</td><td>חשיפה ישירה: פירוק Beta-Carotene, דהייה</td></tr>
+    <tr><td>אחרי פתיחה</td><td>מיכל אטום + מקרר</td><td>חשיפה לאוויר: חמצון מואץ, ספיגת ריחות</td></tr>
+</table>
+
+<p>פפאיה מסוכרת עמידה יותר מהטבעית בגלל תכולת הסוכר הגבוהה שמשמשת כחומר שימור טבעי. זה היתרון האחד שבו הגרסה המסוכרת גוברת על הטבעית מבחינת לוגיסטיקה.</p>
+
+<div class="pull"><p>פרי שנסע מתאילנד 30 יום בתוך מכולה, נכנס למחסן, יצא לחנות, וקנית אותו, עדיין יכול להיות מצוין. אבל רק אם כל תחנה עשתה את עבודתה.</p></div>
+</div>
+
+<!-- ═══ CH 10 ═══ -->
+<div class="ch reveal" id="ch-10">
+<div class="cl">פרק עשירי</div>
+<h2>סיכום, פרי שאין לו עבר בר ואין לו מחיר הולם</h2>
+
+<p class="dc">פפאיה מיובשת היא אחת הסחורות הזולות בשוק הפירות המיובשים. היא לא נהנית מהפרסטיז' של גוג'י, לא ממחיר הפרמיום של תמרים מג'ול, לא מהזהות הבוטנית הדרמטית של אגוז ברזיל. היא נמכרת בשקיות פלסטיק בסופרים, לרוב בגרסה מסוכרת, לרוב ללא הרבה מידע על מקור או זן.</p>
+
+<p>אבל מאחורי החטיף הכתום הפשוט יש פרי שנברא על ידי בני אדם, הופץ על ידי כובשים, נושא אנזים שתעשיית הבשר עשתה ממנו עסק של מיליארדים, ונמצא כיום בכל פינה טרופית בעולם. הוא לא זוכה לספר עליו. זה לא בגלל שאין מה לספר.</p>
+
+<h3>מדריך רכישה</h3>
+<p><strong>לקנייה:</strong> בדקו ריח לפני הכל. מתוק-פרותי, טוב. חמצמץ או כימי, תניחו בחזרה. בדקו מרקם: גמיש ולעוס, לא שבירי ולא דביק. בדקו צבע: כתום עמוק, לא ניאון, לא חיוור. קראו רכיבים: SO₂ ו-INS 110 לגיטימיים אבל ידעו שהם שם. עדיפות לגרסה ללא סוכר מוסף אם רוצים טעם אמיתי של הפרי.</p>
+
+<table class="gt">
+    <tr><th>קריטריון</th><th>טוב</th><th>גרוע</th></tr>
+    <tr><td>צבע</td><td>כתום-זהוב עמוק, לא אחיד לחלוטין</td><td>ניאון, כתמים אפורים, חיוורון</td></tr>
+    <tr><td>מרקם</td><td>גמיש, לעוס</td><td>שבירי, דביק, גוש</td></tr>
+    <tr><td>ריח</td><td>מתוק, טרופי, פרותי</td><td>חמצמץ, עובשי, כימי</td></tr>
+    <tr><td>טעם</td><td>מרוכז, מתוק עם עומק</td><td>שטוח, מתוק מדי בלי פרי, מר</td></tr>
+    <tr><td>תווית</td><td>ארץ מקור, תאריך ייצור, רכיבים ברורים</td><td>חסר מידע, תאריך ישן</td></tr>
+</table>
+
+<div class="ft">
+    ערך ידע צרכני · Blue Star International · 2026<br>
+    מבוסס על FAO 2023, USDA FoodData Central, ITC Trade Map<br>
+    <span>Botanical: Carica papaya L. · Family: Caricaceae · Origin: Mesoamerica</span>
+</div>
+</div>
+
+</main>
+<button id="btt" aria-label="חזרה למעלה">↑</button>
+<script>
+window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('progress-bar').style.width = (window.scrollY / h * 100) + '%';
+    const sections = document.querySelectorAll('.ch');
+    const dots = document.querySelectorAll('.nav-dot');
+    let current = '';
+    sections.forEach(s => { if (pageYOffset >= s.offsetTop - 200) current = s.id; });
+    dots.forEach(d => { d.classList.remove('active'); if (d.dataset.target === current) d.classList.add('active'); });
+    document.getElementById('btt').classList.toggle('visible', window.scrollY > 300);
+});
+document.getElementById('btt').onclick = () => window.scrollTo({top:0, behavior:'smooth'});
+document.querySelectorAll('.nav-dot').forEach(dot => {
+    dot.onclick = () => document.getElementById(dot.dataset.target).scrollIntoView({behavior:'smooth'});
+});
+if (window.IntersectionObserver) {
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            e.target.querySelectorAll('.pb-fill').forEach(b => { b.style.width = b.dataset.w + '%'; });
+            obs.unobserve(e.target);
+        });
+    }, {threshold: 0.3});
+    document.querySelectorAll('.pb-chart').forEach(el => obs.observe(el));
+    const revObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+    }, { threshold: 0, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal').forEach(card => revObs.observe(card));
+}
+// Progress bars
+const pbData = [
+    { flag:'🇮🇳', name:'הודו',    pct:44, color:'#C87820' },
+    { flag:'🇧🇷', name:'ברזיל',   pct:14, color:'#A05C10' },
+    { flag:'🇩🇴', name:'דומיניקן', pct:8,  color:'#885008' },
+    { flag:'🇮🇩', name:'אינדונזיה',pct:7,  color:'#704008' },
+    { flag:'🌍',  name:'אחרות',   pct:27, color:'#503008' },
+];
+const pbWrap = document.getElementById('pb-papaya');
+if(pbWrap) {
+    pbData.forEach(r => {
+        pbWrap.innerHTML += `<div class="pb-row">
+            <div class="pb-meta"><span class="pb-flag">${r.flag}</span><span class="pb-name">${r.name}</span></div>
+            <div class="pb-track"><div class="pb-fill" style="background:${r.color}" data-w="${r.pct}"></div></div>
+            <div class="pb-pct">${r.pct}%</div>
+        </div>`;
+    });
+    setTimeout(() => {
+        document.querySelectorAll('.pb-fill').forEach(b => b.style.width = b.dataset.w + '%');
+    }, 600);
+}
+// DB sync
+(function() {
+    const productId = 'papaya';
+    function syncProductPage() {
+        try {
+            const request = indexedDB.open('StarkOS_DB', 1);
+            request.onsuccess = (e) => {
+                const db = e.target.result;
+                const store = db.transaction('archive','readonly').objectStore('archive');
+                const getRequest = store.get(productId);
+                getRequest.onsuccess = () => {
+                    const data = getRequest.result;
+                    if (!data) return;
+                    function makeMedia(src) {
+                        const isVid = src.startsWith('data:video');
+                        const el = document.createElement(isVid ? 'video' : 'img');
+                        el.src = src; el.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+                        if (isVid) { el.autoplay = el.muted = el.loop = true; el.setAttribute('playsinline',''); }
+                        return el;
+                    }
+                    if (data.title) document.getElementById('sync-title').textContent = data.title;
+                    if (data.desc)  document.getElementById('sync-desc').textContent  = data.desc;
+                    const heroSrc = data.media1 || data.media;
+                    const heroSlot = document.getElementById('slot-product-hero');
+                    if (heroSlot && heroSrc) { heroSlot.innerHTML = ''; heroSlot.appendChild(makeMedia(heroSrc)); }
+                };
+            };
+        } catch(e) {}
+    }
+    window.addEventListener('load', syncProductPage);
+})();
+</script>
+</body>
+</html>
