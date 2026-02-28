@@ -2,7 +2,10 @@
     const PASS = '2108';
     const KEY  = 'bs_auth';
 
-    if (sessionStorage.getItem(KEY) === '1') return;
+    if (sessionStorage.getItem(KEY) === '1') {
+        document.documentElement.style.overflow = '';
+        return;
+    }
 
     // build overlay
     const overlay = document.createElement('div');
