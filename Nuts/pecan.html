@@ -3,10 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Noto+Sans+Hebrew:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 <title>פקאן · Blue Star International</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="theme-nuts">
 <div class="marquee-container">
@@ -185,10 +183,7 @@
 </div>
 
 <script>
-const btt = document.getElementById('btt');
-if (btt) {
-    btt.onclick = () => window.scrollTo({top:0, behavior:'smooth'});
-}
+
 window.addEventListener('scroll', () => {
     const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const bar = document.getElementById('progress-bar');
@@ -198,7 +193,7 @@ window.addEventListener('scroll', () => {
     let current = "";
     sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.id; });
     dots.forEach(d => { d.classList.remove('active'); if (d.dataset.target === current) d.classList.add('active'); });
-    if (btt) btt.classList.toggle('visible', window.scrollY > 300);
+    const btt = document.getElementById('backToTop'); if (btt) btt.style.display = window.scrollY > 300 ? 'block' : 'none';
 });
 document.querySelectorAll('.nav-dot').forEach(dot => {
     dot.onclick = () => document.getElementById(dot.dataset.target).scrollIntoView({behavior:'smooth'});
@@ -281,6 +276,6 @@ if (window.IntersectionObserver) {
 })();
 </script>
 
-<button class="back-to-top" id="btt" aria-label="Back to top">&#8593;</button>
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 </body>
 </html>

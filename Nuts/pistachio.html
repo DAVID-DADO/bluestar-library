@@ -3,10 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Noto+Sans+Hebrew:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 <title>פיסטוק · Blue Star International</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="theme-nuts">
 <div class="marquee-container">
@@ -92,8 +90,8 @@
   <div class="img-ph-title">📷 מטע פיסטוק, קליפורניה</div>
   <div class="img-ph-desc">שיחי פיסטוק נמוכים עם אשכולות ורודים-אדומים</div>
 </div>
+<div id="slot-inline-2" class="media-slot-inline"><img src="../media/pistachio_media2.jpg" style="width:100%;height:100%;object-fit:cover;" alt=""></div>
 </div>
-<div id="slot-inline-2" class="media-slot-inline"><img src="../media/pistachio_media2.jpg" style="width:100%;height:100%;object-fit:cover;" alt=""></div></div>
 
 
 <!-- ═══ CH 3 ═══ -->
@@ -182,9 +180,8 @@
 <!-- ═══ CH 5 ═══ -->
 <div class="ch" id="ch-5">
 <div class="cl">פרק חמישי</div>
-<h2>מה בפנים — 
+<h2>מה בפנים — הפרופיל התזונתי</h2>
 <div id="slot-inline-3" class="media-slot-inline"><img src="../media/pistachio_media3.jpg" style="width:100%;height:100%;object-fit:cover;" alt=""></div></div>
-הפרופיל התזונתי</h2>
 
 <p class="dc">פיסטוק הוא האגוז עם פחות הקלוריות ופחות השומן מכל אגוזי העץ הנפוצים — ועם הכי הרבה חלבון אחרי השקד. השילוב הזה הפך אותו לאגוז הדיאטה הפופולרי ביותר. 49 פיסטוקים = מנה של 28 גרם = 159 קלוריות בלבד. במונחי "אגוזים למנה" — הוא מנצח.</p>
 
@@ -350,10 +347,7 @@
 </div>
 
 <script>
-const btt = document.getElementById('btt');
-if (btt) {
-    btt.onclick = () => window.scrollTo({top:0, behavior:'smooth'});
-}
+
 window.addEventListener('scroll', () => {
     const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const bar = document.getElementById('progress-bar');
@@ -363,7 +357,7 @@ window.addEventListener('scroll', () => {
     let current = "";
     sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.id; });
     dots.forEach(d => { d.classList.remove('active'); if (d.dataset.target === current) d.classList.add('active'); });
-    if (btt) btt.classList.toggle('visible', window.scrollY > 300);
+    const btt = document.getElementById('backToTop'); if (btt) btt.style.display = window.scrollY > 300 ? 'block' : 'none';
 });
 document.querySelectorAll('.nav-dot').forEach(dot => {
     dot.onclick = () => document.getElementById(dot.dataset.target).scrollIntoView({behavior:'smooth'});
@@ -446,6 +440,6 @@ if (window.IntersectionObserver) {
 })();
 </script>
 
-<button class="back-to-top" id="btt" aria-label="Back to top">&#8593;</button>
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 </body>
 </html>

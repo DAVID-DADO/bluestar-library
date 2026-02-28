@@ -3,10 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Noto+Sans+Hebrew:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 <title>אגוז מלך · Blue Star International</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="theme-nuts">
 <div class="marquee-container">
@@ -98,8 +96,8 @@
 <tr><td>צ'ילה</td><td>~120,000</td><td>מגדלת + מייצאת</td><td>↑↑ מהירה</td></tr>
 <tr><td>אוקראינה</td><td>~110,000</td><td>מגדלת</td><td>↓ מלחמה</td></tr>
 </table></div>
+<div id="slot-inline-2" class="media-slot-inline"><video src="../media/walnut_media2.mp4" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;"></video></div>
 </div>
-<div id="slot-inline-2" class="media-slot-inline"><video src="../media/walnut_media2.mp4" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;"></video></div></div>
 
 
 <!-- ═══ CH 3 ═══ -->
@@ -185,9 +183,8 @@
 <!-- ═══ CH 5 ═══ -->
 <div class="ch" id="ch-5">
 <div class="cl">פרק חמישי</div>
-<h2>תזונה, אומג
+<h2>תזונה, אומגה-3 בראש הרשימה</h2>
 <div id="slot-inline-3" class="media-slot-inline"><div class="media-slot-placeholder">MEDIA_03</div></div>
-ה-3 בראש הרשימה</h2>
 
 <p class="dc">אגוז מלך הוא האגוז העשיר ביותר בחומצות שומן אומגה-3 מכל אגוזי העץ. זה הנתון שקובע את הזהות התזונתית שלו. בעוד שרוב האגוזים עשירים בשומנים חד בלתי רוויים, אגוז המלך עשיר בשומנים רב בלתי רוויים, במיוחד חומצה אלפא-לינולנית (ALA), חומצת אומגה-3 שהגוף אינו מייצר בעצמו.</p>
 
@@ -338,10 +335,7 @@ Juglandaceae), אותה משפחה של הפקאן ואגוז השחור האמ�
 </div>
 
 <script>
-const btt = document.getElementById('btt');
-if (btt) {
-    btt.onclick = () => window.scrollTo({top:0, behavior:'smooth'});
-}
+
 window.addEventListener('scroll', () => {
     const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const bar = document.getElementById('progress-bar');
@@ -351,7 +345,7 @@ window.addEventListener('scroll', () => {
     let current = "";
     sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.id; });
     dots.forEach(d => { d.classList.remove('active'); if (d.dataset.target === current) d.classList.add('active'); });
-    if (btt) btt.classList.toggle('visible', window.scrollY > 300);
+    const btt = document.getElementById('backToTop'); if (btt) btt.style.display = window.scrollY > 300 ? 'block' : 'none';
 });
 document.querySelectorAll('.nav-dot').forEach(dot => {
     dot.onclick = () => document.getElementById(dot.dataset.target).scrollIntoView({behavior:'smooth'});
@@ -434,6 +428,6 @@ if (window.IntersectionObserver) {
 })();
 </script>
 
-<button class="back-to-top" id="btt" aria-label="Back to top">&#8593;</button>
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 </body>
 </html>
