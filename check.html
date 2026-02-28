@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>BLUE STAR OS // בדיקת תקינות מערכת</title>
+    <style>
+        body { background: #0A0A0B; color: #FAF7F0; font-family: sans-serif; padding: 40px; }
+        .log { background: #141416; border: 1px solid #B8894A; padding: 20px; border-radius: 8px; line-height: 1.6; }
+        .success { color: #4CAF50; }
+        .error { color: #E06060; font-weight: bold; }
+        .warning { color: #B8894A; }
+        h1 { color: #B8894A; border-bottom: 1px solid #222; padding-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>BLUE STAR INTERNATIONAL // System Integrity Check</h1>
+    <div id="results" class="log">מתחיל בבדיקת מערכת...</div>
+    <script>
+        const results = document.getElementById('results');
+        function log(msg, type = '') {
+            results.innerHTML += `<div class="${type}">${msg}</div>`;
+        }
+        async function runCheck() {
+            results.innerHTML = '';
+            log("--- בודק חיבור למסד נתונים ---");
+            
+            const dbName = 'StarkOS_DB';
+            const request = indexedDB.open(dbName, 1);
+            request.onerror = () => log("שגיאה: לא ניתן לגשת ל-IndexedDB. וודא שאתה מריץ דרך שרת (Live Server).", "error");
+            
+            request.onsuccess = async (e) => {
+                const db = e.target.result;
+                log("חיבור ל-StarkOS_DB הצליח.", "success");
+                const transaction = db.transaction("archive", "readonly");
+                const store = transaction.objectStore("archive");
+                const getAll = store.getAll();
+                getAll.onsuccess = async () => {
+                    const data = getAll.result;
+                    log(`נמצאו ${data.length} מוצרים מעודכנים בזיכרון המערכת.`, "success");
+                    log("<br>--- בודק נתיבי קבצים וקישורים ---");
+                    
+                    const paths = [
+                        { id: 'index.html', path: 'index.html' },
+                        { id: 'admin.html', path: 'admin.html' },
+                        { id: 'auth.js', path: 'auth.js' }
+                    ];
+                    for (let file of paths) {
+                        try {
+                            const res = await fetch(file.path);
+                            if (res.ok) log(`קובץ ליבה נמצא: ${file.id}`, "success");
+                            else throw new Error();
+                        } catch {
+                            log(`שגיאה: קובץ ${file.id} חסר בתיקיית השורש!`, "error");
+                        }
+                    }
+                    log("<br>--- בדיקת סנכרון מוצרים (Sync Verification) ---");
+                    if (data.length === 0) {
+                        log("אזהרה: לא נמצאו נתונים ב-DB. האתר יציג תוכן Fallback בלבד.", "warning");
+                    } else {
+                        data.forEach(item => {
+                            log(`מוצר מאומת ב-DB: [${item.id}] - ${item.name || 'ללא שם'}`, "success");
+                            if (!item.media1) log(`  - אזהרה: חסרה מדיה ראשית ל-${item.id}`, "warning");
+                        });
+                    }
+                    log("<br>--- בדיקה הסתיימה ---");
+                };
+                transaction.onerror = () => log("שגיאה: object store 'archive' לא קיים ב-DB.", "error");
+            };
+        }
+        runCheck();
+    </script>
+</body>
+</html>
