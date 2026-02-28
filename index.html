@@ -108,36 +108,36 @@ body {
     <div class="category-header"><h2 class="category-title">אגוזים</h2></div>
     <div class="product-shelf nuts-shelf">
         <a href="Nuts/almond.html" class="card" data-id="almond">
-            <div class="card-frame"><div class="card-media-slot" id="slot-almond"></div></div>
+            <div class="card-frame"><div class="card-media-slot" id="slot-almond"><img src="media/almond_hero.png" style="width:100%;height:100%;object-fit:cover;" alt="almond"></div></div>
             <h3 class="card-title">שקד</h3>
         </a>
         <a href="Nuts/cashew.html" class="card" data-id="cashew">
-            <div class="card-frame"><div class="card-media-slot" id="slot-cashew"></div></div>
+            <div class="card-frame"><div class="card-media-slot" id="slot-cashew"><img src="media/cashew_hero.png" style="width:100%;height:100%;object-fit:cover;" alt="cashew"></div></div>
             <h3 class="card-title">קשיו</h3>
         </a>
         <a href="Nuts/walnut.html" class="card" data-id="walnut">
-            <div class="card-frame"><div class="card-media-slot" id="slot-walnut"></div></div>
+            <div class="card-frame"><div class="card-media-slot" id="slot-walnut"><img src="media/walnut_hero.png" style="width:100%;height:100%;object-fit:cover;" alt="walnut"></div></div>
             <h3 class="card-title">אגוז מלך</h3>
         </a>
         <a href="Nuts/pecan.html" class="card" data-id="pecan">
-            <div class="card-frame"><div class="card-media-slot" id="slot-pecan"></div></div>
+            <div class="card-frame"><div class="card-media-slot" id="slot-pecan"><img src="media/pecan_hero.png" style="width:100%;height:100%;object-fit:cover;" alt="pecan"></div></div>
             <h3 class="card-title">פקאן</h3>
         </a>
         <a href="Nuts/pistachio.html" class="card" data-id="pistachio">
-            <div class="card-frame"><div class="card-media-slot" id="slot-pistachio"></div></div>
+            <div class="card-frame"><div class="card-media-slot" id="slot-pistachio"><img src="media/pistachio_hero.png" style="width:100%;height:100%;object-fit:cover;" alt="pistachio"></div></div>
             <h3 class="card-title">פיסטוק</h3>
         </a>
         <div class="nuts-row-2">
             <a href="Nuts/hazelnut.html" class="card" data-id="hazelnut">
-                <div class="card-frame"><div class="card-media-slot" id="slot-hazelnut"></div></div>
+                <div class="card-frame"><div class="card-media-slot" id="slot-hazelnut"><img src="media/hazelnut_hero.png" style="width:100%;height:100%;object-fit:cover;" alt="hazelnut"></div></div>
                 <h3 class="card-title">אגוז לוז</h3>
             </a>
             <a href="Nuts/brazil.html" class="card" data-id="brazil">
-                <div class="card-frame"><div class="card-media-slot" id="slot-brazil"></div></div>
+                <div class="card-frame"><div class="card-media-slot" id="slot-brazil"><img src="media/brazil_hero.png" style="width:100%;height:100%;object-fit:cover;" alt="brazil"></div></div>
                 <h3 class="card-title">אגוז ברזיל</h3>
             </a>
             <a href="Nuts/macadamia.html" class="card" data-id="macadamia">
-                <div class="card-frame"><div class="card-media-slot" id="slot-macadamia"></div></div>
+                <div class="card-frame"><div class="card-media-slot" id="slot-macadamia"><img src="media/macadamia_hero.png" style="width:100%;height:100%;object-fit:cover;" alt="macadamia"></div></div>
                 <h3 class="card-title">מקדמיה</h3>
             </a>
             <a href="Nuts/pinenut.html" class="card" data-id="pinenut">
@@ -157,11 +157,11 @@ body {
             <h3 class="card-title">שומשום</h3>
         </a>
         <a href="Seeds/sunflower.html" class="card" data-id="sunflower">
-            <div class="card-frame"><div class="card-media-slot" id="slot-sunflower"></div></div>
+            <div class="card-frame"><div class="card-media-slot" id="slot-sunflower"><video src="media/sunflower_media2.mp4" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;"></video></div></div>
             <h3 class="card-title">חמניה</h3>
         </a>
         <a href="Seeds/pumpkin-seeds.html" class="card" data-id="pumpkin-seeds">
-            <div class="card-frame"><div class="card-media-slot" id="slot-pumpkin-seeds"></div></div>
+            <div class="card-frame"><div class="card-media-slot" id="slot-pumpkin-seeds"><video src="media/pumpkin-seeds_media2.mp4" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;"></video></div></div>
             <h3 class="card-title">גרעיני דלעת</h3>
         </a>
         <a href="Seeds/chia.html" class="card" data-id="chia">
@@ -216,32 +216,7 @@ body {
 </footer>
 
 <script>
-function syncFrontend() {
-    const request = indexedDB.open("StarkOS_DB", 1);
-    request.onsuccess = (e) => {
-        const db = e.target.result;
-        try {
-            const store = db.transaction("archive", "readonly").objectStore("archive");
-            store.getAll().onsuccess = (ev) => {
-                ev.target.result.forEach(product => {
-                    const slot = document.getElementById(`slot-${product.id}`);
-                    if (slot && (product.media1 || product.media)) {
-                        renderMediaToSlot(slot, product.media1 || product.media);
-                    }
-                });
-            };
-        } catch(err) {}
-    };
-}
-function renderMediaToSlot(slot, src) {
-    slot.innerHTML = "";
-    const isVid = src.includes("video") || src.startsWith("data:video");
-    const el = document.createElement(isVid ? 'video' : 'img');
-    el.src = src; el.style.width = "100%"; el.style.height = "100%"; el.style.objectFit = "cover";
-    if (isVid) { el.autoplay = true; el.muted = true; el.loop = true; el.setAttribute('playsinline', ''); }
-    slot.appendChild(el);
-}
-window.addEventListener('load', syncFrontend);
+// media loaded statically
 
 // ── PARALLAX ──
 document.addEventListener('DOMContentLoaded', () => {
