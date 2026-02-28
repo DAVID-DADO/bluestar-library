@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Noto+Sans+Hebrew:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 <title>שקד · Blue Star International</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -87,8 +86,8 @@
 <div class="ab"><div class="tg">זן "מתן", המהפכה הישראלית</div><p>ד"ר דורון הולנד ממכון וולקני פיתח זן חדש, <strong>"מתן"</strong> (על שם בנו הבכור). self-fertile, מאביק את עצמו בלי דבורים ובלי זן נלווה. הגרעין גדול יותר מאום אל-פחם, טעים, ובעל יבול גבוה בעשרות אחוזים. ההבדל יכול לעשות את הפער בין רווח להפסד לחקלאי. "מתן" מתחיל לתפוס מקום במטעים הישראליים.</p></div>
 
 <p>היום ענף השקד הישראלי מונה כ-6,200 הקטר, מקיבוץ נאות סמדר בדרום ועד קיבוץ דן בצפון. אזורי הגידול המרכזיים: עמק החולה, רמת הגולן הדרומית, גליל תחתון, עמק יזרעאל, שפלת יהודה. מכון וולקני, בשיתוף משרד החקלאות ושולחן השקד, ממשיכים לפתח זנים, לשפר עמידות ולהתמודד עם שינויי אקלים. ישראל לא תשפיע על המחיר העולמי, אבל בתחום הזנים ובמחקר, היא שחקנית מפתח.</p>
+<div id="slot-inline-2" class="media-slot-inline"><video src="../media/almond_media2.mp4" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;"></video></div>
 </div>
-<div id="slot-inline-2" class="media-slot-inline"><video src="../media/almond_media2.mp4" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;"></video></div></div>
 
 
 <!-- ═══ CH 3 ═══ -->
@@ -146,9 +145,8 @@
 <!-- ═══ CH 5 ═══ -->
 <div class="ch" id="ch-5">
 <div class="cl">פרק חמישי</div>
-<h2>מה בפנים, ה
+<h2>מה בפנים, הפרופיל התזונתי</h2>
 <div id="slot-inline-3" class="media-slot-inline"><div class="media-slot-placeholder">MEDIA_03</div></div>
-פרופיל התזונתי</h2>
 
 <p class="dc">מאה גרם של שקדים גולמיים מכילים כ-579 קלוריות. פחות מפקאן (690), פחות מאגוז מלך (654), אבל עדיין מספר שמחייב כבוד. ההבדל של השקד טמון בפרופיל: שקד הוא אחד ממקורות החלבון הגבוהים ביותר בעולם האגוזים, עם יחס חלבון-לשומן שמתאים למי שמחפש אנרגיה לצד בנייה.</p>
 
@@ -224,9 +222,8 @@
 <div class="cl">פרק שביעי</div>
 <h2>נתונים מסחריים, USDA FoodData Central</h2>
 
-<p class="dc">לצד הפרופיל התזונתי המלא, חשוב לקרוא את נתוני הסיוו
-<div id="slot-inline-4" class="media-slot-inline"><div class="media-slot-placeholder">MEDIA_04</div></div>
-ג המסחרי. הדרגות קובעות שוק יעד, תמחור ומדפים. האיחוד האירופי מיישם פיקוח מחמיר על רמות אפלטוקסין בשקדים מיובאים. נתוני ייצור: INC / USDA FAS 2024-2025.</p>
+<p class="dc">לצד הפרופיל התזונתי המלא, חשוב לקרוא את נתוני הסיווג המסחרי.
+<div id="slot-inline-4" class="media-slot-inline"><div class="media-slot-placeholder">MEDIA_04</div></div> הדרגות קובעות שוק יעד, תמחור ומדפים. האיחוד האירופי מיישם פיקוח מחמיר על רמות אפלטוקסין בשקדים מיובאים. נתוני ייצור: INC / USDA FAS 2024-2025.</p>
 
 <div class="ph-done" data-slot="almond-map">
   <div class="img-ph"><div class="img-ph-title">📷 מפת אזורי גידול שקד בעולם</div><div class="img-ph-desc">data-slot="almond-map"</div></div>
@@ -298,10 +295,7 @@
 </div>
 
 <script>
-const btt = document.getElementById('btt');
-if (btt) {
-    btt.onclick = () => window.scrollTo({top:0, behavior:'smooth'});
-}
+
 window.addEventListener('scroll', () => {
     const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const bar = document.getElementById('progress-bar');
@@ -311,7 +305,8 @@ window.addEventListener('scroll', () => {
     let current = "";
     sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.id; });
     dots.forEach(d => { d.classList.remove('active'); if (d.dataset.target === current) d.classList.add('active'); });
-    if (btt) btt.classList.toggle('visible', window.scrollY > 300);
+    const btt = document.getElementById('backToTop');
+if (btt) btt.style.display = window.scrollY > 300 ? 'block' : 'none';
 });
 document.querySelectorAll('.nav-dot').forEach(dot => {
     dot.onclick = () => document.getElementById(dot.dataset.target).scrollIntoView({behavior:'smooth'});
@@ -394,6 +389,6 @@ if (window.IntersectionObserver) {
 })();
 </script>
 
-<button class="back-to-top" id="btt" aria-label="Back to top">&#8593;</button>
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 </body>
 </html>
