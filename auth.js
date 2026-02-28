@@ -2,10 +2,7 @@
     const PASS = '2108';
     const KEY  = 'bs_auth';
 
-    if (sessionStorage.getItem(KEY) === '1') {
-        document.documentElement.style.overflow = '';
-        return;
-    }
+    if (sessionStorage.getItem(KEY) === '1') return;
 
     // build overlay
     const overlay = document.createElement('div');
@@ -18,7 +15,6 @@
             <div id="bs-auth-err"></div>
         </div>
     `;
-    document.documentElement.style.overflow = 'hidden';
 
     const style = document.createElement('style');
     style.textContent = `
@@ -92,10 +88,7 @@
         if (val === PASS) {
             sessionStorage.setItem(KEY, '1');
             overlay.classList.add('fade-out');
-            setTimeout(() => {
-                overlay.remove();
-                document.documentElement.style.overflow = '';
-            }, 420);
+            setTimeout(() => overlay.remove(), 420);
         } else {
             document.getElementById('bs-auth-err').textContent = 'שגוי';
             overlay.classList.remove('shake');
@@ -112,7 +105,6 @@
         if (e.key === 'Enter') attempt(this.value.trim());
     });
 
-    // wait for DOM then append + focus
     function mount() {
         document.body.prepend(overlay);
         setTimeout(() => document.getElementById('bs-auth-input').focus(), 50);
