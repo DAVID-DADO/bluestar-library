@@ -599,21 +599,21 @@ strong { color: var(--text); }
 </div>
 
 <script>
-window.onscroll = () => {
+const btt = document.getElementById('btt');
+if (btt) {
+    btt.onclick = () => window.scrollTo({top:0, behavior:'smooth'});
+}
+window.addEventListener('scroll', () => {
     const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    document.getElementById('progress-bar').style.width = (window.scrollY / h * 100) + '%';
+    const bar = document.getElementById('progress-bar');
+    if (bar) bar.style.width = (window.scrollY / h * 100) + '%';
     const sections = document.querySelectorAll('.ch');
     const dots = document.querySelectorAll('.nav-dot');
     let current = "";
-    sections.forEach(s => { if (pageYOffset >= s.offsetTop - 200) current = s.id; });
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.id; });
     dots.forEach(d => { d.classList.remove('active'); if (d.dataset.target === current) d.classList.add('active'); });
-// Back to top
-const btt = document.getElementById('btt');
-window.addEventListener('scroll', () => {
-    btt.classList.toggle('visible', window.scrollY > 300);
+    if (btt) btt.classList.toggle('visible', window.scrollY > 300);
 });
-btt.onclick = () => window.scrollTo({top:0, behavior:'smooth'});
-};
 document.querySelectorAll('.nav-dot').forEach(dot => {
     dot.onclick = () => document.getElementById(dot.dataset.target).scrollIntoView({behavior:'smooth'});
 });
